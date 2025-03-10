@@ -800,9 +800,9 @@ CheckIfHasOtherValidDecks:
 ; that is valid (i.e. has cards)
 	call GetPointerToDeckCards
 	call EnableSRAM
-	ld a, [hl]
+	ld a, [hli]
+	or [hl]
 	call DisableSRAM
-	or a
 	jr z, .no_carry ; no cards
 	; has cards, is the only valid deck!
 	scf
