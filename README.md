@@ -15,8 +15,4 @@ The engine has gone through an overhaul based on the features in the sequel, whi
 To assemble, first download RGBDS (https://github.com/gbdev/rgbds/releases) and extract it to /usr/local/bin.
 Run `make` in your shell.
 
-<<<<<<< HEAD
 This will output a file named "poketcg_ext.gbc".
-=======
-This will output a file named "tinytcg.gbc".
->>>>>>> poketcg/tinytcg
