@@ -26,11 +26,9 @@ DuelCardHeaderGraphics::
 INCBIN "gfx/duel/card_headers.2bpp"
 
 DuelCgbSymbolGraphics::
-INCBIN "gfx/duel/cgb_symbols.2bpp", $0, $808
+INCBIN "gfx/duel/cgb_symbols.2bpp"
 
 SECTION "Gfx 2", ROMX
-
-INCBIN "gfx/duel/cgb_symbols.2bpp", $808, $8
 
 DuelOtherGraphics::
 INCBIN "gfx/duel/other.2bpp"
@@ -2063,3 +2061,7 @@ GamblerCardGfx::
 RecycleCardGfx::
 	INCBIN "gfx/cards/recycle.2bpp"
 	INCBIN "gfx/cards/recycle.pal"
+
+DarknessEnergyCardGfx::
+	INCBIN "gfx/cards/darknessenergy.2bpp"
+	INCBIN "gfx/cards/darknessenergy.pal"
