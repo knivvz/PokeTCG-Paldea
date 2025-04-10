@@ -1255,8 +1255,11 @@ _CheckIfEnoughEnergiesToAttack:
 	inc de
 	dec c
 	jr nz, .next_energy_type_pair
-	ld a, [de] ; colorless energy
+	ld a, [de] ; one more iteration for darkness
 	swap a
+	call CheckIfEnoughEnergiesOfType
+	jr c, .not_usable_or_not_enough_energies
+	ld a, [de] ; colorless energy
 	and $f
 	ld b, a
 	ld a, [wAttachedEnergiesAccum]
@@ -2357,7 +2360,7 @@ DrawDuelHUD:
 
 	; print the Prize icon along with the no. of prizes yet to draw
 	ld a, SYM_PRIZE
-	call WriteByteToBGMap0
+	call WriteVRAM1ByteToBGMap0
 	inc b
 	call CountPrizes
 	add SYM_0
@@ -2444,7 +2447,7 @@ DrawDuelHUD:
 	or a
 	jr z, .check_defender
 	ld a, SYM_PLUSPOWER
-	call WriteByteToBGMap0
+	call WriteVRAM1ByteToBGMap0
 	inc b
 	ld a, [hl] ; number of attached Pluspower
 	add SYM_0
@@ -2457,7 +2460,7 @@ DrawDuelHUD:
 	jr z, .done
 	inc c
 	ld a, SYM_DEFENDER
-	call WriteByteToBGMap0
+	call WriteVRAM1ByteToBGMap0
 	inc b
 	ld a, [hl] ; number of attached Defender
 	add SYM_0
@@ -2471,7 +2474,7 @@ DrawDuelHorizontalSeparator:
 	ld hl, DuelHorizontalSeparatorTileData
 	call WriteDataBlocksToBGMap0
 	call BankswitchVRAM1
-	ld hl, DuelHorizontalSeparatorCGBPalData
+	ld hl, DuelHorizontalSeparatorCGBAttrData
 	call WriteDataBlocksToBGMap0
 	jp BankswitchVRAM0
 
@@ -2485,18 +2488,18 @@ DuelEAndHPTileData:
 
 DuelHorizontalSeparatorTileData:
 ; x, y, tiles[], 0
-	db 0, 4, $37, $37, $37, $37, $37, $37, $37, $37, $37, $31, $32, 0
-	db 9, 5, $33, $34, 0
-	db 9, 6, $33, $34, 0
-	db 9, 7, $35, $36, $37, $37, $37, $37, $37, $37, $37, $37, $37, 0
+	db 0, 4, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_TOP_CURVE1, SYM_SEP_TOP_CURVE2, 0
+	db 9, 5, SYM_SEP_VERT1, SYM_SEP_VERT2, 0
+	db 9, 6, SYM_SEP_VERT1, SYM_SEP_VERT2, 0
+	db 9, 7, SYM_SEP_BOT_CURVE1, SYM_SEP_BOT_CURVE2, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, SYM_SEP_HOR, 0
 	db $ff
 
-DuelHorizontalSeparatorCGBPalData:
+DuelHorizontalSeparatorCGBAttrData:
 ; x, y, pals[], 0
-	db 0, 4, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, 0
-	db 9, 5, $02, $02, 0
-	db 9, 6, $02, $02, 0
-	db 9, 7, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, 0
+	db 0, 4, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, 0
+	db 9, 5, $0a, $0a, 0
+	db 9, 6, $0a, $0a, 0
+	db 9, 7, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, 0
 	db $ff
 
 ; if this is a practice duel, execute the practice duel action at wPracticeDuelAction
@@ -3879,6 +3882,8 @@ CGBDefaultPalettes:
 
 JPWriteByteToBGMap0:
 	jp WriteByteToBGMap0
+JPWriteVRAM1ByteToBGMap0:
+	jp WriteVRAM1ByteToBGMap0
 
 DisplayCardPage_PokemonOverview:
 	ld a, [wCardPageType]
@@ -4213,7 +4218,7 @@ DisplayCardPage_PokemonDescription:
 	call WriteDataBlocksToBGMap0
 	; draw the card symbol associated to its TYPE_* at 3,2
 	lb de, 3, 2
-	call DrawCardSymbol
+	call DrawCardSymbol ; TODO - slight difference between this version and vanilla here because vanilla prints the FACE DOWN tile for a Basic Pokemon, but my code prints the regular tile. Not sure why mine is different off the top of my head but tbh it looks better and more consistent?
 	; print the Level and HP numbers at 12,2 and 16,2 respectively
 	lb bc, 12, 2
 	ld a, [wLoadedCard1Level]
@@ -5108,7 +5113,7 @@ PrintPlayAreaCardHeader:
 	ld c, a
 	ld b, 15
 	ld a, SYM_PLUSPOWER
-	call WriteByteToBGMap0
+	call WriteVRAM1ByteToBGMap0
 	inc b
 	ld a, [hl]
 	add SYM_0
@@ -5124,7 +5129,7 @@ PrintPlayAreaCardHeader:
 	ld c, a
 	ld b, 17
 	ld a, SYM_DEFENDER
-	call WriteByteToBGMap0
+	call WriteVRAM1ByteToBGMap0
 	inc b
 	ld a, [hl]
 	add SYM_0
@@ -5146,6 +5151,7 @@ CheckPrintPoisoned:
 	jr z, .print
 .poison
 	ld a, SYM_POISONED
+	call BankswitchVRAM1
 .print
 	call WriteByteToBGMap0
 	pop af
@@ -5170,6 +5176,10 @@ CheckPrintCnfSlpPrz:
 	ld hl, .status_symbols
 	add hl, de
 	ld a, [hl]
+	cp SYM_SPACE
+	jr z, .write_byte
+	call BankswitchVRAM1 ; SYM_SPACE is in VRAM 0 but status symbols are in VRAM 1 - changes bank if necessary
+.write_byte
 	call WriteByteToBGMap0
 	pop de
 	pop hl

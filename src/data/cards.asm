@@ -9414,6 +9414,17 @@ PsychicEnergyCard:
 	tx PsychicEnergyDescription ; description
 	dw NONE ; description (cont)
 
+DarknessEnergyCard:
+	db TYPE_ENERGY_DARKNESS ; type
+	gfx DarknessEnergyCardGfx ; gfx
+	tx DarknessEnergyName ; name
+	db CIRCLE ; rarity
+	db ENERGY | NONE ; sets
+	dw DARKNESS_ENERGY
+	dw DarknessEnergyEffectCommands ; effect commands
+	tx DarknessEnergyDescription ; description
+	dw NONE ; description (cont)
+
 DoubleColorlessEnergyCard:
 	db TYPE_ENERGY_DOUBLE_COLORLESS ; type
 	gfx DoubleColorlessEnergyCardGfx ; gfx
