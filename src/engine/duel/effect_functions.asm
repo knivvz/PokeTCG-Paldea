@@ -1162,7 +1162,7 @@ HandleColorChangeScreen:
 	push af
 	call EmptyScreen
 	call ZeroObjectPositions
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 
 ; load card data
 	pop af

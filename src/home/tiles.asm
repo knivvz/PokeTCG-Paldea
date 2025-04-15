@@ -308,11 +308,19 @@ LoadCardTypeHeaderTiles::
 	ld b, $10
 	jr CopyFontsOrDuelGraphicsTiles
 
-; loads the symbols that are displayed near the names of a list of cards in the hand or discard pile
-LoadDuelCardSymbolTiles::
+; loads into VRAM 1 the symbols that are displayed near the names of a list of cards in the hand or discard pile
+LoadVRAM1DuelCardSymbolTiles::
 	call BankswitchVRAM1
 	ld hl, DuelCgbSymbolGraphics - $4000
-	ld de, v1Tiles1 + $30 tiles
+	ld de, v1Tiles1 + $40 tiles
+	ld b, $34
+	jr CopyFontsOrDuelGraphicsTiles
+
+; loads into VRAM 0 the symbols that are displayed near the names of a list of cards in the hand or discard pile
+LoadVRAM0DuelCardSymbolTiles::
+	call BankswitchVRAM0
+	ld hl, DuelCgbSymbolGraphics - $4000
+	ld de, v0Tiles1 + $40 tiles
 	ld b, $34
 	jr CopyFontsOrDuelGraphicsTiles
 
@@ -351,6 +359,13 @@ LoadDeckAndDiscardPileIcons::
 	ld hl, DuelCgbSymbolGraphics + $64 tiles - $4000
 	ld de, v0Tiles1 + $50 tiles
 	ld b, $30
+	jr CopyFontsOrDuelGraphicsTiles
+
+; load the Deck icon ONLY (for deck configuration)
+LoadDeckIcon::
+	ld hl, DuelCgbSymbolGraphics + $67 tiles - $4000
+	ld de, v0Tiles1 + $74 tiles
+	ld b, $5
 	jr CopyFontsOrDuelGraphicsTiles
 
 ; load the tiles for the [O] and [X] symbols used to display the results of a coin toss

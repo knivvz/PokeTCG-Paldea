@@ -656,18 +656,18 @@ DrawCardSymbol::
 
 CardSymbolTable::
 ; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange)
-	db $c0, $01 ; TYPE_ENERGY_FIRE
-	db $c4, $02 ; TYPE_ENERGY_GRASS
-	db $c8, $01 ; TYPE_ENERGY_LIGHTNING
-	db $cc, $02 ; TYPE_ENERGY_WATER
-	db $d0, $03 ; TYPE_ENERGY_PSYCHIC
-	db $d4, $03 ; TYPE_ENERGY_FIGHTING
-	db $d8, $00 ; TYPE_ENERGY_DARKNESS
-	db $dc, $00 ; TYPE_ENERGY_DOUBLE_COLORLESS
-	db $b0, $02 ; TYPE_PKMN_*, Basic
-	db $b4, $02 ; TYPE_PKMN_*, Stage 1
-	db $b8, $01 ; TYPE_PKMN_*, Stage 2
-	db $bc, $02 ; TYPE_TRAINER
+	db $d0, $01 ; TYPE_ENERGY_FIRE
+	db $d4, $02 ; TYPE_ENERGY_GRASS
+	db $d8, $01 ; TYPE_ENERGY_LIGHTNING
+	db $dc, $02 ; TYPE_ENERGY_WATER
+	db $e0, $03 ; TYPE_ENERGY_PSYCHIC
+	db $e4, $03 ; TYPE_ENERGY_FIGHTING
+	db $e8, $00 ; TYPE_ENERGY_DARKNESS
+	db $ec, $00 ; TYPE_ENERGY_DOUBLE_COLORLESS
+	db $c0, $02 ; TYPE_PKMN_*, Basic
+	db $c4, $02 ; TYPE_PKMN_*, Stage 1
+	db $c8, $01 ; TYPE_PKMN_*, Stage 2
+	db $cc, $02 ; TYPE_TRAINER
 
 ; copy the name and level of the card at wLoadedCard1 to wDefaultText
 ; a = length in number of tiles (the resulting string will be padded with spaces to match it)

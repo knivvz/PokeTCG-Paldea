@@ -833,7 +833,7 @@ DisplayRetreatScreen:
 DisplayEnergyDiscardScreen:
 	ld [wEnergyDiscardPlayAreaLocation], a
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelFaceDownCardTiles
 	ld a, [wEnergyDiscardPlayAreaLocation]
 	ld hl, wCurPlayAreaSlot
@@ -1990,7 +1990,7 @@ PrintReturnCardsToDeckDrawAgain:
 ; used to let the player know that there are no basic Pokemon in the hand and need to redraw
 DisplayNoBasicPokemonInHandScreen:
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 18
 	call DrawRegularTextBox
@@ -2020,7 +2020,7 @@ NoBasicPokemonCardListParameters:
 DisplayPracticeDuelPlayerHandScreen:
 	call CreateHandCardList
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 13
 	call DrawRegularTextBox
@@ -2808,13 +2808,13 @@ PracticeDuelTurnVerificationPointerTable:
 PracticeDuelVerify_Turn1:
 	ld hl, wTempCardID_ccc2
 	cphl GOLDEEN
-	jp nz, ReturnWrongAction
+	;jp nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn2:
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	jp nz, ReturnWrongAction
+	;jp nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
 	jp nz, ReturnWrongAction
@@ -2822,35 +2822,35 @@ PracticeDuelVerify_Turn2:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + PSYCHIC]
 	or a
-	jp z, ReturnWrongAction
+	;jp z, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn3:
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	jp nz, ReturnWrongAction
+	;jp nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_1
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	or a
-	jr z, ReturnWrongAction
+	;jr z, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn4:
 	ld a, [wPlayerNumberOfPokemonInPlayArea]
 	cp 3
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_2
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	or a
-	jr z, ReturnWrongAction
+	;jr z, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn5:
@@ -2858,10 +2858,10 @@ PracticeDuelVerify_Turn5:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	cp 2
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl STARYU
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn6:
@@ -2869,22 +2869,22 @@ PracticeDuelVerify_Turn6:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	cp 3
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld a, [wPlayerArenaCardHP]
 	cp 40
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl STARYU
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn7Or8:
 	ld hl, wTempCardID_ccc2
 	cphl STARMIE
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
-	jr nz, ReturnWrongAction
+	;jr nz, ReturnWrongAction
 	ret
 
 ReturnWrongAction:
@@ -3046,7 +3046,7 @@ DrawCardListScreenLayout:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
 	call LoadSymbolsFont
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	; draw the surrounding box
 	lb de, 0, 0
 	lb bc, 20, 13
@@ -3364,7 +3364,7 @@ OpenCardPage:
 	call EmptyScreen
 	call FinishQueuedAnimations
 	; load the graphics and display the card image of wLoadedCard1
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
 	call SetOBP1ToCardPalette
@@ -4595,7 +4595,7 @@ DisplayPlayAreaScreen:
 .asm_6022
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	call PrintPlayAreaCardList
 	call EnableLCD
@@ -4814,7 +4814,7 @@ SetupPlayAreaScreen:
 	ret z
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	jp LoadDuelCheckPokemonScreenTiles
 
 ; for each turn holder's play area Pokemon card, print the name, level,
@@ -5302,7 +5302,7 @@ DisplayPlayAreaScreenToUsePkmnPower:
 .DrawScreen:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	ld de, wDuelTempList
 	call SetListPointer
@@ -5359,7 +5359,7 @@ DisplayUsePokemonPowerScreen::
 	ld [wCurPlayAreaY], a
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	call PrintPlayAreaCardInformationAndLocation
 	lb de, 1, 4
@@ -5555,7 +5555,7 @@ DrawHPBar:
 DisplayOpponentUsedAttackScreen:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelFaceDownCardTiles
 	ld a, [wTempCardID_ccc2 + 0]
 	ld e, a
