@@ -1255,11 +1255,15 @@ _CheckIfEnoughEnergiesToAttack:
 	inc de
 	dec c
 	jr nz, .next_energy_type_pair
-	ld a, [de] ; one more iteration for darkness
-	swap a
-	call CheckIfEnoughEnergiesOfType
-	jr c, .not_usable_or_not_enough_energies
+
+	; if total number of coloured types is odd, uncomment this
+	;ld a, [de] ; one more iteration for [odd type]
+	;swap a
+	;call CheckIfEnoughEnergiesOfType
+	;jr c, .not_usable_or_not_enough_energies
+
 	ld a, [de] ; colorless energy
+	swap a ; remove this line if the total number of coloured types is odd
 	and $f
 	ld b, a
 	ld a, [wAttachedEnergiesAccum]
@@ -2808,13 +2812,13 @@ PracticeDuelTurnVerificationPointerTable:
 PracticeDuelVerify_Turn1:
 	ld hl, wTempCardID_ccc2
 	cphl GOLDEEN
-	;jp nz, ReturnWrongAction
+	jp nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn2:
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	;jp nz, ReturnWrongAction
+	jp nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
 	jp nz, ReturnWrongAction
@@ -2822,35 +2826,35 @@ PracticeDuelVerify_Turn2:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + PSYCHIC]
 	or a
-	;jp z, ReturnWrongAction
+	jp z, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn3:
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	;jp nz, ReturnWrongAction
+	jp nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_1
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	or a
-	;jr z, ReturnWrongAction
+	jr z, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn4:
 	ld a, [wPlayerNumberOfPokemonInPlayArea]
 	cp 3
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld e, PLAY_AREA_BENCH_2
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	or a
-	;jr z, ReturnWrongAction
+	jr z, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl SEAKING
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn5:
@@ -2858,10 +2862,10 @@ PracticeDuelVerify_Turn5:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	cp 2
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl STARYU
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn6:
@@ -2869,22 +2873,22 @@ PracticeDuelVerify_Turn6:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	cp 3
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld a, [wPlayerArenaCardHP]
 	cp 40
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
 	cphl STARYU
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn7Or8:
 	ld hl, wTempCardID_ccc2
 	cphl STARMIE
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
-	;jr nz, ReturnWrongAction
+	jr nz, ReturnWrongAction
 	ret
 
 ReturnWrongAction:
@@ -4103,7 +4107,7 @@ PrintCardPageWeaknessesOrResistances:
 	; which bits are set and therefore which WR_* values are active.
 	; a is kept updated with the equivalent TYPE_* constant.
 	inc a
-	cp 8
+	cp 9
 	jr nc, .done
 	rl d
 	jr nc, .loop
@@ -5232,7 +5236,7 @@ PrintPlayAreaCardAttachedEnergies:
 	pop bc
 	call BCCoordToBGMap0Address
 	ld hl, wDefaultText
-	ld b, NUM_TYPES
+	ld b, 8
 	jp SafeCopyDataHLtoDE
 
 DisplayPlayAreaScreenToUsePkmnPower:

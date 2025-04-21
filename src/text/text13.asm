@@ -192,6 +192,7 @@ ColorListText:
 	line "Fighting"
 	line "Psychic"
 	line "Darkness"
+	line "Metal"
 	done
 
 DarknessPokemonText:
@@ -208,4 +209,20 @@ DarknessEnergyDescription:
 
 DarknessSymbolText:
 	textfw "<DARKNESS>"
+	done
+
+MetalPokemonText:
+	text "Metal Pokémon"
+	done
+
+MetalEnergyName:
+	text "Metal Energy"
+	done
+
+MetalEnergyDescription:
+	text "Provides 1 <METAL> Energy."
+	done
+
+MetalSymbolText:
+	textfw "<METAL>"
 	done
