@@ -11,8 +11,9 @@ Based off of [ElectroDeoxys' Pokemon TCG Extended repo](https://github.com/Elect
 
 ## Features:
 
-- Fully functional Darkness type, including the accompanying icons, Basic Energy card, and filter for the deck construction menu. **Note:** No Darkness Pokemon cards have been added as of yet, and as a result no boosters rewarding Darkness cards. 
-- Graphical data for Metal, Fairy and Dragon types is in place but these types have not been implemented yet.
+- Fully functional Darkness and Metal types, including the accompanying icons, Basic Energy card, and filter for the deck construction menu. **Note:** No Darkness or Metal Pokemon cards have been added as of yet, and as a result no boosters rewarding Darkness or Metal cards. 
+- New deck construction screen that better accounts for more types of cards
+- Graphical data for Fairy and Dragon types is in place but these types have not been implemented yet.
 - Changes to the way certain symbols and graphics are loaded into VRAM, leveraging the GBC's additional VRAM banks to load more type symbols and status condition markers. In the future I'd like to extend this to allow for more colourful sprites like the sequel game has.
 - Support for up to 511 cards as opposed to the 254 limit of the original ROM (thanks to ElectroDeoxys' extended engine)
 
@@ -27,10 +28,14 @@ The Pokemon TCG Extended engine removes some code and functionality from the gam
 
 ## Planned content
 There's plenty of things I want to add to this engine over time, but note that I am still inexperienced with assembly this is mostly  pie-in-the-sky wishful thinking at the moment. New types are the priority, and then I'll play it by ear.
-- Metal, Fairy and Dragon types
-	- The game already technically had support for 8 types, but adding more will require significant rewriting of the game's data structures and logic.
-- Updated deck construction screen that accounts for the new types
-	- I have a graphical mock-up done and am working on getting it into the game
+- Fairy and Dragon types
+	- Adding Metal required rewriting a lot of the game's logic, but now the groundwork has been laid for future types
+- Updated deck construction menu
+	- Initial functionality of this screen that accounts for new types is currently in place
+	- Aiming to have a filter that shows all the cards currently in the deck without needing to open the Confirm Deck screen
+	- If the above is achieved then the Confirm Deck screen will be replaced with a new Deck Analysis screen that shows helpful information about your deck (e.g. number of Pokemon vs. Trainers, Energy types required by your Pokemon's attack vs. Energy types in the deck)
+	- I've been toying around with different layouts; if any of them work out I'll provide optional files to give people a choice
+	- The UX on this screen is generally a bit messy so there's a few QOL changes I can implement
 - Burn status condition
 - Pokemon TCG 2 backports
 	- Cards (the sequel has cards up to the Team Rocket series plus a few outliers)
@@ -42,7 +47,7 @@ There's plenty of things I want to add to this engine over time, but note that I
 	- Even with the extended ROM base there's still limitations on how many cards can be added so these will most likely be separated into different branches
 - Seeing if there's a way to work in something similar to [pokecrystal16](https://github.com/vulcandth/pokecrystal16)'s indirection tables to boost the card count even further. A version with every card from the Base Set to Skyridge is the dream.
 	- Essentially these are a very clever system set up by people much smarter than me that allows Pokemon Crystal to have way more Pokemon, moves, and items than usual.
-	- The game uses 8-bit indexes for this content, which limits how much you can add. Indirection tables allow you to use 16-bit indexes for Pokemon, moves etc. while the game only loads in the data that it needs to
+	- The game uses 8-bit indexes for this content, which limits how much you can add. Indirection tables allow you to use 16-bit indexes for Pokemon, moves etc. while the game only loads in the data that it needs to and assigns it an 8-bit id that links to that index
 - Adding multiplayer functionality back in LOL (even if just as an optional extra in a separate branch)
 - Miscellaneous mechanical and QOL improvements (e.g. optional tutorial, fixed bugs from the base game)
 ## Installation
@@ -64,13 +69,18 @@ If none of that makes any sense to you then these [installation instructions](ht
 - Me (Mario_Bones):
 	- Type symbols for Darkness, Metal, Fairy and Dragon types
 	- Card icons for Darkness, Metal, Fairy and Dragon types
-- PaperFire88
+- PaperFire88:
 	- [Darkness, Metal and Fairy Energy card graphics](https://www.deviantart.com/paperfire88/art/Fairy-Metal-Darkness-Energy-GB1-and-2-Shiny-956324645)
 
 ### Code:
-- [ElectroDeoxys](https://github.com/ElectroDeoxys/) - Pokemon TCG Extended engine that allows for adding of more cards
+- Me (Mario_Bones):
+	- Support for new types
+	- New deck construction screen
+- [ElectroDeoxys](https://github.com/ElectroDeoxys/):
+	- Pokemon TCG Extended engine that allows for adding of more cards
 
 ### Special Thanks:
+- Hudson Soft and Creatures Inc. for developing the original TCG Game Boy game and Game Freak for creating Pokemon
 - Everyone who's submitted any code or improvements to the [poketcg disassembly](https://github.com/pret/poketcg) project
 - Imakuni for those dance moves
 - My girlfriend for listening to me talk about VRAM banks and why they're exciting

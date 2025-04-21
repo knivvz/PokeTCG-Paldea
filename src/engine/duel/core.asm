@@ -833,7 +833,7 @@ DisplayRetreatScreen:
 DisplayEnergyDiscardScreen:
 	ld [wEnergyDiscardPlayAreaLocation], a
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelFaceDownCardTiles
 	ld a, [wEnergyDiscardPlayAreaLocation]
 	ld hl, wCurPlayAreaSlot
@@ -1255,11 +1255,15 @@ _CheckIfEnoughEnergiesToAttack:
 	inc de
 	dec c
 	jr nz, .next_energy_type_pair
-	ld a, [de] ; one more iteration for darkness
-	swap a
-	call CheckIfEnoughEnergiesOfType
-	jr c, .not_usable_or_not_enough_energies
+
+	; if total number of coloured types is odd, uncomment this
+	;ld a, [de] ; one more iteration for [odd type]
+	;swap a
+	;call CheckIfEnoughEnergiesOfType
+	;jr c, .not_usable_or_not_enough_energies
+
 	ld a, [de] ; colorless energy
+	swap a ; remove this line if the total number of coloured types is odd
 	and $f
 	ld b, a
 	ld a, [wAttachedEnergiesAccum]
@@ -1990,7 +1994,7 @@ PrintReturnCardsToDeckDrawAgain:
 ; used to let the player know that there are no basic Pokemon in the hand and need to redraw
 DisplayNoBasicPokemonInHandScreen:
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 18
 	call DrawRegularTextBox
@@ -2020,7 +2024,7 @@ NoBasicPokemonCardListParameters:
 DisplayPracticeDuelPlayerHandScreen:
 	call CreateHandCardList
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	lb de, 0, 0
 	lb bc, 20, 13
 	call DrawRegularTextBox
@@ -3046,7 +3050,7 @@ DrawCardListScreenLayout:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
 	call LoadSymbolsFont
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	; draw the surrounding box
 	lb de, 0, 0
 	lb bc, 20, 13
@@ -3364,7 +3368,7 @@ OpenCardPage:
 	call EmptyScreen
 	call FinishQueuedAnimations
 	; load the graphics and display the card image of wLoadedCard1
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	ld de, v0Tiles1 + $20 tiles
 	call LoadLoaded1CardGfx
 	call SetOBP1ToCardPalette
@@ -4103,7 +4107,7 @@ PrintCardPageWeaknessesOrResistances:
 	; which bits are set and therefore which WR_* values are active.
 	; a is kept updated with the equivalent TYPE_* constant.
 	inc a
-	cp 8
+	cp 9
 	jr nc, .done
 	rl d
 	jr nc, .loop
@@ -4595,7 +4599,7 @@ DisplayPlayAreaScreen:
 .asm_6022
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	call PrintPlayAreaCardList
 	call EnableLCD
@@ -4814,7 +4818,7 @@ SetupPlayAreaScreen:
 	ret z
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	jp LoadDuelCheckPokemonScreenTiles
 
 ; for each turn holder's play area Pokemon card, print the name, level,
@@ -5232,7 +5236,7 @@ PrintPlayAreaCardAttachedEnergies:
 	pop bc
 	call BCCoordToBGMap0Address
 	ld hl, wDefaultText
-	ld b, NUM_TYPES
+	ld b, 8
 	jp SafeCopyDataHLtoDE
 
 DisplayPlayAreaScreenToUsePkmnPower:
@@ -5302,7 +5306,7 @@ DisplayPlayAreaScreenToUsePkmnPower:
 .DrawScreen:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	ld de, wDuelTempList
 	call SetListPointer
@@ -5359,7 +5363,7 @@ DisplayUsePokemonPowerScreen::
 	ld [wCurPlayAreaY], a
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelCheckPokemonScreenTiles
 	call PrintPlayAreaCardInformationAndLocation
 	lb de, 1, 4
@@ -5555,7 +5559,7 @@ DrawHPBar:
 DisplayOpponentUsedAttackScreen:
 	call ZeroObjectPositionsAndToggleOAMCopy
 	call EmptyScreen
-	call LoadDuelCardSymbolTiles
+	call LoadVRAM1DuelCardSymbolTiles
 	call LoadDuelFaceDownCardTiles
 	ld a, [wTempCardID_ccc2 + 0]
 	ld e, a

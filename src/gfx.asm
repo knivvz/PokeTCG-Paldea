@@ -2065,3 +2065,7 @@ RecycleCardGfx::
 DarknessEnergyCardGfx::
 	INCBIN "gfx/cards/darknessenergy.2bpp"
 	INCBIN "gfx/cards/darknessenergy.pal"
+
+MetalEnergyCardGfx::
+	INCBIN "gfx/cards/metalenergy.2bpp"
+	INCBIN "gfx/cards/metalenergy.pal"
