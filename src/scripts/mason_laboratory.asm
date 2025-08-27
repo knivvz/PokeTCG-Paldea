@@ -111,6 +111,7 @@ EnergyCardList:
 	dw PSYCHIC_ENERGY
 	dw DARKNESS_ENERGY
 	dw METAL_ENERGY
+	dw FAIRY_ENERGY
 .end
 
 Script_Tech2:

@@ -74,8 +74,8 @@ MACRO energy
 			db LOW(en2)
 			DEF en2 >>= 8
 		ENDR
-	ELSE ; If there is only 1 or less arguments, set all five values to 0
-		db 0, 0, 0, 0, 0
+	ELSE ; If there is only 1 or less arguments, set all six values to 0
+		db 0, 0, 0, 0, 0, 0
 	ENDC
 ENDM
 

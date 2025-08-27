@@ -11,15 +11,16 @@ Based off of [ElectroDeoxys' Pokemon TCG Extended repo](https://github.com/Elect
 
 ## Features:
 
-- Fully functional Darkness and Metal types, including the accompanying icons, Basic Energy card, and filter for the deck construction menu. **Note:** No Darkness or Metal Pokemon cards have been added as of yet, and as a result no boosters rewarding Darkness or Metal cards. 
+- Fully functional Darkness, Metal, Fairy and Dragon types, including the accompanying icons, Basic Energy card, and filter for the deck construction menu.
+	- **Note:** No Pokemon cards of these types have been added as of yet, and as a result no boosters rewarding cards of these types.
+	- **Note 2:** A Dragon energy type is coded into the game for logical convenience, but there is no accompanying Energy Card as there is no Dragon Energy in the real TCG.
 - New deck construction screen that better accounts for more types of cards
-- Graphical data for Fairy and Dragon types is in place but these types have not been implemented yet.
 - Changes to the way certain symbols and graphics are loaded into VRAM, leveraging the GBC's additional VRAM banks to load more type symbols and status condition markers. In the future I'd like to extend this to allow for more colourful sprites like the sequel game has.
 - Support for up to 511 cards as opposed to the 254 limit of the original ROM (thanks to ElectroDeoxys' extended engine)
 
 ## Removed content
 The Pokemon TCG Extended engine removes some code and functionality from the game in order to make space for cards:
-- GameBoy tilemaps and compatibility functionality;
+- GameBoy tilemaps and compatibility functionality
 - Unused content (Japanese title screen, unreferenced routines, unused text, debug menus)
 - Printer functions
 - Card Pop!
@@ -28,8 +29,6 @@ The Pokemon TCG Extended engine removes some code and functionality from the gam
 
 ## Planned content
 There's plenty of things I want to add to this engine over time, but note that I am still inexperienced with assembly this is mostly  pie-in-the-sky wishful thinking at the moment. New types are the priority, and then I'll play it by ear.
-- Fairy and Dragon types
-	- Adding Metal required rewriting a lot of the game's logic, but now the groundwork has been laid for future types
 - Updated deck construction menu
 	- Initial functionality of this screen that accounts for new types is currently in place
 	- Aiming to have a filter that shows all the cards currently in the deck without needing to open the Confirm Deck screen

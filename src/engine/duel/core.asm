@@ -3841,7 +3841,7 @@ SetDefaultConsolePalettes:
 	ld [wTextBoxFrameType], a
 	ld de, CGBDefaultPalettes
 	ld hl, wBackgroundPalettesCGB
-	ld c, 5 palettes
+	ld c, 6 palettes
 	call .copy_de_to_hl
 	ld de, CGBDefaultPalettes
 	ld hl, wObjectPalettesCGB
@@ -3882,6 +3882,11 @@ CGBDefaultPalettes:
 	rgb 28, 28, 24
 	rgb 26, 10, 0
 	rgb 28, 0, 0
+	rgb 0, 0, 0
+; BGP5
+	rgb 28, 28, 24
+	rgb 30, 12, 20
+	rgb 14, 16, 0
 	rgb 0, 0, 0
 
 JPWriteByteToBGMap0:
@@ -4100,6 +4105,12 @@ PrintEnergiesOfColor:
 PrintCardPageWeaknessesOrResistances:
 	push bc
 	push de
+	ld e, 0
+	cp $81
+	jr c, .skip_ahead
+	ld e, 7
+	res 7,a
+.skip_ahead
 	ld d, a
 	xor a ; FIRE
 .loop
@@ -4112,6 +4123,7 @@ PrintCardPageWeaknessesOrResistances:
 	rl d
 	jr nc, .loop
 	push af
+	add e
 	call JPWriteByteToBGMap0
 	inc b
 	pop af
@@ -5142,7 +5154,7 @@ PrintPlayAreaCardHeader:
 	ret
 
 FaceDownCardTileNumbers:
-; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange)
+; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange, ???, pink/gold)
 	db $d0, $02 ; basic
 	db $d4, $02 ; stage 1
 	db $d8, $01 ; stage 2

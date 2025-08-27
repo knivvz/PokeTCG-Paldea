@@ -535,6 +535,8 @@ ConvertColorToEnergyCardID:
 	dw PSYCHIC_ENERGY
 	dw DARKNESS_ENERGY
 	dw METAL_ENERGY
+	dw FAIRY_ENERGY
+	dw DOUBLE_COLORLESS_ENERGY ; ENERGY_DRAGON
 	dw DOUBLE_COLORLESS_ENERGY
 
 ; return carry depending on card index in a:
@@ -1536,8 +1538,13 @@ CheckEnergyFlagsNeededInList:
 	jr .check_energy
 .metal
 	cp16 METAL_ENERGY
-	jr nz, .colorless
+	jr nz, .fairy
 	ld a, METAL_F
+	jr .check_energy
+.fairy
+	cp16 FAIRY_ENERGY
+	jr nz, .colorless
+	ld a, FAIRY_F
 	jr .check_energy
 .colorless
 	cp16 DOUBLE_COLORLESS_ENERGY
@@ -1640,11 +1647,19 @@ GetAttacksEnergyCostBits:
 .metal
 	ld a, b
 	and $0f
-	jr z, .colorless
+	jr z, .fairy
 	ld a, METAL_F
 	or c
 	ld c, a
-.colorless
+.fairy
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .colorless
+	ld a, FAIRY_F
+	or c
+	ld c, a
+.colorless ; We skip Dragon on account of no Dragon energy
 	ld a, [hli]
 	ld b, a
 	and $f0
