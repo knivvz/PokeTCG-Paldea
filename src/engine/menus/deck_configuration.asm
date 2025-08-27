@@ -963,11 +963,13 @@ CardTypeIcons:
 	db ICON_TILE_LIGHTNING,  9, 0
 	db ICON_TILE_FIGHTING,   12, 0
 	db ICON_TILE_PSYCHIC,    15, 0
-	db ICON_TILE_DARKNESS,   0, 3
-	db ICON_TILE_METAL,		 3, 3
-	db ICON_TILE_COLORLESS,  6, 3
-	db ICON_TILE_TRAINER,    9, 3
-	db ICON_TILE_ENERGY,     12, 3
+	db ICON_TILE_DARKNESS,   18, 0
+	db ICON_TILE_METAL,		 0, 3
+	db ICON_TILE_FAIRY,		 3, 3
+	db ICON_TILE_DRAGON,	 6, 3
+	db ICON_TILE_COLORLESS,  9, 3
+	db ICON_TILE_TRAINER,    12, 3
+	db ICON_TILE_ENERGY,     15, 3
 	db $00
 
 CollectionCardTypeIcons:
@@ -978,11 +980,13 @@ CollectionCardTypeIcons:
 		db ICON_TILE_LIGHTNING,  9, 1
 		db ICON_TILE_FIGHTING,   12, 1
 		db ICON_TILE_PSYCHIC,    15, 1
-		db ICON_TILE_DARKNESS,   0, 3
-		db ICON_TILE_METAL,		 3, 3
-		db ICON_TILE_COLORLESS,  6, 3
-		db ICON_TILE_TRAINER,    9, 3
-		db ICON_TILE_ENERGY,     12, 3
+		db ICON_TILE_DARKNESS,   18, 1
+		db ICON_TILE_METAL,		 0, 3
+		db ICON_TILE_FAIRY,		 3, 3
+		db ICON_TILE_DRAGON,	 6, 3
+		db ICON_TILE_COLORLESS,  9, 3
+		db ICON_TILE_TRAINER,    12, 3
+		db ICON_TILE_ENERGY,     15, 3
 		db $00
 
 DeckBuildMenuData:
@@ -1020,13 +1024,13 @@ PrintDeckIcon:
 	push hl
 	lb bc, 2, 2
 	lb hl, 1, 2
-	ld a, $f8 ; deck icon
+	ld a, $00 ; deck icon
 	call FillRectangle
 	lb bc, 2, 2
 	lb hl, 0, 0
 	ld a, $02
 	call BankswitchVRAM1
-	call FillRectangle
+	call FillVRAM1Rectangle
 	call BankswitchVRAM0
 	pop bc
 	pop hl
@@ -1531,6 +1535,8 @@ CardTypeFilters:
 	db FILTER_PSYCHIC
 	db FILTER_DARKNESS
 	db FILTER_METAL
+	db FILTER_FAIRY
+	db FILTER_DRAGON
 	db FILTER_COLORLESS
 	db FILTER_TRAINER
 	db FILTER_ENERGY
@@ -1739,7 +1745,7 @@ InitCardSelectionParams:
 	ld [wCheckMenuCursorBlinkCounter], a
 	ret
 
-HandleCardSelectionInput:
+HandleCardSelectionInput: ; TODO - wrapping on end of top row malfunctions if the bottom row has less filters
 	xor a ; FALSE
 	ld [wMenuInputSFX], a
 	ldh a, [hDPadHeld]
@@ -3136,6 +3142,8 @@ GetCardTypeIconPalette:
 	db ICON_TILE_PSYCHIC,         3
 	db ICON_TILE_DARKNESS,		  0
 	db ICON_TILE_METAL,		  	  0
+	db ICON_TILE_FAIRY,			  5
+	db ICON_TILE_DRAGON,		  5
 	db ICON_TILE_COLORLESS,       0
 	db ICON_TILE_ENERGY,          2
 	db ICON_TILE_BASIC_POKEMON,   2

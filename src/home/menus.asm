@@ -608,11 +608,11 @@ CardTypeToSymbolID::
 	and $0f ; convert energy constant to type constant
 	ret
 .trainer_card
-	ld a, 12
+	ld a, 14
 	ret
 .pokemon_card
 	ld a, [wLoadedCard1Stage] ; different symbol for each evolution stage
-	add 9
+	add 11
 	ret
 
 ; return the entry in CardSymbolTable of the TYPE_* constant in wLoadedCard1Type
@@ -655,7 +655,7 @@ DrawCardSymbol::
 	ret
 
 CardSymbolTable::
-; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange)
+; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange, ???, pink/gold)
 	db $d0, $01 ; TYPE_ENERGY_FIRE
 	db $d4, $02 ; TYPE_ENERGY_GRASS
 	db $d8, $01 ; TYPE_ENERGY_LIGHTNING
@@ -664,7 +664,9 @@ CardSymbolTable::
 	db $e4, $03 ; TYPE_ENERGY_FIGHTING
 	db $e8, $00 ; TYPE_ENERGY_DARKNESS
 	db $ec, $00 ; TYPE_ENERGY_METAL
-	db $f0, $00 ; TYPE_ENERGY_DOUBLE_COLORLESS
+	db $f0, $05 ; TYPE_ENERGY_FAIRY
+	db $f4, $05 ; TYPE_ENERGY_DRAGON
+	db $f8, $00 ; TYPE_ENERGY_DOUBLE_COLORLESS
 	db $c0, $02 ; TYPE_PKMN_*, Basic
 	db $c4, $02 ; TYPE_PKMN_*, Stage 1
 	db $c8, $01 ; TYPE_PKMN_*, Stage 2

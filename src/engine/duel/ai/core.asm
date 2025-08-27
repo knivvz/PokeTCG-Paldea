@@ -439,13 +439,13 @@ CheckEnergyNeededForAttack:
 ; two different basic energy types, then this routine only accounts
 ; for the type with the highest index
 
-	; darkness
+	; one more iteration for an odd-numbered coloured energy
 	;ld a, [de]
 	;swap a
 	;call CheckIfEnoughParticularAttachedEnergy
 	; colorless
 	ld a, [de]
-	;swap a
+	swap a ;- comment this line out if number of coloured energies is odd
 	and %00001111
 	ld b, a ; colorless energy still needed
 	ld a, [wTempLoadedAttackEnergyCost]
@@ -535,6 +535,8 @@ ConvertColorToEnergyCardID:
 	dw PSYCHIC_ENERGY
 	dw DARKNESS_ENERGY
 	dw METAL_ENERGY
+	dw FAIRY_ENERGY
+	dw DOUBLE_COLORLESS_ENERGY ; ENERGY_DRAGON
 	dw DOUBLE_COLORLESS_ENERGY
 
 ; return carry depending on card index in a:
@@ -890,11 +892,11 @@ CheckEnergyNeededForAttackAfterDiscard:
 	dec c
 	jr nz, .loop
 
-	;ld a, [de] ; darkness
+	;ld a, [de] ; extra iteration for an odd-numbered energy type
 	;swap a
 	;call CheckIfEnoughParticularAttachedEnergy
 	ld a, [de]
-	swap a
+	swap a ; comment this out if number of colored energies is odd
 	and $0f
 	ld b, a ; colorless energy still needed
 	ld a, [wTempLoadedAttackEnergyCost]
@@ -1536,8 +1538,13 @@ CheckEnergyFlagsNeededInList:
 	jr .check_energy
 .metal
 	cp16 METAL_ENERGY
-	jr nz, .colorless
+	jr nz, .fairy
 	ld a, METAL_F
+	jr .check_energy
+.fairy
+	cp16 FAIRY_ENERGY
+	jr nz, .colorless
+	ld a, FAIRY_F
 	jr .check_energy
 .colorless
 	cp16 DOUBLE_COLORLESS_ENERGY
@@ -1640,11 +1647,19 @@ GetAttacksEnergyCostBits:
 .metal
 	ld a, b
 	and $0f
-	jr z, .colorless
+	jr z, .fairy
 	ld a, METAL_F
 	or c
 	ld c, a
-.colorless
+.fairy
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .colorless
+	ld a, FAIRY_F
+	or c
+	ld c, a
+.colorless ; We skip Dragon on account of no Dragon energy
 	ld a, [hli]
 	ld b, a
 	and $f0

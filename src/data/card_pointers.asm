@@ -9,6 +9,7 @@ CardPointers::
 	dab PsychicEnergyCard
 	dab DarknessEnergyCard
 	dab MetalEnergyCard
+	dab FairyEnergyCard
 	dab DoubleColorlessEnergyCard
 	dab BulbasaurCard
 	dab IvysaurCard

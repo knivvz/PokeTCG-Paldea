@@ -1895,13 +1895,23 @@ ApplyDamageModifiers_DamageToTarget::
 	jp SwapTurn
 
 ; convert a color to its equivalent WR_* (weakness/resistance) value
+; additional bitwise operation has been added to account for more than
+; 8 coloured types
 TranslateColorToWR::
 	push hl
-	cp COLORLESS ; TODO - types beyond $07 will break the bitwise operations used for W/R values so a more robust system will need to be introduced
-	jr nz, .got_color
+	push bc
+	ld b, $0
+	cp 8 ; Fire, Grass, Lightning, Water, Fighting, Psychic, Darkness, Metal
+	jr c, .got_color
+	cp NUM_COLORED_TYPES ; Fairy, Dragon
+	jr c, .valid_color
 	ld a, 0
 	pop hl
+	pop bc
 	ret
+.valid_color
+	ld b, $80
+	sub 7
 .got_color
 	add LOW(InvertedPowersOf2)
 	ld l, a
@@ -1909,7 +1919,9 @@ TranslateColorToWR::
 	adc $0
 	ld h, a
 	ld a, [hl]
+	or b
 	pop hl
+	pop bc
 	ret
 
 InvertedPowersOf2::

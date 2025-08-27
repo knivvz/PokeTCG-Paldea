@@ -644,7 +644,7 @@ HandleAIShift:
 	ld a, [wAIDefendingPokemonWeakness]
 	ld b, 0
 .loop_color
-	bit 7, a
+	bit 7, a ; TODO - update for more types
 	jr nz, .done
 	inc b
 	rlca

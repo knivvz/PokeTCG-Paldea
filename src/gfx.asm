@@ -2069,3 +2069,7 @@ DarknessEnergyCardGfx::
 MetalEnergyCardGfx::
 	INCBIN "gfx/cards/metalenergy.2bpp"
 	INCBIN "gfx/cards/metalenergy.pal"
+
+FairyEnergyCardGfx::
+	INCBIN "gfx/cards/fairyenergy.2bpp"
+	INCBIN "gfx/cards/fairyenergy.pal"

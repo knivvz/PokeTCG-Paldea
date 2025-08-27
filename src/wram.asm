@@ -426,7 +426,7 @@ wEnergyDiscardPlayAreaLocation:: ; cbe0
 wOpponentTurnEnded:: ; cbe1
 	ds $1
 
-	ds $4 ; Down from 5
+	ds $5
 
 ; if non-zero, duel menu input is not checked
 wDebugSkipDuelMenuInput:: ; cbe7

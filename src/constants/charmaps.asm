@@ -421,7 +421,7 @@ MACRO txsymbol
 	charmap "\1>", const_value - 1
 ENDM
 
-; TX_SYMBOL
+; TX_SYMBOL - bracketed numbers are the indexes from the original code
 ; TODO: If user-defined functions ever become a thing a symbol(*) syntax
 ;       would probably be preferred over SYM_*
 	charmap "<", TX_SYMBOL
@@ -435,9 +435,9 @@ ENDM
 	txsymbol PSYCHIC    	; $06
 	txsymbol DARKNESS  		; $07
 	txsymbol METAL			; $08
-	txsymbol COLORLESS		; $09 ($07)
+	txsymbol FAIRY			; $09
 	txsymbol DRAGON			; $0a
-	txsymbol FAIRY			; $0b
+	txsymbol COLORLESS		; $0b ($07)
 	txsymbol RAINBOW		; $0c
 	txsymbol Lv         	; $0d ($11)
 	txsymbol No         	; $0e ($13)

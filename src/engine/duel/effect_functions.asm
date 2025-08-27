@@ -1307,6 +1307,8 @@ ColorTileAndBGP:
 	db $e4, $03
 	db $e8, $00
 	db $ec, $00
+	db $f0, $00
+	db $f4, $00
 
 ShiftListItemToColor:
 	db GRASS
@@ -1317,6 +1319,8 @@ ShiftListItemToColor:
 	db PSYCHIC
 	db DARKNESS
 	db METAL
+	db FAIRY
+	db DRAGON
 
 ColorToTextSymbol:
 	tx FireSymbolText
@@ -1327,6 +1331,8 @@ ColorToTextSymbol:
 	tx PsychicSymbolText
 	tx DarknessSymbolText
 	tx MetalSymbolText
+	tx FairySymbolText
+	tx DragonSymbolText
 
 DrawSymbolOnPlayAreaCursor:
 	ld c, a

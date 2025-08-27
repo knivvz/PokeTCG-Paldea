@@ -9436,6 +9436,17 @@ MetalEnergyCard:
 	tx MetalEnergyDescription ; description
 	dw NONE ; description (cont)
 
+FairyEnergyCard:
+	db TYPE_ENERGY_FAIRY ; type
+	gfx FairyEnergyCardGfx ; gfx
+	tx FairyEnergyName ; name
+	db CIRCLE ; rarity
+	db ENERGY | NONE ; sets
+	dw FAIRY_ENERGY
+	dw FairyEnergyEffectCommands ; effect commands
+	tx FairyEnergyDescription ; description
+	dw NONE ; description (cont)
+
 DoubleColorlessEnergyCard:
 	db TYPE_ENERGY_DOUBLE_COLORLESS ; type
 	gfx DoubleColorlessEnergyCardGfx ; gfx

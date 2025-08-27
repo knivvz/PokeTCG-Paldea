@@ -193,6 +193,8 @@ ColorListText:
 	line "Psychic"
 	line "Darkness"
 	line "Metal"
+	line "Fairy"
+	line "Dragon"
 	done
 
 DarknessPokemonText:
@@ -225,4 +227,28 @@ MetalEnergyDescription:
 
 MetalSymbolText:
 	textfw "<METAL>"
+	done
+
+FairyPokemonText:
+	text "Fairy Pokémon"
+	done
+
+FairyEnergyName:
+	text "Fairy Energy"
+	done
+
+FairyEnergyDescription:
+	text "Provides 1 <FAIRY> Energy."
+	done
+
+FairySymbolText:
+	textfw "<FAIRY>"
+	done
+
+DragonPokemonText:
+	text "Dragon Pokémon"
+	done
+
+DragonSymbolText:
+	textfw "<DRAGON>"
 	done

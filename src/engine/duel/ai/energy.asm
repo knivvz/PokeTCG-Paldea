@@ -773,7 +773,13 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	ld de, DARKNESS_ENERGY
 	jr .set_carry
 .metal
+	ld a, b
+	and $0f
+	jr z, .fairy
 	ld de, METAL_ENERGY
+	jr .set_carry
+.fairy
+	ld de, FAIRY_ENERGY
 
 .set_carry
 	lb bc, TRUE, FALSE
