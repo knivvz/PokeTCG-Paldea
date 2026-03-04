@@ -1,4 +1,4 @@
-rom := poketcg_ext.gbc
+rom := poketcg_paldea.gbc
 
 rom_obj := \
 	src/main.o \

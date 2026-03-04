@@ -2913,3 +2913,4 @@ TextOffsets::
 	textpointer GamblerDescription
 	textpointer RecycleName
 	textpointer RecycleDescription
+	textpointer DeclinedPracticeDuelText
