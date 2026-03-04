@@ -2407,42 +2407,48 @@ DrawDuelHUD:
 	ld b, [hl]
 	inc hl
 	ld c, [hl] ; wHUDEnergyAndHPBarsY
+	push bc
 	lb de, 9, PLAY_AREA_ARENA
 	call PrintPlayAreaCardAttachedEnergies
 
-	; print HP bar
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wLoadedCard1HP]
-	ld d, a ; max HP
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	ld e, a ; cur HP
-	call DrawHPBar
-	ld hl, wHUDEnergyAndHPBarsX
-	ld b, [hl]
-	inc hl
-	ld c, [hl] ; wHUDEnergyAndHPBarsY
+	; ; print HP bar
+	; ld a, DUELVARS_ARENA_CARD
+	; call GetTurnDuelistVariable
+	; call LoadCardDataToBuffer1_FromDeckIndex
+	; ld a, [wLoadedCard1HP]
+	; ld d, a ; max HP
+	; ld a, DUELVARS_ARENA_CARD_HP
+	; call GetTurnDuelistVariable
+	; ld e, a ; cur HP
+	; call DrawHPBar
+	; ld hl, wHUDEnergyAndHPBarsX
+	; ld b, [hl]
+	; inc hl
+	; ld c, [hl] ; wHUDEnergyAndHPBarsY
+	pop bc
 	inc c ; [wHUDEnergyAndHPBarsY] + 1
-	call BCCoordToBGMap0Address
-	push de
-	ld hl, wDefaultText
-	ld b, HP_BAR_LENGTH / 2 ; first row of the HP bar
-	call SafeCopyDataHLtoDE
-	pop de
-	ld hl, BG_MAP_WIDTH
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, wDefaultText + HP_BAR_LENGTH / 2
-	ld b, HP_BAR_LENGTH / 2 ; second row of the HP bar
-	call SafeCopyDataHLtoDE
+	; call BCCoordToBGMap0Address
+	; push de
+	; ld hl, wDefaultText
+	; ld b, HP_BAR_LENGTH / 2 ; first row of the HP bar
+	; call SafeCopyDataHLtoDE
+	; pop de
+	; ld hl, BG_MAP_WIDTH
+	; add hl, de
+	; ld e, l
+	; ld d, h
+	; ld hl, wDefaultText + HP_BAR_LENGTH / 2
+	; ld b, HP_BAR_LENGTH / 2 ; second row of the HP bar
+	; call SafeCopyDataHLtoDE
+
+	; print HP as #/# (current HP/max HP)
+	xor a ; PLAY_AREA_ARENA
+	call PrintCurrentAndMaxHP
 
 	; print number of attached Pluspower and Defender with respective icon, if any
 	ld hl, wHUDEnergyAndHPBarsX
 	ld a, [hli]
-	add 6
+	add 7
 	ld b, a
 	ld c, [hl] ; wHUDEnergyAndHPBarsY
 	inc c
@@ -4999,33 +5005,100 @@ PrintPlayAreaCardInformation:
 	inc c
 	ld a, SYM_HP
 	call WriteByteToBGMap0
+
+	ld b, 7
 	ld a, [wCurPlayAreaSlot]
+;	fallthrough
+
+; prints a Pokémon's HP as "#/#" (current HP value/maximum HP value).
+; adjusts printing to account for either 2- or 3-digit HP values.
+; if Pokémon has 0 HP, then prints "Knocked Out" instead.
+; input:
+;	a  = Pokémon's play area location offset (PLAY_AREA_* constant)
+;	bc = screen coordinates at which to begin printing the given Pokémon's HP
+; output:
+;	[wLoadedCard1] = all of the Pokémon's card data (card_data_struct)
+PrintCurrentAndMaxHP:
+	ld e, a
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer1_FromDeckIndex
+	ld a, e
 	add DUELVARS_ARENA_CARD_HP
 	call GetTurnDuelistVariable
 	or a
 	jr z, .zero_hp
-	ld e, a
+	cp 100
+	push af
+	jr nc, .current_hp_is_three_digits
+	; current hp is 2 digits
+	call WriteTwoDigitNumberInTxSymbolFormat
+	jr .next
+.current_hp_is_three_digits
+	call WriteTwoByteNumberInTxSymbolFormat
+	inc b
+.next
+	inc b
+	inc b
 	ld a, [wLoadedCard1HP]
+	cp 100
+	jr c, .max_hp_is_two_digits
+	; max hp is 3 digits
 	ld d, a
-	call DrawHPBar
-	ld a, [wCurPlayAreaY]
-	inc a
-	inc a
-	ld c, a
-	ld b, 7
-	call BCCoordToBGMap0Address
-	ld hl, wDefaultText
-	ld b, 12
-	jp SafeCopyDataHLtoDE
+	ld a, SYM_SLASH
+	call WriteByteToBGMap0
+	inc b
+	ld a, d    
+	call WriteTwoByteNumberInTxSymbolFormat
+	pop af
+	ret nc ; return if the current HP value still uses 3 digits
+	; Pokémon's current HP is now only 2 digits,
+	; so make sure any previously printed final digit gets erased.
+	inc b
+	inc b
+	inc b
+	xor a ; SYM_SPACE
+	jp WriteByteToBGMap0
+.max_hp_is_two_digits
+	call WriteTwoByteNumberInTxSymbolFormat
+	pop af ; discard the stored current HP value before returning
+	ld a, SYM_SLASH
+	jp WriteByteToBGMap0
+
+; print "Knocked Out" instead of HP numbers if the Pokémon's current HP = 0
 .zero_hp
-	; if fainted, print "Knock Out" in place of the HP bar
-	ld a, [wCurPlayAreaY]
-	inc a
-	inc a
-	ld e, a
-	ld d, 7
+	ld d, b
+	ld e, c
 	ldtx hl, KnockOutText
 	jp InitTextPrinting_ProcessTextFromID
+
+	; 	ld a, [wCurPlayAreaSlot]
+; 	add DUELVARS_ARENA_CARD_HP
+; 	call GetTurnDuelistVariable
+; 	or a
+; 	jr z, .zero_hp
+; 	ld e, a
+; 	ld a, [wLoadedCard1HP]
+; 	ld d, a
+; 	call DrawHPBar
+; 	ld a, [wCurPlayAreaY]
+; 	inc a
+; 	inc a
+; 	ld c, a
+; 	ld b, 7
+; 	call BCCoordToBGMap0Address
+; 	ld hl, wDefaultText
+; 	ld b, 12
+; 	jp SafeCopyDataHLtoDE
+; .zero_hp
+; 	; if fainted, print "Knock Out" in place of the HP bar
+; 	ld a, [wCurPlayAreaY]
+; 	inc a
+; 	inc a
+; 	ld e, a
+; 	ld d, 7
+; 	ldtx hl, KnockOutText
+; 	jp InitTextPrinting_ProcessTextFromID
 
 ; print a turn holder's play area Pokemon card's name, level, face down stage card,
 ; color symbol, status symbol (if any), and pluspower/defender symbols (if any).
