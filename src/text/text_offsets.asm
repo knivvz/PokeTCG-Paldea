@@ -2914,6 +2914,7 @@ TextOffsets::
 	textpointer RecycleName
 	textpointer RecycleDescription
 	; ---------- NEW ---------------
+	textpointer YouCannotAttackOnFirstTurnText
 	textpointer DeclinedPracticeDuelText
 	textpointer MayOnlyRetreatOncePerTurnText
 	textpointer HyperFangName
