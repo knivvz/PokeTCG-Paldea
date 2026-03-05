@@ -156,7 +156,7 @@ Text0752:
 
 Text0753:
 	text "Shall we begin the Match? It will"
-	line "be a single Match for 4 Prizes."
+	line "be a single Match for 6 Prizes."
 	done
 
 Text0754:
@@ -192,7 +192,7 @@ Text0759:
 	done
 
 Text075a:
-	text "We'll play with 4 Prizes."
+	text "We'll play with 6 Prizes."
 	line "Let's begin."
 	done
 
@@ -310,7 +310,7 @@ Text076e:
 
 Text076f:
 	text "Not too smart, but you've got "
-	line "nerves. We'll play for 4 Prizes!"
+	line "nerves. We'll play for 6 Prizes!"
 	line "If you win 1 Match,"
 	line "I'll let you through!"
 	done
@@ -344,7 +344,7 @@ Text0774:
 	done
 
 Text0775:
-	text "A single Match for 4 Prizes!"
+	text "A single Match for 6 Prizes!"
 	line "Let's begin!"
 	done
 
@@ -388,7 +388,7 @@ Text077c:
 	done
 
 Text077d:
-	text "OK! A single Match with 4 Prizes!"
+	text "OK! A single Match with 6 Prizes!"
 	line "I'm going to defeat you!"
 	done
 
@@ -446,7 +446,7 @@ Text0785:
 
 Text0786:
 	text "OK, same as last time!"
-	line "We'll play with 4 Prizes."
+	line "We'll play with 6 Prizes."
 	line "Is that alright?"
 	line "OK then, let's begin!"
 	done
@@ -571,7 +571,7 @@ Text0797:
 
 Text0798:
 	text "Let's make it a quick single Match"
-	line "with 3 Prizes."
+	line "with 6 Prizes."
 	line "OK, let's start!"
 	done
 
@@ -612,7 +612,7 @@ Text079e:
 
 Text079f:
 	text "Thanks! We'll Rock this Match"
-	line "with 4 Prizes!"
+	line "with 6 Prizes!"
 	done
 
 Text07a0:

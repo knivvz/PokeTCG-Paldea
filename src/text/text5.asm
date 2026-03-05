@@ -4,7 +4,7 @@ ChrisFightingClubDeclinedDuelText:
 	done
 
 ChrisFightingClubDuelStartText:
-	text "A 1-match duel with 4 prizes!"
+	text "A 1-match duel with 6 prizes!"
 	line "Let's do it!"
 	done
 
@@ -40,7 +40,7 @@ MichaelFightingClubDeclinedDuelText:
 	done
 
 MichaelFightingClubDuelStartText:
-	text "OK, a 1-match duel with 4 prizes!"
+	text "OK, a 1-match duel with 6 prizes!"
 	line "Let's do it!"
 	done
 
@@ -75,7 +75,7 @@ JessicaFightingClubDeclinedDuelText:
 	done
 
 JessicaFightingClubDuelStartText:
-	text "OK! A 1-match duel with 4 prizes!"
+	text "OK! A 1-match duel with 6 prizes!"
 	line "Let's go to it!"
 	done
 

@@ -74,7 +74,7 @@ Clerk12ChallengeCup3ActiveText:
 
 Clerk12ChallengeCupInviteText:
 	text "The game will be a 1-match "
-	line "duel with 4 prizes! We are "
+	line "duel with 6 prizes! We are "
 	line "now accepting entrants here."
 	line "Wouldn't you like to enter?"
 	done
@@ -107,7 +107,7 @@ Clerk12ChallengeCupRound1ChallengerText:
 	done
 
 Clerk12ChallengeCupRound1DuelStartText:
-	text "There will be 4 Prizes!"
+	text "There will be 6 Prizes!"
 	line "OK!!"
 	line "Let the duel begin!"
 	done

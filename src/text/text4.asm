@@ -463,7 +463,7 @@ SaraDeclinedDuelText:
 	done
 
 SaraStartDuelText:
-	text "There will be 2 Prizes."
+	text "There will be 6 Prizes."
 	line "The duel will be 1 match."
 	line "OK, let's start!"
 	done
@@ -503,7 +503,7 @@ AmandaDeclinedDuelText:
 	done
 
 AmandaDuelStartText:
-	text "OK, we'll play with 3 Prizes."
+	text "OK, we'll play with 6 Prizes."
 	line "It'll be a 1-match duel!"
 	done
 
@@ -579,7 +579,7 @@ JoshuaDeclinedDuelRepeatText:
 
 JoshuaDuelStartText:
 	text "OK, this will be a 1-match duel"
-	line "with 4 Prizes!"
+	line "with 6 Prizes!"
 	done
 
 JoshuaPlayerLostInitialText:

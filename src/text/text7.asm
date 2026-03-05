@@ -490,7 +490,7 @@ Text061d:
 	done
 
 Text061e:
-	text "OK then! Let's play with 4 Prizes!"
+	text "OK then! Let's play with 6 Prizes!"
 	done
 
 Text061f:
@@ -526,7 +526,7 @@ Text0624:
 
 Text0625:
 	text "OK! Let's start!"
-	line "1 Match with 4 Prizes!"
+	line "1 Match with 6 Prizes!"
 	done
 
 Text0626:
@@ -573,7 +573,7 @@ Text062d:
 	done
 
 Text062e:
-	text "OK, 4 Prizes!"
+	text "OK, 6 Prizes!"
 	line "Ready? Let's do it!"
 	done
 
@@ -850,7 +850,7 @@ Text0656:
 	done
 
 Text0657:
-	text "A single match with 4 prizes!"
+	text "A single match with 6 prizes!"
 	line "Come on, my precious ghosts!"
 	line "Let's make his Pokémon disappear!"
 	done
@@ -1014,7 +1014,7 @@ Text066e:
 	done
 
 Text066f:
-	text "Let's play with 4 Prizes."
+	text "Let's play with 6 Prizes."
 	line "OK, here we go!"
 	done
 
@@ -1059,7 +1059,7 @@ Text0676:
 	done
 
 Text0677:
-	text "OK, a single Match with 4 Prizes!"
+	text "OK, a single Match with 6 Prizes!"
 	line "Here we go!"
 	done
 

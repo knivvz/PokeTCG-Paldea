@@ -93,7 +93,7 @@ Text0690:
 	done
 
 Text0691:
-	text "OK! A single Match with 4 Prizes."
+	text "OK! A single Match with 6 Prizes."
 	line "Let's go to it!"
 	done
 
@@ -248,7 +248,7 @@ Text06a7:
 	done
 
 Text06a8:
-	text "4 Prizes!"
+	text "6 Prizes!"
 	line "Let's heat it up!"
 	done
 
@@ -286,7 +286,7 @@ Text06ae:
 	done
 
 Text06af:
-	text "A single Match with 4 Prizes!"
+	text "A single Match with 6 Prizes!"
 	line "Come on, duel me!"
 	done
 
@@ -558,7 +558,7 @@ Text06db:
 	done
 
 Text06dc:
-	text "OK! A single Match for 4 prizes!"
+	text "OK! A single Match for 6 prizes!"
 	line "Let's begin!"
 	done
 
@@ -610,7 +610,7 @@ Text06e3:
 	done
 
 Text06e4:
-	text "OK! A single Match with 4 Prizes."
+	text "OK! A single Match with 6 Prizes."
 	line "Let's start!"
 	done
 
@@ -832,7 +832,7 @@ Text0707:
 
 Text0708:
 	text "We'll play a single Match"
-	line "with 4 Prizes."
+	line "with 6 Prizes."
 	line "Don't take me lightly"
 	line "just because I'm a girl!"
 	done
@@ -888,7 +888,7 @@ Text0710:
 	done
 
 Text0711:
-	text "Are 4 Prizes OK?"
+	text "Are 6 Prizes OK?"
 	line "Let's begin!"
 	done
 
