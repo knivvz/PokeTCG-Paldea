@@ -54,7 +54,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -I src/ -Weverything
+RGBASMFLAGS = -I src/ -Wno-all
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
