@@ -200,9 +200,9 @@ ChallengeMachine_PrepareDuel:
 	ret
 
 ChallengeMachine_Prizes:
-	db PRIZES_4
-	db PRIZES_4
-	db PRIZES_4
+	db PRIZES_6
+	db PRIZES_6
+	db PRIZES_6
 	db PRIZES_6
 	db PRIZES_6
 

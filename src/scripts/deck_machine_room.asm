@@ -55,7 +55,7 @@ Script_Aaron:
 
 .ows_d8fb
 	print_npc_text Text0602
-	start_duel PRIZES_4, $ff, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, $ff, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatAaron:
