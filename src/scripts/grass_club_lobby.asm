@@ -25,7 +25,7 @@ Script_Brittany:
 Script_BeatBrittany:
 	start_script
 	print_npc_text Text06e5
-	give_booster_packs BOOSTER_MYSTERY_GRASS_COLORLESS, BOOSTER_MYSTERY_GRASS_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_GRASS_COLORLESS, BOOSTER_MYSTERY_GRASS_COLORLESS, BOOSTER_MYSTERY_GRASS_COLORLESS
 	test_if_event_less_than EVENT_NIKKI_STATE, NIKKI_IN_GRASS_CLUB
 	print_variable_npc_text Text06e6, Text06e7
 	max_out_event_value EVENT_BEAT_BRITTANY

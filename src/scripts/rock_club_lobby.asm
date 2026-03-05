@@ -38,7 +38,7 @@ Script_BeatChrisInRockClubLobby:
 	start_script
 	set_event EVENT_PUPIL_CHRIS_STATE, PUPIL_DEFEATED
 	print_npc_text Text077e
-	give_booster_packs BOOSTER_EVOLUTION_FIGHTING, BOOSTER_EVOLUTION_FIGHTING, NO_BOOSTER
+	give_booster_packs BOOSTER_EVOLUTION_FIGHTING, BOOSTER_EVOLUTION_FIGHTING, BOOSTER_EVOLUTION_FIGHTING
 	print_npc_text Text077f
 	close_text_box
 	move_active_npc_by_direction NPCMovementTable_df24
@@ -97,7 +97,7 @@ Script_BeatMatthew:
 	set_event EVENT_MATTHEW_STATE, MATTHEW_DEFEATED
 	test_if_event_false EVENT_RECEIVED_LEGENDARY_CARDS
 	print_variable_npc_text Text0787, Text0788
-	give_booster_packs BOOSTER_MYSTERY_FIGHTING_COLORLESS, BOOSTER_MYSTERY_FIGHTING_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_FIGHTING_COLORLESS, BOOSTER_MYSTERY_FIGHTING_COLORLESS, BOOSTER_MYSTERY_FIGHTING_COLORLESS
 	print_npc_text Text0789
 	quit_script_fully
 

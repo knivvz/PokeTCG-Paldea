@@ -40,7 +40,7 @@ Script_BeatJennifer:
 	start_script
 	max_out_event_value EVENT_BEAT_JENNIFER
 	print_npc_text Text061f
-	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS
 	print_npc_text Text0620
 	quit_script_fully
 
@@ -64,7 +64,7 @@ Script_BeatNicholas:
 	start_script
 	max_out_event_value EVENT_BEAT_NICHOLAS
 	print_npc_text Text0626
-	give_booster_packs BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING
 	print_npc_text Text0627
 	quit_script_fully
 
@@ -98,7 +98,7 @@ Script_BeatBrandon:
 	try_give_pc_pack $05
 	max_out_event_value EVENT_BEAT_BRANDON
 	print_npc_text Text062f
-	give_booster_packs BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING, BOOSTER_COLOSSEUM_LIGHTNING
 	print_npc_text Text0630
 	quit_script_fully
 
@@ -153,7 +153,7 @@ Script_BeatIsaac:
 	show_medal_received_screen EVENT_BEAT_ISAAC
 	record_master_win $04
 	print_npc_text Text0639
-	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS
 	print_npc_text Text063a
 	quit_script_fully
 
@@ -175,7 +175,7 @@ Script_LostToIsaac:
 
 .ows_e517
 	print_npc_text Text063f
-	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS
 	print_npc_text Text0640
 	quit_script_fully
 

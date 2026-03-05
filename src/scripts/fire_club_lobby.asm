@@ -79,7 +79,7 @@ Script_BeatJessicaInFireClubLobby:
 	start_script
 	set_event EVENT_PUPIL_JESSICA_STATE, PUPIL_DEFEATED
 	print_npc_text Text0692
-	give_booster_packs BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING
 	print_npc_text Text0693
 	close_text_box
 	move_active_npc_by_direction NPCMovementTable_edd2

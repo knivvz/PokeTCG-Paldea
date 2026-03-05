@@ -35,7 +35,7 @@ Script_BeatKristin:
 	start_script
 	try_give_pc_pack $06
 	print_npc_text Text0709
-	give_booster_packs BOOSTER_EVOLUTION_GRASS, BOOSTER_EVOLUTION_GRASS, NO_BOOSTER
+	give_booster_packs BOOSTER_EVOLUTION_GRASS, BOOSTER_EVOLUTION_GRASS, BOOSTER_EVOLUTION_GRASS
 	print_npc_text Text070a
 	max_out_event_value EVENT_BEAT_KRISTIN
 	jump_if_event_greater_or_equal EVENT_NIKKI_STATE, NIKKI_IN_GRASS_CLUB, .ows_e740
@@ -67,7 +67,7 @@ Script_BeatHeather:
 	start_script
 	test_if_event_less_than EVENT_NIKKI_STATE, NIKKI_IN_GRASS_CLUB
 	print_variable_npc_text Text0712, Text0713
-	give_booster_packs BOOSTER_COLOSSEUM_GRASS, BOOSTER_COLOSSEUM_GRASS, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_GRASS, BOOSTER_COLOSSEUM_GRASS, BOOSTER_COLOSSEUM_GRASS
 	print_npc_text Text0714
 	max_out_event_value EVENT_BEAT_HEATHER
 	jump_if_event_greater_or_equal EVENT_NIKKI_STATE, NIKKI_IN_GRASS_CLUB, .ows_e789
@@ -126,7 +126,7 @@ Script_BeatNikki:
 	record_master_win $05
 	print_npc_text Text0721
 .ows_e7eb
-	give_booster_packs BOOSTER_LABORATORY_NEUTRAL, BOOSTER_LABORATORY_NEUTRAL, NO_BOOSTER
+	give_booster_packs BOOSTER_LABORATORY_NEUTRAL, BOOSTER_LABORATORY_NEUTRAL, BOOSTER_LABORATORY_NEUTRAL
 	script_jump Script_LostToNikki.ows_e7f3
 
 Script_LostToNikki:

@@ -32,7 +32,7 @@ Script_Robert:
 Script_BeatRobert:
 	start_script
 	print_npc_text Text0658
-	give_booster_packs BOOSTER_EVOLUTION_PSYCHIC, BOOSTER_EVOLUTION_PSYCHIC, NO_BOOSTER
+	give_booster_packs BOOSTER_EVOLUTION_PSYCHIC, BOOSTER_EVOLUTION_PSYCHIC, BOOSTER_EVOLUTION_PSYCHIC
 	print_npc_text Text0659
 	quit_script_fully
 

@@ -52,7 +52,7 @@ Script_BeatSara:
 	start_script
 	max_out_event_value EVENT_BEAT_SARA
 	print_npc_text SaraPlayerWon1Text
-	give_booster_packs BOOSTER_COLOSSEUM_WATER, BOOSTER_COLOSSEUM_WATER, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_WATER, BOOSTER_COLOSSEUM_WATER, BOOSTER_COLOSSEUM_WATER
 	print_npc_text SaraPlayerWon2Text
 	quit_script_fully
 
@@ -76,7 +76,7 @@ Script_BeatAmanda:
 	start_script
 	max_out_event_value EVENT_BEAT_AMANDA
 	print_npc_text AmandaPlayerWon1Text
-	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS, BOOSTER_MYSTERY_LIGHTNING_COLORLESS
 	print_npc_text AmandaPlayerWon2Text
 	quit_script_fully
 
@@ -193,7 +193,7 @@ Script_BeatJoshua:
 	start_script
 	test_if_event_equal EVENT_JOSHUA_STATE, JOSHUA_TALKED
 	print_variable_npc_text JoshuaPlayerWonInitial1Text, JoshuaPlayerWonRepeat1Text
-	give_booster_packs BOOSTER_MYSTERY_WATER_COLORLESS, BOOSTER_MYSTERY_WATER_COLORLESS, NO_BOOSTER
+	give_booster_packs BOOSTER_MYSTERY_WATER_COLORLESS, BOOSTER_MYSTERY_WATER_COLORLESS, BOOSTER_MYSTERY_WATER_COLORLESS
 	test_if_event_equal EVENT_JOSHUA_STATE, JOSHUA_TALKED
 	print_variable_npc_text JoshuaPlayerWonInitial2Text, JoshuaPlayerWonRepeat2Text
 	jump_if_event_not_equal EVENT_JOSHUA_STATE, JOSHUA_DEFEATED, .first_joshua_win
@@ -293,7 +293,7 @@ Script_BeatAmy:
 	record_master_win $03
 	print_npc_text AmyGivesMedal2Text
 .give_booster_packs
-	give_booster_packs BOOSTER_LABORATORY_WATER, BOOSTER_LABORATORY_WATER, NO_BOOSTER
+	give_booster_packs BOOSTER_LABORATORY_WATER, BOOSTER_LABORATORY_WATER, BOOSTER_LABORATORY_WATER
 	print_npc_text AmyPlayerWon2Text
 	jump_if_active_npc_coords_match 20, 4, Script_LostToAmy.ows_e34e
 	quit_script_fully

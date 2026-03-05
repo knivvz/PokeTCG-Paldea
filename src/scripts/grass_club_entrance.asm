@@ -80,7 +80,7 @@ Script_BeatMichaelInGrassClubEntrance:
 	start_script
 	set_event EVENT_PUPIL_MICHAEL_STATE, PUPIL_DEFEATED
 	print_npc_text Text06dd
-	give_booster_packs BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING, NO_BOOSTER
+	give_booster_packs BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING, BOOSTER_COLOSSEUM_FIGHTING
 	print_npc_text Text06de
 	close_text_box
 	move_active_npc_by_direction NPCMovementTable_e5af
