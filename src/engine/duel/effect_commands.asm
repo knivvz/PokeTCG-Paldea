@@ -35,6 +35,61 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+VenusaurDangerousToxwhipEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VenusaurDangerousToxwhip_Effect
+	dbw EFFECTCMDTYPE_AI, VenusaurDangerousToxwhip_AIEffect
+	db $00
+
+VenusaurTranquilFlowerEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, VenusaurTranquilFlower_Check
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, TranquilFlower_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VenusaurTranquilFlower_HealEffect
+	db $00
+
+WiglettDigALittleEffectCommands:
+	;dbw EFFECTCMDTYPE_AI, WugtrioUnderseaTunnel_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WiglettDigALittle_DiscardDeckEffect
+	db $00
+
+WugtrioUnderseaTunnelEffectCommands:
+	dbw EFFECTCMDTYPE_AI, WugtrioUnderseaTunnel_AIEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WugtrioUnderseaTunnel_DiscardDeckEffect
+	db $00
+
+AlakazamPowerfulHandEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AlakazamPowerfulHand_Damage
+	db $00
+
+AlakazamPsychicDrawEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PsychicDraw_Check
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, AlakazamPsychicDraw_Effect
+	db $00
+
+KadabraPsychicDrawEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PsychicDraw_Check
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, KadabraPsychicDraw_Effect
+	db $00
+
+RattataHyperFangEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HyperFang_FlipCoin
+	db $00
+
+RaticateChaseUpEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ChaseUp_AddToHandEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ChaseUp_PlayerDeckSelection
+
+;	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ComputerSearch_HandDeckCheck
+;	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ComputerSearch_PlayerDiscardHandSelection
+;	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ComputerSearch_DiscardAddToHandEffect
+;	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, ComputerSearch_PlayerDeckSelection
+	db  $00
+
+RaticateSuperFangEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RaticateSuperFang_Damage
+	db  $00
+
+
+
 EkansSpitPoisonEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpitPoison_Poison50PercentEffect
 	dbw EFFECTCMDTYPE_AI, SpitPoison_AIEffect
@@ -1360,10 +1415,10 @@ ChanseyDoubleEdgeEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ChanseyDoubleEdgeEffect
 	db  $00
 
-RaticateSuperFangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_HalfHPEffect
-	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
-	db  $00
+; RaticateSuperFangEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SuperFang_HalfHPEffect
+; 	dbw EFFECTCMDTYPE_AI, SuperFang_AIEffect
+; 	db  $00
 
 TrainerCardAsPokemonEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, TrainerCardAsPokemon_BenchCheck

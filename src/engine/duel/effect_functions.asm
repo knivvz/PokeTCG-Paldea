@@ -1,3 +1,251 @@
+VenusaurDangerousToxwhip_Effect:
+	call PoisonEffect
+	call ConfusionEffect
+	ret
+
+; TODO needed?
+VenusaurDangerousToxwhip_AIEffect:
+	ret	
+
+VenusaurTranquilFlower_Check:
+	call Initialization_Check
+	ret c
+	call CheckIfAlreadyUsed
+	ret c
+	call CheckIfInActiveSpot
+	ret c
+	call Potion_DamageCheck
+	ret
+
+TranquilFlower_PlayerSelection:
+	bank1call HasAlivePokemonInPlayArea
+.read_input
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; exit is B was pressed
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	;ldh [hTemp_ffa0], a ; who to heal
+	ld e, a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .read_input ; no damage, loop back to start
+; cap damage
+	ld c, 30
+	cp 30
+	jr nc, .skip_cap
+	ld c, a
+.skip_cap
+	ld a, c
+	ldh [hTempPlayAreaLocation_ffa1], a
+	or a
+	ret
+
+VenusaurTranquilFlower_HealEffect:
+	call SetPkmnPowerAsUsed
+	;ldh a, [hTemp_ffa0]
+	;ldh [hTempPlayAreaLocation_ff9d], a
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh a, [hTempPlayAreaLocation_ffa1]
+	jp HealPlayAreaCardHP
+
+; there can be issues if the value in hTemp_ffa0 is overwritten, so be careful!
+SetPkmnPowerAsUsed:
+	; set as used
+	ldh a, [hTemp_ffa0]
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	set USED_PKMN_POWER_THIS_TURN_F, [hl]
+	ret 
+
+CheckIfAlreadyUsed:
+	; check if already used this turn
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and USED_PKMN_POWER_THIS_TURN
+	jr nz, .already_used
+	;call GetTurnDuelistVariable ; TODO why is this here again?
+	ret
+
+.already_used
+	ldtx hl, OnlyOncePerTurnText
+	scf
+	ret
+
+; return carry if not in active spot
+CheckIfInActiveSpot:
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ldtx hl, CanOnlyBeUsedInActiveSpotText
+	or a
+	jr nz, .set_carry
+	ret 
+.set_carry
+	scf
+	ret
+
+; returns carry if either player has ELECTABUZZ_LV20 in active spot
+Initialization_Check:
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp ELECTABUZZ_LV20;ZAPDOS_LV64
+	jr z, .set_carry
+
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp ELECTABUZZ_LV20;ZAPDOS_LV64
+	jr z, .set_carry
+	or a
+	call SwapTurn
+	ret
+
+.set_carry
+	call SwapTurn
+	ldtx hl, UnableDueToInitializationText
+	scf
+	ret
+
+
+WiglettDigALittle_DiscardDeckEffect:
+	ldtx de, DamageCheckIfHeadsDiscard1CardText;DamageCheckIfHeadsXDamageText
+	ld a, 1
+	call TossCoinATimes
+ 
+	ld [hTemp_ffa0], a
+	call Wildfire_DiscardDeckEffect
+	ret
+
+WugtrioUnderseaTunnel_AIEffect:
+	ld a, 60
+	call AddToDamage
+	jp SetDefiniteAIDamage
+
+WugtrioUnderseaTunnel_DiscardDeckEffect:
+	ldtx de, DamageCheckIfHeadsDiscardXCardsText;DamageCheckIfHeadsXDamageText
+	ld a, 3
+	call TossCoinATimes
+
+	; multiply by 3
+	ld b, a           ; Copy A into B
+	add a, a          ; Multiply A by 2
+	add a, b  
+	ld [hTemp_ffa0], a
+	call Wildfire_DiscardDeckEffect
+	ret
+
+; TODO
+Supporter_Check:
+	ret
+
+AlakazamPowerfulHand_Damage:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	call ATimes10
+	call SetDefiniteDamage
+	ret
+
+; returns carry
+PsychicDraw_Check:
+	scf
+	ret
+
+KadabraPsychicDraw_Effect:
+	;TODO ask if want to use
+	ld c, 2
+	call DrawCCards
+	ret	
+
+AlakazamPsychicDraw_Effect:
+	;TODO ask if want to use
+	ld c, 3
+	call DrawCCards
+	ret
+
+; draw number of cards specified in c
+; TODO check if deck is empty
+DrawCCards:
+;	call ShuffleDeck
+    ld a, c
+    bank1call DisplayDrawNCardsScreen
+.draw_loop
+    call DrawCardFromDeck
+    jr c, .done
+	ldh [hTempCardIndex_ff98], a
+    call AddCardToHand
+	call IsPlayerTurn
+	jr nc, .skip_display_screen
+	push bc
+	bank1call DisplayPlayerDrawCardScreen
+	pop bc
+    jr nz, .draw_loop
+.skip_display_screen
+	dec c
+	jr nz, .draw_loop
+.done
+	ret
+
+HyperFang_FlipCoin:
+	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
+	call TossCoin
+	jr c, .heads
+	xor a ; ATK_ANIM_NONE
+	ld [wLoadedAttackAnimation], a
+	call SetDefiniteDamage
+	call SetWasUnsuccessful
+	ret
+.heads
+	ld a, ATK_ANIM_HIT
+	ld [wLoadedAttackAnimation], a
+	ret
+
+
+ChaseUp_AddToHandEffect:
+	ld a, [hTempCardIndex_ff98]
+	cp $ff
+	jr z, .done
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call IsPlayerTurn
+	jr c, .done
+	ldh a, [hTempList + 1]
+	ldtx hl, WasPlacedInTheHandText
+	bank1call DisplayCardDetailScreen
+.done
+	call ShuffleCardsInDeck
+	ret
+
+ChaseUp_PlayerDeckSelection:
+	call CreateDeckCardList
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+	ldtx hl, ChooseCardToPlaceInHandText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.loop_input
+	bank1call DisplayCardList
+	jr c, .no_card_selected ; can exit with B button
+	ldh [hTempList], a
+	ret
+.no_card_selected
+	ld a, $ff
+	ld [hTempCardIndex_ff98], a
+	ret
+
+RaticateSuperFang_Damage:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	sub a, 10
+	call SetDefiniteDamage
+	ret
+
+
+
+;--------------------------------------------------------------
+
 Poison50PercentEffect:
 	ldtx de, PoisonCheckText
 	call TossCoin
