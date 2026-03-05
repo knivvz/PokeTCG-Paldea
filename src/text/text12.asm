@@ -556,10 +556,9 @@ SuperFangName:
 	done
 
 SuperFangDescription:
-	text "Does damage to the Defending Pokémon"
-	line "equal to half the Defending"
-	line "Pokémon's remaining HP (rounded up"
-	line "to the nearest 10)."
+	text "Put damage counters on your"
+	line "opponent's Active Pokémon until its"
+	line "remaining HP is 10."
 	done
 
 RaticateDescription:

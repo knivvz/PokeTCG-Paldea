@@ -493,6 +493,10 @@ ThePkmnCardsInHandAndDeckWereShuffledText:
 	line "Hand and Deck were shuffled"
 	done
 
+YouCannotAttackOnFirstTurnText:
+    text "You cannot attack on"
+    line "your first turn."
+    done
 ChoosePokemonToRemoveDamageCounterFromText:
 	text "Choose a Pokémon to remove"
 	line "the Damage counter from."

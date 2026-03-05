@@ -23,6 +23,12 @@ DEF TURN_PLAYER_TIED  EQU $3
 DEF DUEL_WIN  EQU $0
 DEF DUEL_LOSS EQU $1
 
+; wOncePerTurnFlags constants
+DEF UNABLE_TO_RETREAT_THIS_TURN_F   EQU 0
+DEF UNABLE_TO_RETREAT_THIS_TURN     EQU 1 << UNABLE_TO_RETREAT_THIS_TURN_F
+DEF USED_SUPPORTER_THIS_TURN_F		EQU 1
+DEF USED_SUPPORTER_THIS_TURN		EQU 1 << USED_SUPPORTER_THIS_TURN_F
+
 ; wPlayerDuelVariables or wOpponentDuelVariables constants
 DEF DUELVARS_CARD_LOCATIONS                   EQUS "LOW(wPlayerCardLocations)"               ; 00
 DEF DUELVARS_PRIZE_CARDS                      EQUS "LOW(wPlayerPrizeCards)"                  ; 3c

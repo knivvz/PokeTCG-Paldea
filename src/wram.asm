@@ -520,8 +520,9 @@ wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
 wAlreadyPlayedEnergy:: ; cc0b
 	ds $1
 
-; set to TRUE if the confusion check coin toss in AttemptRetreat is tails
-wConfusionRetreatCheckWasUnsuccessful:: ; cc0c
+; a series of bit flags that are reset each turn in a duel
+; see wOncePerTurnFlags constants
+wOncePerTurnFlags:: ; cc0c
 	ds $1
 
 ; DUELIST_TYPE_* of the turn holder
@@ -1120,7 +1121,9 @@ wAIAttackIsNonDamaging:: ; ce02
 ; whether AI already retreated this turn or not.
 ;	- $0 has not retreated;
 ;	- $1 has retreated.
-wAIRetreatedThisTurn:: ; ce03
+;wAIRetreatedThisTurn:: ; ce03
+
+; unused wram byte
 	ds $1
 
 ; used by AI to store information of VenusaurLv67

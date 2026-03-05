@@ -2913,4 +2913,28 @@ TextOffsets::
 	textpointer GamblerDescription
 	textpointer RecycleName
 	textpointer RecycleDescription
+	; ---------- NEW ---------------
 	textpointer DeclinedPracticeDuelText
+	textpointer MayOnlyRetreatOncePerTurnText
+	textpointer HyperFangName
+	textpointer HyperFangDescription
+	textpointer ChaseUpName
+	textpointer ChaseUpDescription
+	textpointer UnderseaTunnelName
+	textpointer UnderseaTunnelDescription
+	textpointer DamageCheckIfHeadsDiscardXCardsText
+	textpointer DigALittleName
+	textpointer DigALittleDescription
+	textpointer DamageCheckIfHeadsDiscard1CardText
+	textpointer UnableDueToInitializationText
+	textpointer CanOnlyBeUsedInActiveSpotText
+	textpointer TranquilFlowerName
+	textpointer TranquilFlowerDescription
+	textpointer DangerousToxwhipName
+	textpointer DangerousToxwhipDescription
+	textpointer VenusaurEXName
+	textpointer PsychicDrawName
+	textpointer KadabraPsychicDrawDescription
+	textpointer AlakazamPsychicDrawDescription
+	textpointer PowerfulHandName
+	textpointer PowerfulHandDescription

@@ -1248,9 +1248,7 @@ LeechSeedName:
 	done
 
 BulbasaursLeechSeedDescription:
-	text "Unless all damage from this attack"
-	line "is prevented, you may remove 1"
-	line "damage counter from Bulbasaur."
+	text "Heal 10 damage from this Pokémon."
 	done
 
 SeedName:

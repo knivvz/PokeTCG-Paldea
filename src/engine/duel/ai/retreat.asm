@@ -1,8 +1,8 @@
 ; determine AI score for retreating
 ; return carry if AI decides to retreat
 AIDecideWhetherToRetreat:
-	ld a, [wConfusionRetreatCheckWasUnsuccessful]
-	or a
+	ld a, [wOncePerTurnFlags]
+	and UNABLE_TO_RETREAT_THIS_TURN
 	jp nz, .no_carry
 	xor a
 	ld [wAIPlayEnergyCardForRetreat], a

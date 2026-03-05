@@ -413,17 +413,19 @@ DuelMenu_Done:
 
 ; triggered by selecting the "Retreat" item in the duel menu
 DuelMenu_Retreat:
+	call CheckAbleToRetreat
+	jr c, .unable_to_retreat
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	cp CONFUSED
 	ldh [hTemp_ffa0], a
 	jr nz, .not_confused
-	ld a, [wConfusionRetreatCheckWasUnsuccessful]
-	or a
-	jr nz, .unable_due_to_confusion
-	call CheckAbleToRetreat
-	jr c, .unable_to_retreat
+	; ld a, [wOncePerTurnFlags]
+	; and UNABLE_TO_RETREAT_THIS_TURN
+	; jr nz, .unable_due_to_confusion
+	; call CheckAbleToRetreat
+	; jr c, .unable_to_retreat
 	call DisplayRetreatScreen
 	jr c, .done
 	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
@@ -436,9 +438,10 @@ DuelMenu_Retreat:
 	ldh [hOppActionTableIndex], a
 	call AttemptRetreat
 	jr nc, .done
+	; retreat unsuccessful due to confusion
 	call DrawDuelMainScene
 
-.unable_due_to_confusion
+.unable_to_retreat
 	ldtx hl, UnableToRetreatText
 	call DrawWideTextBox_WaitForInput
 	jp PrintDuelMenuAndHandleInput
@@ -450,8 +453,6 @@ DuelMenu_Retreat:
 	; when the Play Area screen is shown to select the Pokemon to switch to. The reason why
 	; AttemptRetreat is responsible for discarding the energy cards is because, if the
 	; Pokemon is confused, it may not be able to retreat, so they cannot be discarded earlier.
-	call CheckAbleToRetreat
-	jr c, .unable_to_retreat
 	call DisplayRetreatScreen
 	jr c, .done
 	call DiscardRetreatCostCards
@@ -471,9 +472,6 @@ DuelMenu_Retreat:
 .done
 	jp DuelMainInterface
 
-.unable_to_retreat
-	call DrawWideTextBox_WaitForInput
-	jp PrintDuelMenuAndHandleInput
 
 ; triggered by selecting the "Hand" item in the duel menu
 DuelMenu_Hand:
@@ -715,6 +713,10 @@ OpenVariousPlayAreaScreens_FromSelectPresses:
 ; some status condition or due the bench containing no alive Pokemon.
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
+	ld a, [wOncePerTurnFlags]
+	and UNABLE_TO_RETREAT_THIS_TURN
+	ldtx hl, MayOnlyRetreatOncePerTurnText
+	jr nz, .done
 	call CheckUnableToRetreatDueToEffect
 	ret c
 	call CheckIfActiveCardParalyzedOrAsleep
@@ -5515,17 +5517,15 @@ AttemptRetreat:
 	jr nz, .success
 	ldtx de, ConfusionCheckRetreatText
 	call TossCoin
-	jr c, .success
-	ld a, TRUE
-	ld [wConfusionRetreatCheckWasUnsuccessful], a
-	scf
-	ret
+	ccf
+	jr c, .prevent_further_retreating
 .success
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapArenaWithBenchPokemon
-	xor a ; FALSE
-	ld [wConfusionRetreatCheckWasUnsuccessful], a
+.prevent_further_retreating
+	ld hl, wOncePerTurnFlags
+	set UNABLE_TO_RETREAT_THIS_TURN_F, [hl]
 	ret
 
 ; given a number between 0-255 in a, converts it to TX_SYMBOL format,
@@ -7175,7 +7175,7 @@ InitVariablesToBeginDuel:
 InitVariablesToBeginTurn:
 	xor a
 	ld [wAlreadyPlayedEnergy], a
-	ld [wConfusionRetreatCheckWasUnsuccessful], a
+	ld [wOncePerTurnFlags], a
 	ld [wGotHeadsFromSandAttackOrSmokescreenCheck], a
 	ldh a, [hWhoseTurn]
 	ld [wWhoseTurn], a

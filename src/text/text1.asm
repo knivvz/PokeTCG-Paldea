@@ -952,3 +952,18 @@ DamageCheckIfHeadsXDamageText:
 	text "Damage check!"
 	line "If Heads, x <RAMNUM> damage!!"
 	done
+
+DeclinedPracticeDuelText:
+	text "Well, if you change your mind,"
+	line "Sam would be happy to help you."
+	line "He can answer a lot of questions"
+	line "that you might have about the game,"
+	line "and he's always up for a match"
+	line "using the practice decks."
+	line "Sam can usually be found near"
+	line "the card table to your left."
+	done
+
+MayOnlyRetreatOncePerTurnText:
+	text "You may only retreat once per turn."
+	done

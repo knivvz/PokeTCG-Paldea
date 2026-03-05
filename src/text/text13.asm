@@ -253,13 +253,121 @@ DragonSymbolText:
 	textfw "<DRAGON>"
 	done
 
-DeclinedPracticeDuelText:
-	text "Well, if you change your mind,"
-	line "Sam would be happy to help you."
-	line "He can answer a lot of questions"
-	line "that you might have about the game,"
-	line "and he's always up for a match"
-	line "using the practice decks."
-	line "Sam can usually be found near"
-	line "the card table to your left."
+
+; NEW
+
+HyperFangName:
+	text "Hyper Fang"
+	done
+
+
+HyperFangDescription:
+	text "Flip a coin. If tails, this attack"
+	line "does nothing."
+	done
+
+; SuperFangDescription:
+; 	text "Put damage counters on your"
+; 	line "opponent's Active Pokémon until its"
+; 	line "remaining HP is 10."
+; 	done
+
+ChaseUpName:
+	text "Chase Up"
+	done
+
+ChaseUpDescription:
+	text "Search your deck for a card and put"
+	line "it into your hand. Then, shuffle"
+	line "your deck."
+	done
+
+UnderseaTunnelName:
+	text "Undersea Tunnel"
+	done
+
+UnderseaTunnelDescription:
+	text "Flip 3 coins. For each heads,"
+	line "discard the top 3 cards of your"
+	line "opponent's deck."
+	done
+
+DamageCheckIfHeadsDiscardXCardsText:
+	text "For each heads, discard 1 card"
+	line "from opponent's deck."
+	done
+
+DigALittleName:
+	text "Dig a Little"
+	done	
+
+DigALittleDescription:
+	text "Flip a coin. If heads, discard the"
+	line "top card of your opponent's deck."
+	done
+
+DamageCheckIfHeadsDiscard1CardText:
+	text "If heads, discard the top card"
+	line "of opponent's deck."
+	done
+
+UnableDueToInitializationText:
+	text "Unable to use due to the"
+	line "effects of Initialization."
+	done
+
+CanOnlyBeUsedInActiveSpotText:
+	text "Can only be used in active spot."
+	done
+
+TranquilFlowerName:
+	text "Tranquil Flower"
+	done
+
+TranquilFlowerDescription:
+	text "Once during your turn, if this"
+	line "Pokémon is in the Active Spot, you"
+	line "may heal 30 damage from 1 of your"
+	line "Pokémon."
+	done
+
+DangerousToxwhipName:
+	text "Dangerous Toxwhip"
+	done
+
+DangerousToxwhipDescription:
+	text "Your opponent's Active Pokémon is"
+	line "now Confused and Poisoned."
+	done
+
+VenusaurEXName:
+	text "Venusaur EX"
+	done
+
+PsychicDrawName:
+	text "Psychic Draw"
+	done
+
+KadabraPsychicDrawDescription:
+	text "Once during your turn, when you play"
+	line "this Pokémon from your hand to"
+	line "evolve 1 of your Pokémon, you may"
+	line "use this Ability. Draw 2 cards."
+	done
+
+AlakazamPsychicDrawDescription:
+	text "Once during your turn, when you play"
+	line "this Pokémon from your hand to"
+	line "evolve 1 of your Pokémon, you may"
+	line "use this Ability. Draw 3 cards."
+	done
+
+PowerfulHandName:
+	text "Powerful Hand"
+	done
+
+PowerfulHandDescription:
+	text "Place 1 damage counter on your"
+	line "opponent's Active Pokémon for each"
+	line "card in your hand."
 	done
