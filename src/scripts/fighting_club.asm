@@ -111,7 +111,7 @@ Script_de4b:
 
 .ows_de61
 	print_npc_text ChrisFightingClubDuelStartText
-	start_duel PRIZES_4, MUSCLES_FOR_BRAINS_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, MUSCLES_FOR_BRAINS_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatChrisInFightingClub:
@@ -139,7 +139,7 @@ Script_MichaelRematch:
 
 .ows_de8d
 	print_npc_text MichaelFightingClubDuelStartText
-	start_duel PRIZES_4, HEATED_BATTLE_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, HEATED_BATTLE_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatMichaelInFightingClub:
@@ -167,7 +167,7 @@ Script_dead:
 
 .ows_deb9
 	print_npc_text JessicaFightingClubDuelStartText
-	start_duel PRIZES_4, LOVE_TO_BATTLE_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, LOVE_TO_BATTLE_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatJessicaInFightingClub:

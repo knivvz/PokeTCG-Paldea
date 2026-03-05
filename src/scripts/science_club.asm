@@ -35,7 +35,7 @@ Script_David:
 
 .ows_ec27
 	print_npc_text Text0753
-	start_duel PRIZES_4, LOVELY_NIDORAN_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, LOVELY_NIDORAN_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatDavid:
@@ -59,7 +59,7 @@ Script_Erik:
 
 .ows_ec4f
 	print_npc_text Text075a
-	start_duel PRIZES_4, POISON_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, POISON_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatErik:
@@ -150,7 +150,7 @@ Script_Joseph:
 
 .ows_ecee
 	print_npc_text Text076f
-	start_duel PRIZES_4, FLYIN_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, FLYIN_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatJoseph:
@@ -189,7 +189,7 @@ Script_LostToJoseph:
 
 .ows_ed2f
 	print_npc_text Text0775
-	start_duel PRIZES_4, FLYIN_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, FLYIN_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 .ows_ed37

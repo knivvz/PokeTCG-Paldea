@@ -29,7 +29,7 @@ Script_Ryan:
 
 .ows_dfff
 	print_npc_text Text0798
-	start_duel PRIZES_3, EXCAVATION_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, EXCAVATION_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatRyan:
@@ -53,7 +53,7 @@ Script_Andrew:
 
 .ows_e026
 	print_npc_text Text079f
-	start_duel PRIZES_4, BLISTERING_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, BLISTERING_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatAndrew:
