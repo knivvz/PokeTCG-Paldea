@@ -2611,7 +2611,7 @@ TextOffsets::
 	textpointer AbraDescription
 	textpointer KadabraName
 	textpointer KadabrasRecoverDescription
-	textpointer SuperPsiName
+	textpointer SuperPsyBoltName
 	textpointer KadabraDescription
 	textpointer AlakazamName
 	textpointer DamageSwapName

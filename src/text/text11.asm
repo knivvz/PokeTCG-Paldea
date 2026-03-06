@@ -1411,8 +1411,8 @@ KadabrasRecoverDescription:
 	line "Kadabra."
 	done
 
-SuperPsiName:
-	text "Super Psy"
+SuperPsyBoltName:
+	text "Super Psy Bolt"
 	done
 
 KadabraDescription:

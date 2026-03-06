@@ -6783,30 +6783,30 @@ KadabraCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	dw KADABRA
-	db 60 ; hp
+	db 40 ; hp
 	db STAGE1 ; stage
 	tx AbraName ; pre-evo name
 
 	; attack 1
-	energy PSYCHIC, 2 ; energies
-	tx RecoverName ; name
-	tx KadabrasRecoverDescription ; description
+	energy 0 ; energies
+	tx PsychicDrawName ; name
+	tx KadabraPsychicDrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
-	db RESIDUAL ; category
-	dw KadabraRecoverEffectCommands ; effect commands
+	db POKEMON_POWER ; category
+	dw KadabraPsychicDrawEffectCommands ; effect commands
 	db NONE ; flags 1
-	db DISCARD_ENERGY ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_RECOVER ; animation
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy PSYCHIC, 2, COLORLESS, 1 ; energies
-	tx SuperPsiName ; name
+	energy PSYCHIC, 1 ; energies
+	tx SuperPsyBoltName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -6815,9 +6815,23 @@ KadabraCard:
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 3 ; retreat cost
+	; ; attack 1
+	; energy PSYCHIC, 2 ; energies
+	; tx RecoverName ; name
+	; tx KadabrasRecoverDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw KadabraRecoverEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db DISCARD_ENERGY ; flags 2
+	; db NONE ; flags 3
+	; db 3 ; attack score penalty for DISCARD_ENERGY
+	; db ATK_ANIM_RECOVER ; animation
+
+	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
-	db NONE ; resistance
+	db WR_FIGHTING ; resistance
 	tx PsiName ; category
 	db 64 ; Pokedex number
 	db 38 ; level
@@ -6833,18 +6847,18 @@ AlakazamCard:
 	db STAR ; rarity
 	db MYSTERY | NONE ; sets
 	dw ALAKAZAM
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE2 ; stage
 	tx KadabraName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
-	tx DamageSwapName ; name
-	tx DamageSwapDescription ; description
+	tx PsychicDrawName ; name
+	tx AlakazamPsychicDrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw AlakazamDamageSwapEffectCommands ; effect commands
+	dw AlakazamPsychicDrawEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -6852,22 +6866,50 @@ AlakazamCard:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy PSYCHIC, 3 ; energies
-	tx ConfuseRayName ; name
-	tx MayInflictConfusionDescription ; description
+	energy PSYCHIC, 1 ; energies
+	tx PowerfulHandName ; name
+	tx PowerfulHandDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw AlakazamConfuseRayEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
+	dw AlakazamPowerfulHandEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_CONFUSE_RAY ; animation
+	db ATK_ANIM_PSYCHIC_HIT ; animation
 
-	db 3 ; retreat cost
+	; attack 1
+	; energy 0 ; energies
+	; tx DamageSwapName ; name
+	; tx DamageSwapDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw AlakazamDamageSwapEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; ; attack 2
+	; energy PSYCHIC, 3 ; energies
+	; tx ConfuseRayName ; name
+	; tx MayInflictConfusionDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw AlakazamConfuseRayEffectCommands ; effect commands
+	; db INFLICT_CONFUSION ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_CONFUSE_RAY ; animation
+
+	db 1 ; retreat cost
 	db WR_PSYCHIC ; weakness
-	db NONE ; resistance
+	db WR_FIGHTING ; resistance
 	tx PsiName ; category
 	db 65 ; Pokedex number
 	db 42 ; level
