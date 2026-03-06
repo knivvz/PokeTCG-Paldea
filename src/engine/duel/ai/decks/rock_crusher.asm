@@ -30,23 +30,23 @@ AIActionTable_RockCrusher:
 	dw RHYHORN
 	dw ONIX
 	dw GEODUDE
-	dw DIGLETT
+	dw WIGLETT
 	dw NULL
 
 .list_bench
-	dw DIGLETT
+	dw WIGLETT
 	dw GEODUDE
 	dw RHYHORN
 	dw ONIX
 	dw NULL
 
 .list_retreat
-	ai_retreat DIGLETT, -1
+	ai_retreat WIGLETT, -1
 	dw NULL
 
 .list_energy
-	ai_energy DIGLETT,  3, +1
-	ai_energy DUGTRIO,  4, +0
+	ai_energy WIGLETT,  3, +1
+	ai_energy WUGTRIO,  4, +0
 	ai_energy GEODUDE,  2, +1
 	ai_energy GRAVELER, 3, +0
 	ai_energy GOLEM,    4, +0

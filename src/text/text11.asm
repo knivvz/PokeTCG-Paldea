@@ -825,8 +825,8 @@ SandslashDescription:
 	line "up to attack or escape."
 	done
 
-DiglettName:
-	text "Diglett"
+WiglettName:
+	text "Wiglett"
 	done
 
 DigName:
@@ -841,14 +841,14 @@ MoleName:
 	text "Mole"
 	done
 
-DiglettDescription:
+WiglettDescription:
 	text "Lives about three feet underground,"
 	line "where it feeds on plant roots. It"
 	line "sometimes appears above ground."
 	done
 
-DugtrioName:
-	text "Dugtrio"
+WugtrioName:
+	text "Wugtrio"
 	done
 
 EarthquakeName:
@@ -862,8 +862,8 @@ EarthquakeDescription:
 	line "Pokémon.)"
 	done
 
-DugtrioDescription:
-	text "A team of Diglett triplets."
+WugtrioDescription:
+	text "A team of Wiglett triplets."
 	line "It triggers huge earthquakes by"
 	line "burrowing 60 miles underground."
 	done

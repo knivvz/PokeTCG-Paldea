@@ -124,8 +124,8 @@ CardPointers::
 	dab ZapdosLv68Card
 	dab SandshrewCard
 	dab SandslashCard
-	dab DiglettCard
-	dab DugtrioCard
+	dab WiglettCard
+	dab WugtrioCard
 	dab MankeyCard
 	dab PrimeapeCard
 	dab MachopCard

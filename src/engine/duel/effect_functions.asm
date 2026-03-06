@@ -5774,11 +5774,11 @@ SandAttackEffect:
 	ld a, SUBSTATUS2_SAND_ATTACK
 	jp ApplySubstatus2ToDefendingCard
 
-EarthquakeEffect:
-	ld a, TRUE
-	ld [wIsDamageToSelf], a
-	ld a, 10
-	jp DealDamageToAllBenchedPokemon
+; EarthquakeEffect:
+; 	ld a, TRUE
+; 	ld [wIsDamageToSelf], a
+; 	ld a, 10
+; 	jp DealDamageToAllBenchedPokemon
 
 PrehistoricPowerEffect:
 	scf

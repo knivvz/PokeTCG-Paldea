@@ -122,8 +122,8 @@
 	const ZAPDOS_LV68                 ; $76
 	const SANDSHREW                   ; $77
 	const SANDSLASH                   ; $78
-	const DIGLETT                     ; $79
-	const DUGTRIO                     ; $7a
+	const WIGLETT                     ; $79
+	const WUGTRIO                     ; $7a
 	const MANKEY                      ; $7b
 	const PRIMEAPE                    ; $7c
 	const MACHOP                      ; $7d

@@ -1037,9 +1037,9 @@ SandslashFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_AI, FurySwipes20_AIEffect
 	db  $00
 
-DugtrioEarthquakeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EarthquakeEffect
-	db  $00
+; DugtrioEarthquakeEffectCommands:
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EarthquakeEffect
+; 	db  $00
 
 AerodactylPrehistoricPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, PrehistoricPowerEffect

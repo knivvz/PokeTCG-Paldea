@@ -6,8 +6,8 @@ AllFightingPokemonCardList:
 	card_item FIGHTING_ENERGY, 26
 	card_item SANDSHREW,        2
 	card_item SANDSLASH,        1
-	card_item DIGLETT,          2
-	card_item DUGTRIO,          1
+	card_item WIGLETT,          2
+	card_item WUGTRIO,          1
 	card_item MANKEY,           2
 	card_item PRIMEAPE,         1
 	card_item MACHOP,           3
@@ -137,8 +137,8 @@ SqueakingMouseCardList:
 GreatQuakeCardList:
 	deck_list_start
 	card_item FIGHTING_ENERGY, 25
-	card_item DIGLETT,          4
-	card_item DUGTRIO,          3
+	card_item WIGLETT,          4
+	card_item WUGTRIO,          3
 	card_item ONIX,             4
 	card_item RHYHORN,          3
 	card_item RHYDON,           2
@@ -201,8 +201,8 @@ RockCrusherCardList:
 	deck_list_start
 	card_item FIGHTING_ENERGY,         24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item DIGLETT,                  4
-	card_item DUGTRIO,                  2
+	card_item WIGLETT,                  4
+	card_item WUGTRIO,                  2
 	card_item GEODUDE,                  4
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
@@ -1040,8 +1040,8 @@ PsychicMachampCardList:
 	deck_list_start
 	card_item FIGHTING_ENERGY, 12
 	card_item PSYCHIC_ENERGY,  12
-	card_item DIGLETT,          2
-	card_item DUGTRIO,          1
+	card_item WIGLETT,          2
+	card_item WUGTRIO,          1
 	card_item MACHOP,           2
 	card_item MACHOKE,          1
 	card_item MACHAMP,          1

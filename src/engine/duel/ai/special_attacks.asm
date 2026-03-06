@@ -44,8 +44,8 @@ HandleSpecialAIAttacks:
 	jp z, .BigThunder
 	cp16 KANGASKHAN
 	jp z, .Fetch
-	cp16 DUGTRIO
-	jp z, .Earthquake
+	;cp16 WUGTRIO
+	;jp z, .Earthquake
 	cp16 ELECTRODE_LV35
 	jp z, .EnergySpike
 	cp16 GOLDUCK
@@ -342,27 +342,27 @@ HandleSpecialAIAttacks:
 ; dismiss attack if number of own benched cards which would
 ; be KOd is greater than or equal to the number
 ; of prize cards left for player.
-.Earthquake:
-	ld a, DUELVARS_BENCH
-	call GetTurnDuelistVariable
+; .Earthquake:
+; 	ld a, DUELVARS_BENCH
+; 	call GetTurnDuelistVariable
 
-	lb de, 0, PLAY_AREA_BENCH_1 - 1
-.loop_earthquake
-	inc e
-	ld a, [hli]
-	cp $ff
-	jr z, .count_prizes
-	ld a, e
-	add DUELVARS_ARENA_CARD_HP
-	; bug, GetTurnDuelistVariable clobbers hl
-	; uncomment the following lines to preserve hl
-	; push hl
-	call GetTurnDuelistVariable
-	; pop hl
-	cp 20
-	jr nc, .loop_earthquake
-	inc d
-	jr .loop_earthquake
+; 	lb de, 0, PLAY_AREA_BENCH_1 - 1
+; .loop_earthquake
+; 	inc e
+; 	ld a, [hli]
+; 	cp $ff
+; 	jr z, .count_prizes
+; 	ld a, e
+; 	add DUELVARS_ARENA_CARD_HP
+; 	; bug, GetTurnDuelistVariable clobbers hl
+; 	; uncomment the following lines to preserve hl
+; 	; push hl
+; 	call GetTurnDuelistVariable
+; 	; pop hl
+; 	cp 20
+; 	jr nc, .loop_earthquake
+; 	inc d
+; 	jr .loop_earthquake
 
 .count_prizes
 	; bug, this is supposed to count the player's prize cards

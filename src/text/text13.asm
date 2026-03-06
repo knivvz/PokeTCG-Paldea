@@ -371,3 +371,7 @@ PowerfulHandDescription:
 	line "opponent's Active Pokémon for each"
 	line "card in your hand."
 	done
+
+PsyshotName:
+	text "Psyshot"
+	done

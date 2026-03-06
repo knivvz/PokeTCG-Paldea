@@ -178,8 +178,8 @@ SamsPracticeDeck:
 	card_item MACHOP,                  1
 	card_item NEMONA,                    1
 	card_item FIGHTING_ENERGY,         1
-	card_item DIGLETT,                 1
-	card_item DUGTRIO,                 1
+	card_item WIGLETT,                 1
+	card_item WUGTRIO,                 1
 	card_item FIGHTING_ENERGY,         1
 	card_item MACHOKE,                 1
 	card_item LIGHTNING_ENERGY,        1
@@ -208,7 +208,7 @@ SamsPracticeDeck:
 	card_item RAICHU_LV45,             1
 	card_item LIGHTNING_ENERGY,        1
 	card_item JOLTEON_LV29,            1
-	card_item DIGLETT,                 1
+	card_item WIGLETT,                 1
 	card_item MACHOP,                  1
 	card_item MACHOKE,                 1
 	card_item ONIX,                    1
@@ -238,8 +238,8 @@ CharmanderAndFriendsDeck:
 	card_item MAGNEMITE_LV13,    2
 	card_item MAGNETON_LV28,     1
 	card_item ZAPDOS_LV64,       1
-	card_item DIGLETT,           2
-	card_item DUGTRIO,           1
+	card_item WIGLETT,           2
+	card_item WUGTRIO,           1
 	card_item MACHOP,            1
 	card_item MACHOKE,           1
 	card_item RATTATA,           2
@@ -390,8 +390,8 @@ BulbasaurExtraDeck:
 	card_item JYNX,              1
 	card_item GASTLY_LV8,        2
 	card_item HAUNTER_LV22,      1
-	card_item DIGLETT,           1
-	card_item DUGTRIO,           1
+	card_item WIGLETT,           1
+	card_item WUGTRIO,           1
 	card_item HITMONCHAN,        1
 	card_item NEMONA,              1
 	card_item POTION,            2
@@ -604,8 +604,8 @@ RockCrusherDeck:
 	deck_list_start
 	card_item FIGHTING_ENERGY,         24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item DIGLETT,                  4
-	card_item DUGTRIO,                  2
+	card_item WIGLETT,                  4
+	card_item WUGTRIO,                  2
 	card_item GEODUDE,                  4
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
@@ -1154,7 +1154,7 @@ EtceteraDeck:
 	card_item MAGMAR_LV31,      1
 	card_item PIKACHU_LV12,     2
 	card_item MAGNEMITE_LV13,   1
-	card_item DIGLETT,          1
+	card_item WIGLETT,          1
 	card_item MACHOP,           2
 	card_item GASTLY_LV8,       2
 	card_item JYNX,             1

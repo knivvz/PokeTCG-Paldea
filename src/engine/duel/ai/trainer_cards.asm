@@ -4976,13 +4976,13 @@ AIDecide_Pokeball:
 	ld de, FIGHTING_ENERGY
 	call LookForCardIDInHandList_Bank8
 	jr nc, .psychic
-	ld de, DIGLETT
+	ld de, WIGLETT
 	call LookForCardIDInHandList_Bank8
 	jr c, .psychic
 	ld de, MACHOP
 	call LookForCardIDInHandList_Bank8
 	jr c, .psychic
-	ld de, DIGLETT
+	ld de, WIGLETT
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5141,7 +5141,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	jr z, .pop_de_and_no_carry
 	cp16 DOUBLE_COLORLESS_ENERGY
 	jr z, .pop_de_and_no_carry
-	cp16 DIGLETT
+	cp16 WIGLETT
 	jr z, .pop_de_and_no_carry
 	cp16 GEODUDE
 	jr z, .pop_de_and_no_carry
@@ -5210,31 +5210,31 @@ AIDecide_ComputerSearch_RockCrusher:
 	ld de, GOLEM
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
-	jr nc, .dugtrio
+	jr nc, .WUGTRIO
 	ld [wce06], a
 	ld de, GRAVELER
 	call LookForCardIDInPlayArea_Bank8
-	jr nc, .dugtrio
+	jr nc, .WUGTRIO
 	ld de, GOLEM
 	call LookForCardIDInHandList_Bank8
-	jr c, .dugtrio
+	jr c, .WUGTRIO
 	call CreateHandCardList
 	ld hl, wDuelTempList
 	jr .find_discard_cards_2
 
-; checks if there is a Dugtrio card in the deck to target.
-; if so, check if there's Diglett in Play Area,
-; and if there's no Dugtrio card in hand, proceed.
-.dugtrio
-	ld de, DUGTRIO
+; checks if there is a WUGTRIO card in the deck to target.
+; if so, check if there's WIGLETT in Play Area,
+; and if there's no WUGTRIO card in hand, proceed.
+.WUGTRIO
+	ld de, WUGTRIO
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jp nc, .no_carry
 	ld [wce06], a
-	ld de, DIGLETT
+	ld de, WIGLETT
 	call LookForCardIDInPlayArea_Bank8
 	jp nc, .no_carry
-	ld de, DUGTRIO
+	ld de, WUGTRIO
 	call LookForCardIDInHandList_Bank8
 	jp c, .no_carry
 	call CreateHandCardList

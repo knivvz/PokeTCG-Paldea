@@ -2498,15 +2498,15 @@ TextOffsets::
 	textpointer SandslashName
 	textpointer TripleAttackX20Description
 	textpointer SandslashDescription
-	textpointer DiglettName
+	textpointer WiglettName
 	textpointer DigName
 	textpointer MudSlapName
 	textpointer MoleName
-	textpointer DiglettDescription
-	textpointer DugtrioName
+	textpointer WiglettDescription
+	textpointer WugtrioName
 	textpointer EarthquakeName
 	textpointer EarthquakeDescription
-	textpointer DugtrioDescription
+	textpointer WugtrioDescription
 	textpointer MankeyName
 	textpointer PeekName
 	textpointer PeekDescription
@@ -2939,3 +2939,4 @@ TextOffsets::
 	textpointer AlakazamPsychicDrawDescription
 	textpointer PowerfulHandName
 	textpointer PowerfulHandDescription
+	textpointer PsyshotName

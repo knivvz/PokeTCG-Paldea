@@ -5676,73 +5676,101 @@ SandslashCard:
 	tx SandslashDescription ; description
 	db 0 ; AI info
 
-DiglettCard:
-	db TYPE_PKMN_FIGHTING ; type
+WiglettCard:
+	db TYPE_PKMN_WATER ; type
 	gfx DiglettCardGfx ; gfx
-	tx DiglettName ; name
+	tx WiglettName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw DIGLETT
+	dw WIGLETT
 	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx DigName ; name
+	energy COLORLESS, 1 ; energies
+	tx DigALittleName ; name
+	tx DigALittleDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw WiglettDigALittleEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2 EMPTY ATTACK
+	energy 0 ; energies
+	dw NONE ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 0 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_NONE ; animation
 
-	; attack 2
-	energy FIGHTING, 2 ; energies
-	tx MudSlapName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
+	; attack 1
+	; energy FIGHTING, 1 ; energies
+	; tx DigName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
 
-	db 0 ; retreat cost
-	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	; ; attack 2
+	; energy FIGHTING, 2 ; energies
+	; tx MudSlapName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
+
+	db 1 ; retreat cost
+	db WR_LIGHTNING ; weakness
+	db NONE ; resistance
 	tx MoleName ; category
 	db 50 ; Pokedex number
 	db 8 ; level
 	db 0, 8 ; length
 	dw 2 * 10 ; weight
-	tx DiglettDescription ; description
+	tx WiglettDescription ; description
 	db AI_INFO_UNK_03 | HAS_EVOLUTION ; AI info
 
-DugtrioCard:
-	db TYPE_PKMN_FIGHTING ; type
+WugtrioCard:
+	db TYPE_PKMN_WATER ; type
 	gfx DugtrioCardGfx ; gfx
-	tx DugtrioName ; name
+	tx WugtrioName ; name
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw DUGTRIO
-	db 70 ; hp
+	dw WUGTRIO
+	db 50 ; hp
 	db STAGE1 ; stage
-	tx DiglettName ; pre-evo name
+	tx WiglettName ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 2, COLORLESS, 1 ; energies
-	tx SlashName ; name
+	energy WATER, 1 ; energies
+	tx HeadbuttName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
+	db 20 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -5752,28 +5780,42 @@ DugtrioCard:
 	db ATK_ANIM_SLASH ; animation
 
 	; attack 2
-	energy FIGHTING, 4 ; energies
-	tx EarthquakeName ; name
-	tx EarthquakeDescription ; description
+	energy COLORLESS, 3 ; energies
+	tx UnderseaTunnelName ; name
+	tx UnderseaTunnelDescription ; description
 	dw NONE ; description (cont)
-	db 70 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DugtrioEarthquakeEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw WugtrioUnderseaTunnelEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_GLOW_EFFECT ; animation
+	
+	; attack 2
+;	energy FIGHTING, 4 ; energies
+;	tx EarthquakeName ; name
+;	tx EarthquakeDescription ; description
+;	dw NONE ; description (cont)
+;	db 70 ; damage
+;	db DAMAGE_NORMAL ; category
+;	dw DugtrioEarthquakeEffectCommands ; effect commands
+;	db NONE ; flags 1
+;	db NONE ; flags 2
+;	db SPECIAL_AI_HANDLING ; flags 3
+;	db 0
+;	db ATK_ANIM_HIT ; animation
 
 	db 2 ; retreat cost
-	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	db WR_LIGHTNING ; weakness
+	db NONE ; resistance
 	tx MoleName ; category
 	db 51 ; Pokedex number
 	db 36 ; level
 	db 2, 4 ; length
 	dw 73 * 10 ; weight
-	tx DugtrioDescription ; description
+	tx WugtrioDescription ; description
 	db 0 ; AI info
 
 MankeyCard:
@@ -6739,17 +6781,31 @@ AbraCard:
 
 	; attack 1
 	energy PSYCHIC, 1 ; energies
-	tx PsyshockName ; name
-	tx MayInflictParalysisDescription ; description
+	tx PsyshotName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw AbraPsyshockEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PSYCHIC_HIT ; animation
+
+	; attack 1
+	; energy PSYCHIC, 1 ; energies
+	; tx PsyshockName ; name
+	; tx MayInflictParalysisDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw AbraPsyshockEffectCommands ; effect commands
+	; db INFLICT_PARALYSIS ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PSYCHIC_HIT ; animation
 
 	; attack 2
 	energy 0 ; energies
@@ -6765,9 +6821,9 @@ AbraCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 0 ; retreat cost
-	db WR_PSYCHIC ; weakness
-	db NONE ; resistance
+	db 1 ; retreat cost
+	db WR_DARKNESS ; weakness
+	db WR_FIGHTING; resistance
 	tx PsiName ; category
 	db 63 ; Pokedex number
 	db 10 ; level
@@ -6830,7 +6886,7 @@ KadabraCard:
 	; db ATK_ANIM_RECOVER ; animation
 
 	db 1 ; retreat cost
-	db WR_PSYCHIC ; weakness
+	db WR_DARKNESS ; weakness
 	db WR_FIGHTING ; resistance
 	tx PsiName ; category
 	db 64 ; Pokedex number
@@ -6908,7 +6964,7 @@ AlakazamCard:
 	; db ATK_ANIM_CONFUSE_RAY ; animation
 
 	db 1 ; retreat cost
-	db WR_PSYCHIC ; weakness
+	db WR_DARKNESS ; weakness
 	db WR_FIGHTING ; resistance
 	tx PsiName ; category
 	db 65 ; Pokedex number
