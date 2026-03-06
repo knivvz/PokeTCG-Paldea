@@ -1,0 +1,17 @@
+Changes implemented:
+
+ - Retreat only once per turn
+ - No attack on turn 1 of the game
+ - All duels now have 6 prizes
+ - increased booster packs received after duel to 3
+ - replaced dmg counters with numbers (capped dmg to 250)
+ - practice duel optional
+
+
+TODO:
+ - Supporters:
+    - only once per turn
+    - not on turn 1
+    - designated filter on deck construction menu
+ - add cards, rearrange booster packs
+ - add sprites

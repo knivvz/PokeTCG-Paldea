@@ -136,12 +136,13 @@ DEF TYPE_ENERGY EQU const_value		   ; $10
 	const TYPE_ENERGY_DOUBLE_COLORLESS ; $1a
 	const_skip 5
 	const TYPE_TRAINER                 ; $20
-	const TYPE_TRAINER_UNUSED          ; $21
-DEF NUM_CARD_TYPES EQU const_value - 11
+	const TYPE_TRAINER_SUPPORTER       ; $21
+DEF NUM_CARD_TYPES EQU const_value - 11 ; change to 10 for supporters
 
 DEF TYPE_PKMN      EQU %1111
 DEF TYPE_ENERGY_F  EQU 4
 DEF TYPE_TRAINER_F EQU 5
+DEF TYPE_TRAINER_SUPPORTER_F EQU 6
 
 ; CARD_DATA_RARITY constants
 DEF CIRCLE    EQU $0

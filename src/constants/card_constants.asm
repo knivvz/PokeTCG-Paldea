@@ -198,7 +198,7 @@
 	const DRAGONITE_LV45              ; $c2
 	const PROFESSOR_OAK               ; $c3
 	const IMPOSTER_PROFESSOR_OAK      ; $c4
-	const BILL                        ; $c5
+	const NEMONA                        ; $c5
 	const MR_FUJI                     ; $c6
 	const LASS                        ; $c7
 	const IMAKUNI_CARD                ; $c8

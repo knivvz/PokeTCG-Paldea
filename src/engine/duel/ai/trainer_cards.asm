@@ -1418,7 +1418,7 @@ AIDecide_GustOfWind:
 	scf
 	ret
 
-AIPlay_Bill:
+AIPlay_Nemona:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -1426,7 +1426,7 @@ AIPlay_Bill:
 	ret
 
 ; return carry if cards in deck > 9
-AIDecide_Bill:
+AIDecide_Nemona:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9

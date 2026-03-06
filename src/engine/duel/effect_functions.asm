@@ -9517,10 +9517,10 @@ Pokedex_OrderDeckCardsEffect:
 	jr nz, .loop_place_deck
 	ret
 
-BillEffect:
-	ld a, 2
+NemonaEffect:
+	ld a, 3
 	bank1call DisplayDrawNCardsScreen
-	ld c, 2
+	ld c, 3
 .loop_draw
 	call DrawCardFromDeck
 	jr c, .done

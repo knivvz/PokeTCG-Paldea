@@ -24,7 +24,7 @@ AllFightingPokemonCardList:
 	card_item RHYHORN,          2
 	card_item RHYDON,           1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item SWITCH,           1
 	card_item POTION,           2
 	deck_list_end
@@ -40,7 +40,7 @@ BenchAttackCardList:
 	card_item HITMONCHAN,        2
 	card_item MEOWTH_LV14,       4
 	card_item PROFESSOR_OAK,     1
-	card_item BILL,              2
+	card_item NEMONA,              2
 	card_item MR_FUJI,           1
 	card_item ENERGY_RETRIEVAL,  2
 	card_item SWITCH,            2
@@ -107,7 +107,7 @@ FirstStrikeCardList:
 	card_item PLUSPOWER,        2
 	card_item SWITCH,           2
 	card_item GUST_OF_WIND,     3
-	card_item BILL,             4
+	card_item NEMONA,             4
 	deck_list_end
 
 SqueakingMouseCardList:
@@ -124,7 +124,7 @@ SqueakingMouseCardList:
 	card_item RATTATA,                  4
 	card_item RATICATE,                 3
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item POKEMON_TRADER,           1
 	card_item ENERGY_RETRIEVAL,         2
 	card_item COMPUTER_SEARCH,          1
@@ -146,7 +146,7 @@ GreatQuakeCardList:
 	card_item TAUROS,           1
 	card_item SNORLAX,          1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item POKEMON_TRADER,   2
 	card_item SWITCH,           3
 	card_item DEFENDER,         4
@@ -167,7 +167,7 @@ BoneAttackCardList:
 	card_item MAROWAK_LV32,     2
 	card_item RHYHORN,          2
 	card_item RHYDON,           1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item MR_FUJI,          1
 	card_item POKE_BALL,        2
 	card_item POKEDEX,          1
@@ -192,7 +192,7 @@ ExcavationCardList:
 	card_item KABUTOPS,           1
 	card_item AERODACTYL,         2
 	card_item PROFESSOR_OAK,      2
-	card_item BILL,               2
+	card_item NEMONA,               2
 	card_item POKEMON_BREEDER,    2
 	card_item MYSTERIOUS_FOSSIL,  4
 	deck_list_end
@@ -241,7 +241,7 @@ BlueWaterCardList:
 	card_item OMASTAR,            1
 	card_item ARTICUNO_LV35,      1
 	card_item PROFESSOR_OAK,      1
-	card_item BILL,               2
+	card_item NEMONA,               2
 	card_item POKEMON_TRADER,     1
 	card_item MYSTERIOUS_FOSSIL,  2
 	card_item ENERGY_SEARCH,      1
@@ -264,7 +264,7 @@ OnTheBeachCardList:
 	card_item STARMIE,           2
 	card_item SANDSHREW,         3
 	card_item SANDSLASH,         2
-	card_item BILL,              2
+	card_item NEMONA,              2
 	card_item ENERGY_RETRIEVAL,  2
 	card_item ENERGY_REMOVAL,    2
 	card_item GUST_OF_WIND,      2
@@ -285,7 +285,7 @@ ParalyzeCardList:
 	card_item STARYU,                   4
 	card_item STARMIE,                  3
 	card_item PROFESSOR_OAK,            2
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item PLUSPOWER,                2
 	card_item DEFENDER,                 2
 	card_item POTION,                   4
@@ -306,7 +306,7 @@ EnergyRemovalCardList:
 	card_item DRATINI,                  3
 	card_item DRAGONAIR,                2
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     1
+	card_item NEMONA,                     1
 	card_item LASS,                     1
 	card_item ENERGY_SEARCH,            2
 	card_item ENERGY_REMOVAL,           2
@@ -361,7 +361,7 @@ CutePokemonCardList:
 	card_item WIGGLYTUFF,               2
 	card_item EEVEE,                    4
 	card_item PROFESSOR_OAK,            2
-	card_item BILL,                     3
+	card_item NEMONA,                     3
 	card_item CLEFAIRY_DOLL,            2
 	card_item SCOOP_UP,                 2
 	card_item COMPUTER_SEARCH,          1
@@ -383,7 +383,7 @@ PokemonFluteCardList:
 	card_item RATTATA,           2
 	card_item RATICATE,          1
 	card_item PROFESSOR_OAK,     2
-	card_item BILL,              4
+	card_item NEMONA,              4
 	card_item ENERGY_REMOVAL,    3
 	card_item COMPUTER_SEARCH,   1
 	card_item PLUSPOWER,         3
@@ -455,7 +455,7 @@ ZappingSelfdestructCardList:
 	card_item KANGASKHAN,               2
 	card_item TAUROS,                   1
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item SWITCH,                   2
 	card_item DEFENDER,                 4
 	card_item GUST_OF_WIND,             1
@@ -477,7 +477,7 @@ InsectCollectionCardList:
 	card_item VENOMOTH,         1
 	card_item SCYTHER,          1
 	card_item PINSIR,           1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item POKEMON_BREEDER,  2
 	card_item SWITCH,           2
 	card_item POKE_BALL,        2
@@ -506,7 +506,7 @@ JungleCardList:
 	card_item PINSIR,                   1
 	card_item LICKITUNG,                1
 	card_item KANGASKHAN,               1
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item SWITCH,                   1
 	card_item POKE_BALL,                1
 	card_item PLUSPOWER,                2
@@ -557,7 +557,7 @@ KaleidoscopeCardList:
 	card_item DITTO,                    4
 	card_item EEVEE,                    4
 	card_item PORYGON,                  4
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item MR_FUJI,                  2
 	card_item ENERGY_SEARCH,            2
 	card_item SWITCH,                   4
@@ -577,7 +577,7 @@ FlowerPowerCardList:
 	card_item EXEGGCUTE,         4
 	card_item EXEGGUTOR,         3
 	card_item PROFESSOR_OAK,     2
-	card_item BILL,              3
+	card_item NEMONA,              3
 	card_item POKEMON_BREEDER,   2
 	card_item ENERGY_RETRIEVAL,  2
 	card_item SWITCH,            2
@@ -630,7 +630,7 @@ DreamEaterHaunterCardList:
 	card_item JIGGLYPUFF_LV14,         2
 	card_item MEOWTH_LV15,             2
 	card_item PROFESSOR_OAK,           2
-	card_item BILL,                    2
+	card_item NEMONA,                    2
 	card_item ENERGY_RETRIEVAL,        2
 	card_item SUPER_ENERGY_RETRIEVAL,  1
 	card_item SWITCH,                  2
@@ -739,7 +739,7 @@ ScienceCorpsCardList:
 	card_item MEOWTH_LV15,      2
 	card_item PERSIAN,          1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             1
+	card_item NEMONA,             1
 	card_item POKEMON_TRADER,   1
 	card_item POKEMON_BREEDER,  1
 	card_item POTION,           1
@@ -765,7 +765,7 @@ FlyinPokemonCardList:
 	card_item FEAROW,                   3
 	card_item IMPOSTER_PROFESSOR_OAK,   2
 	card_item LASS,                     2
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item POTION,                   4
 	deck_list_end
 
@@ -804,7 +804,7 @@ WondersOfScienceCardList:
 	card_item PORYGON,                 2
 	card_item IMPOSTER_PROFESSOR_OAK,  1
 	card_item PROFESSOR_OAK,           2
-	card_item BILL,                    2
+	card_item NEMONA,                    2
 	card_item ENERGY_SEARCH,           2
 	card_item SWITCH,                  2
 	card_item COMPUTER_SEARCH,         2
@@ -846,7 +846,7 @@ ChariSaurCardList:
 	card_item CHARIZARD,         2
 	card_item FLAREON_LV22,      3
 	card_item EEVEE,             4
-	card_item BILL,              2
+	card_item NEMONA,              2
 	card_item POKEMON_TRADER,    3
 	card_item POKEMON_BREEDER,   3
 	card_item ENERGY_RETRIEVAL,  2
@@ -896,7 +896,7 @@ FirePokemonCardList:
 	card_item MOLTRES_LV35,             1
 	card_item EEVEE,                    3
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item POKEMON_TRADER,           1
 	card_item POKEMON_BREEDER,          1
 	card_item ENERGY_RETRIEVAL,         1
@@ -918,7 +918,7 @@ FireChargeCardList:
 	card_item CHANSEY,                  2
 	card_item TAUROS,                   2
 	card_item PROFESSOR_OAK,            1
-	card_item BILL,                     2
+	card_item NEMONA,                     2
 	card_item ENERGY_RETRIEVAL,         2
 	card_item POKE_BALL,                1
 	card_item COMPUTER_SEARCH,          1
@@ -954,7 +954,7 @@ CharmanderAndFriendsCardList:
 	card_item RATICATE,         1
 	card_item MEOWTH_LV14,      1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item SWITCH,           1
 	card_item COMPUTER_SEARCH,  1
 	card_item PLUSPOWER,        1
@@ -992,7 +992,7 @@ SquirtleAndFriendsCardList:
 	card_item RATICATE,          1
 	card_item MEOWTH_LV14,       1
 	card_item PROFESSOR_OAK,     1
-	card_item BILL,              1
+	card_item NEMONA,              1
 	card_item SWITCH,            1
 	card_item POKE_BALL,         1
 	card_item SCOOP_UP,          1
@@ -1026,7 +1026,7 @@ BulbasaurAndFriendsCardList:
 	card_item MEOWTH_LV14,      1
 	card_item KANGASKHAN,       1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             1
+	card_item NEMONA,             1
 	card_item SWITCH,           1
 	card_item POKE_BALL,        1
 	card_item PLUSPOWER,        2
@@ -1063,7 +1063,7 @@ PsychicMachampCardList:
 	card_item RATTATA,          2
 	card_item RATICATE,         1
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item SWITCH,           1
 	card_item GUST_OF_WIND,     1
 	card_item POTION,           2
@@ -1097,7 +1097,7 @@ WaterBeetleCardList:
 	card_item KANGASKHAN,        1
 	card_item TAUROS,            1
 	card_item PROFESSOR_OAK,     1
-	card_item BILL,              2
+	card_item NEMONA,              2
 	card_item ENERGY_RETRIEVAL,  1
 	card_item ENERGY_SEARCH,     1
 	card_item SWITCH,            1
@@ -1116,7 +1116,7 @@ LegendaryMoltresCardList:
 	card_item MAGMAR_LV31,             2
 	card_item MOLTRES_LV35,            2
 	card_item MOLTRES_LV37,            2
-	card_item BILL,                    3
+	card_item NEMONA,                    3
 	card_item LASS,                    2
 	card_item POKEMON_TRADER,          1
 	card_item ENERGY_RETRIEVAL,        1
@@ -1138,7 +1138,7 @@ LegendaryZapdosCardList:
 	card_item ZAPDOS_LV64,       1
 	card_item ZAPDOS_LV68,       2
 	card_item EEVEE,             3
-	card_item BILL,              4
+	card_item NEMONA,              4
 	card_item ENERGY_RETRIEVAL,  2
 	card_item SWITCH,            2
 	card_item PLUSPOWER,         3
@@ -1202,7 +1202,7 @@ MysteriousPokemonCardList:
 	card_item MEW_LV8,          1
 	card_item MEW_LV15,         2
 	card_item PROFESSOR_OAK,    1
-	card_item BILL,             2
+	card_item NEMONA,             2
 	card_item POKEMON_BREEDER,  2
 	card_item ENERGY_REMOVAL,   1
 	card_item SWITCH,           2

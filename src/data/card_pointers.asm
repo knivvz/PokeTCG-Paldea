@@ -200,7 +200,7 @@ CardPointers::
 	dab DragoniteLv45Card
 	dab ProfessorOakCard
 	dab ImposterProfessorOakCard
-	dab BillCard
+	dab NemonaCard
 	dab MrFujiCard
 	dab LassCard
 	dab ImakuniCard

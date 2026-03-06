@@ -229,7 +229,7 @@ cards = {
 	0xc2: "DRAGONITE_LV45",
 	0xc3: "PROFESSOR_OAK",
 	0xc4: "IMPOSTER_PROFESSOR_OAK",
-	0xc5: "BILL",
+	0xc5: "NEMONA",
 	0xc6: "MR_FUJI",
 	0xc7: "LASS",
 	0xc8: "IMAKUNI_CARD",

@@ -1210,12 +1210,12 @@ ImposterProfessorOakDescription:
 	line "draws 7 cards."
 	done
 
-BillName:
-	text "Bill"
+NemonaName:
+	text "Nemona"
 	done
 
-BillDescription:
-	text "Draw 2 cards."
+NemonaDescription:
+	text "Draw 3 cards."
 	done
 
 MrFujiName:

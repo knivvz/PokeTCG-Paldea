@@ -1625,8 +1625,8 @@ PokedexEffectCommands:
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Pokedex_PlayerSelection
 	db  $00
 
-BillEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BillEffect
+NemonaEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NemonaEffect
 	db  $00
 
 LassEffectCommands:

@@ -39,7 +39,7 @@ DEF AI_ENERGY_FLAG_SKIP_ARENA_CARD EQU 1 << 7 ; whether to include Arena card in
 	; Recycle
 
 	const AI_TRAINER_CARD_PHASE_04 ; $4
-	; Bill
+	; Nemona
 	; Item Finder
 
 	const AI_TRAINER_CARD_PHASE_05 ; $5

@@ -2847,8 +2847,8 @@ TextOffsets::
 	textpointer ProfessorOakDescription
 	textpointer ImposterProfessorOakName
 	textpointer ImposterProfessorOakDescription
-	textpointer BillName
-	textpointer BillDescription
+	textpointer NemonaName
+	textpointer NemonaDescription
 	textpointer MrFujiName
 	textpointer MrFujiDescription
 	textpointer LassName

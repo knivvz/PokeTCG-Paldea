@@ -9459,7 +9459,7 @@ DoubleColorlessEnergyCard:
 	dw NONE ; description (cont)
 
 ProfessorOakCard:
-	db TYPE_TRAINER ; type
+	db TYPE_TRAINER;_SUPPORTER ; type
 	gfx ProfessorOakCardGfx ; gfx
 	tx ProfessorOakName ; name
 	db DIAMOND ; rarity
@@ -9480,15 +9480,15 @@ ImposterProfessorOakCard:
 	tx ImposterProfessorOakDescription ; description
 	dw NONE ; description (cont)
 
-BillCard:
-	db TYPE_TRAINER ; type
+NemonaCard:
+	db TYPE_TRAINER;_SUPPORTER ; type
 	gfx BillCardGfx ; gfx
-	tx BillName ; name
+	tx NemonaName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw BILL
-	dw BillEffectCommands ; effect commands
-	tx BillDescription ; description
+	dw NEMONA
+	dw NemonaEffectCommands ; effect commands
+	tx NemonaDescription ; description
 	dw NONE ; description (cont)
 
 MrFujiCard:
