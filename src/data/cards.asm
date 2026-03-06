@@ -10,17 +10,17 @@ BulbasaurCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx LeechSeedName ; name
 	tx BulbasaursLeechSeedDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw BulbasaurLeechSeedEffectCommands ; effect commands
 	db NONE ; flags 1
 	db HEAL_USER ; flags 2
 	db NONE ; flags 3
-	db 1
+	db 1 ; used to calculate the HEAL_USER attack score bonus
 	db ATK_ANIM_DRAIN ; animation
 
 	; attack 2
@@ -37,7 +37,7 @@ BulbasaurCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
+	db 2 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx SeedName ; category
@@ -55,16 +55,30 @@ IvysaurCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	dw IVYSAUR
-	db 60 ; hp
+	db 50 ; hp
 	db STAGE1 ; stage
 	tx BulbasaurName ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1, COLORLESS, 2 ; energies
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx LeechSeedName ; name
+	tx BulbasaursLeechSeedDescription ; description
+	dw NONE ; description (cont)
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw BulbasaurLeechSeedEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 1 ; used to calculate the HEAL_USER attack score bonus
+	db ATK_ANIM_DRAIN ; animation
+
+	; attack 2
+	energy GRASS, 2, COLORLESS, 1 ; energies
 	tx VineWhipName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -73,21 +87,7 @@ IvysaurCard:
 	db 0
 	db ATK_ANIM_WHIP ; animation
 
-	; attack 2
-	energy GRASS, 3 ; energies
-	tx PoisonPowderName ; name
-	tx InflictPoisonDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw IvysaurPoisonPowderEffectCommands ; effect commands
-	db INFLICT_POISON ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_POWDER_HIT_POISON ; animation
-
-	db 1 ; retreat cost
+	db 3 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx SeedName ; category
@@ -151,22 +151,22 @@ VenusaurLv64Card:
 VenusaurLv67Card:
 	db TYPE_PKMN_GRASS ; type
 	gfx VenusaurLv67CardGfx ; gfx
-	tx VenusaurName ; name
+	tx VenusaurEXName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	dw VENUSAUR_LV67
-	db 100 ; hp
+	db 170 ; hp
 	db STAGE2 ; stage
 	tx IvysaurName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
-	tx EnergyTransName ; name
-	tx EnergyTransDescription ; description
+	tx TranquilFlowerName ; name
+	tx TranquilFlowerDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenusaurEnergyTransEffectCommands ; effect commands
+	dw VenusaurTranquilFlowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -174,20 +174,48 @@ VenusaurLv67Card:
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
-	energy GRASS, 4 ; energies
-	tx SolarBeamName ; name
-	dw NONE ; description
+	energy GRASS, 2, COLORLESS, 1 ; energies
+	tx DangerousToxwhipName ; name
+	tx DangerousToxwhipDescription ; description
 	dw NONE ; description (cont)
-	db 60 ; damage
+	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw VenusaurDangerousToxwhipEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_BEAM ; animation
 
-	db 2 ; retreat cost
+	; attack 1
+	; energy 0 ; energies
+	; tx EnergyTransName ; name
+	; tx EnergyTransDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw VenusaurEnergyTransEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; ; attack 2
+	; energy GRASS, 4 ; energies
+	; tx SolarBeamName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 60 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_BEAM ; animation
+
+	db 4 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
 	tx SeedName ; category

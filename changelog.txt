@@ -13,5 +13,6 @@ TODO:
     - only once per turn
     - not on turn 1
     - designated filter on deck construction menu
+ - make gym leaders give you a card after defeating them (strong ex that they use)
  - add cards, rearrange booster packs
  - add sprites
