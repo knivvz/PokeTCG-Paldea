@@ -35,6 +35,43 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+
+SwingAndSkedaddleEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SwingAndSkedaddle_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, StarmieRecover_AISelectEffect
+	dbw EFFECTCMDTYPE_DISCARD_ENERGY, StarmieRecover_DiscardEffect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwingAndSkedaddle_Effect
+
+; TODO
+BraveryCharmEffectCommands:
+	;dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BraveryCharm_Effect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Potion_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Potion_HealEffect
+	db  $00
+TenRecoilEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TenRecoil_Effect
+	db $00
+BallisticBeakEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BallisticBeak_Damage
+	dbw EFFECTCMDTYPE_AI, BallisticBeak_AIEffect
+	db  $00
+ZoomingDrawEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RoaringResolve_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ZoomingDraw_Effect
+	db  $00
+RunAwayDrawEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, RunAwayDraw_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RunAwayDraw_Effect
+	db  $00
+LilliesDeterminationEffectCommands:
+
+	db $00
+
+IonoEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Supporter_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Iono_Effect
+	db $00
+
 VenusaurDangerousToxwhipEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, VenusaurDangerousToxwhip_Effect
 	dbw EFFECTCMDTYPE_AI, VenusaurDangerousToxwhip_AIEffect
@@ -477,13 +514,13 @@ SeadraAgilityEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AgilityEffect
 	db  $00
 
-ShellderSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
-	db  $00
+; ShellderSupersonicEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
+; 	db  $00
 
-ShellderHideInShellEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HideInShellEffect
-	db  $00
+; ShellderHideInShellEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HideInShellEffect
+; 	db  $00
 
 VaporeonQuickAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, QuickAttack_DamageBoostEffect
@@ -560,14 +597,14 @@ PoliwagWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, PoliwagWaterGunEffect
 	db  $00
 
-CloysterClampEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ClampEffect
-	db  $00
+; CloysterClampEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ClampEffect
+; 	db  $00
 
-CloysterSpikeCannonEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CloysterSpikeCannon_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, CloysterSpikeCannon_AIEffect
-	db  $00
+; CloysterSpikeCannonEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CloysterSpikeCannon_MultiplierEffect
+; 	dbw EFFECTCMDTYPE_AI, CloysterSpikeCannon_AIEffect
+; 	db  $00
 
 ArticunoFreezeDryEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
@@ -1523,6 +1560,7 @@ EnergySearchEffectCommands:
 	db  $00
 
 ProfessorOakEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Supporter_Check
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ProfessorOakEffect
 	db  $00
 
@@ -1557,9 +1595,9 @@ FullHealEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FullHeal_ClearStatusEffect
 	db  $00
 
-ImposterProfessorOakEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ImposterProfessorOakEffect
-	db  $00
+; ImposterProfessorOakEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ImposterProfessorOakEffect
+; 	db  $00
 
 ComputerSearchEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ComputerSearch_HandDeckCheck
@@ -1626,6 +1664,7 @@ PokedexEffectCommands:
 	db  $00
 
 NemonaEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Supporter_Check
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, NemonaEffect
 	db  $00
 

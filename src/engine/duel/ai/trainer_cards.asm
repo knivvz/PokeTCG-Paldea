@@ -3195,7 +3195,7 @@ AIDecide_PokemonCenter:
 	or a
 	ret
 
-AIPlay_ImposterProfessorOak:
+AIPlay_Iono:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -3204,7 +3204,7 @@ AIPlay_ImposterProfessorOak:
 
 ; sets carry depending on player's number of cards
 ; in deck in in hand.
-AIDecide_ImposterProfessorOak:
+AIDecide_Iono:
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetNonTurnDuelistVariable
 	cp DECK_SIZE - 14
@@ -4402,7 +4402,7 @@ AIDecide_Recycle:
 	jr .loop_2
 
 .meowth
-	cp16 MEOWTH_LV15
+	cp16 DUNSPARCE
 	jr nz, .loop_2
 	ld a, b
 	ld [wce08 + 4], a
@@ -5823,12 +5823,12 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 	ld bc, KINGLER
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, SHELLDER
-	ld de, CLOYSTER
+	ld bc, WIMPOD
+	ld de, GOLISOPODEX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, SHELLDER
-	ld bc, CLOYSTER
+	ld de, WIMPOD
+	ld bc, GOLISOPODEX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	ld bc, HORSEA
@@ -5862,7 +5862,7 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 	ld de, HORSEA
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, SHELLDER
+	ld de, WIMPOD
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, TENTACOOL

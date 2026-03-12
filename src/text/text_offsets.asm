@@ -2321,12 +2321,12 @@ TextOffsets::
 	textpointer AuroraBeamName
 	textpointer IceBeamName
 	textpointer DewgongDescription
-	textpointer ShellderName
+	textpointer WimpodName
 	textpointer HideInShellName
 	textpointer HideInShellDescription
 	textpointer BivalveName
 	textpointer ShellderDescription
-	textpointer CloysterName
+	textpointer GolisopodExName
 	textpointer ClampName
 	textpointer ClampDescription
 	textpointer SpikeCannonName
@@ -2766,7 +2766,7 @@ TextOffsets::
 	textpointer PayDayName
 	textpointer PayDayDescription
 	textpointer MeowthLv15Description
-	textpointer PersianName
+	textpointer DudunsparceName
 	textpointer PounceName
 	textpointer PounceDescription
 	textpointer ClassyCatName
@@ -2845,8 +2845,8 @@ TextOffsets::
 	textpointer DragoniteDescription
 	textpointer ProfessorOakName
 	textpointer ProfessorOakDescription
-	textpointer ImposterProfessorOakName
-	textpointer ImposterProfessorOakDescription
+	;textpointer ImposterProfessorOakName
+	;textpointer ImposterProfessorOakDescription
 	textpointer NemonaName
 	textpointer NemonaDescription
 	textpointer MrFujiName
@@ -2940,3 +2940,21 @@ TextOffsets::
 	textpointer PowerfulHandName
 	textpointer PowerfulHandDescription
 	textpointer PsyshotName
+	textpointer Only1SupporterPerTurnText
+	textpointer NoSupporterOnFirstTurnText
+	textpointer IonoName
+	textpointer IonoDescription
+	textpointer RunAwayDrawName
+	textpointer RunAwayDrawDescription
+	textpointer LandCrushName
+	textpointer DunsparceName
+	textpointer ZoomingDrawName
+	textpointer ZoomingDrawDescription
+	textpointer BallisticBeakName
+	textpointer BallisticBeakDescription
+	textpointer RecklessChargeName
+	textpointer TenRecoilDescription
+	textpointer SwingAndSkedaddleName
+	textpointer SwingAndSkedaddleDescription
+	textpointer AquaBladeName
+	textpointer HideName

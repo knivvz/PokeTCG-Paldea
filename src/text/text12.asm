@@ -801,8 +801,8 @@ MeowthLv15Description:
 	line "look for dropped loose change."
 	done
 
-PersianName:
-	text "Persian"
+DudunsparceName:
+	text "Dudunsparce"
 	done
 
 PounceName:
@@ -1200,15 +1200,15 @@ ProfessorOakDescription:
 	line "cards."
 	done
 
-ImposterProfessorOakName:
-	text "Imposter Professor Oak"
-	done
+; ImposterProfessorOakName:
+; 	text "Imposter Professor Oak"
+; 	done
 
-ImposterProfessorOakDescription:
-	text "Your opponent shuffles his or her"
-	line "hand into his or her deck, then"
-	line "draws 7 cards."
-	done
+; ImposterProfessorOakDescription:
+; 	text "Your opponent shuffles his or her"
+; 	line "hand into his or her deck, then"
+; 	line "draws 7 cards."
+; 	done
 
 NemonaName:
 	text "Nemona"

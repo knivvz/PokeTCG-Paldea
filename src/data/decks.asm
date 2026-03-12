@@ -74,7 +74,7 @@ UnnamedDeck:
 	card_item ENERGY_RETRIEVAL,        2
 	card_item ENERGY_SEARCH,           2
 	card_item POKEMON_BREEDER,         2
-	card_item IMPOSTER_PROFESSOR_OAK,  2
+	card_item IONO,  2
 	card_item SCOOP_UP,                1
 	card_item DEVOLUTION_SPRAY,        1
 	card_item POTION,                  1
@@ -718,7 +718,7 @@ WondersofScienceDeck:
 	card_item MEWTWO_ALT_LV60,         1
 	card_item MEWTWO_LV60,             1
 	card_item PORYGON,                 2
-	card_item IMPOSTER_PROFESSOR_OAK,  1
+	card_item IONO,  1
 	card_item PROFESSOR_OAK,           2
 	card_item NEMONA,                    2
 	card_item ENERGY_SEARCH,           2
@@ -871,8 +871,8 @@ MusclesforBrainsDeck:
 	card_item MACHAMP,                  2
 	card_item HITMONLEE,                2
 	card_item HITMONCHAN,               2
-	card_item MEOWTH_LV15,              3
-	card_item PERSIAN,                  2
+	card_item DUNSPARCE,              3
+	card_item DUDUNSPARCE,                  2
 	card_item LICKITUNG,                1
 	card_item KANGASKHAN,               1
 	card_item TAUROS,                   2
@@ -932,8 +932,8 @@ ExcavationDeck:
 	deck_list_start
 	card_item FIGHTING_ENERGY,    15
 	card_item WATER_ENERGY,        8
-	card_item SHELLDER,            3
-	card_item CLOYSTER,            1
+	card_item WIMPOD,            3
+	card_item GOLISOPODEX,            1
 	card_item OMANYTE,             3
 	card_item OMASTAR,             2
 	card_item SANDSHREW,           4
@@ -1057,8 +1057,8 @@ SoundoftheWavesDeck:
 	card_item TENTACRUEL,      1
 	card_item SEEL,            3
 	card_item DEWGONG,         2
-	card_item SHELLDER,        3
-	card_item CLOYSTER,        2
+	card_item WIMPOD,        3
+	card_item GOLISOPODEX,        2
 	card_item KRABBY,          3
 	card_item KINGLER,         2
 	card_item HORSEA,          2
@@ -1230,7 +1230,7 @@ GhostDeck:
 	card_item HAUNTER_LV17,             2
 	card_item HAUNTER_LV22,             2
 	card_item GENGAR,                   4
-	card_item MEOWTH_LV15,              3
+	card_item DUNSPARCE,              3
 	card_item DITTO,                    3
 	card_item PROFESSOR_OAK,            2
 	card_item NEMONA,                     1
@@ -1300,7 +1300,7 @@ FlyinPokemonDeck:
 	card_item PIDGEOT_LV40,             1
 	card_item SPEAROW,                  4
 	card_item FEAROW,                   3
-	card_item IMPOSTER_PROFESSOR_OAK,   2
+	card_item IONO,   2
 	card_item LASS,                     2
 	card_item NEMONA,                     2
 	card_item POTION,                   4
@@ -1321,7 +1321,7 @@ LovelyNidoranDeck:
 	card_item KOFFING,          2
 	card_item WEEZING,          1
 	card_item PINSIR,           1
-	card_item MEOWTH_LV15,      2
+	card_item DUNSPARCE,      2
 	card_item FARFETCHD,        2
 	card_item DODUO,            2
 	card_item PROFESSOR_OAK,    1
@@ -1347,7 +1347,7 @@ PoisonDeck:
 	card_item KOFFING,                 3
 	card_item WEEZING,                 2
 	card_item PROFESSOR_OAK,           1
-	card_item IMPOSTER_PROFESSOR_OAK,  2
+	card_item IONO,  2
 	card_item POKEMON_BREEDER,         1
 	card_item POTION,                  2
 	card_item FULL_HEAL,               2

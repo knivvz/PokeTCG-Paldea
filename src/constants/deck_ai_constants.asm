@@ -55,7 +55,7 @@ DEF AI_ENERGY_FLAG_SKIP_ARENA_CARD EQU 1 << 7 ; whether to include Arena card in
 	; Potion
 	; Gust of Wind
 	; Pokémon Breeder
-	; Imposter Professor Oak
+	; Iono
 	; Full Heal
 
 	const AI_TRAINER_CARD_PHASE_08 ; $8

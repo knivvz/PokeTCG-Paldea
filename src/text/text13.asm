@@ -375,3 +375,88 @@ PowerfulHandDescription:
 PsyshotName:
 	text "Psyshot"
 	done
+
+NoSupporterOnFirstTurnText:
+	text "You cannot use a supporter card on"
+	line "the first turn."
+	done
+
+Only1SupporterPerTurnText:
+	text "You can only use 1 Supporter per" 
+	line "turn."
+	done
+
+IonoName:
+	text "Iono"
+	done
+
+IonoDescription:
+	text "Each player shuffles their hand"
+	line "into their deck. Then, each player"
+	line "draws a card for each of their "
+	line "remaining Prize cards. (You can only"
+	line "use 1 supporter per turn.)"
+	done
+
+RunAwayDrawName:
+	text "Run Away Draw"
+	done
+
+RunAwayDrawDescription:
+	text "Once during your turn, you may draw"
+	line "3 cards. If you drew any cards in"
+	line "this way, shuffle this Pokémon and"
+	line "all attached cards into your deck."
+	done
+LandCrushName:
+	text "Land Crush"
+	done
+
+DunsparceName:
+	text "Dunsparce"
+	done
+
+ZoomingDrawName:
+	text "Zooming Draw"
+	done
+ZoomingDrawDescription:
+	text "Once during your turn, you may put 1"
+	line "damage counter on this Pokémon. If"
+	line "you do, draw a card."
+	done
+	
+BallisticBeakName:
+	text "Ballistic Beak"
+	done
+BallisticBeakDescription:
+	text "This attack does 20 more damage for"
+	line "each damage counter on this Pokémon."
+	done
+
+RecklessChargeName:
+	text "Reckless Charge"
+	done
+
+TenRecoilDescription:
+	text "This Pokémon also does 10 damage to"
+	line "itself."
+	done
+
+SwingAndSkedaddleName:
+	text "Swing and Skedaddle"
+	done
+
+SwingAndSkedaddleDescription:
+	text "Discard an Energy from this Pokémon."
+	line "If you do, switch it with 1 of your"
+	line "Benched Pokémon."
+	done
+
+AquaBladeName:
+	text "Aqua Blade"
+	done
+
+HideName:
+	text "Hide"
+	done
+	

@@ -62,7 +62,7 @@ BattleContestCardList:
 	card_item HITMONLEE,                2
 	card_item HITMONCHAN,               2
 	card_item MEOWTH_LV14,              3
-	card_item PERSIAN,                  2
+	card_item DUDUNSPARCE,                  2
 	card_item DRATINI,                  3
 	card_item DRAGONAIR,                2
 	card_item DRAGONITE_LV45,           1
@@ -179,8 +179,8 @@ ExcavationCardList:
 	deck_list_start
 	card_item FIGHTING_ENERGY,   15
 	card_item WATER_ENERGY,       8
-	card_item SHELLDER,           3
-	card_item CLOYSTER,           1
+	card_item WIMPOD,           3
+	card_item GOLISOPODEX,           1
 	card_item OMANYTE,            3
 	card_item OMASTAR,            2
 	card_item SANDSHREW,          4
@@ -228,8 +228,8 @@ BlueWaterCardList:
 	card_item POLIWRATH,          1
 	card_item SEEL,               2
 	card_item DEWGONG,            1
-	card_item SHELLDER,           2
-	card_item CLOYSTER,           1
+	card_item WIMPOD,           2
+	card_item GOLISOPODEX,           1
 	card_item KRABBY,             2
 	card_item KINGLER,            1
 	card_item HORSEA,             2
@@ -256,8 +256,8 @@ OnTheBeachCardList:
 	card_item FIGHTING_ENERGY,  10
 	card_item SEEL,              2
 	card_item DEWGONG,           1
-	card_item SHELLDER,          3
-	card_item CLOYSTER,          2
+	card_item WIMPOD,          3
+	card_item GOLISOPODEX,          2
 	card_item KRABBY,            3
 	card_item KINGLER,           2
 	card_item STARYU,            3
@@ -280,8 +280,8 @@ ParalyzeCardList:
 	card_item METAPOD,                  2
 	card_item SQUIRTLE,                 3
 	card_item WARTORTLE,                2
-	card_item SHELLDER,                 3
-	card_item CLOYSTER,                 2
+	card_item WIMPOD,                 3
+	card_item GOLISOPODEX,                 2
 	card_item STARYU,                   4
 	card_item STARMIE,                  3
 	card_item PROFESSOR_OAK,            2
@@ -628,7 +628,7 @@ DreamEaterHaunterCardList:
 	card_item DROWZEE,                 3
 	card_item HYPNO,                   2
 	card_item JIGGLYPUFF_LV14,         2
-	card_item MEOWTH_LV15,             2
+	card_item DUNSPARCE,             2
 	card_item PROFESSOR_OAK,           2
 	card_item NEMONA,                    2
 	card_item ENERGY_RETRIEVAL,        2
@@ -736,8 +736,8 @@ ScienceCorpsCardList:
 	card_item MUK,              1
 	card_item KOFFING,          2
 	card_item WEEZING,          1
-	card_item MEOWTH_LV15,      2
-	card_item PERSIAN,          1
+	card_item DUNSPARCE,      2
+	card_item DUDUNSPARCE,          1
 	card_item PROFESSOR_OAK,    1
 	card_item NEMONA,             1
 	card_item POKEMON_TRADER,   1
@@ -763,7 +763,7 @@ FlyinPokemonCardList:
 	card_item PIDGEOT_LV40,             1
 	card_item SPEAROW,                  4
 	card_item FEAROW,                   3
-	card_item IMPOSTER_PROFESSOR_OAK,   2
+	card_item IONO,   2
 	card_item LASS,                     2
 	card_item NEMONA,                     2
 	card_item POTION,                   4
@@ -783,7 +783,7 @@ PoisonCardList:
 	card_item KOFFING,                 3
 	card_item WEEZING,                 2
 	card_item PROFESSOR_OAK,           1
-	card_item IMPOSTER_PROFESSOR_OAK,  2
+	card_item IONO,  2
 	card_item POKEMON_BREEDER,         1
 	card_item POTION,                  2
 	card_item FULL_HEAL,               2
@@ -802,7 +802,7 @@ WondersOfScienceCardList:
 	card_item MEWTWO_ALT_LV60,         1
 	card_item MEWTWO_LV60,             1
 	card_item PORYGON,                 2
-	card_item IMPOSTER_PROFESSOR_OAK,  1
+	card_item IONO,  1
 	card_item PROFESSOR_OAK,           2
 	card_item NEMONA,                    2
 	card_item ENERGY_SEARCH,           2
@@ -829,7 +829,7 @@ ReplaceEmAllCardList:
 	card_item DODUO,                   3
 	card_item DODRIO,                  2
 	card_item PROFESSOR_OAK,           2
-	card_item IMPOSTER_PROFESSOR_OAK,  2
+	card_item IONO,  2
 	card_item LASS,                    2
 	card_item GUST_OF_WIND,            3
 	deck_list_end

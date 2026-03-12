@@ -78,8 +78,8 @@
 	const TENTACRUEL                  ; $4a
 	const SEEL                        ; $4b
 	const DEWGONG                     ; $4c
-	const SHELLDER                    ; $4d
-	const CLOYSTER                    ; $4e
+	const WIMPOD                    ; $4d
+	const GOLISOPODEX                    ; $4e
 	const KRABBY                      ; $4f
 	const KINGLER                     ; $50
 	const HORSEA                      ; $51
@@ -179,8 +179,8 @@
 	const JIGGLYPUFF_LV14             ; $af
 	const WIGGLYTUFF                  ; $b0
 	const MEOWTH_LV14                 ; $b1
-	const MEOWTH_LV15                 ; $b2
-	const PERSIAN                     ; $b3
+	const DUNSPARCE                   ; $b2
+	const DUDUNSPARCE                 ; $b3
 	const FARFETCHD                   ; $b4
 	const DODUO                       ; $b5
 	const DODRIO                      ; $b6
@@ -197,8 +197,8 @@
 	const DRAGONITE_LV41              ; $c1
 	const DRAGONITE_LV45              ; $c2
 	const PROFESSOR_OAK               ; $c3
-	const IMPOSTER_PROFESSOR_OAK      ; $c4
-	const NEMONA                        ; $c5
+	const IONO					      ; $c4
+	const NEMONA                      ; $c5
 	const MR_FUJI                     ; $c6
 	const LASS                        ; $c7
 	const IMAKUNI_CARD                ; $c8

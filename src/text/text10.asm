@@ -1477,8 +1477,8 @@ DewgongDescription:
 	line "intensely cold waters."
 	done
 
-ShellderName:
-	text "Shellder"
+WimpodName:
+	text "Wimpod"
 	done
 
 HideInShellName:
@@ -1487,7 +1487,7 @@ HideInShellName:
 
 HideInShellDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Shellder during your"
+	line "damage done to Wimpod during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
@@ -1502,8 +1502,8 @@ ShellderDescription:
 	line "its shell is open."
 	done
 
-CloysterName:
-	text "Cloyster"
+GolisopodExName:
+	text "Golisopod Ex"
 	done
 
 ClampName:

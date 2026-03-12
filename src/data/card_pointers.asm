@@ -80,8 +80,8 @@ CardPointers::
 	dab TentacruelCard
 	dab SeelCard
 	dab DewgongCard
-	dab ShellderCard
-	dab CloysterCard
+	dab WimpodCard
+	dab GolisopodExCard
 	dab KrabbyCard
 	dab KinglerCard
 	dab HorseaCard
@@ -181,8 +181,8 @@ CardPointers::
 	dab JigglypuffLv14Card
 	dab WigglytuffCard
 	dab MeowthLv14Card
-	dab MeowthLv15Card
-	dab PersianCard
+	dab DunsparceCard
+	dab DudunsparceCard
 	dab FarfetchdCard
 	dab DoduoCard
 	dab DodrioCard
@@ -199,7 +199,7 @@ CardPointers::
 	dab DragoniteLv41Card
 	dab DragoniteLv45Card
 	dab ProfessorOakCard
-	dab ImposterProfessorOakCard
+	dab IonoCard
 	dab NemonaCard
 	dab MrFujiCard
 	dab LassCard

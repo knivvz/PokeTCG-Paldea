@@ -1,3 +1,304 @@
+CreateListOfAllEnergyAttachedToArena:
+	ld c, 0
+	ld de, wDuelTempList
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+	.loop
+	ld a, [hl]
+	cp CARD_LOCATION_ARENA
+	jr nz, .next
+	push de
+	ld a, l
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	pop de
+	and TYPE_ENERGY
+	jr z, .next ; is same as input type?
+	ld a, l
+	ld [de], a
+	inc de
+	inc c
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop
+
+	ld a, $ff
+	ld [de], a
+	ld a, c
+	ret
+
+SwingAndSkedaddle_PlayerSelectEffect:
+	call CreateListOfAllEnergyAttachedToArena
+	xor a ; PLAY_AREA_ARENA
+	bank1call DisplayEnergyDiscardScreen
+.loop_input
+	bank1call HandleEnergyDiscardMenuInput
+	jr c, .loop_input
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a ; store card chosen
+	ret
+
+SwingAndSkedaddle_Effect:
+	call MrFuji_BenchCheck
+	ret c
+
+	call IsPlayerTurn
+	jr c, .player_turn
+	call Teleport_AISelectEffect
+	jp .switch
+.player_turn
+	call Teleport_PlayerSelectEffect
+.switch
+	call Teleport_SwitchEffect
+	ret
+
+TenRecoil_Effect:
+	ld a, 10
+	call DealRecoilDamageToSelf
+	ret
+
+BallisticBeak_AIEffect:
+	call BallisticBeak_Damage
+	jp SetDefiniteAIDamage
+
+BallisticBeak_Damage:
+	ld e, PLAY_AREA_ARENA
+	; dmg * 2
+	call GetCardDamageAndMaxHP
+	call AddToDamage
+	call GetCardDamageAndMaxHP
+	call AddToDamage
+	ret
+
+RoaringResolve_Check:
+	call CheckIfAlreadyUsed
+	ret c
+	
+	ld a, [hTempPlayAreaLocation_ff9d]
+	ld e, a
+	call GetCardDamageAndMaxHP ; a = damage, c = max hp
+	add 10
+	
+	; swap values : a = max hp, c = damage + 10
+	ld b, a
+	ld a, c
+	ld c, b
+	
+	cp c
+	ldtx hl, CannotUseBecauseItWillBeKnockedOutText
+	jr z, .set_carry
+
+	call SetPkmnPowerAsUsed
+	ret
+
+.set_carry
+	scf	
+	ret
+
+Deal10DamageToCurrentPokemon:
+	; deal 10 damage
+	ld de, 10
+	ldh a, [hTempPlayAreaLocation_ff9d]
+ 	ld b, a
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	ret
+
+ZoomingDraw_Effect:
+	call SetPkmnPowerAsUsed
+
+	call Deal10DamageToCurrentPokemon
+
+	ld c, 1
+	call IsPlayerTurn
+	jr c, .player_turn
+	call DrawCCardsDontShow
+	ret
+.player_turn
+	call DrawCCards
+	ret
+
+RunAwayDraw_Check:
+	; deck size 3 or more
+
+	; TODO test, should stop drawing once deck reaches 0
+
+	;ld a, DUELVARS_DECK_CARDS
+	;call GetTurnDuelistVariable ; probably not needed? not used elsewhere with deck_cards
+	;cp 3
+	;jr c, .not_enough_cards_in_deck
+
+; should not be only pkmn in play
+	; ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	; call GetTurnDuelistVariable
+	; cp 1
+	; jr z, .only_pokemon_in_play
+
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldtx hl, EffectNoPokemonOnTheBenchText
+	cp 2
+	ret
+
+.not_enough_cards_in_deck
+	; print something
+	scf
+	ret
+
+; .only_pokemon_in_play
+; 	; print something
+; 	scf
+; 	ret
+
+
+; works but account for if pkmn was active, make choose new active!
+RunAwayDraw_Effect:
+	ld c, 3
+	call DrawCCards
+
+	; copied from mr fuji
+	; get Play Area location's card index
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	cp 0 ; arena pokemon, force retreat (first?)
+	jr nz, .next
+	
+	call Switch_PlayerSelection
+	call Switch_SwitchEffect
+	ldh a, [hTemp_ffa0] ; new play area location of effect user
+
+.next
+	ldh [hTemp_ffa0], a
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ldh [hTempCardIndex_ff98], a
+
+; find all cards that are in the same location
+; (previous evolutions and energy cards attached)
+; and return them all to the deck.
+	ldh a, [hTemp_ffa0]
+	or CARD_LOCATION_PLAY_AREA
+	ld e, a
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_cards
+	push de
+	push hl
+	ld a, [hl]
+	cp e
+	jr nz, .next_card
+	ld a, l
+	call ReturnCardToDeck
+.next_card
+	pop hl
+	pop de
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_cards
+
+; clear Play Area location of card
+	ldh a, [hTemp_ffa0]
+	ld e, a
+	call EmptyPlayAreaSlot
+	ld l, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	dec [hl]
+
+	
+
+	call ShiftAllPokemonToFirstPlayAreaSlots
+
+.done
+	jp ShuffleCardsInDeck
+	ret
+
+; subroutine for returning all cards from hand to deck and drawing new cards
+; c = number of cards to draw
+ReturnCardsToDeck:;AndDraw:
+    call CreateHandCardList
+    call SortCardsInDuelTempListByID
+    ld hl, wDuelTempList
+.loop_return_deck
+    ld a, [hli]
+    cp $ff
+    ;jr z, .check_coin_toss
+	ret z
+    call RemoveCardFromHand
+    call ReturnCardToDeck
+	
+    jr .loop_return_deck
+	ret
+
+DrawCCardsDontShow:
+	ld a, c
+	bank1call DisplayDrawNCardsScreen
+.draw_loop
+	call DrawCardFromDeck
+	;jr c, .done
+	call AddCardToHand
+	dec c
+	jr nz, .draw_loop
+	ret
+
+Supporter_Check:
+	; if duelturns == 0
+	ld a, [wDuelTurns]
+	cp 0
+	jr z, .set_carry
+
+	call Supporter_OncePerTurnCheck
+	ret
+
+.set_carry
+	scf
+	ldtx hl, NoSupporterOnFirstTurnText
+	ret
+
+Supporter_OncePerTurnCheck:
+	ld a, [wOncePerTurnFlags]
+    bit USED_SUPPORTER_THIS_TURN_F, a   ; Check if USED_SUPPORTER_THIS_TURN flag is set
+    jp nz, .already_used
+	or a
+	ret
+
+.already_used
+ 	ldtx hl, Only1SupporterPerTurnText
+ 	scf
+ 	ret
+Supporter_SetUsedThisTurnFlag:
+	ld a, [wOncePerTurnFlags]
+	set USED_SUPPORTER_THIS_TURN_F, a
+    ld [wOncePerTurnFlags], a   ; Store the updated flags byte back
+    ret
+
+Iono_Effect:
+	call Supporter_SetUsedThisTurnFlag
+	; discard Iono card from hand
+	ldh a, [hTempCardIndex_ff9f]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+
+    ; shuffle cards into deck
+    call ReturnCardsToDeck;AndDraw
+	call ShuffleCardsInDeck
+	call CountPrizes
+	ld c, a
+	call DrawCCardsDontShow
+
+
+    ; swap turn and do the same for opponent
+    call SwapTurn
+    call ReturnCardsToDeck;AndDraw
+	call ShuffleCardsInDeck
+	call CountPrizes
+	ld c, a
+	call DrawCCardsDontShow
+
+    ; swap turn back to initial player and return
+    call SwapTurn
+    ret
+
 VenusaurDangerousToxwhip_Effect:
 	call PoisonEffect
 	call ConfusionEffect
@@ -137,11 +438,6 @@ WugtrioUnderseaTunnel_DiscardDeckEffect:
 	ld [hTemp_ffa0], a
 	call Wildfire_DiscardDeckEffect
 	ret
-
-; TODO
-Supporter_Check:
-	ret
-
 AlakazamPowerfulHand_Damage:
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
@@ -3224,22 +3520,22 @@ ClampEffect:
 	call SetDefiniteDamage
 	jp SetWasUnsuccessful
 
-CloysterSpikeCannon_AIEffect:
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
+; CloysterSpikeCannon_AIEffect:
+; 	ld a, 60 / 2
+; 	lb de, 0, 60
+; 	jp SetExpectedAIDamage
 
-CloysterSpikeCannon_MultiplierEffect:
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes
-	ld e, a
-	add a
-	add e
-	call ATimes10
-	jp SetDefiniteDamage
+; CloysterSpikeCannon_MultiplierEffect:
+; 	ld hl, 30
+; 	call LoadTxRam3
+; 	ldtx de, DamageCheckIfHeadsXDamageText
+; 	ld a, 2
+; 	call TossCoinATimes
+; 	ld e, a
+; 	add a
+; 	add e
+; 	call ATimes10
+; 	jp SetDefiniteDamage
 
 Blizzard_BenchDamage50PercentEffect:
 	ldtx de, DamageToOppBenchIfHeadsDamageToYoursIfTailsText
@@ -8633,35 +8929,35 @@ FullHeal_ClearStatusEffect:
 	bank1call DrawDuelHUDs
 	ret
 
-ImposterProfessorOakEffect:
-	call SwapTurn
-	call CreateHandCardList
-	call SortCardsInDuelTempListByID
+; ImposterProfessorOakEffect:
+; 	call SwapTurn
+; 	call CreateHandCardList
+; 	call SortCardsInDuelTempListByID
 
-; first return all cards in hand to the deck.
-	ld hl, wDuelTempList
-.loop_return_deck
-	ld a, [hli]
-	cp $ff
-	jr z, .done_return
-	call RemoveCardFromHand
-	call ReturnCardToDeck
-	jr .loop_return_deck
+; ; first return all cards in hand to the deck.
+; 	ld hl, wDuelTempList
+; .loop_return_deck
+; 	ld a, [hli]
+; 	cp $ff
+; 	jr z, .done_return
+; 	call RemoveCardFromHand
+; 	call ReturnCardToDeck
+; 	jr .loop_return_deck
 
-; then draw 7 cards from the deck.
-.done_return
-	call ShuffleCardsInDeck
-	ld a, 7
-	bank1call DisplayDrawNCardsScreen
-	ld c, 7
-.loop_draw
-	call DrawCardFromDeck
-	jr c, .done
-	call AddCardToHand
-	dec c
-	jr nz, .loop_draw
-.done
-	jp SwapTurn
+; ; then draw 7 cards from the deck.
+; .done_return
+; 	call ShuffleCardsInDeck
+; 	ld a, 7
+; 	bank1call DisplayDrawNCardsScreen
+; 	ld c, 7
+; .loop_draw
+; 	call DrawCardFromDeck
+; 	jr c, .done
+; 	call AddCardToHand
+; 	dec c
+; 	jr nz, .loop_draw
+; .done
+; 	jp SwapTurn
 
 ; return carry if not enough cards in hand to discard
 ; or if there are no cards left in the deck.
