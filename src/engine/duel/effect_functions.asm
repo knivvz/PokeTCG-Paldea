@@ -29,7 +29,7 @@ CreateListOfAllEnergyAttachedToArena:
 	ld a, c
 	ret
 
-SwingAndSkedaddle_PlayerSelectEffect:
+GolisopodExSwingAndSkedaddle_PlayerSelectEffect:
 	call CreateListOfAllEnergyAttachedToArena
 	xor a ; PLAY_AREA_ARENA
 	bank1call DisplayEnergyDiscardScreen
@@ -40,7 +40,7 @@ SwingAndSkedaddle_PlayerSelectEffect:
 	ldh [hTemp_ffa0], a ; store card chosen
 	ret
 
-SwingAndSkedaddle_Effect:
+GolisopodExSwingAndSkedaddle_Effect:
 	call MrFuji_BenchCheck
 	ret c
 

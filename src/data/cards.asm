@@ -3586,7 +3586,7 @@ GolisopodExCard:
 	dw NONE ; description (cont)
 	db 60 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SwingAndSkedaddleEffectCommands ; effect commands
+	dw GolisopodExSwingAndSkedaddleEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3

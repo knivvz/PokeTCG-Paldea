@@ -36,11 +36,11 @@ EffectCommands::
 ;	SpitPoison_AIEffect              ;
 
 
-SwingAndSkedaddleEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SwingAndSkedaddle_PlayerSelectEffect
+GolisopodExSwingAndSkedaddleEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, GolisopodExSwingAndSkedaddle_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, StarmieRecover_AISelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, StarmieRecover_DiscardEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SwingAndSkedaddle_Effect
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GolisopodExSwingAndSkedaddle_Effect
 
 ; TODO
 BraveryCharmEffectCommands:
