@@ -938,90 +938,90 @@ HandleAICurse:
 	ret
 
 ; handles AI logic for Cowardice
-HandleAICowardice:
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	ret c ; return if there's Muk in play
+; HandleAICowardice:
+; 	ld de, MUK
+; 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
+; 	ret c ; return if there's Muk in play
 
-	farcall AIChooseRandomlyNotToDoAction
-	ret c ; randomly return
+; 	farcall AIChooseRandomlyNotToDoAction
+; 	ret c ; randomly return
 
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp 1
-	ret z ; return if only one Pokemon in Play Area
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetTurnDuelistVariable
+; 	cp 1
+; 	ret z ; return if only one Pokemon in Play Area
 
-	ld b, a
-	ld c, PLAY_AREA_ARENA
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	jr nz, .next
-.loop
-	ld a, DUELVARS_ARENA_CARD
-	add c
-	call GetTurnDuelistVariable
-	ld [wce08], a
-	call GetCardIDFromDeckIndex
-	push bc
-	cp16 TENTACOOL
-	call z, .CheckWhetherToUseCowardice
-	pop bc
-	jr nc, .next
+; 	ld b, a
+; 	ld c, PLAY_AREA_ARENA
+; 	ld a, DUELVARS_ARENA_CARD_STATUS
+; 	call GetTurnDuelistVariable
+; 	and CNF_SLP_PRZ
+; 	jr nz, .next
+; .loop
+; 	ld a, DUELVARS_ARENA_CARD
+; 	add c
+; 	call GetTurnDuelistVariable
+; 	ld [wce08], a
+; 	call GetCardIDFromDeckIndex
+; 	push bc
+; 	cp16 TENTACOOL
+; 	call z, .CheckWhetherToUseCowardice
+; 	pop bc
+; 	jr nc, .next
 
-	dec b ; subtract 1 from number of Pokemon in Play Area
-	ld a, 1
-	cp b
-	ret z ; return if no longer has Bench Pokemon
-	ld c, PLAY_AREA_ARENA ; reset back to Arena
-	jr .loop
+; 	dec b ; subtract 1 from number of Pokemon in Play Area
+; 	ld a, 1
+; 	cp b
+; 	ret z ; return if no longer has Bench Pokemon
+; 	ld c, PLAY_AREA_ARENA ; reset back to Arena
+; 	jr .loop
 
-.next
-	inc c
-	ld a, c
-	cp b
-	jr nz, .loop
-	ret
+; .next
+; 	inc c
+; 	ld a, c
+; 	cp b
+; 	jr nz, .loop
+; 	ret
 
-; checks whether AI uses Cowardice.
-; return carry if Pkmn Power was used.
-; input:
-;	c = Play Area location (PLAY_AREA_*) of Tentacool.
-.CheckWhetherToUseCowardice:
-	ld a, c
-	ldh [hTemp_ffa0], a
-	ld e, a
-	call GetCardDamageAndMaxHP
-.asm_22678
-	or a
-	ret z ; return if has no damage counters
+; ; checks whether AI uses Cowardice.
+; ; return carry if Pkmn Power was used.
+; ; input:
+; ;	c = Play Area location (PLAY_AREA_*) of Tentacool.
+; .CheckWhetherToUseCowardice:
+; 	ld a, c
+; 	ldh [hTemp_ffa0], a
+; 	ld e, a
+; 	call GetCardDamageAndMaxHP
+; .asm_22678
+; 	or a
+; 	ret z ; return if has no damage counters
 
-	ldh a, [hTemp_ffa0]
-	or a
-	jr nz, .is_benched
+; 	ldh a, [hTemp_ffa0]
+; 	or a
+; 	jr nz, .is_benched
 
-	; this part is buggy if AIDecideBenchPokemonToSwitchTo returns carry
-	; but since this was already checked beforehand, this never happens.
-	; so jr c, .asm_22678 can be safely removed.
-	farcall AIDecideBenchPokemonToSwitchTo
-	jr c, .asm_22678 ; bug, this jumps in the middle of damage checking
-	jr .use_cowardice
-.is_benched
-	ld a, $ff
-.use_cowardice
-	push af
-	ld a, [wce08]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	pop af
-	ldh [hAIPkmnPowerEffectParam], a
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
-	scf
-	ret
+; 	; this part is buggy if AIDecideBenchPokemonToSwitchTo returns carry
+; 	; but since this was already checked beforehand, this never happens.
+; 	; so jr c, .asm_22678 can be safely removed.
+; 	farcall AIDecideBenchPokemonToSwitchTo
+; 	jr c, .asm_22678 ; bug, this jumps in the middle of damage checking
+; 	jr .use_cowardice
+; .is_benched
+; 	ld a, $ff
+; .use_cowardice
+; 	push af
+; 	ld a, [wce08]
+; 	ldh [hTempCardIndex_ff9f], a
+; 	ld a, OPPACTION_USE_PKMN_POWER
+; 	bank1call AIMakeDecision
+; 	pop af
+; 	ldh [hAIPkmnPowerEffectParam], a
+; 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
+; 	bank1call AIMakeDecision
+; 	ld a, OPPACTION_DUEL_MAIN_SCENE
+; 	bank1call AIMakeDecision
+; 	scf
+; 	ret
 
 ; AI logic for Damage Swap to transfer damage from Arena card
 ; to a card in Bench with more than 10 HP remaining

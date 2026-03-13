@@ -1,3 +1,101 @@
+LumineonAquaLiner_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	ret c ; has no Bench Pokemon
+
+	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
+	call DrawWideTextBox_WaitForInput
+	call SwapTurn
+	bank1call HasAlivePokemonInBench
+
+	; the following two instructions can be removed
+	; since Player selection will overwrite it.
+	ld a, PLAY_AREA_BENCH_1
+	ldh [hTempPlayAreaLocation_ff9d], a
+
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	jp SwapTurn
+
+LumineonAquaLiner_AISelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	ret c ; has no Bench Pokemon
+; AI always picks Pokemon with lowest HP remaining
+	call GetBenchPokemonWithLowestHP
+	ldh [hTemp_ffa0], a
+	ret
+
+LumineonAquaLiner_BenchDamageEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	ret z
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	ld b, a
+	ld de, 30
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	jp SwapTurn
+
+Collect_Effect:
+	ld c, 1
+	call DrawCCards
+	ret
+
+HydroJet_BenchDamageEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	ld e, a
+    ld d, $00
+
+	ldh a, [hTemp_ffa0]
+	ld b, a
+
+	call SwapTurn
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	call SwapTurn
+	ret
+
+AquaHorn_AIDamage:
+	call AquaHorn_Damage
+	jp SetDefiniteAIDamage
+
+AquaHorn_Damage:
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + WATER]
+	call ATimes10
+	call AddToDamage
+	call AddToDamage ; times 20
+	ret
+
+SwimFreely_AIEffect:
+	ld a, 10 / 2
+	lb de, 0, 10
+	jp SetExpectedAIDamage
+
+SwimFreely_Success50PercentEffect:
+	ldtx de, SuccessCheckIfHeadsAttackIsSuccessfulText
+	call TossCoin
+	ret nc
+	
+	ld a, ATK_ANIM_AGILITY_PROTECT
+	ld [wLoadedAttackAnimation], a
+	ld a, SUBSTATUS1_FLY
+	call ApplySubstatus1ToDefendingCard
+	ret
+
 ; TODO prints text "select energy to discard", not return to hand
 ; also fix print 0/2 and 1/2
 QuaquavalSpiralShot_PlayerSelectEnergyEffect:
@@ -3786,73 +3884,73 @@ Blizzard_BenchDamageEffect:
 	jp SwapTurn
 
 ; return carry if can't use Cowardice
-Cowardice_Check:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call CheckIsIncapableOfUsingPkmnPower
-	ret c ; return if cannot use
+; Cowardice_Check:
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	ldh [hTemp_ffa0], a
+; 	call CheckIsIncapableOfUsingPkmnPower
+; 	ret c ; return if cannot use
 
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, EffectNoPokemonOnTheBenchText
-	cp 2
-	ret c ; return if no bench
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetTurnDuelistVariable
+; 	ldtx hl, EffectNoPokemonOnTheBenchText
+; 	cp 2
+; 	ret c ; return if no bench
 
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	ldtx hl, CannotBeUsedInTurnWhichWasPlayedText
-	and CAN_EVOLVE_THIS_TURN
-	scf
-	ret z ; return if was played this turn
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	add DUELVARS_ARENA_CARD_FLAGS
+; 	call GetTurnDuelistVariable
+; 	ldtx hl, CannotBeUsedInTurnWhichWasPlayedText
+; 	and CAN_EVOLVE_THIS_TURN
+; 	scf
+; 	ret z ; return if was played this turn
 
-	or a
-	ret
+; 	or a
+; 	ret
 
-Cowardice_PlayerSelectEffect:
-	ldh a, [hTemp_ffa0]
-	or a
-	ret nz ; return if not Arena card
-	ldtx hl, SelectPokemonToPlaceInTheArenaText
-	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInBench
-	bank1call OpenPlayAreaScreenForSelection
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hAIPkmnPowerEffectParam], a
-	ret
+; Cowardice_PlayerSelectEffect:
+; 	ldh a, [hTemp_ffa0]
+; 	or a
+; 	ret nz ; return if not Arena card
+; 	ldtx hl, SelectPokemonToPlaceInTheArenaText
+; 	call DrawWideTextBox_WaitForInput
+; 	bank1call HasAlivePokemonInBench
+; 	bank1call OpenPlayAreaScreenForSelection
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	ldh [hAIPkmnPowerEffectParam], a
+; 	ret
 
-Cowardice_RemoveFromPlayAreaEffect:
-	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
+; Cowardice_RemoveFromPlayAreaEffect:
+; 	ldh a, [hTemp_ffa0]
+; 	add DUELVARS_ARENA_CARD
+; 	call GetTurnDuelistVariable
 
-; put card in Discard Pile temporarily, so that
-; all cards attached are discarded as well.
-	push af
-	ldh a, [hTemp_ffa0]
-	ld e, a
-	call MovePlayAreaCardToDiscardPile
+; ; put card in Discard Pile temporarily, so that
+; ; all cards attached are discarded as well.
+; 	push af
+; 	ldh a, [hTemp_ffa0]
+; 	ld e, a
+; 	call MovePlayAreaCardToDiscardPile
 
-; if card was in Arena, swap selected Bench
-; Pokemon with Arena, otherwise skip.
-	ldh a, [hTemp_ffa0]
-	or a
-	jr nz, .skip_switch
-	ldh a, [hAIPkmnPowerEffectParam]
-	ld e, a
-	call SwapArenaWithBenchPokemon
+; ; if card was in Arena, swap selected Bench
+; ; Pokemon with Arena, otherwise skip.
+; 	ldh a, [hTemp_ffa0]
+; 	or a
+; 	jr nz, .skip_switch
+; 	ldh a, [hAIPkmnPowerEffectParam]
+; 	ld e, a
+; 	call SwapArenaWithBenchPokemon
 
-.skip_switch
-; move card back to Hand from Discard Pile
-; and adjust Play Area
-	pop af
-	call MoveDiscardPileCardToHand
-	call AddCardToHand
-	call ShiftAllPokemonToFirstPlayAreaSlots
+; .skip_switch
+; ; move card back to Hand from Discard Pile
+; ; and adjust Play Area
+; 	pop af
+; 	call MoveDiscardPileCardToHand
+; 	call AddCardToHand
+; 	call ShiftAllPokemonToFirstPlayAreaSlots
 
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ret
+; 	xor a
+; 	ld [wDuelDisplayedScreen], a
+; 	ret
 
 LaprasWaterGunEffect:
 	lb bc, 1, 0

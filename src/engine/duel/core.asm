@@ -509,7 +509,7 @@ OpenPlayerHandScreen:
 	bit TYPE_ENERGY_F, c
 	jr nz, PlayEnergyCard
 	call PlayPokemonCard
-	jr c, ReloadCardListScreen ; jump if card not played
+	jp c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 .trainer_card
 	call PlayTrainerCard
@@ -524,6 +524,8 @@ PlayEnergyCard:
 	jr nz, .not_water_energy
 	call IsRainDanceActive
 	jr c, .rain_dance_active
+	call IsOceanicAccompanimentActive
+	jr c, .oceanic_active
 
 .not_water_energy
 	ld a, [wAlreadyPlayedEnergy]
@@ -553,6 +555,19 @@ PlayEnergyCard:
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 	call CheckRainDanceScenario
+	jr c, .play_energy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	jr z, .play_energy_set_played
+	ldtx hl, MayOnlyAttachOneEnergyCardText
+	call DrawWideTextBox_WaitForInput
+	jp OpenPlayerHandScreen
+
+.oceanic_active
+	call HasAlivePokemonInPlayArea
+	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
+	jp c, DuelMainInterface ; exit if no card was chosen
+	call CheckOceanicAccompanimentScenario
 	jr c, .play_energy
 	ld a, [wAlreadyPlayedEnergy]
 	or a

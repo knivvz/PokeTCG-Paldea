@@ -3528,34 +3528,34 @@ PoliwrathCard:
 	tx PoliwrathDescription ; description
 	db 0 ; AI info
 
-TentacoolCard:
+FinneonCard:
 	db TYPE_PKMN_WATER ; type
 	gfx TentacoolCardGfx ; gfx
-	tx TentacoolName ; name
+	tx FinneonName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
-	dw TENTACOOL
+	dw FINNEON
 	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
-	tx CowardiceName ; name
-	tx CowardiceDescription ; description
+	tx OceanicAccompanimentName ; name
+	tx OceanicAccompanimentDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw TentacoolCowardiceEffectCommands ; effect commands
+	dw FinneonOceanicAccompanimentEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_PKMN_POWER_1 ; animation
 
 	; attack 2
 	energy WATER, 1 ; energies
-	tx AcidName ; name
+	tx WaterGunName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
@@ -3565,9 +3565,37 @@ TentacoolCard:
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_GOO ; animation
+	db ATK_ANIM_WATER_JETS ; animation
 
-	db 0 ; retreat cost
+	; attack 1
+	; energy 0 ; energies
+	; tx CowardiceName ; name
+	; tx CowardiceDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw TentacoolCowardiceEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; ; attack 2
+	; energy WATER, 1 ; energies
+	; tx AcidName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_GOO ; animation
+
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx JellyfishName ; category
@@ -3578,16 +3606,44 @@ TentacoolCard:
 	tx TentacoolDescription ; description
 	db AI_INFO_UNK_03 | HAS_EVOLUTION ; AI info
 
-TentacruelCard:
+LumineonCard:
 	db TYPE_PKMN_WATER ; type
 	gfx TentacruelCardGfx ; gfx
-	tx TentacruelName ; name
+	tx LumineonName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
-	dw TENTACRUEL
-	db 60 ; hp
+	dw LUMINEON
+	db 40 ; hp
 	db STAGE1 ; stage
-	tx TentacoolName ; pre-evo name
+	tx FinneonName ; pre-evo name
+
+	; attack 1
+	energy WATER, 2 ; energies
+	tx AquaLinerName ; name
+	tx AquaLinerDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw LumineonAquaLinerEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation TODO change animation to ??
+
+	; attack 2 EMPTY ATTACK
+	energy 0 ; energies
+	dw NONE ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
 
 	; attack 1
 	energy WATER, 1 ; energies
@@ -3991,7 +4047,7 @@ HorseaCard:
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	dw HORSEA
-	db 40 ; hp
+	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -4023,7 +4079,7 @@ HorseaCard:
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 0 ; retreat cost
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx DragonName ; category
@@ -4041,37 +4097,65 @@ SeadraCard:
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	dw SEADRA
-	db 60 ; hp
+	db 40 ; hp
 	db STAGE1 ; stage
 	tx HorseaName ; pre-evo name
 
 	; attack 1
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterGunName ; name
-	tx SeadrasWaterGunDescription ; description
+	energy WATER, 1 ; energies
+	tx SwimFreelyName ; name
+	tx SwimFreelyDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw SeadraWaterGunEffectCommands ; effect commands
-	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
-	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
-	db ATK_ANIM_WATER_GUN ; animation
-
-	; attack 2
-	energy WATER, 1, COLORLESS, 2 ; energies
-	tx AgilityName ; name
-	tx SeadrasAgilityDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw SeadraAgilityEffectCommands ; effect commands
+	dw SwimFreelyEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_QUICK_ATTACK ; animation
+	db ATK_ANIM_WATER_GUN ; animation
+
+	; attack 2
+	energy WATER, 1 ; energies
+	tx HydroJetName ; name
+	tx HydroJetDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw SeadraHydroJetEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db ATTACHED_ENERGY_BOOST ; flags 2
+	db NONE ; flags 3
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
+	db ATK_ANIM_STRETCH_KICK ; animation
+
+	; attack 1
+	; energy WATER, 1, COLORLESS, 1 ; energies
+	; tx WaterGunName ; name
+	; tx SeadrasWaterGunDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw SeadraWaterGunEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db ATTACHED_ENERGY_BOOST ; flags 2
+	; db NONE ; flags 3
+	; db MAX_ENERGY_BOOST_IS_LIMITED
+	; db ATK_ANIM_WATER_GUN ; animation
+
+	; ; attack 2
+	; energy WATER, 1, COLORLESS, 2 ; energies
+	; tx AgilityName ; name
+	; tx SeadrasAgilityDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw SeadraAgilityEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_QUICK_ATTACK ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
@@ -4096,8 +4180,22 @@ GoldeenCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy WATER, 1 ; energies
-	tx HornAttackName ; name
+	energy COLORLESS, 1 ; energies
+	tx CollectName ; name
+	tx CollectDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw GoldeenCollectEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 1
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx WaterfallName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
@@ -4109,21 +4207,35 @@ GoldeenCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
-	db NONE ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	; ; attack 1
+	; energy WATER, 1 ; energies
+	; tx HornAttackName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
 
-	db 0 ; retreat cost
+	; ; attack 2
+	; energy 0 ; energies
+	; dw NONE ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_NONE ; animation
+
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx GoldfishName ; category
@@ -4141,39 +4253,67 @@ SeakingCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	dw SEAKING
-	db 70 ; hp
+	db 60 ; hp
 	db STAGE1 ; stage
 	tx GoldeenName ; pre-evo name
 
 	; attack 1
 	energy WATER, 1 ; energies
-	tx HornAttackName ; name
-	dw NONE ; description
+	tx SwimFreelyName ; name
+	tx SwimFreelyDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw SwimFreelyEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_HIT ; animation
+	db ATK_ANIM_WATER_GUN ; animation
 
 	; attack 2
-	energy WATER, 1, COLORLESS, 1 ; energies
-	tx WaterfallName ; name
-	dw NONE ; description
+	energy COLORLESS, 3 ; energies
+	tx AquaHornName ; name
+	tx AquaHornDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw SeakingAquaHornEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db ATTACHED_ENERGY_BOOST ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_WATER_JETS ; animation
+	db MAX_ENERGY_BOOST_IS_NOT_LIMITED
+	db ATK_ANIM_WATER_GUN ; animation
 
-	db 1 ; retreat cost
+	; attack 1
+	; energy WATER, 1 ; energies
+	; tx HornAttackName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
+
+	; ; attack 2
+	; energy WATER, 1, COLORLESS, 1 ; energies
+	; tx WaterfallName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_WATER_JETS ; animation
+
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx GoldfishName ; category

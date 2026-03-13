@@ -1053,8 +1053,8 @@ LonelyFriendsDeck:
 SoundoftheWavesDeck:
 	deck_list_start
 	card_item WATER_ENERGY,   24
-	card_item TENTACOOL,       2
-	card_item TENTACRUEL,      1
+	card_item FINNEON,       2
+	card_item LUMINEON,      1
 	card_item SEEL,            3
 	card_item DEWGONG,         2
 	card_item WIMPOD,        3

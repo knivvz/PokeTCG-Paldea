@@ -1399,8 +1399,8 @@ PoliwrathDescription:
 	line "overtakes the best human swimmers."
 	done
 
-TentacoolName:
-	text "Tentacool"
+FinneonName:
+	text "Finneon"
 	done
 
 CowardiceName:
@@ -1427,8 +1427,8 @@ TentacoolDescription:
 	line "punished by its stinging acid."
 	done
 
-TentacruelName:
-	text "Tentacruel"
+LumineonName:
+	text "Lumineon"
 	done
 
 JellyfishStingName:

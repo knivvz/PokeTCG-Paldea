@@ -2305,12 +2305,12 @@ TextOffsets::
 	textpointer PoliwrathsWaterGunDescription
 	textpointer WhirlpoolName
 	textpointer PoliwrathDescription
-	textpointer TentacoolName
+	textpointer FinneonName
 	textpointer CowardiceName
 	textpointer CowardiceDescription
 	textpointer JellyfishName
 	textpointer TentacoolDescription
-	textpointer TentacruelName
+	textpointer LumineonName
 	textpointer JellyfishStingName
 	textpointer TentacruelDescription
 	textpointer SeelName
@@ -2983,3 +2983,15 @@ TextOffsets::
 	textpointer SpiralShotDescription
 	textpointer ExcitingDanceName
 	textpointer ExcitingDanceDescription
+	textpointer SwimFreelyName
+	textpointer SwimFreelyDescription
+	textpointer AquaHornName
+	textpointer AquaHornDescription
+	textpointer HydroJetName
+	textpointer HydroJetDescription
+	textpointer CollectName
+	textpointer CollectDescription
+	textpointer OceanicAccompanimentName
+	textpointer OceanicAccompanimentDescription
+	textpointer AquaLinerName
+	textpointer AquaLinerDescription

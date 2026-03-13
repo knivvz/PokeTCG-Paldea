@@ -74,8 +74,8 @@
 	const POLIWAG                     ; $46
 	const POLIWHIRL                   ; $47
 	const POLIWRATH                   ; $48
-	const TENTACOOL                   ; $49
-	const TENTACRUEL                  ; $4a
+	const FINNEON                   ; $49
+	const LUMINEON                  ; $4a
 	const SEEL                        ; $4b
 	const DEWGONG                     ; $4c
 	const WIMPOD                    ; $4d

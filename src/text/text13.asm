@@ -574,3 +574,65 @@ ExcitingDanceDescription:
 	line "to the Bench. (Your opponent chooses"
 	line "the new Active Pokémon.)"
 	done
+
+SwimFreelyName:
+	text "Swim Freely"
+	done
+
+SwimFreelyDescription:
+	text "Flip a coin. If heads, during your"
+	line "opponent's next turn, prevent all"
+	line "effects of attacks, including"
+	line "damage, done to this Pokémon"
+	done
+
+AquaHornName:
+	text "Aqua Horn"
+	done
+
+AquaHornDescription:
+	text "This attack does 20 more damage for"
+	line "each <WATER> Energy attached to this"
+	line "Pokémon."
+	done
+
+HydroJetName:
+	text "Hydro Jet"
+	done
+
+HydroJetDescription:
+    text "This attack does 10 damage to 1 of"
+	line "your opponent's Pokémon for each <WATER>"
+	line "Energy attached to this Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
+	done
+
+CollectName:
+	text "Collect"
+	done
+
+CollectDescription:
+	text "Draw 1 card."
+	done
+
+OceanicAccompanimentName:
+	text "Oceanic Accompaniment"
+	done
+
+OceanicAccompanimentDescription:
+	text "As often as you like during your"
+	line "turn, you may attach a <WATER> Energy"
+	line "card from your hand to 1 of your"
+	line "Pokémon that has the Swim Freely"
+	line "attack."
+	done
+
+AquaLinerName:
+	text "Aqua Liner"
+	done
+
+AquaLinerDescription:
+	text "This attack does 30 damage to 1 of"
+	line "your opponent's Benched Pokémon."
+	done

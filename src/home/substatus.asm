@@ -607,6 +607,52 @@ CountTurnDuelistPokemonWithActivePkmnPower::
 	pop hl
 	ret
 
+CountPokemonIDInPlayArea::
+	push hl
+	push de
+	push bc
+	ld [wTempPokemonID_ce7c], a
+	ld c, $0
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	cp -1
+	jr z, .check_bench
+	call GetCardIDFromDeckIndex
+	ld a, [wTempPokemonID_ce7c]
+	cp e
+	jr nz, .check_bench
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
+	jr nz, .check_bench
+	inc c
+.check_bench
+	ld a, DUELVARS_BENCH
+	call GetTurnDuelistVariable
+.next_bench_slot
+	ld a, [hli]
+	cp -1
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	ld a, [wTempPokemonID_ce7c]
+	cp e
+	jr nz, .skip
+	inc c
+.skip
+	inc b
+	jr .next_bench_slot
+.done
+	ld a, c
+	or a
+	scf
+	jr nz, .found
+	or a
+.found
+	pop bc
+	pop de
+	pop hl
+	ret
+
 ; return, in a, the retreat cost of the card in wLoadedCard1,
 ; adjusting for any Dodrio's Retreat Aid Pkmn Power that is active.
 GetLoadedCard1RetreatCost::
@@ -742,6 +788,21 @@ IsRainDanceActive::
 	ccf
 	ret
 
+IsOceanicAccompanimentActive::
+	ld a, FINNEON
+	call CountPokemonIDInPlayArea
+	ret nc; return if no Pkmn Power-capable Blastoise found in turn holder's play area
+	; check if any seadra or seaking in play
+	ld a, SEADRA
+	call CountPokemonIDInPlayArea
+	ret c
+	ld a, SEAKING
+	call CountPokemonIDInPlayArea
+	ret c
+	ld a, LUMINEON
+	call CountPokemonIDInPlayArea
+	ret ; TODO is this enough?
+
 ; return carry if card at [hTempCardIndex_ff98] is a water energy card AND
 ; if card at [hTempPlayAreaLocation_ff9d] is a water Pokemon card.
 CheckRainDanceScenario::
@@ -758,6 +819,30 @@ CheckRainDanceScenario::
 	ret
 .no_carry
 	or a
+	ret
+
+CheckOceanicAccompanimentScenario::
+	ldh a, [hTempCardIndex_ff98]
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_WATER
+	jr nz, .done
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp SEAKING
+	jr z, .done
+	cp SEADRA
+	jr z, .done
+	cp LUMINEON
+	jr z, .done
+	
+	or a
+	ret
+.done
+	scf
 	ret
 
 ; if the defending (non-turn) card's HP is 0 and the attacking (turn) card's HP

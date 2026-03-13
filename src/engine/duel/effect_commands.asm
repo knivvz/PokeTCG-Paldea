@@ -36,8 +36,32 @@ EffectCommands::
 ;	SpitPoison_AIEffect              ;
 
 
+LumineonAquaLinerEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LumineonAquaLiner_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, LumineonAquaLiner_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, LumineonAquaLiner_AISelectEffect
+	db  $00
+FinneonOceanicAccompanimentEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
+	db  $00
+
+GoldeenCollectEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Collect_Effect
+	db  $00
+SeadraHydroJetEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, HydroJet_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
+	db  $00
+SeakingAquaHornEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AquaHorn_Damage
+	dbw EFFECTCMDTYPE_AI, AquaHorn_AIDamage
+ 	db  $00
+SwimFreelyEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SwimFreely_Success50PercentEffect
+	dbw EFFECTCMDTYPE_AI, SwimFreely_AIEffect
+	db  $00
 QuaquavalSpiralShotEffectCommands:
-	;dbw EFFECTCMDTYPE_BEFORE_DAMAGE, QuaquavalSpiralShot_Effect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, QuaquavalSpiralShot_PlayerSelectEnergyEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, QuaquavalSpiralShot_AISelectEnergyEffect
 	db  $00
@@ -641,11 +665,11 @@ ArticunoBlizzardEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Blizzard_BenchDamageEffect
 	db  $00
 
-TentacoolCowardiceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Cowardice_Check
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_RemoveFromPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Cowardice_PlayerSelectEffect
-	db  $00
+; TentacoolCowardiceEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Cowardice_Check
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_RemoveFromPlayAreaEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Cowardice_PlayerSelectEffect
+; 	db  $00
 
 LaprasWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LaprasWaterGunEffect

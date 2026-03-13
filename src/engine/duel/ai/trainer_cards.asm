@@ -5839,12 +5839,12 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 	ld bc, SEADRA
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, TENTACOOL
-	ld de, TENTACRUEL
+	ld bc, FINNEON
+	ld de, LUMINEON
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, TENTACOOL
-	ld bc, TENTACRUEL
+	ld de, FINNEON
+	ld bc, LUMINEON
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	jr .no_carry
@@ -5865,7 +5865,7 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 	ld de, WIMPOD
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, TENTACOOL
+	ld de, FINNEON
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	; none found

@@ -76,8 +76,8 @@ CardPointers::
 	dab PoliwagCard
 	dab PoliwhirlCard
 	dab PoliwrathCard
-	dab TentacoolCard
-	dab TentacruelCard
+	dab FinneonCard
+	dab LumineonCard
 	dab SeelCard
 	dab DewgongCard
 	dab WimpodCard
