@@ -2076,7 +2076,7 @@ TextOffsets::
 	textpointer ToxicName
 	textpointer ToxicDescription
 	textpointer NidokingDescription
-	textpointer ZubatName
+	textpointer MurkrowName
 	textpointer LeechLifeName
 	textpointer ZubatsLeechLifeDescription
 	textpointer BatName
@@ -2721,7 +2721,7 @@ TextOffsets::
 	textpointer SuperFangName
 	textpointer SuperFangDescription
 	textpointer RaticateDescription
-	textpointer SpearowName
+	textpointer FlamigoName
 	textpointer PeckName
 	textpointer SpearowsMirrorMoveDescription
 	textpointer SpearowDescription
@@ -2995,3 +2995,14 @@ TextOffsets::
 	textpointer OceanicAccompanimentDescription
 	textpointer AquaLinerName
 	textpointer AquaLinerDescription
+	textpointer UnitedWingsName
+	textpointer UnitedWingsDescription
+	textpointer SpinTurnName
+	textpointer SpinTurnDescription
+	textpointer WattrelName
+	textpointer KilowattrelName
+	textpointer UnitedThunderName
+	textpointer UnitedThunderDescription
+	textpointer SpeedWingName
+	textpointer InstaFlockName
+	textpointer InstaFlockDescription

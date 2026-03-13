@@ -35,12 +35,34 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+FlamigoInstaFlockEffectCommands:
+	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, InstaFlock_Effect
+	dbw EFFECTCMDTYPE_AI, InstaFlock_AIEffect
+	db  $00
+KilowattrelUnitedThunderEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, UnitedThunder_BenchDamageEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Spark_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, Spark_AISelectEffect
+	db  $00
+	
+MurkrowSpinTurnEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpinTurn_CheckBench
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpinTurn_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SpinTurn_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SpinTurn_AISelectEffect
+	db  $00
+
+UnitedWingsEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnitedWings_Damage
+	dbw EFFECTCMDTYPE_AI, UnitedWings_AIEffect
+	db $00
 
 LumineonAquaLinerEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, LumineonAquaLiner_BenchDamageEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, LumineonAquaLiner_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, LumineonAquaLiner_AISelectEffect
 	db  $00
+
 FinneonOceanicAccompanimentEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
 	db  $00
@@ -86,6 +108,7 @@ BouquetMagicEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, TealDance_AISelectEffect
 	db $00
 
+; TODO does this work on ai?
 GolisopodExSwingAndSkedaddleEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, GolisopodExSwingAndSkedaddle_PlayerSelectEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, StarmieRecover_AISelectEffect
@@ -255,13 +278,13 @@ ScytherSwordsDanceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SwordsDanceEffect
 	db  $00
 
-ZubatSupersonicEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
-	db  $00
+; ZubatSupersonicEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SupersonicEffect
+; 	db  $00
 
-ZubatLeechLifeEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ZubatLeechLifeEffect
-	db  $00
+; ZubatLeechLifeEffectCommands:
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ZubatLeechLifeEffect
+; 	db  $00
 
 BeedrillTwineedleEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Twineedle_MultiplierEffect
@@ -306,10 +329,10 @@ OddishSproutEffectCommands:
 	db  $00
 
 ExeggutorTeleportEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Teleport_CheckBench
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Teleport_SwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Teleport_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Teleport_AISelectEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SpinTurn_CheckBench
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SpinTurn_SwitchEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, SpinTurn_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, SpinTurn_AISelectEffect
 	db  $00
 
 ExeggutorBigEggsplosionEffectCommands:

@@ -232,9 +232,8 @@ NidokingDescription:
 	line "smash, constrict, then break its"
 	line "prey's bones."
 	done
-
-ZubatName:
-	text "Zubat"
+MurkrowName:
+	text "Murkrow"
 	done
 
 LeechLifeName:

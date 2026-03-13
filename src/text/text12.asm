@@ -567,8 +567,8 @@ RaticateDescription:
 	line "they are cut off."
 	done
 
-SpearowName:
-	text "Spearow"
+FlamigoName:
+	text "Flamigo"
 	done
 
 PeckName:

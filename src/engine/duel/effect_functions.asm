@@ -1,3 +1,199 @@
+; TODO improve UI
+InstaFlock_Effect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+.start
+	call CreateDeckCardList
+	ldtx hl, ChooseAKrabbyFromDeckText
+	ldtx bc, KrabbyText
+	ld de, FLAMIGO
+	call LookForCardsInDeck
+	ret c ; no flamigo in deck, exit
+
+; draw Deck list interface and print text
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+	ldtx hl, ChooseAKrabbyText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+
+.loop
+	bank1call DisplayCardList
+	jr c, .end
+	call GetCardIDFromDeckIndex
+	cp16 FLAMIGO
+	jr nz, .play_sfx
+
+; flamigo was selected
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	; ld c, a
+	; push bc
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	; pop bc
+	; call RemoveCardFromDuelTempList
+	jr .start
+	or a
+.end
+	call ShuffleCardsInDeck
+	ret
+
+.play_sfx
+	; play SFX and loop back
+	call PlaySFX_InvalidChoice
+	jr .loop
+
+
+
+; .pressed_b
+; ; figure if Player can exit the screen without selecting,
+; ; that is, if the Deck has no Krabby card.
+; 	ld a, DUELVARS_CARD_LOCATIONS
+; 	call GetTurnDuelistVariable
+; .loop_b_press
+; 	ld a, [hl]
+; 	cp CARD_LOCATION_DECK
+; 	jr nz, .next
+; 	ld a, l
+; 	call GetCardIDFromDeckIndex
+; 	cp16 KRABBY
+; 	jr z, .play_sfx ; found Krabby, go back to top loop
+; .next
+; 	inc l
+; 	ld a, l
+; 	cp DECK_SIZE
+; 	jr c, .loop_b_press
+
+; ; no Krabby in Deck, can safely exit screen
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
+; 	or a
+; 	ret
+
+
+; TODO update, this is just copied from krabby call for family
+InstaFlock_AIEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; no flamigo
+	call GetCardIDFromDeckIndex
+	cp16 FLAMIGO
+	jr nz, .loop_deck
+	ret ; flamigo found
+
+UnitedThunder_BenchDamageEffect:
+	; calculate damage
+    call CreateDiscardPileCardList ; wDuelTempList
+    ld hl, wDuelTempList ; Load the list into hl
+    ld b, 0 ; counter
+.loop_discard_pile
+    ld a, [hli]   ; Load the next card from the list into a
+    cp $ff
+    jr z, .set_damage         ; If it's zero, then we've reached the end of the list, return
+	call GetCardIDFromDeckIndex
+	ld a, e
+
+	cp WATTREL
+	jr z, .increase_damage
+	cp MURKROW
+	jr z, .increase_damage
+	cp FLAMIGO 
+	jr z, .increase_damage
+    jp .loop_discard_pile
+    
+.increase_damage
+    inc b         ; Increment the counter
+    jr .loop_discard_pile ; And then loop back to the beginning
+.set_damage
+	ld a, b
+	call ATimes10
+	ld e, a ; dmg in e
+	push de
+	
+	ldh a, [hTemp_ffa0] ; pokemon that was chosen
+	cp $ff
+	ret z
+	call SwapTurn
+	ldh a, [hTemp_ffa0]
+	ld b, a
+	pop de
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	jp SwapTurn
+
+; returns carry if no Pokemon on Bench
+SpinTurn_CheckBench:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldtx hl, ThereAreNoPokemonOnBenchText
+	cp 2
+	ret
+
+SpinTurn_PlayerSelectEffect:
+	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
+	call DrawWideTextBox_WaitForInput
+	bank1call HasAlivePokemonInBench
+	ld a, $01
+	ld [wPlayAreaSelectAction], a
+.loop
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+SpinTurn_AISelectEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	call Random
+	ldh [hTemp_ffa0], a
+	ret
+
+SpinTurn_SwitchEffect:
+	ldh a, [hTemp_ffa0]
+	ld e, a
+	call SwapArenaWithBenchPokemon
+	xor a
+	ld [wDuelDisplayedScreen], a
+	ret
+
+UnitedWings_AIEffect:
+	call UnitedWings_Damage
+	jp SetDefiniteAIDamage
+
+; works, deal 10 damage per united wings in discard pile 
+UnitedWings_Damage:
+    call CreateDiscardPileCardList ; wDuelTempList
+    ld hl, wDuelTempList ; Load the list into hl
+    ld b, 0 ; counter
+.loop_discard_pile
+    ld a, [hli]   ; Load the next card from the list into a
+    cp $ff
+    jr z, .set_damage         ; If it's zero, then we've reached the end of the list, return
+	call GetCardIDFromDeckIndex
+	ld a, e
+
+	cp WATTREL
+	jr z, .increase_damage
+	cp MURKROW
+	jr z, .increase_damage
+	cp FLAMIGO 
+	jr z, .increase_damage
+    jp .loop_discard_pile
+    
+.increase_damage
+    inc b         ; Increment the counter
+    jr .loop_discard_pile ; And then loop back to the beginning
+.set_damage
+	ld a, b
+	call ATimes10
+	call SetDefiniteDamage
+	ret
+
 LumineonAquaLiner_PlayerSelectEffect:
 	ld a, $ff
 	ldh [hTemp_ffa0], a
@@ -9,7 +205,7 @@ LumineonAquaLiner_PlayerSelectEffect:
 	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
 	call DrawWideTextBox_WaitForInput
 	call SwapTurn
-	bank1call HasAlivePokemonInBench
+	bank1call HasAlivePokemonInPlayArea
 
 	; the following two instructions can be removed
 	; since Player selection will overwrite it.
@@ -51,6 +247,19 @@ Collect_Effect:
 	call DrawCCards
 	ret
 
+HydroJet_PlayerSelectEffect:
+	ldtx hl, ChoosePkmnInTheBenchToGiveDamageText
+	call DrawWideTextBox_WaitForInput
+	call SwapTurn
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	jr c, .loop_input
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	jp SwapTurn
+
+
 HydroJet_BenchDamageEffect:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
@@ -75,9 +284,8 @@ AquaHorn_Damage:
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
-	call ATimes10
+	call SetDamageToATimes20
 	call AddToDamage
-	call AddToDamage ; times 20
 	ret
 
 SwimFreely_AIEffect:
@@ -369,12 +577,12 @@ GolisopodExSwingAndSkedaddle_Effect:
 
 	call IsPlayerTurn
 	jr c, .player_turn
-	call Teleport_AISelectEffect
+	call SpinTurn_AISelectEffect
 	jp .switch
 .player_turn
-	call Teleport_PlayerSelectEffect
+	call SpinTurn_PlayerSelectEffect
 .switch
-	call Teleport_SwitchEffect
+	call SpinTurn_SwitchEffect
 	ret
 
 TenRecoil_Effect:
@@ -2391,12 +2599,12 @@ SupersonicEffect:
 	call nc, SetNoEffectFromStatus
 	ret
 
-ZubatLeechLifeEffect:
-	ld hl, wDealtDamage
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	jp ApplyAndAnimateHPRecovery
+; ZubatLeechLifeEffect:
+; 	ld hl, wDealtDamage
+; 	ld e, [hl]
+; 	inc hl
+; 	ld d, [hl]
+; 	jp ApplyAndAnimateHPRecovery
 
 Twineedle_AIEffect:
 	ld a, 60 / 2
@@ -2541,42 +2749,6 @@ Sprout_PutInPlayAreaEffect:
 	bank1call DisplayCardDetailScreen
 .shuffle
 	jp ShuffleCardsInDeck
-
-; returns carry if no Pokemon on Bench
-Teleport_CheckBench:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, ThereAreNoPokemonOnBenchText
-	cp 2
-	ret
-
-Teleport_PlayerSelectEffect:
-	ldtx hl, SelectPkmnOnBenchToSwitchWithActiveText
-	call DrawWideTextBox_WaitForInput
-	bank1call HasAlivePokemonInBench
-	ld a, $01
-	ld [wPlayAreaSelectAction], a
-.loop
-	bank1call OpenPlayAreaScreenForSelection
-	jr c, .loop
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-
-Teleport_AISelectEffect:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	call Random
-	ldh [hTemp_ffa0], a
-	ret
-
-Teleport_SwitchEffect:
-	ldh a, [hTemp_ffa0]
-	ld e, a
-	call SwapArenaWithBenchPokemon
-	xor a
-	ld [wDuelDisplayedScreen], a
-	ret
 
 BigEggsplosion_AIEffect:
 	ldh a, [hTempPlayAreaLocation_ff9d]

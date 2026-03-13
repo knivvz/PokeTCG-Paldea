@@ -29,7 +29,7 @@ CardPointers::
 	dab NidoranMCard
 	dab NidorinoCard
 	dab NidokingCard
-	dab ZubatCard
+	dab MurkrowCard
 	dab GolbatCard
 	dab OddishCard
 	dab GloomCard
@@ -108,9 +108,9 @@ CardPointers::
 	dab SurfingPikachuAltLv13Card
 	dab RaichuLv40Card
 	dab RaichuLv45Card
-	dab MagnemiteLv13Card
+	dab WattrelCard
 	dab MagnemiteLv15Card
-	dab MagnetonLv28Card
+	dab KilowattrelCard
 	dab MagnetonLv35Card
 	dab VoltorbCard
 	dab ElectrodeLv35Card
@@ -172,7 +172,7 @@ CardPointers::
 	dab PidgeotLv40Card
 	dab RattataCard
 	dab RaticateCard
-	dab SpearowCard
+	dab FlamigoCard
 	dab FearowCard
 	dab ClefairyCard
 	dab ClefableCard

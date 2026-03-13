@@ -1010,47 +1010,75 @@ NidokingCard:
 	tx NidokingDescription ; description
 	db 0 ; AI info
 
-ZubatCard:
-	db TYPE_PKMN_GRASS ; type
+MurkrowCard:
+	db TYPE_PKMN_DARKNESS ; type
 	gfx ZubatCardGfx ; gfx
-	tx ZubatName ; name
+	tx MurkrowName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
-	dw ZUBAT
-	db 40 ; hp
+	dw MURKROW
+	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ZubatSupersonicEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
-
-	; attack 2
-	energy GRASS, 1, COLORLESS, 1 ; energies
-	tx LeechLifeName ; name
-	tx ZubatsLeechLifeDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx SpinTurnName ; name
+	tx SpinTurnDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ZubatLeechLifeEffectCommands ; effect commands
+	dw MurkrowSpinTurnEffectCommands ; effect commands
 	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_DRAIN ; animation
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
 
-	db 0 ; retreat cost
-	db WR_PSYCHIC ; weakness
+	; attack 1
+	energy DARKNESS, 1 ; energies
+	tx UnitedWingsName ; name
+	tx UnitedWingsDescription ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw UnitedWingsEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 1
+	; energy COLORLESS, 2 ; energies
+	; tx SupersonicName ; name
+	; tx MayInflictConfusionDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ZubatSupersonicEffectCommands ; effect commands
+	; db INFLICT_CONFUSION ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SUPERSONIC ; animation
+
+	; ; attack 2
+	; energy GRASS, 1, COLORLESS, 1 ; energies
+	; tx LeechLifeName ; name
+	; tx ZubatsLeechLifeDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ZubatLeechLifeEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db HEAL_USER ; flags 2
+	; db NONE ; flags 3
+	; db 3
+	; db ATK_ANIM_DRAIN ; animation
+
+	db 1 ; retreat cost
+	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx BatName ; category
 	db 41 ; Pokedex number
@@ -1069,7 +1097,7 @@ GolbatCard:
 	dw GOLBAT
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx ZubatName ; pre-evo name
+	tx MurkrowName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -5324,48 +5352,76 @@ RaichuLv45Card:
 	tx RaichuLv45Description ; description
 	db 0 ; AI info
 
-MagnemiteLv13Card:
+WattrelCard:
 	db TYPE_PKMN_LIGHTNING ; type
 	gfx MagnemiteLv13CardGfx ; gfx
-	tx MagnemiteName ; name
+	tx WattrelName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw MAGNEMITE_LV13
-	db 40 ; hp
+	dw WATTREL
+	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1 ; energies
-	tx ThunderWaveName ; name
-	tx MayInflictParalysisDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx PeckName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagnemiteThunderWaveEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db ATK_ANIM_HIT ; animation
 
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx SelfdestructName ; name
-	tx MagnemitesSelfdestructDescription ; description
+	; attack 1
+	energy COLORLESS, 2 ; energies
+	tx UnitedWingsName ; name
+	tx UnitedWingsDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MagnemiteSelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw UnitedWingsEffectCommands ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 40
-	db ATK_ANIM_SELFDESTRUCT ; animation
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 1
+	; energy LIGHTNING, 1 ; energies
+	; tx ThunderWaveName ; name
+	; tx MayInflictParalysisDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw MagnemiteThunderWaveEffectCommands ; effect commands
+	; db INFLICT_PARALYSIS ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDER_WAVE ; animation
+
+	; ; attack 2
+	; energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	; tx SelfdestructName ; name
+	; tx MagnemitesSelfdestructDescription ; description
+	; dw NONE ; description (cont)
+	; db 40 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw MagnemiteSelfdestructEffectCommands ; effect commands
+	; db HIGH_RECOIL ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 40
+	; db ATK_ANIM_SELFDESTRUCT ; animation
 
 	db 1 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	db WR_LIGHTNING ; weakness
+	db WR_FIGHTING ; resistance
 	tx MagnetName ; category
 	db 81 ; Pokedex number
 	db 13 ; level
@@ -5424,48 +5480,76 @@ MagnemiteLv15Card:
 	tx MagnemiteLv15Description ; description
 	db AI_INFO_UNK_03 | HAS_EVOLUTION ; AI info
 
-MagnetonLv28Card:
+KilowattrelCard:
 	db TYPE_PKMN_LIGHTNING ; type
 	gfx MagnetonLv28CardGfx ; gfx
-	tx MagnetonName ; name
+	tx KilowattrelName ; name
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw MAGNETON_LV28
+	dw KILOWATTREL
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx MagnemiteName ; pre-evo name
+	tx WattrelName ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 2, COLORLESS, 1 ; energies
-	tx ThunderWaveName ; name
-	tx MayInflictParalysisDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx UnitedThunderName ; name
+	tx UnitedThunderDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw KilowattrelUnitedThunderEffectCommands ; effect commands
+	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 10
+	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
+
+	; attack 2
+	energy LIGHTNING, 1, COLORLESS, 2 ; energies
+	tx SpeedWingName ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 50 ; damage
 	db DAMAGE_NORMAL ; category
-	dw MagnetonThunderWaveEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_THUNDER_WAVE ; animation
+	db ATK_ANIM_THUNDERSHOCK ; animation
 
-	; attack 2
-	energy LIGHTNING, 2, COLORLESS, 2 ; energies
-	tx SelfdestructName ; name
-	tx MagnetonLv28sSelfdestructDescription ; description
-	dw NONE ; description (cont)
-	db 80 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MagnetonLv28SelfdestructEffectCommands ; effect commands
-	db HIGH_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 80
-	db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
+	; attack 1
+	; energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	; tx ThunderWaveName ; name
+	; tx MayInflictParalysisDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw MagnetonThunderWaveEffectCommands ; effect commands
+	; db INFLICT_PARALYSIS ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDER_WAVE ; animation
 
-	db 1 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db NONE ; resistance
+	; ; attack 2
+	; energy LIGHTNING, 2, COLORLESS, 2 ; energies
+	; tx SelfdestructName ; name
+	; tx MagnetonLv28sSelfdestructDescription ; description
+	; dw NONE ; description (cont)
+	; db 80 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw MagnetonLv28SelfdestructEffectCommands ; effect commands
+	; db HIGH_RECOIL ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 80
+	; db ATK_ANIM_BIG_SELFDESTRUCTION ; animation
+
+	db 0 ; retreat cost
+	db WR_LIGHTNING ; weakness
+	db WR_FIGHTING ; resistance
 	tx MagnetName ; category
 	db 82 ; Pokedex number
 	db 28 ; level
@@ -8636,46 +8720,74 @@ RaticateCard:
 	tx RaticateDescription ; description
 	db AI_INFO_UNK_03 ; AI info
 
-SpearowCard:
+FlamigoCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SpearowCardGfx ; gfx
-	tx SpearowName ; name
+	tx FlamigoName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | JUNGLE ; sets
-	dw SPEAROW
-	db 50 ; hp
+	dw FLAMIGO
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx PeckName ; name
-	dw NONE ; description
+	energy 0 ; energies
+	tx InstaFlockName ; name
+	tx InstaFlockDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw FlamigoInstaFlockEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy COLORLESS, 2 ; energies
+	tx UnitedWingsName ; name
+	tx UnitedWingsDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db DAMAGE_X ; category
+	dw UnitedWingsEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx MirrorMoveName ; name
-	tx SpearowsMirrorMoveDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SpearowMirrorMoveEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_MIRROR_MOVE ; animation
+	; attack 1
+	; energy COLORLESS, 1 ; energies
+	; tx PeckName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
 
-	db 0 ; retreat cost
+	; ; attack 2
+	; energy COLORLESS, 3 ; energies
+	; tx MirrorMoveName ; name
+	; tx SpearowsMirrorMoveDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw SpearowMirrorMoveEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_MIRROR_MOVE ; animation
+
+	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db WR_FIGHTING ; resistance
 	tx TinyBirdName ; category
@@ -8695,7 +8807,7 @@ FearowCard:
 	dw FEAROW
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx SpearowName ; pre-evo name
+	tx FlamigoName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies

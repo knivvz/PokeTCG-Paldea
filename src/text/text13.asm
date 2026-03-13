@@ -636,3 +636,59 @@ AquaLinerDescription:
 	text "This attack does 30 damage to 1 of"
 	line "your opponent's Benched Pokémon."
 	done
+
+UnitedWingsName:
+	text "United Wings"
+	done
+
+UnitedWingsDescription:
+	text "This attack does 10 damage for"
+	line "each Pokémon in your discard pile"
+	line "that has the United Wings attack."
+	done
+
+SpinTurnName:
+	text "Spin Turn"
+	done
+
+SpinTurnDescription:
+	text "Switch this Pokémon with 1 of your"
+	line "Benched Pokémon."
+	done
+
+WattrelName:
+	text "Wattrel"
+	done
+
+KilowattrelName:
+	text "Kilowattrel"
+	done
+
+UnitedThunderName:
+	text "United Thunder"
+	done
+
+UnitedThunderDescription:
+	text "This attack does 10 damage for each"
+	line "Pokémon in your discard pile that"
+	line "has the United Wings attack to 1 of"
+	line "your opponent's Benched Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
+	done
+SpeedWingName:
+	text "Speed Wing"
+	done
+
+InstaFlockName:
+	text "Insta-Flock"
+	done
+
+InstaFlockDescription:
+	text "When you play this Pokémon from your"
+	line "hand onto your Bench during your"
+	line "turn, you may search your deck for"
+	line "up to 3 Flamigo, reveal them, and"
+	line "put them into your hand. Then,"
+	line "shuffle your deck."
+	done

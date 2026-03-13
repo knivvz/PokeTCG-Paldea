@@ -4382,13 +4382,13 @@ AIDecide_Recycle:
 
 .gastly1
 	cp16 GASTLY_LV8
-	jr nz, .zubat
+	jr nz, .murkrow
 	ld a, b
 	ld [wce08 + 1], a
 	jr .loop_2
 
-.zubat
-	cp16 ZUBAT
+.murkrow
+	cp16 MURKROW
 	jr nz, .ditto
 	ld a, b
 	ld [wce08 + 2], a
@@ -4960,14 +4960,14 @@ AIDecide_Pokeball:
 	ld de, PIKACHU_LV12
 	call LookForCardIDInHandList_Bank8
 	jr c, .fighting
-	ld de, MAGNEMITE_LV13
+	ld de, WATTREL
 	call LookForCardIDInHandList_Bank8
 	jr c, .fighting
 	ld de, PIKACHU_LV12
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
-	ld de, MAGNEMITE_LV13
+	ld de, WATTREL
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5915,7 +5915,7 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld bc, ELECTRODE_LV35
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, MAGNEMITE_LV13
+	ld bc, WATTREL
 	ld de, MAGNETON_LV35
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
@@ -5923,28 +5923,28 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld de, MAGNETON_LV35
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, MAGNEMITE_LV13
-	ld de, MAGNETON_LV28
+	ld bc, WATTREL
+	ld de, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld bc, MAGNEMITE_LV15
-	ld de, MAGNETON_LV28
+	ld de, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld de, MAGNEMITE_LV15
 	ld bc, MAGNETON_LV35
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, MAGNEMITE_LV13
+	ld de, WATTREL
 	ld bc, MAGNETON_LV35
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld de, MAGNEMITE_LV15
-	ld bc, MAGNETON_LV28
+	ld bc, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, MAGNEMITE_LV13
-	ld bc, MAGNETON_LV28
+	ld de, WATTREL
+	ld bc, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	; bug, missing jr .no_carry

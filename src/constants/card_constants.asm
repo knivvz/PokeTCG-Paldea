@@ -27,7 +27,7 @@
 	const NIDORANM                    ; $17
 	const NIDORINO                    ; $18
 	const NIDOKING                    ; $19
-	const ZUBAT                       ; $1a
+	const MURKROW                       ; $1a
 	const GOLBAT                      ; $1b
 	const ODDISH                      ; $1c
 	const GLOOM                       ; $1d
@@ -106,9 +106,9 @@
 	const SURFING_PIKACHU_ALT_LV13    ; $66
 	const RAICHU_LV40                 ; $67
 	const RAICHU_LV45                 ; $68
-	const MAGNEMITE_LV13              ; $69
+	const WATTREL              ; $69
 	const MAGNEMITE_LV15              ; $6a
-	const MAGNETON_LV28               ; $6b
+	const KILOWATTREL               ; $6b
 	const MAGNETON_LV35               ; $6c
 	const VOLTORB                     ; $6d
 	const ELECTRODE_LV35              ; $6e
@@ -170,7 +170,7 @@
 	const PIDGEOT_LV40                ; $a6
 	const RATTATA                     ; $a7
 	const RATICATE                    ; $a8
-	const SPEAROW                     ; $a9
+	const FLAMIGO                     ; $a9
 	const FEAROW                      ; $aa
 	const CLEFAIRY                    ; $ab
 	const CLEFABLE                    ; $ac

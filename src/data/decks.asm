@@ -226,27 +226,21 @@ CharmanderAndFriendsDeck:
 	card_item FIRE_ENERGY,      10
 	card_item LIGHTNING_ENERGY,  8
 	card_item FIGHTING_ENERGY,   6
-	card_item FUECOCO,        2
-	card_item CROCALOR,        1
-	card_item SKELEDIRGEEX,         1
-	card_item GROWLITHE,         2
-	card_item ARCANINE_LV45,     1
+	card_item FUECOCO,        	 2
+	card_item CROCALOR,        	 1
+	card_item SKELEDIRGEEX,      1
+	card_item FLAMIGO,         	 4
 	card_item PONYTA,            2
 	card_item MAGMAR_LV24,       1
 	card_item PIKACHU_LV12,      2
 	card_item RAICHU_LV40,       1
-	card_item MAGNEMITE_LV13,    2
-	card_item MAGNETON_LV28,     1
-	card_item ZAPDOS_LV64,       1
+	card_item WATTREL,    		 2
+	card_item KILOWATTREL,     	 1
 	card_item WIGLETT,           2
 	card_item WUGTRIO,           1
-	card_item MACHOP,            1
-	card_item MACHOKE,           1
-	card_item RATTATA,           2
-	card_item RATICATE,          1
 	card_item MEOWTH_LV14,       1
-	card_item PROFESSOR_OAK,     1
-	card_item NEMONA,              2
+	card_item PROFESSOR_OAK,     4
+	card_item NEMONA,            4
 	card_item SWITCH,            1
 	card_item COMPUTER_SEARCH,   1
 	card_item PLUSPOWER,         1
@@ -333,8 +327,8 @@ SquirtleExtraDeck:
 	card_item GROWLITHE,         1
 	card_item ARCANINE_LV45,     1
 	card_item PIKACHU_LV12,      2
-	card_item MAGNEMITE_LV13,    1
-	card_item MAGNETON_LV28,     1
+	card_item WATTREL,    1
+	card_item KILOWATTREL,     1
 	card_item ELECTABUZZ_LV35,   1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
@@ -383,7 +377,7 @@ BulbasaurExtraDeck:
 	card_item FIGHTING_ENERGY,   3
 	card_item PIKACHU_LV12,      2
 	card_item RAICHU_LV40,       1
-	card_item MAGNEMITE_LV13,    1
+	card_item WATTREL,    1
 	card_item ELECTABUZZ_LV35,   1
 	card_item ABRA,              2
 	card_item KADABRA,           1
@@ -417,8 +411,8 @@ LightningAndFireDeck:
 	card_item PIKACHU_LV12,             1
 	card_item PIKACHU_LV14,             1
 	card_item RAICHU_LV40,              1
-	card_item MAGNEMITE_LV13,           2
-	card_item MAGNETON_LV28,            1
+	card_item WATTREL,           2
+	card_item KILOWATTREL,            1
 	card_item VOLTORB,                  3
 	card_item ELECTRODE_LV35,           1
 	card_item ELECTRODE_LV42,           1
@@ -649,8 +643,8 @@ ZappingSelfdestructDeck:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,        24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item MAGNEMITE_LV13,           4
-	card_item MAGNETON_LV28,            3
+	card_item WATTREL,           4
+	card_item KILOWATTREL,            3
 	card_item VOLTORB,                  4
 	card_item ELECTRODE_LV35,           2
 	card_item ELECTABUZZ_LV35,          4
@@ -1102,7 +1096,7 @@ BoomBoomSelfdestructDeck:
 	card_item KOFFING,           4
 	card_item WEEZING,           3
 	card_item MAGNEMITE_LV15,    4
-	card_item MAGNETON_LV28,     2
+	card_item KILOWATTREL,     2
 	card_item MAGNETON_LV35,     2
 	card_item GEODUDE,           4
 	card_item GRAVELER,          3
@@ -1119,9 +1113,9 @@ PowerGeneratorDeck:
 	card_item PIKACHU_LV12,      2
 	card_item PIKACHU_LV14,      1
 	card_item RAICHU_LV40,       1
-	card_item MAGNEMITE_LV13,    1
+	card_item WATTREL,    1
 	card_item MAGNEMITE_LV15,    1
-	card_item MAGNETON_LV28,     1
+	card_item KILOWATTREL,     1
 	card_item MAGNETON_LV35,     1
 	card_item VOLTORB,           3
 	card_item ELECTRODE_LV35,    1
@@ -1153,7 +1147,7 @@ EtceteraDeck:
 	card_item FUECOCO,       2
 	card_item MAGMAR_LV31,      1
 	card_item PIKACHU_LV12,     2
-	card_item MAGNEMITE_LV13,   1
+	card_item WATTREL,   1
 	card_item WIGLETT,          1
 	card_item MACHOP,           2
 	card_item GASTLY_LV8,       2
@@ -1223,7 +1217,7 @@ GhostDeck:
 	card_item PSYCHIC_ENERGY,          15
 	card_item GRASS_ENERGY,             6
 	card_item DOUBLE_COLORLESS_ENERGY,  3
-	card_item ZUBAT,                    4
+	card_item MURKROW,                    4
 	card_item GOLBAT,                   3
 	card_item GASTLY_LV8,               2
 	card_item GASTLY_LV17,              2
@@ -1291,14 +1285,14 @@ FlyinPokemonDeck:
 	card_item GRASS_ENERGY,            13
 	card_item LIGHTNING_ENERGY,        10
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item ZUBAT,                    4
+	card_item MURKROW,                    4
 	card_item GOLBAT,                   3
 	card_item FLYING_PIKACHU,           2
 	card_item PIDGEY,                   4
 	card_item PIDGEOTTO,                3
 	card_item PIDGEOT_LV38,             1
 	card_item PIDGEOT_LV40,             1
-	card_item SPEAROW,                  4
+	card_item FLAMIGO,                  4
 	card_item FEAROW,                   3
 	card_item IONO,   2
 	card_item LASS,                     2

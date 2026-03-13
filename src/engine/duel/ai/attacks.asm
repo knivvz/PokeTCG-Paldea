@@ -367,7 +367,7 @@ GetAIScoreOfAttack:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 MAGNEMITE_LV13
+	cp16 WATTREL
 	jr z, .magnemite1
 	ld b, 10 ; bench damage
 .magnemite1
@@ -407,7 +407,7 @@ GetAIScoreOfAttack:
 	call GetCardIDFromDeckIndex
 	cp16 CHANSEY
 	jr z, .chansey
-	cp16 MAGNEMITE_LV13
+	cp16 WATTREL
 	jr z, .magnemite1_or_weezing
 	cp16 WEEZING
 	jr z, .magnemite1_or_weezing

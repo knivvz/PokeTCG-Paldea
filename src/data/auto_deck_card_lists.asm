@@ -378,7 +378,7 @@ PokemonFluteCardList:
 	card_item LAPRAS,            2
 	card_item PIKACHU_LV12,      3
 	card_item RAICHU_LV40,       1
-	card_item MAGNEMITE_LV13,    2
+	card_item WATTREL,    2
 	card_item ELECTABUZZ_LV35,   3
 	card_item RATTATA,           2
 	card_item RATICATE,          1
@@ -399,9 +399,9 @@ YellowFlashCardList:
 	card_item PIKACHU_LV14,      1
 	card_item RAICHU_LV40,       1
 	card_item RAICHU_LV45,       1
-	card_item MAGNEMITE_LV13,    2
+	card_item WATTREL,    2
 	card_item MAGNEMITE_LV15,    1
-	card_item MAGNETON_LV28,     1
+	card_item KILOWATTREL,     1
 	card_item MAGNETON_LV35,     1
 	card_item VOLTORB,           3
 	card_item ELECTRODE_LV35,    1
@@ -429,9 +429,9 @@ ElectricShockCardList:
 	card_item PIKACHU_LV16,             1
 	card_item PIKACHU_ALT_LV16,         1
 	card_item RAICHU_LV40,              2
-	card_item MAGNEMITE_LV13,           2
+	card_item WATTREL,           2
 	card_item MAGNEMITE_LV15,           2
-	card_item MAGNETON_LV28,            2
+	card_item KILOWATTREL,            2
 	card_item VOLTORB,                  4
 	card_item ELECTRODE_LV42,           3
 	card_item ZAPDOS_LV64,              1
@@ -447,8 +447,8 @@ ZappingSelfdestructCardList:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,        24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item MAGNEMITE_LV13,           4
-	card_item MAGNETON_LV28,            3
+	card_item WATTREL,           4
+	card_item KILOWATTREL,            3
 	card_item VOLTORB,                  4
 	card_item ELECTRODE_LV35,           2
 	card_item ELECTABUZZ_LV35,          4
@@ -491,7 +491,7 @@ JungleCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  1
 	card_item EKANS,                    2
 	card_item ARBOK,                    1
-	card_item ZUBAT,                    2
+	card_item MURKROW,                    2
 	card_item GOLBAT,                   1
 	card_item ODDISH,                   2
 	card_item GLOOM,                    1
@@ -619,7 +619,7 @@ DreamEaterHaunterCardList:
 	deck_list_start
 	card_item GRASS_ENERGY,            7
 	card_item PSYCHIC_ENERGY,         17
-	card_item ZUBAT,                   3
+	card_item MURKROW,                   3
 	card_item GOLBAT,                  2
 	card_item GASTLY_LV8,              4
 	card_item HAUNTER_LV17,            1
@@ -730,7 +730,7 @@ ScienceCorpsCardList:
 	card_item NIDORANM,         3
 	card_item NIDORINO,         2
 	card_item NIDOKING,         1
-	card_item ZUBAT,            2
+	card_item MURKROW,            2
 	card_item GOLBAT,           1
 	card_item GRIMER,           2
 	card_item MUK,              1
@@ -754,14 +754,14 @@ FlyinPokemonCardList:
 	card_item GRASS_ENERGY,            13
 	card_item LIGHTNING_ENERGY,        10
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item ZUBAT,                    4
+	card_item MURKROW,                    4
 	card_item GOLBAT,                   3
 	card_item FLYING_PIKACHU,           2
 	card_item PIDGEY,                   4
 	card_item PIDGEOTTO,                3
 	card_item PIDGEOT_LV38,             1
 	card_item PIDGEOT_LV40,             1
-	card_item SPEAROW,                  4
+	card_item FLAMIGO,                  4
 	card_item FEAROW,                   3
 	card_item IONO,   2
 	card_item LASS,                     2
@@ -985,8 +985,8 @@ SquirtleAndFriendsCardList:
 	card_item STARMIE,           1
 	card_item LAPRAS,            1
 	card_item PIKACHU_LV12,      2
-	card_item MAGNEMITE_LV13,    1
-	card_item MAGNETON_LV28,     1
+	card_item WATTREL,    1
+	card_item KILOWATTREL,     1
 	card_item ELECTABUZZ_LV35,   1
 	card_item RATTATA,           2
 	card_item RATICATE,          1
@@ -1015,7 +1015,7 @@ BulbasaurAndFriendsCardList:
 	card_item TANGELA_LV12,     1
 	card_item PIKACHU_LV12,     2
 	card_item RAICHU_LV40,      1
-	card_item MAGNEMITE_LV13,   1
+	card_item WATTREL,   1
 	card_item ELECTABUZZ_LV35,  1
 	card_item ABRA,             2
 	card_item KADABRA,          1
