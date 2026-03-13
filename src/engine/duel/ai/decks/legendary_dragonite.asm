@@ -29,13 +29,13 @@ AIActionTable_LegendaryDragonite:
 .list_arena
 	dw KANGASKHAN
 	dw LAPRAS
-	dw CHARMANDER
+	dw FUECOCO
 	dw DRATINI
 	dw MAGIKARP
 	dw NULL
 
 .list_bench
-	dw CHARMANDER
+	dw FUECOCO
 	dw MAGIKARP
 	dw DRATINI
 	dw LAPRAS
@@ -43,14 +43,14 @@ AIActionTable_LegendaryDragonite:
 	dw NULL
 
 .list_retreat
-	ai_retreat CHARMANDER, -1
+	ai_retreat FUECOCO, -1
 	ai_retreat MAGIKARP,   -5
 	dw NULL
 
 .list_energy
-	ai_energy CHARMANDER,     3, +1
-	ai_energy CHARMELEON,     4, +1
-	ai_energy CHARIZARD,      5, +0
+	ai_energy FUECOCO,     3, +1
+	ai_energy CROCALOR,     4, +1
+	ai_energy SKELEDIRGEEX,      5, +0
 	ai_energy MAGIKARP,       3, +1
 	ai_energy GYARADOS,       4, -1
 	ai_energy DRATINI,        2, +0

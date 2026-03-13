@@ -1203,7 +1203,7 @@ CheckIfEnoughEnergiesToAttack:
 	push bc
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	call HandleEnergyBurn
+	;call HandleEnergyBurn
 	ldh a, [hCurMenuItem]
 	add a
 	ld e, a

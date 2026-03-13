@@ -90,22 +90,22 @@ GetCardResistance::
 
 ; this function checks if turn holder's CHARIZARD energy burn is active, and if so, turns
 ; all energies at wAttachedEnergies except double colorless energies into fire energies
-HandleEnergyBurn::
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	cp16 CHARIZARD
-	ret nz
-	xor a ; PLAY_AREA_ARENA
-	call CheckIsIncapableOfUsingPkmnPower
-	ret c
-	ld hl, wAttachedEnergies
-	ld c, NUM_COLORED_TYPES
-	xor a
-.zero_next_energy
-	ld [hli], a
-	dec c
-	jr nz, .zero_next_energy
-	ld a, [wTotalAttachedEnergies]
-	ld [wAttachedEnergies + FIRE], a
-	ret
+; HandleEnergyBurn::
+; 	ld a, DUELVARS_ARENA_CARD
+; 	call GetTurnDuelistVariable
+; 	call GetCardIDFromDeckIndex
+; 	cp16 CHARIZARD
+; 	ret nz
+; 	xor a ; PLAY_AREA_ARENA
+; 	call CheckIsIncapableOfUsingPkmnPower
+; 	ret c
+; 	ld hl, wAttachedEnergies
+; 	ld c, NUM_COLORED_TYPES
+; 	xor a
+; .zero_next_energy
+; 	ld [hli], a
+; 	dec c
+; 	jr nz, .zero_next_energy
+; 	ld a, [wTotalAttachedEnergies]
+; 	ld [wAttachedEnergies + FIRE], a
+; 	ret

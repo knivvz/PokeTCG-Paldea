@@ -460,3 +460,92 @@ HideName:
 	text "Hide"
 	done
 	
+NoGrassEnergyCardsInHandText:
+	text "You have no Grass Energy cards in"
+	line "your hand."
+	done
+
+BouquetMagicName:
+	text "Bouquet Magic"
+	done
+
+BouquetMagicDescription:
+	text "You must discard a Basic <GRASS> Energy"
+	line "card from your hand in order to use"
+	line "this Ability. Once during your turn,"
+	line "you may put 1 damage counter on 1 of"
+	line "your opponent's Benched Pokemon."
+	done
+
+ScratchingNailsName:
+	text "Scratching Nails"
+	done
+
+ScratchingNailsDescription:
+	text "If your opponent's Active Pokemon"
+	line "already has any damage counters on"
+	line "it, this attack does 60 more"
+	line "damage."
+	done
+
+MiniDrainName:
+	text "Mini Drain"
+	done
+
+LeafStepName:
+	text "Leaf Step"
+	done
+
+SkeledirgeExName:
+	text "Skeledirge EX"
+	done
+
+BurningVoiceName:
+	text "Burning Voice"
+	done
+
+BurningVoiceDescription:
+	text "This attack does 10 less damage for"
+	line "each damage counter on this Pokémon."
+	done
+
+VitalitySongName:
+	text "Vitality Song"
+	done
+
+VitalitySongDescription:
+	text "Heal 20 damage from each of your"
+	line "Pokémon."
+	done
+
+FuecocoName:
+	text "Fuecoco"
+	done
+
+LiveCoalName:
+	text "Live Coal"
+	done
+
+CrocalorName:
+	text "Crocalor"
+	done
+
+SteadyFirebreathingName:
+	text "Steady Firebreathing"
+	done
+
+HyperVoiceName:
+	text "Hyper Voice"
+	done
+
+QuaxlyName:
+	text "Quaxly"
+	done
+
+QuaxwellName:
+	text "Quaxwell"
+	done
+
+WaveSplashName:
+	text "Wave Splash"
+	done

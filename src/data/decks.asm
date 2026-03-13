@@ -89,9 +89,9 @@ UnnamedDeck2:
 	card_item BULBASAUR,                4
 	card_item IVYSAUR,                  3
 	card_item VENUSAUR_LV67,            2
-	card_item CHARMANDER,               4
-	card_item CHARMELEON,               3
-	card_item CHARIZARD,                2
+	card_item FUECOCO,               4
+	card_item CROCALOR,               3
+	card_item SKELEDIRGEEX,                2
 	card_item POKEMON_BREEDER,          3
 	card_item POKEMON_TRADER,           3
 	card_item ENERGY_RETRIEVAL,         2
@@ -117,12 +117,12 @@ PracticePlayerDeck:
 	card_item NEMONA,           1
 	card_item PSYCHIC_ENERGY, 1
 	card_item JYNX,           1
-	card_item SQUIRTLE,       1
+	card_item QUAXLY,       1
 	card_item WATER_ENERGY,   1
-	card_item SQUIRTLE,       1
+	card_item QUAXLY,       1
 	card_item WATER_ENERGY,   1
 	card_item PSYCHIC_ENERGY, 1
-	card_item WARTORTLE,      1
+	card_item QUAXWELL,      1
 	card_item NEMONA,           1
 	card_item WATER_ENERGY,   1
 	card_item BLASTOISE,      1
@@ -226,9 +226,9 @@ CharmanderAndFriendsDeck:
 	card_item FIRE_ENERGY,      10
 	card_item LIGHTNING_ENERGY,  8
 	card_item FIGHTING_ENERGY,   6
-	card_item CHARMANDER,        2
-	card_item CHARMELEON,        1
-	card_item CHARIZARD,         1
+	card_item FUECOCO,        2
+	card_item CROCALOR,        1
+	card_item SKELEDIRGEEX,         1
 	card_item GROWLITHE,         2
 	card_item ARCANINE_LV45,     1
 	card_item PONYTA,            2
@@ -262,7 +262,7 @@ CharmanderExtraDeck:
 	card_item PSYCHIC_ENERGY,  3
 	card_item BULBASAUR,       1
 	card_item IVYSAUR,         1
-	card_item NIDORANF,        2
+	card_item SPRIGATITO,        2
 	card_item CATERPIE,        2
 	card_item METAPOD,         1
 	card_item NIDORANM,        1
@@ -283,8 +283,8 @@ SquirtleAndFriendsDeck:
 	card_item WATER_ENERGY,    11
 	card_item FIGHTING_ENERGY,  6
 	card_item PSYCHIC_ENERGY,   8
-	card_item SQUIRTLE,         2
-	card_item WARTORTLE,        1
+	card_item QUAXLY,         2
+	card_item QUAXWELL,        1
 	card_item BLASTOISE,        1
 	card_item SEEL,             2
 	card_item DEWGONG,          1
@@ -320,15 +320,15 @@ SquirtleExtraDeck:
 	card_item GRASS_ENERGY,      3
 	card_item FIRE_ENERGY,       4
 	card_item LIGHTNING_ENERGY,  4
-	card_item NIDORANF,          2
+	card_item SPRIGATITO,          2
 	card_item NIDORANM,          1
 	card_item CATERPIE,          1
 	card_item METAPOD,           1
 	card_item WEEDLE,            1
 	card_item KAKUNA,            1
 	card_item PINSIR,            1
-	card_item CHARMANDER,        2
-	card_item CHARMELEON,        1
+	card_item FUECOCO,        2
+	card_item CROCALOR,        1
 	card_item MAGMAR_LV24,       1
 	card_item GROWLITHE,         1
 	card_item ARCANINE_LV45,     1
@@ -350,7 +350,7 @@ BulbasaurAndFriendsDeck:
 	card_item VENUSAUR_LV67,    1
 	card_item CATERPIE,         2
 	card_item METAPOD,          1
-	card_item NIDORANF,         2
+	card_item SPRIGATITO,         2
 	card_item NIDORANM,         2
 	card_item NIDORINO,         1
 	card_item TANGELA_LV12,     1
@@ -405,9 +405,9 @@ LightningAndFireDeck:
 	card_item FIRE_ENERGY,             10
 	card_item LIGHTNING_ENERGY,        10
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item CHARMANDER,               2
-	card_item CHARMELEON,               1
-	card_item CHARIZARD,                1
+	card_item FUECOCO,               2
+	card_item CROCALOR,               1
+	card_item SKELEDIRGEEX,                1
 	card_item GROWLITHE,                2
 	card_item ARCANINE_LV45,            1
 	card_item PONYTA,                   2
@@ -471,8 +471,8 @@ GrassAndPsychicDeck:
 	card_item WEEDLE,          2
 	card_item KAKUNA,          1
 	card_item BEEDRILL,        1
-	card_item NIDORANF,        2
-	card_item NIDORINA,        1
+	card_item SPRIGATITO,        2
+	card_item FLORAGATO,        1
 	card_item PARAS,           2
 	card_item PARASECT,        1
 	card_item EXEGGCUTE,       2
@@ -561,9 +561,9 @@ LegendaryDragoniteDeck:
 	deck_list_start
 	card_item WATER_ENERGY,            20
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item CHARMANDER,               3
-	card_item CHARMELEON,               2
-	card_item CHARIZARD,                2
+	card_item FUECOCO,               3
+	card_item CROCALOR,               2
+	card_item SKELEDIRGEEX,                2
 	card_item MAGIKARP,                 3
 	card_item GYARADOS,                 2
 	card_item LAPRAS,                   2
@@ -625,8 +625,8 @@ RockCrusherDeck:
 GoGoRainDanceDeck:
 	deck_list_start
 	card_item WATER_ENERGY,           24
-	card_item SQUIRTLE,                4
-	card_item WARTORTLE,               3
+	card_item QUAXLY,                4
+	card_item QUAXWELL,               3
 	card_item BLASTOISE,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
@@ -760,12 +760,12 @@ ImRonaldDeck:
 	card_item FIRE_ENERGY,       9
 	card_item WATER_ENERGY,     10
 	card_item FIGHTING_ENERGY,   8
-	card_item CHARMANDER,        3
-	card_item CHARMELEON,        2
+	card_item FUECOCO,        3
+	card_item CROCALOR,        2
 	card_item GROWLITHE,         3
 	card_item ARCANINE_LV45,     1
-	card_item SQUIRTLE,          3
-	card_item WARTORTLE,         2
+	card_item QUAXLY,          3
+	card_item QUAXWELL,         2
 	card_item SEEL,              2
 	card_item DEWGONG,           1
 	card_item LAPRAS,            2
@@ -1000,8 +1000,8 @@ WaterfrontPokemonDeck:
 	deck_list_start
 	card_item WATER_ENERGY,     18
 	card_item PSYCHIC_ENERGY,    7
-	card_item SQUIRTLE,          2
-	card_item WARTORTLE,         1
+	card_item QUAXLY,          2
+	card_item QUAXWELL,         1
 	card_item BLASTOISE,         1
 	card_item PSYDUCK,           2
 	card_item GOLDUCK,           1
@@ -1147,10 +1147,10 @@ EtceteraDeck:
 	card_item PSYCHIC_ENERGY,   4
 	card_item CATERPIE,         1
 	card_item WEEDLE,           1
-	card_item NIDORANF,         2
+	card_item SPRIGATITO,         2
 	card_item ODDISH,           2
 	card_item TANGELA_LV12,     2
-	card_item CHARMANDER,       2
+	card_item FUECOCO,       2
 	card_item MAGMAR_LV31,      1
 	card_item PIKACHU_LV12,     2
 	card_item MAGNEMITE_LV13,   1
@@ -1310,9 +1310,9 @@ FlyinPokemonDeck:
 LovelyNidoranDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,    24
-	card_item NIDORANF,         4
-	card_item NIDORINA,         2
-	card_item NIDOQUEEN,        2
+	card_item SPRIGATITO,         4
+	card_item FLORAGATO,         2
+	card_item MEOWSCARADAEX,        2
 	card_item NIDORANM,         3
 	card_item NIDORINO,         2
 	card_item NIDOKING,         1
@@ -1382,9 +1382,9 @@ FlamethrowerDeck:
 	deck_list_start
 	card_item FIRE_ENERGY,             22
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item CHARMANDER,               2
-	card_item CHARMELEON,               2
-	card_item CHARIZARD,                1
+	card_item FUECOCO,               2
+	card_item CROCALOR,               2
+	card_item SKELEDIRGEEX,                1
 	card_item VULPIX,                   2
 	card_item NINETALES_LV32,           1
 	card_item GROWLITHE,                2

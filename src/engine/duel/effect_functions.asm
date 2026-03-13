@@ -1,3 +1,160 @@
+SkeledirgeBurningVoice_AIEffect:
+	call SkeledirgeBurningVoice_DamageSubtractionEffect
+	jp SetDefiniteAIDamage
+
+SkeledirgeBurningVoice_DamageSubtractionEffect:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	ld e, a
+	ld hl, wDamage
+	ld a, [hl]
+	sub e
+	ld [hli], a
+	ld a, [hl]
+	sbc 0
+	ld [hl], a
+	rla
+	ret nc
+; cap it to 0 damage
+	xor a
+	jp SetDefiniteDamage
+
+
+SkeledirgeVitalitySong_Effect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+
+; go through every Pokemon in the Play Area
+; and heal 20 dmg
+.loop_play_area
+; check its damage
+	ld a, e
+	ldh [hTempPlayAreaLocation_ff9d], a
+	call GetCardDamageAndMaxHP
+	or a
+	jr z, .next_pkmn ; if no damage, skip Pokemon
+
+; heal 30 damage
+	push de
+	ld e, 20
+	call HealPlayAreaCardHP
+	
+.next_pkmn
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret
+
+
+ScratchingNails_Effect:
+	call SwapTurn
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP ; a = damage
+	cp 0
+	jr z, .done
+	ld a, 60
+	call AddToDamage
+
+.done
+	call SwapTurn
+	or a
+	ret 
+
+;TODO test this
+TealDance_AISelectEffect:
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff ; end of list
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr nz, .loop
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+SelectGrassEnergyFromHand:
+	call SetPkmnPowerAsUsed
+
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+	ldtx hl, ChooseBasicEnergyCardText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.select_card
+	bank1call DisplayCardList
+	jr c, .select_card ; can't cancel with b
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr nz, .select_card
+	
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	ret
+
+GrassEnergyInHand_Check:
+	; check for grass energy in hand
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff ; end of list
+	jr z, .set_carry
+    ;ld a, [hl]
+
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr z, .done
+	jp .loop
+.set_carry
+	ldtx hl, NoGrassEnergyCardsInHandText
+	scf
+.done
+	ret
+
+BouquetMagic_Check:
+	call Initialization_Check
+	ret c
+	call CheckIfAlreadyUsed
+	ret c
+	call GrassEnergyInHand_Check
+	ret c
+	call GustOfWind_BenchCheck
+	ret c
+	call SetPkmnPowerAsUsed
+	ret
+
+BouquetMagic_Effect:
+	call Spark_BenchDamageEffect
+	
+	; knock out if hp 0
+	bank1call HandleDestinyBondAndBetweenTurnKnockOuts
+	ret 
+
+BouquetMagic_PlayerSelectEffect:
+	call SelectGrassEnergyFromHand ; energy card at hTemp_ffa0
+	ld a, [hTemp_ffa0]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+	call Spark_PlayerSelectEffect
+	ret
+
 CreateListOfAllEnergyAttachedToArena:
 	ld c, 0
 	ld de, wDuelTempList
@@ -357,8 +514,8 @@ SetPkmnPowerAsUsed:
 	set USED_PKMN_POWER_THIS_TURN_F, [hl]
 	ret 
 
+; check if already used pkmn power this turn
 CheckIfAlreadyUsed:
-	; check if already used this turn
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	add DUELVARS_ARENA_CARD_FLAGS
@@ -1159,7 +1316,7 @@ CheckIfDeckIsEmpty:
 ; in the Deck anyway, and returns carry if No is selected.
 ; uses SEARCHEFFECT_* as input which determines what to search for:
 ;	no search effect = search for card ID in e
-;	SEARCHEFFECT_NIDORAN = search for either NidoranM or NidoranF
+;	SEARCHEFFECT_NIDORAN = search for either NidoranM or SPRIGATITO
 ;	SEARCHEFFECT_BASIC_FIGHTING = search for any Basic Fighting Pokemon
 ;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
 ;	SEARCHEFFECT_POKEMON = search for any Pokemon card
@@ -1230,7 +1387,7 @@ LookForCardsInDeck:
 	or a
 	ret
 
-; returns carry if no NidoranM or NidoranF card is found in Deck
+; returns carry if no NidoranM or SPRIGATITO card is found in Deck
 .SearchDeckForNidoran
 	ld hl, wDuelTempList
 .loop_deck_nidoran
@@ -1238,7 +1395,7 @@ LookForCardsInDeck:
 	cp $ff
 	jr z, .set_carry
 	call GetCardIDFromDeckIndex
-	cp16 NIDORANF
+	cp16 SPRIGATITO
 	jr z, .found_nidoran
 	cp16 NIDORANM
 	jr nz, .loop_deck_nidoran
@@ -1595,7 +1752,7 @@ AIPickAttackForAmnesia:
 	call SwapTurn
 	ld e, PLAY_AREA_ARENA
 	call GetPlayAreaCardAttachedEnergies
-	call HandleEnergyBurn
+	;call HandleEnergyBurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	ld d, a
@@ -2331,28 +2488,28 @@ Toxic_AIEffect:
 Toxic_DoublePoisonEffect:
 	jp DoublePoisonEffect
 
-BoyfriendsEffect:
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	ld c, 0
-.loop
-	ld a, [hl]
-	cp $ff
-	jr z, .done
-	call GetCardIDFromDeckIndex
-	cp16 NIDOKING
-	jr nz, .next
-	inc c
-.next
-	inc hl
-	jr .loop
-.done
-; c holds number of Nidoking found in Play Area
-	ld a, c
-	add a
-	call ATimes10
-	call AddToDamage ; adds 2 * 10 * c
-	ret
+; BoyfriendsEffect:
+; 	ld a, DUELVARS_ARENA_CARD
+; 	call GetTurnDuelistVariable
+; 	ld c, 0
+; .loop
+; 	ld a, [hl]
+; 	cp $ff
+; 	jr z, .done
+; 	call GetCardIDFromDeckIndex
+; 	cp16 NIDOKING
+; 	jr nz, .next
+; 	inc c
+; .next
+; 	inc hl
+; 	jr .loop
+; .done
+; ; c holds number of Nidoking found in Play Area
+; 	ld a, c
+; 	add a
+; 	call ATimes10
+; 	call AddToDamage ; adds 2 * 10 * c
+; 	ret
 
 FurySwipes10_AIEffect:
 	ld a, 30 / 2
@@ -2368,111 +2525,111 @@ FurySwipes10_MultiplierEffect:
 	call ATimes10
 	jp SetDefiniteDamage
 
-NidoranFCallForFamily_CheckDeckAndPlayArea:
-	call CheckIfDeckIsEmpty
-	ret c ; return if no cards in deck
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, NoSpaceOnTheBenchText
-	cp MAX_PLAY_AREA_POKEMON
-	ccf
-	ret
+; SPRIGATITOCallForFamily_CheckDeckAndPlayArea:
+; 	call CheckIfDeckIsEmpty
+; 	ret c ; return if no cards in deck
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetTurnDuelistVariable
+; 	ldtx hl, NoSpaceOnTheBenchText
+; 	cp MAX_PLAY_AREA_POKEMON
+; 	ccf
+; 	ret
 
-NidoranFCallForFamily_PlayerSelectEffect:
-	ld a, $ff
-	ldh [hTemp_ffa0], a
+; SPRIGATITOCallForFamily_PlayerSelectEffect:
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
 
-	call CreateDeckCardList
-	ldtx hl, ChooseNidoranFromDeckText
-	ldtx bc, NidoranMNidoranFText
-	ld d, SEARCHEFFECT_NIDORAN
-	call LookForCardsInDeck
-	ret c
+; 	call CreateDeckCardList
+; 	ldtx hl, ChooseSPRIGATITOromDeckText
+; 	ldtx bc, NidoranMSPRIGATITOText
+; 	ld d, SEARCHEFFECT_NIDORAN
+; 	call LookForCardsInDeck
+; 	ret c
 
-; draw Deck list interface and print text
-	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
-	ldtx hl, ChooseNidoranText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
+; ; draw Deck list interface and print text
+; 	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+; 	ldtx hl, ChooseNidoranText
+; 	ldtx de, DuelistDeckText
+; 	bank1call SetCardListHeaderText
 
-.loop
-	bank1call DisplayCardList
-	jr c, .pressed_b
-	call GetCardIDFromDeckIndex
-	cp16 NIDORANF
-	jr z, .selected_nidoran
-	cp16 NIDORANM
-	jr nz, .loop ; .play_sfx would be more appropriate here
+; .loop
+; 	bank1call DisplayCardList
+; 	jr c, .pressed_b
+; 	call GetCardIDFromDeckIndex
+; 	cp16 SPRIGATITO
+; 	jr z, .selected_nidoran
+; 	cp16 NIDORANM
+; 	jr nz, .loop ; .play_sfx would be more appropriate here
 
-.selected_nidoran
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	or a
-	ret
+; .selected_nidoran
+; 	ldh a, [hTempCardIndex_ff98]
+; 	ldh [hTemp_ffa0], a
+; 	or a
+; 	ret
 
-.play_sfx
-	; play SFX and loop back
-	call PlaySFX_InvalidChoice
-	jr .loop
+; .play_sfx
+; 	; play SFX and loop back
+; 	call PlaySFX_InvalidChoice
+; 	jr .loop
 
-.pressed_b
-; figure if Player can exit the screen without selecting,
-; that is, if the Deck has no NidoranF or NidoranM card.
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop_b_press
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next
-	ld a, l
-	call GetCardIDFromDeckIndex
-	cp16 NIDORANF
-	jr z, .play_sfx ; found, go back to top loop
-	cp16 NIDORANM
-	jr z, .play_sfx ; found, go back to top loop
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_b_press
+; .pressed_b
+; ; figure if Player can exit the screen without selecting,
+; ; that is, if the Deck has no SPRIGATITO or NidoranM card.
+; 	ld a, DUELVARS_CARD_LOCATIONS
+; 	call GetTurnDuelistVariable
+; .loop_b_press
+; 	ld a, [hl]
+; 	cp CARD_LOCATION_DECK
+; 	jr nz, .next
+; 	ld a, l
+; 	call GetCardIDFromDeckIndex
+; 	cp16 SPRIGATITO
+; 	jr z, .play_sfx ; found, go back to top loop
+; 	cp16 NIDORANM
+; 	jr z, .play_sfx ; found, go back to top loop
+; .next
+; 	inc l
+; 	ld a, l
+; 	cp DECK_SIZE
+; 	jr c, .loop_b_press
 
-; no Nidoran in Deck, can safely exit screen
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
-	ret
+; ; no Nidoran in Deck, can safely exit screen
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
+; 	or a
+; 	ret
 
-NidoranFCallForFamily_AISelectEffect:
-	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
-	ldh [hTemp_ffa0], a
-	cp $ff
-	ret z ; none found
-	call GetCardIDFromDeckIndex
-	cp16 NIDORANF
-	jr z, .found
-	cp16 NIDORANM
-	jr nz, .loop_deck
-.found
-	ret
+; SPRIGATITOCallForFamily_AISelectEffect:
+; 	call CreateDeckCardList
+; 	ld hl, wDuelTempList
+; .loop_deck
+; 	ld a, [hli]
+; 	ldh [hTemp_ffa0], a
+; 	cp $ff
+; 	ret z ; none found
+; 	call GetCardIDFromDeckIndex
+; 	cp16 SPRIGATITO
+; 	jr z, .found
+; 	cp16 NIDORANM
+; 	jr nz, .loop_deck
+; .found
+; 	ret
 
-NidoranFCallForFamily_PutInPlayAreaEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .shuffle
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call PutHandPokemonCardInPlayArea
-	call IsPlayerTurn
-	jr c, .shuffle
-	; display card on screen
-	ldh a, [hTemp_ffa0]
-	ldtx hl, PlacedOnTheBenchText
-	bank1call DisplayCardDetailScreen
-.shuffle
-	jp ShuffleCardsInDeck
+; SPRIGATITOCallForFamily_PutInPlayAreaEffect:
+; 	ldh a, [hTemp_ffa0]
+; 	cp $ff
+; 	jr z, .shuffle
+; 	call SearchCardInDeckAndAddToHand
+; 	call AddCardToHand
+; 	call PutHandPokemonCardInPlayArea
+; 	call IsPlayerTurn
+; 	jr c, .shuffle
+; 	; display card on screen
+; 	ldh a, [hTemp_ffa0]
+; 	ldtx hl, PlacedOnTheBenchText
+; 	bank1call DisplayCardDetailScreen
+; .shuffle
+; 	jp ShuffleCardsInDeck
 
 HornHazard_AIEffect:
 	ld a, 30 / 2
@@ -3215,14 +3372,14 @@ OmanyteWaterGunEffect:
 	lb bc, 1, 0
 	jp ApplyExtraWaterEnergyDamageBonus
 
-WithdrawEffect:
-	ldtx de, IfHeadsNoDamageNextTurnText
-	call TossCoin
-	jp nc, SetWasUnsuccessful
-	ld a, ATK_ANIM_PROTECT
-	ld [wLoadedAttackAnimation], a
-	ld a, SUBSTATUS1_NO_DAMAGE_10
-	jp ApplySubstatus1ToDefendingCard
+; WithdrawEffect:
+; 	ldtx de, IfHeadsNoDamageNextTurnText
+; 	call TossCoin
+; 	jp nc, SetWasUnsuccessful
+; 	ld a, ATK_ANIM_PROTECT
+; 	ld [wLoadedAttackAnimation], a
+; 	ld a, SUBSTATUS1_NO_DAMAGE_10
+; 	jp ApplySubstatus1ToDefendingCard
 
 RainDanceEffect:
 	scf

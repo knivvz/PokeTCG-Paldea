@@ -4938,13 +4938,13 @@ AIDecide_Pokeball:
 	ld de, FIRE_ENERGY
 	call LookForCardIDInHandList_Bank8
 	jr nc, .lightning
-	ld de, CHARMANDER
+	ld de, FUECOCO
 	call LookForCardIDInHandList_Bank8
 	jr c, .lightning
 	ld de, MAGMAR_LV31
 	call LookForCardIDInHandList_Bank8
 	jr c, .lightning
-	ld de, CHARMANDER
+	ld de, FUECOCO
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5036,20 +5036,20 @@ AIDecide_Pokeball:
 	ld bc, NIDOKING
 	call LookForCardIDInDeck_GivenCardIDInHand
 	ret c
-	ld bc, NIDORANF
-	ld de, NIDORINA
+	ld bc, SPRIGATITO
+	ld de, FLORAGATO
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	ret c
-	ld bc, NIDORINA
-	ld de, NIDOQUEEN
+	ld bc, FLORAGATO
+	ld de, MEOWSCARADAEX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	ret c
-	ld de, NIDORANF
-	ld bc, NIDORINA
+	ld de, SPRIGATITO
+	ld bc, FLORAGATO
 	call LookForCardIDInDeck_GivenCardIDInHand
 	ret c
-	ld de, NIDORINA
-	ld bc, NIDOQUEEN
+	ld de, FLORAGATO
+	ld bc, MEOWSCARADAEX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	ret c
 	ret
@@ -5631,20 +5631,20 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	ld bc, DRAGONITE_LV41
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, CHARMANDER
-	ld de, CHARMELEON
+	ld bc, FUECOCO
+	ld de, CROCALOR
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld bc, CHARMELEON
-	ld de, CHARIZARD
+	ld bc, CROCALOR
+	ld de, SKELEDIRGEEX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, CHARMANDER
-	ld bc, CHARMELEON
+	ld de, FUECOCO
+	ld bc, CROCALOR
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld de, CHARMELEON
-	ld bc, CHARIZARD
+	ld de, CROCALOR
+	ld bc, SKELEDIRGEEX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	jr .no_carry
@@ -5662,7 +5662,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	ld de, DRAGONAIR
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, CHARMELEON
+	ld de, CROCALOR
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, GYARADOS
@@ -5671,7 +5671,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	ld de, MAGIKARP
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, CHARMANDER
+	ld de, FUECOCO
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, DRATINI
@@ -6053,20 +6053,20 @@ AIDecide_PokemonTrader_Flamethrower:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld bc, CHARMANDER
-	ld de, CHARMELEON
+	ld bc, FUECOCO
+	ld de, CROCALOR
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, CHARMELEON
-	ld de, CHARIZARD
+	ld bc, CROCALOR
+	ld de, SKELEDIRGEEX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, CHARMANDER
-	ld bc, CHARMELEON
+	ld de, FUECOCO
+	ld bc, CROCALOR
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, CHARMELEON
-	ld bc, CHARIZARD
+	ld de, CROCALOR
+	ld bc, SKELEDIRGEEX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, VULPIX

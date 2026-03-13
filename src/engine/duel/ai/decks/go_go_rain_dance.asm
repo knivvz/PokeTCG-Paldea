@@ -30,25 +30,25 @@ AIActionTable_GoGoRainDance:
 	dw LAPRAS
 	dw HORSEA
 	dw GOLDEEN
-	dw SQUIRTLE
+	dw QUAXLY
 	dw NULL
 
 .list_bench
-	dw SQUIRTLE
+	dw QUAXLY
 	dw HORSEA
 	dw GOLDEEN
 	dw LAPRAS
 	dw NULL
 
 .list_retreat
-	ai_retreat SQUIRTLE,  -3
-	ai_retreat WARTORTLE, -2
+	ai_retreat QUAXLY,  -3
+	ai_retreat QUAXWELL, -2
 	ai_retreat HORSEA,    -1
 	dw NULL
 
 .list_energy
-	ai_energy SQUIRTLE,  2, +0
-	ai_energy WARTORTLE, 3, +0
+	ai_energy QUAXLY,  2, +0
+	ai_energy QUAXWELL, 3, +0
 	ai_energy BLASTOISE, 5, +0
 	ai_energy GOLDEEN,   1, +0
 	ai_energy SEAKING,   2, +0

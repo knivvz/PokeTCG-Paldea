@@ -21,9 +21,9 @@
 	const BEEDRILL                    ; $11
 	const EKANS                       ; $12
 	const ARBOK                       ; $13
-	const NIDORANF                    ; $14
-	const NIDORINA                    ; $15
-	const NIDOQUEEN                   ; $16
+	const SPRIGATITO                    ; $14
+	const FLORAGATO                    ; $15
+	const MEOWSCARADAEX                   ; $16
 	const NIDORANM                    ; $17
 	const NIDORINO                    ; $18
 	const NIDOKING                    ; $19
@@ -49,9 +49,9 @@
 	const TANGELA_LV12                ; $2d
 	const SCYTHER                     ; $2e
 	const PINSIR                      ; $2f
-	const CHARMANDER                  ; $30
-	const CHARMELEON                  ; $31
-	const CHARIZARD                   ; $32
+	const FUECOCO                  ; $30
+	const CROCALOR                  ; $31
+	const SKELEDIRGEEX                   ; $32
 	const VULPIX                      ; $33
 	const NINETALES_LV32              ; $34
 	const NINETALES_LV35              ; $35
@@ -66,8 +66,8 @@
 	const FLAREON_LV28                ; $3e
 	const MOLTRES_LV35                ; $3f
 	const MOLTRES_LV37                ; $40
-	const SQUIRTLE                    ; $41
-	const WARTORTLE                   ; $42
+	const QUAXLY                    ; $41
+	const QUAXWELL                   ; $42
 	const BLASTOISE                   ; $43
 	const PSYDUCK                     ; $44
 	const GOLDUCK                     ; $45

@@ -406,7 +406,7 @@ CheckEnergyNeededForAttack:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetPlayAreaCardAttachedEnergies
-	bank1call HandleEnergyBurn
+	;bank1call HandleEnergyBurn
 
 	xor a
 	ld [wTempLoadedAttackEnergyCost], a
@@ -872,7 +872,7 @@ CheckEnergyNeededForAttackAfterDiscard:
 	dec [hl]
 
 .asm_1570c
-	bank1call HandleEnergyBurn
+	;bank1call HandleEnergyBurn
 	xor a
 	ld [wTempLoadedAttackEnergyCost], a
 	ld [wTempLoadedAttackEnergyNeededAmount], a
@@ -2124,7 +2124,7 @@ CheckIfNoSurplusEnergyForAttack:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetPlayAreaCardAttachedEnergies
-	bank1call HandleEnergyBurn
+	;bank1call HandleEnergyBurn
 	xor a
 	ld [wTempLoadedAttackEnergyCost], a
 	ld [wTempLoadedAttackEnergyNeededAmount], a

@@ -10,8 +10,8 @@ HandleSpecialAIAttacks:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 
-	cp16 NIDORANF
-	jp z, .NidoranFCallForFamily
+	; cp16 NIDORANF
+	; jp z, .NidoranFCallForFamily
 	cp16 ODDISH
 	jp z, .CallForFamily
 	cp16 BELLSPROUT
@@ -76,25 +76,25 @@ HandleSpecialAIAttacks:
 
 ; if any of NidoranM or NidoranF is found in deck,
 ; return a score of $80 + slots available in bench.
-.NidoranFCallForFamily:
-	ld de, NIDORANM
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank5
-	jr c, .found_nidoran
-	ld de, NIDORANF
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank5
-	jr nc, .zero_score
-.found_nidoran
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	cp MAX_PLAY_AREA_POKEMON
-	jr nc, .zero_score
-	ld b, a
-	ld a, MAX_PLAY_AREA_POKEMON
-	sub b
-	add $80
-	ret
+; .NidoranFCallForFamily:
+; 	ld de, NIDORANM
+; 	ld a, CARD_LOCATION_DECK
+; 	call LookForCardIDInLocation_Bank5
+; 	jr c, .found_nidoran
+; 	ld de, NIDORANF
+; 	ld a, CARD_LOCATION_DECK
+; 	call LookForCardIDInLocation_Bank5
+; 	jr nc, .zero_score
+; .found_nidoran
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetTurnDuelistVariable
+; 	cp MAX_PLAY_AREA_POKEMON
+; 	jr nc, .zero_score
+; 	ld b, a
+; 	ld a, MAX_PLAY_AREA_POKEMON
+; 	sub b
+; 	add $80
+; 	ret
 
 ; checks for certain card IDs of Fighting color in deck.
 ; if any of them are found, return a score of

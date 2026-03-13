@@ -714,10 +714,10 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	ld hl, wLoadedCard2ID
 	cphl ZAPDOS_LV64
 	jr z, .zapdos
-	cphl CHARIZARD
-	jr z, .charizard_or_exeggutor
-	cphl EXEGGUTOR
-	jr z, .charizard_or_exeggutor
+	; cphl CHARIZARD
+	; jr z, .charizard_or_exeggutor
+	; cphl EXEGGUTOR
+	; jr z, .charizard_or_exeggutor
 	ld hl, wLoadedCard2Atk2EnergyCost
 	jr .fire
 .first_attack
@@ -793,10 +793,10 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 
 ; Charizard's Fire Spin and Exeggutor's Big Eggsplosion,
 ; return carry.
-.charizard_or_exeggutor
-	lb bc, FALSE, TRUE
-	scf
-	ret
+; .charizard_or_exeggutor
+; 	lb bc, FALSE, TRUE
+; 	scf
+; 	ret
 
 ; called after the AI has decided which card to attach
 ; energy from hand. AI does checks to determine whether
@@ -994,7 +994,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Charmander and Dratini.
 .legendary_dragonite_deck
 	call .GetArenaCardID
-	cp16 CHARMANDER
+	cp16 FUECOCO
 	jr z, .check_colorless_attached
 	cp16 DRATINI
 	jr z, .check_colorless_attached

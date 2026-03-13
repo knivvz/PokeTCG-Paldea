@@ -402,17 +402,17 @@ AIDecideSpecialEvolutions:
 
 .legendary_dragonite
 	ld hl, wLoadedCard2ID
-	cphl CHARMELEON
-	jr z, .charmeleon
+	cphl CROCALOR
+	jr z, .crocalor
 	cphl MAGIKARP
 	jr z, .magikarp
 	cphl DRAGONAIR
 	jr z, .dragonair
 	ret
 
-; check if number of energy cards attached to Charmeleon are at least 3
+; check if number of energy cards attached to crocalor are at least 3
 ; and if adding the energy cards in hand makes at least 6 energy cards
-.charmeleon
+.crocalor
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call CountNumberOfEnergyCardsAttached

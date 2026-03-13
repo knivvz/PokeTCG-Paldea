@@ -81,8 +81,8 @@ ArbokDescription:
 	line "from area to area."
 	done
 
-NidoranFName:
-	text "Nidoran♀"
+SprigatitoName:
+	text "Sprigatito"
 	done
 
 FurySwipesName:
@@ -116,8 +116,8 @@ NidoranFDescription:
 	line "The female has smaller horns."
 	done
 
-NidorinaName:
-	text "Nidorina"
+FloragatoName:
+	text "Floragato"
 	done
 
 SupersonicName:
@@ -139,8 +139,8 @@ NidorinaDescription:
 	line "clawing and biting."
 	done
 
-NidoqueenName:
-	text "Nidoqueen"
+MeowscaradaExName:
+	text "Meowscarada Ex"
 	done
 
 BoyfriendsName:
@@ -817,8 +817,8 @@ CharmeleonDescription:
 	line "high levels."
 	done
 
-CharizardName:
-	text "Charizard"
+SkeledirgeName:
+	text "Skeledirge"
 	done
 
 EnergyBurnName:
@@ -829,9 +829,9 @@ EnergyBurnDescription:
 	text "As often as you like during your"
 	line "turn (before your attack), you may"
 	line "turn all Energy attached to"
-	line "Charizard into <FIRE> Energy for the"
+	line "Skeledirge into <FIRE> Energy for the"
 	line "rest of the turn. This power can't"
-	line "be used if Charizard is Asleep,"
+	line "be used if Skeledirge is Asleep,"
 	line "Confused, or Paralyzed."
 	done
 
@@ -841,7 +841,7 @@ FireSpinName:
 
 FireSpinDescription:
 	text "Discard 2 Energy cards attached to"
-	line "Charizard in order to use this"
+	line "Skeledirge in order to use this"
 	line "attack."
 	done
 

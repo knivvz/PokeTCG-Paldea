@@ -278,8 +278,8 @@ ParalyzeCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  4
 	card_item CATERPIE,                 3
 	card_item METAPOD,                  2
-	card_item SQUIRTLE,                 3
-	card_item WARTORTLE,                2
+	card_item QUAXLY,                 3
+	card_item QUAXWELL,                2
 	card_item WIMPOD,                 3
 	card_item GOLISOPODEX,                 2
 	card_item STARYU,                   4
@@ -316,8 +316,8 @@ EnergyRemovalCardList:
 RainDancerCardList:
 	deck_list_start
 	card_item WATER_ENERGY,           24
-	card_item SQUIRTLE,                4
-	card_item WARTORTLE,               3
+	card_item QUAXLY,                4
+	card_item QUAXWELL,               3
 	card_item BLASTOISE,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
@@ -703,9 +703,9 @@ StrangePsyshockCardList:
 LovelyNidoranCardList:
 	deck_list_start
 	card_item GRASS_ENERGY,     20
-	card_item NIDORANF,          4
-	card_item NIDORINA,          3
-	card_item NIDOQUEEN,         2
+	card_item SPRIGATITO,          4
+	card_item FLORAGATO,          3
+	card_item MEOWSCARADAEX,         2
 	card_item NIDORANM,          4
 	card_item NIDORINO,          4
 	card_item NIDOKING,          4
@@ -724,9 +724,9 @@ ScienceCorpsCardList:
 	card_item GRASS_ENERGY,    26
 	card_item EKANS,            2
 	card_item ARBOK,            1
-	card_item NIDORANF,         2
-	card_item NIDORINA,         1
-	card_item NIDOQUEEN,        1
+	card_item SPRIGATITO,         2
+	card_item FLORAGATO,         1
+	card_item MEOWSCARADAEX,        1
 	card_item NIDORANM,         3
 	card_item NIDORINO,         2
 	card_item NIDOKING,         1
@@ -841,9 +841,9 @@ ChariSaurCardList:
 	card_item BULBASAUR,         4
 	card_item IVYSAUR,           3
 	card_item VENUSAUR_LV67,     2
-	card_item CHARMANDER,        4
-	card_item CHARMELEON,        3
-	card_item CHARIZARD,         2
+	card_item FUECOCO,        4
+	card_item CROCALOR,        3
+	card_item SKELEDIRGEEX,         2
 	card_item FLAREON_LV22,      3
 	card_item EEVEE,             4
 	card_item NEMONA,              2
@@ -859,8 +859,8 @@ TrafficLightCardList:
 	card_item FIRE_ENERGY,      10
 	card_item WATER_ENERGY,      8
 	card_item LIGHTNING_ENERGY,  8
-	card_item CHARMANDER,        3
-	card_item CHARMELEON,        2
+	card_item FUECOCO,        3
+	card_item CROCALOR,        2
 	card_item PONYTA,            3
 	card_item RAPIDASH,          2
 	card_item FLAREON_LV22,      2
@@ -879,9 +879,9 @@ FirePokemonCardList:
 	deck_list_start
 	card_item FIRE_ENERGY,             24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item CHARMANDER,               3
-	card_item CHARMELEON,               2
-	card_item CHARIZARD,                1
+	card_item FUECOCO,               3
+	card_item CROCALOR,               2
+	card_item SKELEDIRGEEX,                1
 	card_item VULPIX,                   3
 	card_item NINETALES_LV32,           1
 	card_item NINETALES_LV35,           1
@@ -936,12 +936,12 @@ CharmanderAndFriendsCardList:
 	card_item WATER_ENERGY,     6
 	card_item CATERPIE,         2
 	card_item METAPOD,          1
-	card_item NIDORANF,         2
+	card_item SPRIGATITO,         2
 	card_item NIDORANM,         1
 	card_item PINSIR,           1
-	card_item CHARMANDER,       2
-	card_item CHARMELEON,       1
-	card_item CHARIZARD,        1
+	card_item FUECOCO,       2
+	card_item CROCALOR,       1
+	card_item SKELEDIRGEEX,        1
 	card_item GROWLITHE,        2
 	card_item ARCANINE_LV45,    1
 	card_item PONYTA,           2
@@ -969,13 +969,13 @@ SquirtleAndFriendsCardList:
 	card_item FIRE_ENERGY,       8
 	card_item WATER_ENERGY,     11
 	card_item LIGHTNING_ENERGY,  6
-	card_item CHARMANDER,        2
-	card_item CHARMELEON,        1
+	card_item FUECOCO,        2
+	card_item CROCALOR,        1
 	card_item GROWLITHE,         1
 	card_item ARCANINE_LV45,     1
 	card_item MAGMAR_LV24,       1
-	card_item SQUIRTLE,          2
-	card_item WARTORTLE,         1
+	card_item QUAXLY,          2
+	card_item QUAXWELL,         1
 	card_item BLASTOISE,         1
 	card_item SEEL,              2
 	card_item DEWGONG,           1
@@ -1009,7 +1009,7 @@ BulbasaurAndFriendsCardList:
 	card_item BULBASAUR,        2
 	card_item IVYSAUR,          1
 	card_item VENUSAUR_LV67,    1
-	card_item NIDORANF,         2
+	card_item SPRIGATITO,         2
 	card_item NIDORANM,         2
 	card_item NIDORINO,         1
 	card_item TANGELA_LV12,     1
@@ -1168,9 +1168,9 @@ LegendaryDragoniteCardList:
 	deck_list_start
 	card_item WATER_ENERGY,            20
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item CHARMANDER,               3
-	card_item CHARMELEON,               2
-	card_item CHARIZARD,                2
+	card_item FUECOCO,               3
+	card_item CROCALOR,               2
+	card_item SKELEDIRGEEX,                2
 	card_item MAGIKARP,                 3
 	card_item GYARADOS,                 2
 	card_item LAPRAS,                   2

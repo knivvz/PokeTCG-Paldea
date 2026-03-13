@@ -23,9 +23,9 @@ CardPointers::
 	dab BeedrillCard
 	dab EkansCard
 	dab ArbokCard
-	dab NidoranFCard
-	dab NidorinaCard
-	dab NidoqueenCard
+	dab SprigatitoCard
+	dab FloragatoCard
+	dab MeowscaradaExCard
 	dab NidoranMCard
 	dab NidorinoCard
 	dab NidokingCard
@@ -51,9 +51,9 @@ CardPointers::
 	dab TangelaLv12Card
 	dab ScytherCard
 	dab PinsirCard
-	dab CharmanderCard
-	dab CharmeleonCard
-	dab CharizardCard
+	dab FuecocoCard
+	dab CrocalorCard
+	dab SkeledirgeExCard
 	dab VulpixCard
 	dab NinetalesLv32Card
 	dab NinetalesLv35Card
@@ -68,8 +68,8 @@ CardPointers::
 	dab FlareonLv28Card
 	dab MoltresLv35Card
 	dab MoltresLv37Card
-	dab SquirtleCard
-	dab WartortleCard
+	dab QuaxlyCard
+	dab QuaxwellCard
 	dab BlastoiseCard
 	dab PsyduckCard
 	dab GolduckCard

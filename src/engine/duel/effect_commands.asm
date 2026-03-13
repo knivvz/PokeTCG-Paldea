@@ -35,6 +35,23 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+SkeledirgeBurningVoiceEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SkeledirgeBurningVoice_DamageSubtractionEffect
+	dbw EFFECTCMDTYPE_AI, SkeledirgeBurningVoice_AIEffect
+	db  $00
+SkeledirgeVitalitySongEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SkeledirgeVitalitySong_Effect
+	db  $00
+ScratchingNailsEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, ScratchingNails_Effect
+	db $00
+
+BouquetMagicEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, BouquetMagic_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BouquetMagic_Effect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, BouquetMagic_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, TealDance_AISelectEffect
+	db $00
 
 GolisopodExSwingAndSkedaddleEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, GolisopodExSwingAndSkedaddle_PlayerSelectEffect
@@ -278,21 +295,21 @@ NidokingToxicEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Toxic_AIEffect
 	db  $00
 
-NidoqueenBoyfriendsEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
-	db  $00
+; NidoqueenBoyfriendsEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BoyfriendsEffect
+; 	db  $00
 
-NidoranFFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes10_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, FurySwipes10_AIEffect
-	db  $00
+; NidoranFFurySwipesEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes10_MultiplierEffect
+; 	dbw EFFECTCMDTYPE_AI, FurySwipes10_AIEffect
+; 	db  $00
 
-NidoranFCallForFamilyEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, NidoranFCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NidoranFCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NidoranFCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, NidoranFCallForFamily_AISelectEffect
-	db  $00
+; NidoranFCallForFamilyEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, NidoranFCallForFamily_CheckDeckAndPlayArea
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, NidoranFCallForFamily_PutInPlayAreaEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, NidoranFCallForFamily_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, NidoranFCallForFamily_AISelectEffect
+; 	db  $00
 
 NidoranMHornHazardEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HornHazard_NoDamage50PercentEffect
@@ -452,9 +469,9 @@ OmanyteWaterGunEffectCommands:
 	dbw EFFECTCMDTYPE_AI, OmanyteWaterGunEffect
 	db  $00
 
-WartortleWithdrawEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
-	db  $00
+; WartortleWithdrawEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
+; 	db  $00
 
 BlastoiseRainDanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
@@ -548,13 +565,13 @@ StarmieStarFreezeEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-SquirtleBubbleEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
-	db  $00
+; SquirtleBubbleEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
+; 	db  $00
 
-SquirtleWithdrawEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
-	db  $00
+; SquirtleWithdrawEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
+; 	db  $00
 
 HorseaSmokescreenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SmokescreenEffect
@@ -692,12 +709,12 @@ NinetalesFireBlastEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, FireBlast_AISelectEffect
 	db  $00
 
-CharmanderEmberEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Ember_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Ember_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Ember_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, Ember_AISelectEffect
-	db  $00
+; CharmanderEmberEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Ember_CheckEnergy
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Ember_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, Ember_DiscardEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, Ember_AISelectEffect
+; 	db  $00
 
 MoltresWildfireEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, Wildfire_CheckEnergy
@@ -747,16 +764,16 @@ CharmeleonFlamethrowerEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Flamethrower_AISelectEffect
 	db  $00
 
-CharizardEnergyBurnEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyBurnEffect
-	db  $00
+; CharizardEnergyBurnEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, EnergyBurnEffect
+; 	db  $00
 
-CharizardFireSpinEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FireSpin_CheckEnergy
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FireSpin_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FireSpin_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, FireSpin_AISelectEffect
-	db  $00
+; CharizardFireSpinEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, FireSpin_CheckEnergy
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, FireSpin_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, FireSpin_DiscardEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, FireSpin_AISelectEffect
+; 	db  $00
 
 VulpixConfuseRayEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect

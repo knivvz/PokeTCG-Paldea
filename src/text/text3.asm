@@ -505,7 +505,7 @@ ReplaceEmAllDescriptionText:
 	done
 
 ChariSaurDescriptionText:
-	text "Attack with Charizard - with "
+	text "Attack with Skeledirge - with "
 	line "just a few Fire Energy cards!"
 	done
 
@@ -515,7 +515,7 @@ TrafficLightDescriptionText:
 	done
 
 FirePokemonDescriptionText:
-	text "With Fire Pokémon like Charizard, "
+	text "With Fire Pokémon like Skeledirge, "
 	line "Rapidash and Magmar, it's hot!"
 	done
 

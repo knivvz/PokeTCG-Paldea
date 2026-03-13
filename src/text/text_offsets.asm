@@ -2045,19 +2045,19 @@ TextOffsets::
 	textpointer PoisonFangName
 	textpointer CobraName
 	textpointer ArbokDescription
-	textpointer NidoranFName
+	textpointer SprigatitoName
 	textpointer FurySwipesName
 	textpointer TripleAttackX10Description
 	textpointer CallForFamilyName
 	textpointer NidoranFsCallForFamilyDescription
 	textpointer PoisonPinName
 	textpointer NidoranFDescription
-	textpointer NidorinaName
+	textpointer FloragatoName
 	textpointer SupersonicName
 	textpointer MayInflictConfusionDescription
 	textpointer DoubleKickName
 	textpointer NidorinaDescription
-	textpointer NidoqueenName
+	textpointer MeowscaradaExName
 	textpointer BoyfriendsName
 	textpointer BoyfriendsDescription
 	textpointer MegaPunchName
@@ -2192,7 +2192,7 @@ TextOffsets::
 	textpointer CharmeleonsFlamethrowerDescription
 	textpointer FlameName
 	textpointer CharmeleonDescription
-	textpointer CharizardName
+	textpointer SkeledirgeName
 	textpointer EnergyBurnName
 	textpointer EnergyBurnDescription
 	textpointer FireSpinName
@@ -2958,3 +2958,23 @@ TextOffsets::
 	textpointer SwingAndSkedaddleDescription
 	textpointer AquaBladeName
 	textpointer HideName
+	textpointer NoGrassEnergyCardsInHandText
+	textpointer BouquetMagicName
+	textpointer BouquetMagicDescription
+	textpointer ScratchingNailsName
+	textpointer ScratchingNailsDescription
+	textpointer MiniDrainName
+	textpointer LeafStepName
+	textpointer SkeledirgeExName
+	textpointer BurningVoiceName
+	textpointer BurningVoiceDescription
+	textpointer VitalitySongName
+	textpointer VitalitySongDescription
+	textpointer FuecocoName
+	textpointer LiveCoalName
+	textpointer CrocalorName
+	textpointer SteadyFirebreathingName
+	textpointer HyperVoiceName
+	textpointer QuaxlyName
+	textpointer QuaxwellName
+	textpointer WaveSplashName

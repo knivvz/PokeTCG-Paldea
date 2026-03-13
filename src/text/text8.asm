@@ -745,47 +745,47 @@ Text06fa:
 	done
 
 Text06fb:
-	text "Charizard! Charizard!"
-	line "Charizard, light my fire!"
+	text "Skeledirge! Skeledirge!"
+	line "Skeledirge, light my fire!"
 	line "Blastoise is cool,"
-	line "But I prefer Charizard!"
+	line "But I prefer Skeledirge!"
 	line "I'll give you this Blastoise"
-	line "if you give me a Charizard!"
+	line "if you give me a Skeledirge!"
 	done
 
 Text06fc:
 	text "Hi!"
-	line "Did you bring me a Charizard?"
-	line "Would you trade your Charizard"
+	line "Did you bring me a Skeledirge?"
+	line "Would you trade your Skeledirge"
 	line "for my Blastoise?"
 	done
 
 Text06fd:
-	text "I want a Charizard!"
-	line "Charizard! Charizard!"
+	text "I want a Skeledirge!"
+	line "Skeledirge! Skeledirge!"
 	done
 
 Text06fe:
 	text "Excuse me..."
-	line "Do you have a Charizard..."
+	line "Do you have a Skeledirge..."
 	done
 
 Text06ff:
 	text "Then let's trade!"
-	line "Blastoise for a Charizard."
+	line "Blastoise for a Skeledirge."
 	line "Oops!"
-	line "Your Charizard is in your Deck!"
+	line "Your Skeledirge is in your Deck!"
 	line "I can't take that."
 	line "Please trade me some other time!"
 	done
 
 Text0700:
 	text "OK then, let's trade!"
-	line "Blastoise for a Charizard!"
+	line "Blastoise for a Skeledirge!"
 	done
 
 Text0701:
-	text "<RAMNAME> traded a Charizard"
+	text "<RAMNAME> traded a Skeledirge"
 	line "for a Blastoise!"
 	done
 
