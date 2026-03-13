@@ -3200,46 +3200,74 @@ QuaxwellCard:
 	tx WartortleDescription ; description
 	db AI_INFO_ENCOURAGE_EVO | HAS_EVOLUTION ; AI info
 
-BlastoiseCard:
+QuaquavalExCard:
 	db TYPE_PKMN_WATER ; type
 	gfx BlastoiseCardGfx ; gfx
-	tx BlastoiseName ; name
+	tx QuaquavalExName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
-	dw BLASTOISE
-	db 100 ; hp
+	dw QUAQUAVALEX
+	db 160 ; hp
 	db STAGE2 ; stage
 	tx QuaxwellName ; pre-evo name
 
 	; attack 1
-	energy 0 ; energies
-	tx RainDanceName ; name
-	tx RainDanceDescription ; description
-	tx RainDanceDescriptionCont ; description (cont)
-	db 0 ; damage
-	db POKEMON_POWER ; category
-	dw BlastoiseRainDanceEffectCommands ; effect commands
+	energy WATER, 1 ; energies
+	tx ExcitingDanceName ; name
+	tx ExcitingDanceDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw QuaquavalExcitingDanceEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db SWITCH_OPPONENT_POKEMON ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_PKMN_POWER_1 ; animation
+	db ATK_ANIM_WHIRLWIND ; animation
 
 	; attack 2
-	energy WATER, 3 ; energies
-	tx HydroPumpName ; name
-	tx HydroPumpDescription ; description
+	energy WATER, 1, COLORLESS, 1 ; energies
+	tx SpiralShotName ; name
+	tx SpiralShotDescription ; description
 	dw NONE ; description (cont)
-	db 40 ; damage
-	db DAMAGE_PLUS ; category
-	dw BlastoiseHydroPumpEffectCommands ; effect commands
+	db 120 ; damage
+	db DAMAGE_NORMAL ; category
+	dw QuaquavalSpiralShotEffectCommands ; effect commands
 	db NONE ; flags 1
-	db ATTACHED_ENERGY_BOOST ; flags 2
+	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
-	db MAX_ENERGY_BOOST_IS_LIMITED
+	db 3
 	db ATK_ANIM_HYDRO_PUMP ; animation
 
-	db 3 ; retreat cost
+	; ; attack 1
+	; energy 0 ; energies
+	; tx RainDanceName ; name
+	; tx RainDanceDescription ; description
+	; tx RainDanceDescriptionCont ; description (cont)
+	; db 0 ; damage
+	; db POKEMON_POWER ; category
+	; dw BlastoiseRainDanceEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; ; attack 2
+	; energy WATER, 3 ; energies
+	; tx HydroPumpName ; name
+	; tx HydroPumpDescription ; description
+	; dw NONE ; description (cont)
+	; db 40 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw BlastoiseHydroPumpEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db ATTACHED_ENERGY_BOOST ; flags 2
+	; db NONE ; flags 3
+	; db MAX_ENERGY_BOOST_IS_LIMITED
+	; db ATK_ANIM_HYDRO_PUMP ; animation
+
+	db 2 ; retreat cost
 	db WR_LIGHTNING ; weakness
 	db NONE ; resistance
 	tx ShellfishName ; category

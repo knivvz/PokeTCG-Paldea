@@ -68,7 +68,7 @@
 	const MOLTRES_LV37                ; $40
 	const QUAXLY                    ; $41
 	const QUAXWELL                   ; $42
-	const BLASTOISE                   ; $43
+	const QUAQUAVALEX                   ; $43
 	const PSYDUCK                     ; $44
 	const GOLDUCK                     ; $45
 	const POLIWAG                     ; $46

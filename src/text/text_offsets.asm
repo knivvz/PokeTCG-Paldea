@@ -2978,3 +2978,8 @@ TextOffsets::
 	textpointer QuaxlyName
 	textpointer QuaxwellName
 	textpointer WaveSplashName
+	textpointer QuaquavalExName
+	textpointer SpiralShotName
+	textpointer SpiralShotDescription
+	textpointer ExcitingDanceName
+	textpointer ExcitingDanceDescription

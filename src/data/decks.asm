@@ -125,7 +125,7 @@ PracticePlayerDeck:
 	card_item QUAXWELL,      1
 	card_item NEMONA,           1
 	card_item WATER_ENERGY,   1
-	card_item BLASTOISE,      1
+	card_item QUAQUAVALEX,      1
 	card_item WATER_ENERGY,   1
 	card_item PSYCHIC_ENERGY, 1
 	card_item WATER_ENERGY,   1
@@ -285,7 +285,7 @@ SquirtleAndFriendsDeck:
 	card_item PSYCHIC_ENERGY,   8
 	card_item QUAXLY,         2
 	card_item QUAXWELL,        1
-	card_item BLASTOISE,        1
+	card_item QUAQUAVALEX,        1
 	card_item SEEL,             2
 	card_item DEWGONG,          1
 	card_item STARYU,           1
@@ -627,7 +627,7 @@ GoGoRainDanceDeck:
 	card_item WATER_ENERGY,           24
 	card_item QUAXLY,                4
 	card_item QUAXWELL,               3
-	card_item BLASTOISE,               2
+	card_item QUAQUAVALEX,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
 	card_item HORSEA,                  3
@@ -1002,7 +1002,7 @@ WaterfrontPokemonDeck:
 	card_item PSYCHIC_ENERGY,    7
 	card_item QUAXLY,          2
 	card_item QUAXWELL,         1
-	card_item BLASTOISE,         1
+	card_item QUAQUAVALEX,         1
 	card_item PSYDUCK,           2
 	card_item GOLDUCK,           1
 	card_item POLIWAG,           2

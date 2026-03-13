@@ -1973,7 +1973,7 @@ AIDecide_PokemonBreeder:
 	jr z, .found
 	cp16 VENUSAUR_LV67
 	jr z, .found
-	cp16 BLASTOISE
+	cp16 QUAQUAVALEX
 	jr z, .found
 	cp16 VILEPLUME
 	jr z, .found
@@ -2362,7 +2362,7 @@ AIDecide_ProfessorOak:
 	jr c, .check_hand
 
 ; no Muk in Play Area
-	ld de, BLASTOISE
+	ld de, QUAQUAVALEX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jr nc, .check_hand
 
@@ -2647,7 +2647,7 @@ AIDecide_EnergyRetrieval:
 	ld de, MUK
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .start
-	ld de, BLASTOISE
+	ld de, QUAQUAVALEX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 
@@ -2912,7 +2912,7 @@ AIDecide_SuperEnergyRetrieval:
 	ld de, MUK
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .start
-	ld de, BLASTOISE
+	ld de, QUAQUAVALEX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 

@@ -549,3 +549,28 @@ QuaxwellName:
 WaveSplashName:
 	text "Wave Splash"
 	done
+
+QuaquavalExName:
+	text "Quaquaval EX"
+	done
+
+SpiralShotName:
+	text "Spiral Shot"
+	done
+
+SpiralShotDescription:
+	text "Put 2 Energy attached to this"
+	line "Pokémon into your hand."
+	done
+
+ExcitingDanceName:
+	text "Exciting Dance"
+	done
+
+ExcitingDanceDescription:
+	text "Switch this Pokémon with 1 of your"
+	line "Benched Pokémon. If you do, switch"
+	line "out your opponent's Active Pokémon"
+	line "to the Bench. (Your opponent chooses"
+	line "the new Active Pokémon.)"
+	done

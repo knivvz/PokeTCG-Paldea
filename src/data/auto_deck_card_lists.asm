@@ -318,7 +318,7 @@ RainDancerCardList:
 	card_item WATER_ENERGY,           24
 	card_item QUAXLY,                4
 	card_item QUAXWELL,               3
-	card_item BLASTOISE,               2
+	card_item QUAQUAVALEX,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
 	card_item HORSEA,                  3
@@ -976,7 +976,7 @@ SquirtleAndFriendsCardList:
 	card_item MAGMAR_LV24,       1
 	card_item QUAXLY,          2
 	card_item QUAXWELL,         1
-	card_item BLASTOISE,         1
+	card_item QUAQUAVALEX,         1
 	card_item SEEL,              2
 	card_item DEWGONG,           1
 	card_item GOLDEEN,           1

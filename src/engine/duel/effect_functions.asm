@@ -1,3 +1,65 @@
+; TODO prints text "select energy to discard", not return to hand
+; also fix print 0/2 and 1/2
+QuaquavalSpiralShot_PlayerSelectEnergyEffect:
+	ld c, 0 ; counter
+	
+.loop
+	push bc
+	call CreateListOfAllEnergyAttachedToArena
+	bank1call DisplayEnergyDiscardScreen
+.loop_input
+	bank1call HandleEnergyDiscardMenuInput
+	jr c, .loop_input
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a ; store card chosen
+	call AddCardToHand
+
+	pop bc
+	inc c
+	ld a, c
+	cp 2
+	jr nz, .loop
+	
+	ret
+
+; TODO test this
+QuaquavalSpiralShot_AISelectEnergyEffect:
+	call CreateListOfAllEnergyAttachedToArena
+	ld hl, wDuelTempList
+	ld c, 0 ; counter
+.loop
+	ld a, [hli]
+	call AddCardToHand
+	inc c
+	ld a, c
+	cp 2
+	jr nz, .loop
+	ret
+
+ForcedSwitchEffect:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetNonTurnDuelistVariable
+	cp 2
+	jr nc, .has_bench
+	; no bench, do not do effect
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	ret
+.has_bench
+	call DuelistSelectForcedSwitch
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	call HandleSwitchDefendingPokemonEffect
+	ret 
+
+QuaquavalExcitingDance_Effect:
+	call ForcedSwitchEffect
+	call SwapTurn
+
+	call ForcedSwitchEffect
+	call SwapTurn
+	ret
+
 SkeledirgeBurningVoice_AIEffect:
 	call SkeledirgeBurningVoice_DamageSubtractionEffect
 	jp SetDefiniteAIDamage
@@ -155,12 +217,18 @@ BouquetMagic_PlayerSelectEffect:
 	call Spark_PlayerSelectEffect
 	ret
 
+
+; creates in wDuelTempList a list of all energy cards
+; attached to the active pkmn
+; output:
+;	a = number of cards in list;
+;	wDuelTempList filled with cards, terminated by $ff
 CreateListOfAllEnergyAttachedToArena:
 	ld c, 0
 	ld de, wDuelTempList
 	ld a, DUELVARS_CARD_LOCATIONS
 	call GetTurnDuelistVariable
-	.loop
+.loop
 	ld a, [hl]
 	cp CARD_LOCATION_ARENA
 	jr nz, .next

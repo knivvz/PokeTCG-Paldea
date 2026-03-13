@@ -1199,7 +1199,7 @@ HandleAIGoGoRainDanceEnergy:
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	ret nz ; return if not Go Go Rain Dance deck
 
-	ld de, BLASTOISE
+	ld de, QUAQUAVALEX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	ret nc ; return if no Blastoise
 	ld de, MUK

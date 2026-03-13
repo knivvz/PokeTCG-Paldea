@@ -70,7 +70,7 @@ CardPointers::
 	dab MoltresLv37Card
 	dab QuaxlyCard
 	dab QuaxwellCard
-	dab BlastoiseCard
+	dab QuaquavalExCard
 	dab PsyduckCard
 	dab GolduckCard
 	dab PoliwagCard

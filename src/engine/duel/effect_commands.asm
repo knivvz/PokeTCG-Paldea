@@ -35,6 +35,15 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+
+QuaquavalSpiralShotEffectCommands:
+	;dbw EFFECTCMDTYPE_BEFORE_DAMAGE, QuaquavalSpiralShot_Effect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, QuaquavalSpiralShot_PlayerSelectEnergyEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, QuaquavalSpiralShot_AISelectEnergyEffect
+	db  $00
+QuaquavalExcitingDanceEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, QuaquavalExcitingDance_Effect
+	db  $00
 SkeledirgeBurningVoiceEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SkeledirgeBurningVoice_DamageSubtractionEffect
 	dbw EFFECTCMDTYPE_AI, SkeledirgeBurningVoice_AIEffect
@@ -473,14 +482,14 @@ OmanyteWaterGunEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, WithdrawEffect
 ; 	db  $00
 
-BlastoiseRainDanceEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
-	db  $00
+; BlastoiseRainDanceEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RainDanceEffect
+; 	db  $00
 
-BlastoiseHydroPumpEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HydroPumpEffect
-	dbw EFFECTCMDTYPE_AI, HydroPumpEffect
-	db  $00
+; BlastoiseHydroPumpEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HydroPumpEffect
+; 	dbw EFFECTCMDTYPE_AI, HydroPumpEffect
+; 	db  $00
 
 GyaradosBubblebeamEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
