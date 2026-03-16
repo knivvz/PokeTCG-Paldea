@@ -745,8 +745,8 @@ ScytherDescription:
 	line "there is more than one of it."
 	done
 
-PinsirName:
-	text "Pinsir"
+TealMaskOgerponExName:
+	text "Teal Mask Ogerpon Ex"
 	done
 
 IronGripName:

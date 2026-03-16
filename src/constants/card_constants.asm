@@ -48,7 +48,7 @@
 	const TANGELA_LV8                 ; $2c
 	const TANGELA_LV12                ; $2d
 	const SCYTHER                     ; $2e
-	const PINSIR                      ; $2f
+	const TEALMASKOGERPONEX                      ; $2f
 	const FUECOCO                  ; $30
 	const CROCALOR                  ; $31
 	const SKELEDIRGEEX                   ; $32
@@ -97,7 +97,7 @@
 	const OMASTAR                     ; $5d
 	const ARTICUNO_LV35               ; $5e
 	const ARTICUNO_LV37               ; $5f
-	const PIKACHU_LV12                ; $60
+	const EMOLGA                ; $60
 	const PIKACHU_LV14                ; $61
 	const PIKACHU_LV16                ; $62
 	const PIKACHU_ALT_LV16            ; $63
@@ -133,10 +133,10 @@
 	const GRAVELER                    ; $81
 	const GOLEM                       ; $82
 	const ONIX                        ; $83
-	const CUBONE                      ; $84
+	const GIMMIGHOUL                      ; $84
 	const MAROWAK_LV26                ; $85
-	const MAROWAK_LV32                ; $86
-	const HITMONLEE                   ; $87
+	const GHOLDENGOEX                ; $86
+	const PALDEAN_TAUROS                   ; $87
 	const HITMONCHAN                  ; $88
 	const RHYHORN                     ; $89
 	const RHYDON                      ; $8a

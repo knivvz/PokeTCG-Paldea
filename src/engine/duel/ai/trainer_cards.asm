@@ -4678,7 +4678,7 @@ AIDecide_Revive:
 	ld d, a
 	cp16 HITMONCHAN
 	jr z, .set_carry
-	cp16 HITMONLEE
+	cp16 PALDEAN_TAUROS
 	jr z, .set_carry
 	cp16 TAUROS
 	jr z, .set_carry
@@ -4918,7 +4918,7 @@ AIDecide_Pokeball:
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
-	ld de, PIKACHU_LV12
+	ld de, EMOLGA
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -4957,13 +4957,13 @@ AIDecide_Pokeball:
 	ld de, LIGHTNING_ENERGY
 	call LookForCardIDInHandList_Bank8
 	jr nc, .fighting
-	ld de, PIKACHU_LV12
+	ld de, EMOLGA
 	call LookForCardIDInHandList_Bank8
 	jr c, .fighting
 	ld de, WATTREL
 	call LookForCardIDInHandList_Bank8
 	jr c, .fighting
-	ld de, PIKACHU_LV12
+	ld de, EMOLGA
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5770,11 +5770,11 @@ AIDecide_PokemonTrader_BlisteringPokemon:
 	ld bc, RHYDON
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, CUBONE
+	ld bc, GIMMIGHOUL
 	ld de, MAROWAK_LV26
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, CUBONE
+	ld de, GIMMIGHOUL
 	ld bc, MAROWAK_LV26
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
@@ -5887,7 +5887,7 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld de, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jp c, .find_duplicates
-	ld bc, PIKACHU_LV12
+	ld bc, EMOLGA
 	ld de, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jp c, .find_duplicates
@@ -5895,7 +5895,7 @@ AIDecide_PokemonTrader_PowerGenerator:
 	ld bc, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jp c, .find_duplicates
-	ld de, PIKACHU_LV12
+	ld de, EMOLGA
 	ld bc, RAICHU_LV40
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jp c, .find_duplicates

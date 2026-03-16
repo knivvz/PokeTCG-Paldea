@@ -30,7 +30,7 @@ AIActionTable_ImRonald:
 	dw LAPRAS
 	dw SEEL
 	dw FUECOCO
-	dw CUBONE
+	dw GIMMIGHOUL
 	dw QUAXLY
 	dw GROWLITHE
 	dw NULL
@@ -39,7 +39,7 @@ AIActionTable_ImRonald:
 	dw FUECOCO
 	dw QUAXLY
 	dw SEEL
-	dw CUBONE
+	dw GIMMIGHOUL
 	dw GROWLITHE
 	dw LAPRAS
 	dw NULL
@@ -57,7 +57,7 @@ AIActionTable_ImRonald:
 	ai_energy SEEL,           3, +0
 	ai_energy DEWGONG,        4, +0
 	ai_energy LAPRAS,         3, +0
-	ai_energy CUBONE,         3, +0
+	ai_energy GIMMIGHOUL,         3, +0
 	ai_energy MAROWAK_LV26,   3, +0
 	dw NULL
 

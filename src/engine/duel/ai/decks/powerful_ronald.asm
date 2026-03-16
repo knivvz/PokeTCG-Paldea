@@ -32,7 +32,7 @@ AIActionTable_PowerfulRonald:
 	dw HITMONCHAN
 	dw MR_MIME
 	dw LICKITUNG
-	dw HITMONLEE
+	dw PALDEAN_TAUROS
 	dw TAUROS
 	dw JYNX
 	dw MEWTWO_LV53
@@ -41,7 +41,7 @@ AIActionTable_PowerfulRonald:
 
 .list_bench
 	dw KANGASKHAN
-	dw HITMONLEE
+	dw PALDEAN_TAUROS
 	dw HITMONCHAN
 	dw TAUROS
 	dw DODUO
@@ -60,7 +60,7 @@ AIActionTable_PowerfulRonald:
 
 .list_energy
 	ai_energy ELECTABUZZ_LV35, 2, +1
-	ai_energy HITMONLEE,       3, +1
+	ai_energy PALDEAN_TAUROS,       3, +1
 	ai_energy HITMONCHAN,      3, +1
 	ai_energy MR_MIME,         2, +0
 	ai_energy JYNX,            3, +0

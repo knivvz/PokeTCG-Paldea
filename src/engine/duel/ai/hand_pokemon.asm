@@ -348,7 +348,7 @@ AIDecideEvolution:
 	cp PIKACHU_DECK_ID
 	jr nz, .check_score
 	ld hl, wLoadedCard1ID
-	cphl PIKACHU_LV12
+	cphl EMOLGA
 	jr z, .pikachu
 	cphl PIKACHU_LV14
 	jr z, .pikachu

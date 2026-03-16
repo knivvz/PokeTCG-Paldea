@@ -50,7 +50,7 @@ CardPointers::
 	dab TangelaLv8Card
 	dab TangelaLv12Card
 	dab ScytherCard
-	dab PinsirCard
+	dab TealMaskOgerponExCard
 	dab FuecocoCard
 	dab CrocalorCard
 	dab SkeledirgeExCard
@@ -99,7 +99,7 @@ CardPointers::
 	dab OmastarCard
 	dab ArticunoLv35Card
 	dab ArticunoLv37Card
-	dab PikachuLv12Card
+	dab EmolgaCard
 	dab PikachuLv14Card
 	dab PikachuLv16Card
 	dab PikachuAltLv16Card
@@ -135,10 +135,10 @@ CardPointers::
 	dab GravelerCard
 	dab GolemCard
 	dab OnixCard
-	dab CuboneCard
+	dab GimmighoulCard
 	dab MarowakLv26Card
-	dab MarowakLv32Card
-	dab HitmonleeCard
+	dab GholdengoExCard
+	dab PaldeanTaurosCard
 	dab HitmonchanCard
 	dab RhyhornCard
 	dab RhydonCard

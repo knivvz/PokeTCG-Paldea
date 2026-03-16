@@ -285,7 +285,7 @@ AIDecideWhetherToRetreat:
 	call SwapTurn
 	cp16 MR_MIME
 	jr z, .mr_mime_or_hitmonlee
-	cp16 HITMONLEE
+	cp16 PALDEAN_TAUROS
 	jr nz, .check_retreat_cost
 
 ; check bench if there's any Pokémon

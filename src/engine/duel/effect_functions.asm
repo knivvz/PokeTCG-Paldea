@@ -1,3 +1,265 @@
+BoiledPress_Poison:
+	call SwapTurn
+	call PoisonEffect
+	call SwapTurn
+	ret
+
+UnhingedScissors_AI:
+	call UnhingedScissors_ExtraDamage
+	;ld a, 10 ; poison
+	;call AddToDamage
+	jp SetDefiniteAIDamage
+
+UnhingedScissors_ExtraDamage:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	ret z ; no condition on active
+	jp .condition
+
+.condition
+	ld a, 80
+	call AddToDamage
+	ret
+
+MyriadLeafShower_AIEffect:
+	call MyriadLeafShower_Damage
+	jp SetDefiniteAIDamage
+
+MyriadLeafShower_Damage:
+	call Psychic_DamageBoostEffect
+	call SwapTurn
+	call Psychic_DamageBoostEffect
+	call SwapTurn
+
+	ld a, [wDamage]
+	add a
+	ld [wDamage], a
+	ret
+
+TealDance_Check:
+	call Initialization_Check
+	ret c
+	call CheckIfAlreadyUsed
+	ret c
+
+	; check for grass energy in hand
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff ; end of list
+	jr z, .set_carry
+    ;ld a, [hl]
+
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr z, .done
+	jp .loop
+.set_carry
+	ldtx hl, NoGrassEnergyCardsInHandText
+	scf
+.done
+	ret
+
+
+TealDance_Effect:
+	call SetPkmnPowerAsUsed
+
+	ld c, TYPE_ENERGY_GRASS
+	call CreateHandCardList
+
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	ldh [hTempCardIndex_ff98], a
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+	jr nz, .loop
+	ldh a, [hTempPlayAreaLocation_ff9d] ; pokemon
+	ld e, a
+	ldh a, [hTempCardIndex_ff98]
+	call PutHandCardInPlayArea
+
+	ldh a, [hTempPlayAreaLocation_ff9d] ; pokemon
+	call DrawPlayAreaScreenToShowChanges
+
+	; draw 1
+	ld c, 1
+	call DrawCCards
+	ret
+
+TealDance_PlayerSelectEffect:
+	call SetPkmnPowerAsUsed
+
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+	ldtx hl, ChooseBasicEnergyCardText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+.select_card
+	bank1call DisplayCardList
+	jr c, .select_card ; can't cancel with b
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr nz, .select_card
+	
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	ret
+
+;TODO test this
+TealDance_AISelectEffect:
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	cp $ff ; end of list
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp GRASS_ENERGY
+    jr nz, .loop
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTemp_ffa0], a
+	ret
+
+
+RagingCharge_Damage:
+	ld a, DUELVARS_ARENA_CARD
+ 	call GetTurnDuelistVariable
+ 	ld c, 0
+	ld b, PLAY_AREA_ARENA
+.loop
+ 	ld a, [hli]
+ 	cp $ff
+ 	jr z, .done
+	push bc
+ 	call GetCardIDFromDeckIndex
+	pop bc
+ 	cp16 TAUROS
+ 	jr z, .check_damage
+	cp16 PALDEAN_TAUROS
+	jr z, .check_damage
+	jr .next
+
+.check_damage
+	ld e, b
+	push bc
+	call GetCardDamageAndMaxHP
+	pop bc
+	cp 0
+	jr z, .next
+	inc c ; found!
+
+.next
+	inc b
+ 	jr .loop
+.done
+; c holds number of TAUROS and PALDEAN_TAUROS found in Play Area with dmg
+ 	ld a, c
+ 	call SetDamageToATimes20
+ 	ret
+	
+
+RagingCharge_AIEffect:
+	call RagingCharge_Damage
+	jp SetDefiniteAIDamage
+
+
+SkyWave_Damage:
+	ld a, 10
+	call DealDamageToAllBenchedPokemon
+	call SwapTurn
+
+	ld a, 10
+	call DealDamageToAllBenchedPokemon
+	call SwapTurn
+	ret
+
+; TODO implement
+MakeItRain_AIEffect:
+	ret
+
+; check if energy in hand
+MakeItRain_Check:
+ 	call CreateHandCardList
+ 	ld a, [wDuelTempList]
+ 	call SortCardsInDuelTempListByID ; if sorted 1st card should be energy
+ 	ld hl, wDuelTempList
+ 	ld a, [hli]
+ 	cp $ff ; end of list
+ 	jr z, .no_energy
+ 	call GetCardIDFromDeckIndex
+ 	call GetCardType
+ 	and TYPE_ENERGY
+ 	jr z, .no_energy
+ 	ret
+
+.no_energy
+ 	ldtx hl, NoEnergyCardsInHandText
+ 	scf 
+	ret
+
+MakeItRain_SelectAndDamageEffect:
+	ld a, [wDamage]
+	sub 20
+	ld [wDamage], a
+	.select_card
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+
+	call SortCardsInDuelTempListByID ; if sorted 1st card should be energy
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+
+	cp $ff
+	ret z
+	bank1call DisplayCardList
+	ret c;jr c, .select_card ; can't cancel with b
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	and TYPE_ENERGY
+	jr z, .select_card ; selected card is not energy
+
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTempList], a
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	ld a, 20
+	call AddToDamage	
+	jp .select_card
+	ret
+
+CoinBonus_Check:
+	call Initialization_Check
+	ret c
+	call CheckIfAlreadyUsed
+	ret
+
+CoinBonus_DrawEffect:
+	call SetPkmnPowerAsUsed
+	ld c, 1
+	call DrawCCards
+
+	call CheckIfInActiveSpot
+	ret c
+	ld c, 1
+	call DrawCCards
+	ret
+
 ; TODO improve UI
 InstaFlock_Effect:
 	ld a, $ff
@@ -429,24 +691,6 @@ ScratchingNails_Effect:
 	call SwapTurn
 	or a
 	ret 
-
-;TODO test this
-TealDance_AISelectEffect:
-	call CreateHandCardList
-	ld a, [wDuelTempList]
-	call SortCardsInDuelTempListByID
-	ld hl, wDuelTempList
-.loop
-	ld a, [hli]
-	cp $ff ; end of list
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp GRASS_ENERGY
-    jr nz, .loop
-
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
 
 SelectGrassEnergyFromHand:
 	call SetPkmnPowerAsUsed
@@ -6326,9 +6570,9 @@ AbsorbEffect:
 	ld d, h
 	jp ApplyAndAnimateHPRecovery
 
-SnivelEffect:
-	ld a, SUBSTATUS2_REDUCE_BY_20
-	jp ApplySubstatus2ToDefendingCard
+; SnivelEffect:
+; 	ld a, SUBSTATUS2_REDUCE_BY_20
+; 	jp ApplySubstatus2ToDefendingCard
 
 Bonemerang_AIEffect:
 	ld a, 60 / 2
@@ -8011,9 +8255,9 @@ FuryAttack_MultiplierEffect:
 	call ATimes10
 	jp SetDefiniteDamage
 
-RetreatAidEffect:
-	scf
-	ret
+; RetreatAidEffect:
+; 	scf
+; 	ret
 
 PayDayEffect:
 	ldtx de, IfHeadsDraw1CardFromDeckText

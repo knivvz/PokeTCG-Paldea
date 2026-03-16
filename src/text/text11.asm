@@ -1099,8 +1099,8 @@ OnixDescription:
 	line "to a diamond, though colored black."
 	done
 
-CuboneName:
-	text "Cubone"
+GimmighoulName:
+	text "Gimmighoul"
 	done
 
 SnivelName:
@@ -1192,8 +1192,8 @@ MarowakLv32Description:
 	line "grown more vicious over the ages."
 	done
 
-HitmonleeName:
-	text "Hitmonlee"
+PaldeanTaurosName:
+	text "Paldean Tauros"
 	done
 
 StretchKickName:

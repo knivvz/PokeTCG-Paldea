@@ -35,6 +35,44 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+KlawfBoiledPressEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BoiledPress_Poison
+	db $00
+
+KlawfUnhingedScissorsEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, UnhingedScissors_ExtraDamage
+	dbw EFFECTCMDTYPE_AI, UnhingedScissors_AI
+	db $00
+
+TealOgerponMyriadLeafShowerEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, MyriadLeafShower_Damage
+	dbw EFFECTCMDTYPE_AI, MyriadLeafShower_AIEffect
+	db $00
+
+TealOgerponTealDanceEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, TealDance_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, TealDance_Effect
+	db $00
+
+PaldeanTaurosRagingChargeEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, RagingCharge_Damage
+	dbw EFFECTCMDTYPE_AI, RagingCharge_AIEffect
+	db  $00
+EmolgaSkyWaveEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, SkyWave_Damage
+	db $00
+
+GholdengoExMakeItRainEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MakeItRain_Check
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MakeItRain_SelectAndDamageEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, MakeItRain_AIEffect
+	db $00
+
+GholdengoExCoinBonusEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CoinBonus_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CoinBonus_DrawEffect
+	db $00
+
 FlamigoInstaFlockEffectCommands:
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, InstaFlock_Effect
 	dbw EFFECTCMDTYPE_AI, InstaFlock_AIEffect
@@ -236,9 +274,9 @@ VictreebelAcidEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AcidEffect
 	db  $00
 
-PinsirIronGripEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
-	db  $00
+; PinsirIronGripEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
+; 	db  $00
 
 CaterpieStringShotEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
@@ -1083,14 +1121,14 @@ KabutopsAbsorbEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AbsorbEffect
 	db  $00
 
-CuboneSnivelEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SnivelEffect
-	db  $00
+; CuboneSnivelEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SnivelEffect
+; 	db  $00
 
-CuboneRageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
-	db  $00
+; CuboneRageEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+; 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
+; 	db  $00
 
 MarowakBonemerangEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Bonemerang_MultiplierEffect
@@ -1131,12 +1169,12 @@ RhyhornLeerEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
 	db  $00
 
-HitmonleeStretchKickEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
-	db  $00
+; HitmonleeStretchKickEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, StretchKick_BenchDamageEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, StretchKick_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
+; 	db  $00
 
 SandshrewSandAttackEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
@@ -1394,19 +1432,19 @@ TaurosRampageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Rampage_AIEffect
 	db  $00
 
-DoduoFuryAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FuryAttack_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, FuryAttack_AIEffect
-	db  $00
+; DoduoFuryAttackEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FuryAttack_MultiplierEffect
+; 	dbw EFFECTCMDTYPE_AI, FuryAttack_AIEffect
+; 	db  $00
 
-DodrioRetreatAidEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RetreatAidEffect
-	db  $00
+; DodrioRetreatAidEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, RetreatAidEffect
+; 	db  $00
 
-DodrioRageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
-	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
-	db  $00
+; DodrioRageEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+; 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
+; 	db  $00
 
 MeowthPayDayEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, PayDayEffect

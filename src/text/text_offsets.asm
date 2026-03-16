@@ -2177,7 +2177,7 @@ TextOffsets::
 	textpointer SwordsDanceDescription
 	textpointer MantisName
 	textpointer ScytherDescription
-	textpointer PinsirName
+	textpointer TealMaskOgerponExName
 	textpointer IronGripName
 	textpointer GuillotineName
 	textpointer StagbeetleName
@@ -2552,7 +2552,7 @@ TextOffsets::
 	textpointer OnixsHardenDescription
 	textpointer RockSnakeName
 	textpointer OnixDescription
-	textpointer CuboneName
+	textpointer GimmighoulName
 	textpointer SnivelName
 	textpointer SnivelDescription
 	textpointer CubonesRageDescription
@@ -2569,7 +2569,7 @@ TextOffsets::
 	textpointer WailName
 	textpointer WailDescription
 	textpointer MarowakLv32Description
-	textpointer HitmonleeName
+	textpointer PaldeanTaurosName
 	textpointer StretchKickName
 	textpointer StretchKickDescription
 	textpointer HighJumpKickName
@@ -3006,3 +3006,22 @@ TextOffsets::
 	textpointer SpeedWingName
 	textpointer InstaFlockName
 	textpointer InstaFlockDescription
+	textpointer MakeItRainName
+	textpointer MakeItRainDescription
+	textpointer CoinBonusName
+	textpointer CoinBonusDescription
+	textpointer GholdengoExName
+	textpointer NoEnergyCardsInHandText
+	textpointer SkyWaveName
+	textpointer SkyWaveDescription
+	textpointer EmolgaName
+	textpointer RagingChargeName
+	textpointer RagingChargeDescription
+	textpointer TealDanceName
+	textpointer TealDanceDescription
+	textpointer MyriadLeafShowerName
+	textpointer MyriadLeafShowerDescription
+	textpointer UnhingedScissorsName
+	textpointer UnhingedScissorsDescription
+	textpointer BoiledPressName
+	textpointer BoiledPressDescription

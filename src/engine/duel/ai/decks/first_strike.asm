@@ -29,13 +29,13 @@ AIActionTable_FirstStrike:
 .list_arena
 	dw HITMONCHAN
 	dw MACHOP
-	dw HITMONLEE
+	dw PALDEAN_TAUROS
 	dw MANKEY
 	dw NULL
 
 .list_bench
 	dw MACHOP
-	dw HITMONLEE
+	dw PALDEAN_TAUROS
 	dw HITMONCHAN
 	dw MANKEY
 	dw NULL
@@ -51,13 +51,13 @@ AIActionTable_FirstStrike:
 	ai_energy MACHOKE,    4, +0
 	ai_energy MACHAMP,    4, -1
 	ai_energy HITMONCHAN, 3, +0
-	ai_energy HITMONLEE,  3, +0
+	ai_energy PALDEAN_TAUROS,  3, +0
 	ai_energy MANKEY,     2, -1
 	ai_energy PRIMEAPE,   3, -1
 	dw NULL
 
 .list_prize
-	dw HITMONLEE
+	dw PALDEAN_TAUROS
 	dw HITMONCHAN
 	dw NULL
 

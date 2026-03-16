@@ -17,9 +17,9 @@ AllFightingPokemonCardList:
 	card_item GRAVELER,         1
 	card_item GOLEM,            1
 	card_item ONIX,             1
-	card_item CUBONE,           2
+	card_item GIMMIGHOUL,           2
 	card_item MAROWAK_LV26,     1
-	card_item HITMONLEE,        1
+	card_item PALDEAN_TAUROS,        1
 	card_item HITMONCHAN,       1
 	card_item RHYHORN,          2
 	card_item RHYDON,           1
@@ -36,7 +36,7 @@ BenchAttackCardList:
 	card_item VOLTORB,           4
 	card_item ELECTRODE_LV42,    2
 	card_item ZAPDOS_LV40,       2
-	card_item HITMONLEE,         4
+	card_item PALDEAN_TAUROS,         4
 	card_item HITMONCHAN,        2
 	card_item MEOWTH_LV14,       4
 	card_item PROFESSOR_OAK,     1
@@ -59,7 +59,7 @@ BattleContestCardList:
 	card_item MANKEY,                   3
 	card_item MACHOP,                   4
 	card_item MACHOKE,                  3
-	card_item HITMONLEE,                2
+	card_item PALDEAN_TAUROS,                2
 	card_item HITMONCHAN,               2
 	card_item MEOWTH_LV14,              3
 	card_item DUDUNSPARCE,                  2
@@ -81,7 +81,7 @@ HeatedBattleCardList:
 	card_item ELECTABUZZ_LV35,   2
 	card_item MANKEY,            3
 	card_item PRIMEAPE,          2
-	card_item HITMONLEE,         3
+	card_item PALDEAN_TAUROS,         3
 	card_item HITMONCHAN,        3
 	card_item KANGASKHAN,        2
 	card_item ENERGY_SEARCH,     2
@@ -99,7 +99,7 @@ FirstStrikeCardList:
 	card_item MACHOKE,          3
 	card_item MACHAMP,          2
 	card_item HITMONCHAN,       2
-	card_item HITMONLEE,        4
+	card_item PALDEAN_TAUROS,        4
 	card_item MANKEY,           4
 	card_item PRIMEAPE,         1
 	card_item POTION,           2
@@ -115,7 +115,7 @@ SqueakingMouseCardList:
 	card_item LIGHTNING_ENERGY,         8
 	card_item FIGHTING_ENERGY,         15
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item PIKACHU_LV12,             2
+	card_item EMOLGA,             2
 	card_item PIKACHU_LV14,             2
 	card_item RAICHU_LV40,              1
 	card_item RAICHU_LV45,              1
@@ -162,9 +162,9 @@ BoneAttackCardList:
 	card_item GRAVELER,         2
 	card_item GOLEM,            1
 	card_item ONIX,             4
-	card_item CUBONE,           4
+	card_item GIMMIGHOUL,           4
 	card_item MAROWAK_LV26,     1
-	card_item MAROWAK_LV32,     2
+	card_item GHOLDENGOEX,     2
 	card_item RHYHORN,          2
 	card_item RHYDON,           1
 	card_item NEMONA,             2
@@ -185,8 +185,8 @@ ExcavationCardList:
 	card_item OMASTAR,            2
 	card_item SANDSHREW,          4
 	card_item SANDSLASH,          2
-	card_item CUBONE,             3
-	card_item MAROWAK_LV32,       1
+	card_item GIMMIGHOUL,             3
+	card_item GHOLDENGOEX,       1
 	card_item HITMONCHAN,         3
 	card_item KABUTO,             2
 	card_item KABUTOPS,           1
@@ -343,7 +343,7 @@ CutePokemonCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item FLAREON_LV28,             1
 	card_item VAPOREON_LV42,            1
-	card_item PIKACHU_LV12,             1
+	card_item EMOLGA,             1
 	card_item PIKACHU_LV14,             1
 	card_item PIKACHU_LV16,             1
 	card_item PIKACHU_ALT_LV16,         1
@@ -376,7 +376,7 @@ PokemonFluteCardList:
 	card_item LIGHTNING_ENERGY, 12
 	card_item STARYU,            2
 	card_item LAPRAS,            2
-	card_item PIKACHU_LV12,      3
+	card_item EMOLGA,      3
 	card_item RAICHU_LV40,       1
 	card_item WATTREL,    2
 	card_item ELECTABUZZ_LV35,   3
@@ -395,7 +395,7 @@ PokemonFluteCardList:
 YellowFlashCardList:
 	deck_list_start
 	card_item LIGHTNING_ENERGY, 26
-	card_item PIKACHU_LV12,      2
+	card_item EMOLGA,      2
 	card_item PIKACHU_LV14,      1
 	card_item RAICHU_LV40,       1
 	card_item RAICHU_LV45,       1
@@ -476,7 +476,7 @@ InsectCollectionCardList:
 	card_item VENONAT,          2
 	card_item VENOMOTH,         1
 	card_item SCYTHER,          1
-	card_item PINSIR,           1
+	card_item TEALMASKOGERPONEX,           1
 	card_item NEMONA,             2
 	card_item POKEMON_BREEDER,  2
 	card_item SWITCH,           2
@@ -503,7 +503,7 @@ JungleCardList:
 	card_item BELLSPROUT,               2
 	card_item WEEPINBELL,               1
 	card_item VICTREEBEL,               1
-	card_item PINSIR,                   1
+	card_item TEALMASKOGERPONEX,                   1
 	card_item LICKITUNG,                1
 	card_item KANGASKHAN,               1
 	card_item NEMONA,                     2
@@ -865,7 +865,7 @@ TrafficLightCardList:
 	card_item RAPIDASH,          2
 	card_item FLAREON_LV22,      2
 	card_item VAPOREON_LV29,     2
-	card_item PIKACHU_LV12,      2
+	card_item EMOLGA,      2
 	card_item VOLTORB,           3
 	card_item ELECTRODE_LV42,    2
 	card_item JOLTEON_LV24,      2
@@ -938,7 +938,7 @@ CharmanderAndFriendsCardList:
 	card_item METAPOD,          1
 	card_item SPRIGATITO,         2
 	card_item NIDORANM,         1
-	card_item PINSIR,           1
+	card_item TEALMASKOGERPONEX,           1
 	card_item FUECOCO,       2
 	card_item CROCALOR,       1
 	card_item SKELEDIRGEEX,        1
@@ -984,7 +984,7 @@ SquirtleAndFriendsCardList:
 	card_item STARYU,            1
 	card_item STARMIE,           1
 	card_item LAPRAS,            1
-	card_item PIKACHU_LV12,      2
+	card_item EMOLGA,      2
 	card_item WATTREL,    1
 	card_item KILOWATTREL,     1
 	card_item ELECTABUZZ_LV35,   1
@@ -1013,7 +1013,7 @@ BulbasaurAndFriendsCardList:
 	card_item NIDORANM,         2
 	card_item NIDORINO,         1
 	card_item TANGELA_LV12,     1
-	card_item PIKACHU_LV12,     2
+	card_item EMOLGA,     2
 	card_item RAICHU_LV40,      1
 	card_item WATTREL,   1
 	card_item ELECTABUZZ_LV35,  1
@@ -1046,7 +1046,7 @@ PsychicMachampCardList:
 	card_item MACHOKE,          1
 	card_item MACHAMP,          1
 	card_item ONIX,             1
-	card_item HITMONLEE,        1
+	card_item PALDEAN_TAUROS,        1
 	card_item HITMONCHAN,       1
 	card_item ABRA,             2
 	card_item KADABRA,          1

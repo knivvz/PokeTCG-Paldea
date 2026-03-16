@@ -692,3 +692,98 @@ InstaFlockDescription:
 	line "put them into your hand. Then,"
 	line "shuffle your deck."
 	done
+
+MakeItRainName:
+	text "Make It Rain"
+	done
+
+MakeItRainDescription:
+	text "Discard any number of Basic Energy"
+	line "cards from your hand. This attack"
+	line "does 20 more damage for each card"
+	line "you discarded in this way. (min. 1)"
+	done
+
+CoinBonusName:
+	text "Coin Bonus"
+	done
+
+CoinBonusDescription:
+	text "Once during your turn, you may draw"
+	line "a card. If this Pokémon is in the"
+	line "Active Spot, draw 1 more card."
+	done
+
+GholdengoExName:
+ 	text "Gholdengo EX"
+	done
+
+NoEnergyCardsInHandText:
+	text "You have no Energy cards in hand."
+	done
+
+SkyWaveName:
+	text "Sky Wave"
+	done
+
+SkyWaveDescription:
+	text "This attack also does 10 damage to"
+	line "each Benched Pokémon (both yours and"
+	line "(Don't apply Weakness and Resistance"
+	line "or Benched Pokémon.)"
+	done
+
+EmolgaName:
+	text "Emolga"
+	done
+
+RagingChargeName:
+	text "Raging Charge"
+	done
+
+RagingChargeDescription:
+	text "This attack does 20 damage for each"
+	line "of your Pokémon that has 'Tauros' in"
+	line "its name that has any damage"
+	line "counters on it."
+	done
+
+TealDanceName:
+	text "Teal Dance"
+	done
+
+TealDanceDescription:
+	text "Once during your turn, you may"
+	line "attach a Basic <GRASS> Energy card"
+	line "from your hand to this Pokémon. If"
+	line "you attached Energy to a Pokémon in"
+	line "this way, draw a card."
+	done
+
+MyriadLeafShowerName:
+	text "Myriad Leaf Shower"
+	done
+
+MyriadLeafShowerDescription:
+	text "This attack does 20 damage for each"
+	line "Energy attached to both Active"
+	line "Pokémon."
+	done
+
+BoiledPressName:
+	text "Boiled Press"
+	done
+
+BoiledPressDescription:
+	text "This Pokémon is now poisoned."
+	done
+
+UnhingedScissorsName:
+	text "Unhinged Scissors"
+	done
+
+UnhingedScissorsDescription:
+	text "If this Pokémon is affected by a"
+	line "Special Condition, this attack does"
+	line "80 more damage."
+	done
