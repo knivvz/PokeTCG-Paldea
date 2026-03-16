@@ -163,7 +163,7 @@ cards = {
 	0x80: "GEODUDE",
 	0x81: "GRAVELER",
 	0x82: "GOLEM",
-	0x83: "ONIX",
+	0x83: "KLAWF",
 	0x84: "GIMMIGHOUL",
 	0x85: "MAROWAK_LV26",
 	0x86: "GHOLDENGOEX",

@@ -1096,9 +1096,9 @@ GeodudeStoneBarrageEffectCommands:
 	dbw EFFECTCMDTYPE_AI, StoneBarrage_AIEffect
 	db  $00
 
-OnixHardenEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HardenEffect
-	db  $00
+; OnixHardenEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HardenEffect
+; 	db  $00
 
 PrimeapeFurySwipesEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes20_MultiplierEffect

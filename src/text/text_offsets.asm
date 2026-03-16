@@ -2548,7 +2548,7 @@ TextOffsets::
 	textpointer GolemsSelfdestructDescription
 	textpointer MegatonName
 	textpointer GolemDescription
-	textpointer OnixName
+	textpointer KlawfName
 	textpointer OnixsHardenDescription
 	textpointer RockSnakeName
 	textpointer OnixDescription

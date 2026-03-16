@@ -16,7 +16,7 @@ AllFightingPokemonCardList:
 	card_item GEODUDE,          2
 	card_item GRAVELER,         1
 	card_item GOLEM,            1
-	card_item ONIX,             1
+	card_item KLAWF,             1
 	card_item GIMMIGHOUL,           2
 	card_item MAROWAK_LV26,     1
 	card_item PALDEAN_TAUROS,        1
@@ -139,7 +139,7 @@ GreatQuakeCardList:
 	card_item FIGHTING_ENERGY, 25
 	card_item WIGLETT,          4
 	card_item WUGTRIO,          3
-	card_item ONIX,             4
+	card_item KLAWF,             4
 	card_item RHYHORN,          3
 	card_item RHYDON,           2
 	card_item KANGASKHAN,       2
@@ -161,7 +161,7 @@ BoneAttackCardList:
 	card_item GEODUDE,          3
 	card_item GRAVELER,         2
 	card_item GOLEM,            1
-	card_item ONIX,             4
+	card_item KLAWF,             4
 	card_item GIMMIGHOUL,           4
 	card_item MAROWAK_LV26,     1
 	card_item GHOLDENGOEX,     2
@@ -206,7 +206,7 @@ RockCrusherCardList:
 	card_item GEODUDE,                  4
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
-	card_item ONIX,                     3
+	card_item KLAWF,                     3
 	card_item RHYHORN,                  3
 	card_item PROFESSOR_OAK,            2
 	card_item POKEMON_BREEDER,          1
@@ -1045,7 +1045,7 @@ PsychicMachampCardList:
 	card_item MACHOP,           2
 	card_item MACHOKE,          1
 	card_item MACHAMP,          1
-	card_item ONIX,             1
+	card_item KLAWF,             1
 	card_item PALDEAN_TAUROS,        1
 	card_item HITMONCHAN,       1
 	card_item ABRA,             2

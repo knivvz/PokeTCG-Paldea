@@ -211,7 +211,7 @@ SamsPracticeDeck:
 	card_item WIGLETT,                 1
 	card_item MACHOP,                  1
 	card_item MACHOKE,                 1
-	card_item ONIX,                    1
+	card_item KLAWF,                    1
 	card_item RHYHORN,                 1
 	card_item RHYHORN,                 1
 	card_item RHYDON,                  1
@@ -603,7 +603,7 @@ RockCrusherDeck:
 	card_item GEODUDE,                  4
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
-	card_item ONIX,                     3
+	card_item KLAWF,                     3
 	card_item RHYHORN,                  3
 	card_item PROFESSOR_OAK,            2
 	card_item POKEMON_BREEDER,          1
@@ -953,7 +953,7 @@ BlisteringPokemonDeck:
 	card_item DOUBLE_COLORLESS_ENERGY, 2
 	card_item PONYTA,                  3
 	card_item RAPIDASH,                2
-	card_item ONIX,                    4
+	card_item KLAWF,                    4
 	card_item GIMMIGHOUL,                  4
 	card_item MAROWAK_LV26,            2
 	card_item RHYHORN,                 4
@@ -976,7 +976,7 @@ HardPokemonDeck:
 	card_item GEODUDE,          4
 	card_item GRAVELER,         3
 	card_item GOLEM,            2
-	card_item ONIX,             3
+	card_item KLAWF,             3
 	card_item GIMMIGHOUL,           3
 	card_item MAROWAK_LV26,     2
 	card_item RHYHORN,          2

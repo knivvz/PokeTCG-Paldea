@@ -104,7 +104,7 @@ HandleSpecialAIAttacks:
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
-	ld de, ONIX
+	ld de, KLAWF
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card

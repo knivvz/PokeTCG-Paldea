@@ -1076,8 +1076,8 @@ GolemDescription:
 	line "dynamite blasts without damage."
 	done
 
-OnixName:
-	text "Onix"
+KlawfName:
+	text "Klawf"
 	done
 
 OnixsHardenDescription:

@@ -4897,7 +4897,7 @@ AIDecide_Pokeball:
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
-	ld de, ONIX
+	ld de, KLAWF
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5145,7 +5145,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	jr z, .pop_de_and_no_carry
 	cp16 GEODUDE
 	jr z, .pop_de_and_no_carry
-	cp16 ONIX
+	cp16 KLAWF
 	jr z, .pop_de_and_no_carry
 	cp16 RHYHORN
 	jr z, .pop_de_and_no_carry

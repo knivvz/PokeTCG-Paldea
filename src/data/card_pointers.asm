@@ -134,7 +134,7 @@ CardPointers::
 	dab GeodudeCard
 	dab GravelerCard
 	dab GolemCard
-	dab OnixCard
+	dab KlawfCard
 	dab GimmighoulCard
 	dab MarowakLv26Card
 	dab GholdengoExCard

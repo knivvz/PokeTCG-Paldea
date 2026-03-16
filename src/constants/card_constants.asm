@@ -132,7 +132,7 @@
 	const GEODUDE                     ; $80
 	const GRAVELER                    ; $81
 	const GOLEM                       ; $82
-	const ONIX                        ; $83
+	const KLAWF                        ; $83
 	const GIMMIGHOUL                      ; $84
 	const MAROWAK_LV26                ; $85
 	const GHOLDENGOEX                ; $86

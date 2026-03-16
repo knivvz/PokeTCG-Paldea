@@ -6820,13 +6820,13 @@ GolemCard:
 	tx GolemDescription ; description
 	db 0 ; AI info
 
-OnixCard:
+KlawfCard:
 	db TYPE_PKMN_FIGHTING ; type
 	gfx OnixCardGfx ; gfx
-	tx OnixName ; name
+	tx KlawfName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
-	dw ONIX
+	dw KLAWF
 	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name

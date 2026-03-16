@@ -28,7 +28,7 @@ AIActionTable_RockCrusher:
 
 .list_arena
 	dw RHYHORN
-	dw ONIX
+	dw KLAWF
 	dw GEODUDE
 	dw WIGLETT
 	dw NULL
@@ -37,7 +37,7 @@ AIActionTable_RockCrusher:
 	dw WIGLETT
 	dw GEODUDE
 	dw RHYHORN
-	dw ONIX
+	dw KLAWF
 	dw NULL
 
 .list_retreat
@@ -50,7 +50,7 @@ AIActionTable_RockCrusher:
 	ai_energy GEODUDE,  2, +1
 	ai_energy GRAVELER, 3, +0
 	ai_energy GOLEM,    4, +0
-	ai_energy ONIX,     2, -1
+	ai_energy KLAWF,     2, -1
 	ai_energy RHYHORN,  3, +0
 	dw NULL
 
