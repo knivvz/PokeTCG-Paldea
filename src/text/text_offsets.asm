@@ -2730,7 +2730,7 @@ TextOffsets::
 	textpointer DrillPeckName
 	textpointer BeakName
 	textpointer FearowDescription
-	textpointer ClefairyName
+	textpointer CleffaName
 	textpointer SingName
 	textpointer MetronomeName
 	textpointer ClefairysMetronomeDescription
@@ -3025,3 +3025,5 @@ TextOffsets::
 	textpointer UnhingedScissorsDescription
 	textpointer BoiledPressName
 	textpointer BoiledPressDescription
+	textpointer GraspingDrawName
+	textpointer GraspingDrawDescription

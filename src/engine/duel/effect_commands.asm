@@ -35,6 +35,9 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+CleffaGraspingDrawEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GraspingDraw_DrawEffect
+	db $00
 KlawfBoiledPressEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, BoiledPress_Poison
 	db $00
@@ -1491,15 +1494,15 @@ PidgeottoMirrorMoveEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MirrorMove_AIEffect
 	db  $00
 
-ClefairySingEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SingEffect
-	db  $00
+; ClefairySingEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SingEffect
+; 	db  $00
 
-ClefairyMetronomeEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefairyMetronome_CheckAttacks
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefairyMetronome_UseAttackEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, ClefairyMetronome_AISelectEffect
-	db  $00
+; ClefairyMetronomeEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, ClefairyMetronome_CheckAttacks
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefairyMetronome_UseAttackEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, ClefairyMetronome_AISelectEffect
+; 	db  $00
 
 WigglytuffLullabyEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SleepEffect

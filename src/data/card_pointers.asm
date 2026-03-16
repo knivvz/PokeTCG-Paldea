@@ -174,7 +174,7 @@ CardPointers::
 	dab RaticateCard
 	dab FlamigoCard
 	dab FearowCard
-	dab ClefairyCard
+	dab CleffaCard
 	dab ClefableCard
 	dab JigglypuffLv12Card
 	dab JigglypuffLv13Card

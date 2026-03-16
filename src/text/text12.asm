@@ -612,8 +612,8 @@ FearowDescription:
 	line "having to land for rest."
 	done
 
-ClefairyName:
-	text "Clefairy"
+CleffaName:
+	text "Cleffa"
 	done
 
 SingName:

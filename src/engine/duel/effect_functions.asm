@@ -1,3 +1,32 @@
+; input: e - number of cards to refill to
+CardRefillToE:
+	ld b, e                         ; Load e into register B
+	cp b                            ; Compare A with 10
+	ld c, a                         ; Move the value of A (DUELVARS_NUMBER_OF_CARDS_IN_HAND) into C
+	ld a, b                         ; Load 10 into A
+	sub a, c                        ; Subtract the value of C from 10
+	ld c, a                         ; Move the result to register C     
+	call DrawCCards
+	ret
+
+GraspingDraw_DrawEffect:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp 7
+	jr c, .continue ; Jump to .continue if carry is set (i.e. number of cards is less than or equal to 7)
+	jr .set_carry ; Otherwise, jump to .already_used
+.continue:
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND  ; Load value of DUELVARS_NUMBER_OF_CARDS_IN_HAND into register A
+	call GetTurnDuelistVariable               ; Call subroutine to get the value (assuming it's in register A)
+	
+	ld e, 7
+	call CardRefillToE
+	ret
+	
+.set_carry
+ 	scf
+ 	ret
+
 BoiledPress_Poison:
 	call SwapTurn
 	call PoisonEffect
@@ -8407,16 +8436,16 @@ SingEffect:
 	ret
 
 ; return carry if Defending Pokemon has no attacks
-ClefairyMetronome_CheckAttacks:
-	call CheckIfDefendingPokemonHasAnyAttack
-	ldtx hl, NoAttackMayBeChoosenText
-	ret
+; ClefairyMetronome_CheckAttacks:
+; 	call CheckIfDefendingPokemonHasAnyAttack
+; 	ldtx hl, NoAttackMayBeChoosenText
+; 	ret
 
-ClefairyMetronome_AISelectEffect:
-	jp HandleAIMetronomeEffect
+; ClefairyMetronome_AISelectEffect:
+; 	jp HandleAIMetronomeEffect
 
-ClefairyMetronome_UseAttackEffect:
-	ld a, 3 ; energy cost of this attack
+; ClefairyMetronome_UseAttackEffect:
+; 	ld a, 3 ; energy cost of this attack
 ;	fallthrough
 
 ; handles Metronome selection, and validates

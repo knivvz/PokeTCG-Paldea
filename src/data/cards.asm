@@ -9016,48 +9016,75 @@ FearowCard:
 	tx FearowDescription ; description
 	db 0 ; AI info
 
-ClefairyCard:
-	db TYPE_PKMN_COLORLESS ; type
+CleffaCard:
+	db TYPE_PKMN_PSYCHIC ; type
 	gfx ClefairyCardGfx ; gfx
-	tx ClefairyName ; name
+	tx CleffaName ; name
 	db STAR ; rarity
 	db MYSTERY | NONE ; sets
-	dw CLEFAIRY
+	dw CLEFFA
 	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
-	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx SingName ; name
-	tx MayInflictSleepDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ClefairySingEffectCommands ; effect commands
-	db INFLICT_SLEEP ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SING ; animation
-
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx MetronomeName ; name
-	tx ClefairysMetronomeDescription ; description
+	energy 0 ; energies
+	tx GraspingDrawName ; name
+	tx GraspingDrawDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ClefairyMetronomeEffectCommands ; effect commands
-	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
+	dw CleffaGraspingDrawEffectCommands ; effect commands
+	db DRAW_CARD ; flags 1
+	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_NONE ; animation
 
-	db 1 ; retreat cost
-	db WR_FIGHTING ; weakness
-	db WR_PSYCHIC ; resistance
+	; attack 2
+	energy 0 ; energies
+	dw NONE ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
+
+	; attack 1
+	; energy COLORLESS, 1 ; energies
+	; tx SingName ; name
+	; tx MayInflictSleepDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ClefairySingEffectCommands ; effect commands
+	; db INFLICT_SLEEP ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SING ; animation
+
+	; ; attack 2
+	; energy COLORLESS, 3 ; energies
+	; tx MetronomeName ; name
+	; tx ClefairysMetronomeDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db RESIDUAL ; category
+	; dw ClefairyMetronomeEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_NONE ; animation
+
+	db 0 ; retreat cost
+	db WR_METAL ; weakness
+	db NONE ; resistance
 	tx FairyName ; category
 	db 35 ; Pokedex number
 	db 14 ; level
@@ -9075,7 +9102,7 @@ ClefableCard:
 	dw CLEFABLE
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx ClefairyName ; pre-evo name
+	tx CleffaName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies

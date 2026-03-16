@@ -353,7 +353,7 @@ CutePokemonCardList:
 	card_item RAICHU_LV40,              1
 	card_item RAICHU_LV45,              1
 	card_item JOLTEON_LV29,             1
-	card_item CLEFAIRY,                 2
+	card_item CLEFFA,              2
 	card_item CLEFABLE,                 1
 	card_item JIGGLYPUFF_LV12,          1
 	card_item JIGGLYPUFF_LV13,          2
@@ -603,7 +603,7 @@ PsychicPowerCardList:
 	card_item JYNX,              1
 	card_item MEWTWO_LV53,       1
 	card_item MEW_LV23,          1
-	card_item CLEFAIRY,          1
+	card_item CLEFFA,          1
 	card_item CLEFABLE,          1
 	card_item SNORLAX,           1
 	card_item PROFESSOR_OAK,     2

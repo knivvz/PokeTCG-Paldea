@@ -787,3 +787,13 @@ UnhingedScissorsDescription:
 	line "Special Condition, this attack does"
 	line "80 more damage."
 	done
+
+GraspingDrawName:
+	text "Grasping Draw"
+	done
+
+GraspingDrawDescription:
+	text "Draw cards until you have 7 cards"
+	line "in your hand. (This attack does)"
+	line "not require any Energy)"
+	done

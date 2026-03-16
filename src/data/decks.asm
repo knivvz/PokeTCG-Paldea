@@ -62,7 +62,7 @@ UnnamedDeck:
 	deck_list_start
 	card_item PSYCHIC_ENERGY,         20
 	card_item SLOWPOKE_LV9,            4
-	card_item CLEFAIRY,                4
+	card_item CLEFFA,                4
 	card_item MEW_LV8,                 4
 	card_item PIDGEOT_LV40,            2
 	card_item PIDGEOTTO,               2

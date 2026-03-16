@@ -172,7 +172,7 @@
 	const RATICATE                    ; $a8
 	const FLAMIGO                     ; $a9
 	const FEAROW                      ; $aa
-	const CLEFAIRY                    ; $ab
+	const CLEFFA                    ; $ab
 	const CLEFABLE                    ; $ac
 	const JIGGLYPUFF_LV12             ; $ad
 	const JIGGLYPUFF_LV13             ; $ae
