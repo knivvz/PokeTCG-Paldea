@@ -27,7 +27,7 @@ AIActionTable_LegendaryZapdos:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw VOLTORB
 	dw EEVEE
 	dw ZAPDOS_LV40
@@ -40,19 +40,19 @@ AIActionTable_LegendaryZapdos:
 	dw ZAPDOS_LV40
 	dw EEVEE
 	dw VOLTORB
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw NULL
 
 .list_retreat
 	ai_retreat EEVEE,           -5
 	ai_retreat VOLTORB,         -5
-	ai_retreat ELECTABUZZ_LV35, -5
+	ai_retreat IRON_HANDS_EX, -5
 	dw NULL
 
 .list_energy
 	ai_energy VOLTORB,         1, -1
 	ai_energy ELECTRODE_LV35,  3, +0
-	ai_energy ELECTABUZZ_LV35, 2, -1
+	ai_energy IRON_HANDS_EX, 2, -1
 	ai_energy JOLTEON_LV29,    3, +1
 	ai_energy ZAPDOS_LV40,     4, +2
 	ai_energy ZAPDOS_LV64,     4, +2
@@ -112,7 +112,7 @@ AIDoTurn_LegendaryZapdos:
 	jr nc, .attach_normally
 	jr .voltorb_or_electabuzz
 .check_electabuzz
-	cp16 ELECTABUZZ_LV35
+	cp16 IRON_HANDS_EX
 	jr nz, .attach_normally
 
 .voltorb_or_electabuzz

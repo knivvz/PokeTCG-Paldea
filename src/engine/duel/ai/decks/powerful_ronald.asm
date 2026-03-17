@@ -28,7 +28,7 @@ AIActionTable_PowerfulRonald:
 
 .list_arena
 	dw KANGASKHAN
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw HITMONCHAN
 	dw MR_MIME
 	dw LICKITUNG
@@ -47,7 +47,7 @@ AIActionTable_PowerfulRonald:
 	dw DODUO
 	dw JYNX
 	dw MEWTWO_LV53
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw MR_MIME
 	dw LICKITUNG
 	dw NULL
@@ -59,7 +59,7 @@ AIActionTable_PowerfulRonald:
 	dw NULL
 
 .list_energy
-	ai_energy ELECTABUZZ_LV35, 2, +1
+	ai_energy IRON_HANDS_EX, 2, +1
 	ai_energy PALDEAN_TAUROS,       3, +1
 	ai_energy HITMONCHAN,      3, +1
 	ai_energy MR_MIME,         2, +0

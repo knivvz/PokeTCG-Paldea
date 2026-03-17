@@ -114,7 +114,7 @@
 	const ELECTRODE_LV35              ; $6e
 	const ELECTRODE_LV42              ; $6f
 	const ELECTABUZZ_LV20             ; $70
-	const ELECTABUZZ_LV35             ; $71
+	const IRON_HANDS_EX             ; $71
 	const JOLTEON_LV24                ; $72
 	const JOLTEON_LV29                ; $73
 	const ZAPDOS_LV40                 ; $74
@@ -181,7 +181,7 @@
 	const MEOWTH_LV14                 ; $b1
 	const DUNSPARCE                   ; $b2
 	const DUDUNSPARCE                 ; $b3
-	const FARFETCHD                   ; $b4
+	const SQUAWKABILLYEX                   ; $b4
 	const DODUO                       ; $b5
 	const DODRIO                      ; $b6
 	const LICKITUNG                   ; $b7

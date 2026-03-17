@@ -35,6 +35,15 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+IronHandsExAmpYouVeryMuchEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AmpYouVeryMuch_DrawExtraPrize
+	db $00
+
+SquawkabillyExSquawkAndSeizeEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SquawkAndSeize_Check
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SquawkAndSeize_Effect
+	db $00
+
 CleffaGraspingDrawEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, GraspingDraw_DrawEffect
 	db $00
@@ -1409,12 +1418,12 @@ SnorlaxBodySlamEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
 	db  $00
 
-FarfetchdLeekSlapEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, LeekSlap_OncePerDuelCheck
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeekSlap_NoDamage50PercentEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, LeekSlap_SetUsedThisDuelFlag
-	dbw EFFECTCMDTYPE_AI, LeekSlap_AIEffect
-	db  $00
+; FarfetchdLeekSlapEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, LeekSlap_OncePerDuelCheck
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeekSlap_NoDamage50PercentEffect
+; 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, LeekSlap_SetUsedThisDuelFlag
+; 	dbw EFFECTCMDTYPE_AI, LeekSlap_AIEffect
+; 	db  $00
 
 KangaskhanFetchEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, FetchEffect

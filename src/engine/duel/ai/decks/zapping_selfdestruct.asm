@@ -28,7 +28,7 @@ AIActionTable_ZappingSelfdestruct:
 
 .list_arena
 	dw KANGASKHAN
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw TAUROS
 	dw WATTREL
 	dw VOLTORB
@@ -37,7 +37,7 @@ AIActionTable_ZappingSelfdestruct:
 .list_bench
 	dw WATTREL
 	dw VOLTORB
-	dw ELECTABUZZ_LV35
+	dw IRON_HANDS_EX
 	dw TAUROS
 	dw KANGASKHAN
 	dw NULL
@@ -51,7 +51,7 @@ AIActionTable_ZappingSelfdestruct:
 	ai_energy KILOWATTREL,   4, +0
 	ai_energy VOLTORB,         3, +1
 	ai_energy ELECTRODE_LV35,  3, +0
-	ai_energy ELECTABUZZ_LV35, 1, +0
+	ai_energy IRON_HANDS_EX, 1, +0
 	ai_energy KANGASKHAN,      2, -2
 	ai_energy TAUROS,          3, +0
 	dw NULL

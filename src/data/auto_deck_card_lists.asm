@@ -78,7 +78,7 @@ HeatedBattleCardList:
 	card_item LIGHTNING_ENERGY,  4
 	card_item FIGHTING_ENERGY,  15
 	card_item MAGMAR_LV24,       4
-	card_item ELECTABUZZ_LV35,   2
+	card_item IRON_HANDS_EX,   2
 	card_item MANKEY,            3
 	card_item PRIMEAPE,          2
 	card_item PALDEAN_TAUROS,         3
@@ -379,7 +379,7 @@ PokemonFluteCardList:
 	card_item EMOLGA,      3
 	card_item RAICHU_LV40,       1
 	card_item WATTREL,    2
-	card_item ELECTABUZZ_LV35,   3
+	card_item IRON_HANDS_EX,   3
 	card_item RATTATA,           2
 	card_item RATICATE,          1
 	card_item PROFESSOR_OAK,     2
@@ -407,7 +407,7 @@ YellowFlashCardList:
 	card_item ELECTRODE_LV35,    1
 	card_item ELECTRODE_LV42,    1
 	card_item ELECTABUZZ_LV20,   1
-	card_item ELECTABUZZ_LV35,   1
+	card_item IRON_HANDS_EX,   1
 	card_item JOLTEON_LV24,      1
 	card_item JOLTEON_LV29,      1
 	card_item ZAPDOS_LV40,       1
@@ -451,7 +451,7 @@ ZappingSelfdestructCardList:
 	card_item KILOWATTREL,            3
 	card_item VOLTORB,                  4
 	card_item ELECTRODE_LV35,           2
-	card_item ELECTABUZZ_LV35,          4
+	card_item IRON_HANDS_EX,          4
 	card_item KANGASKHAN,               2
 	card_item TAUROS,                   1
 	card_item PROFESSOR_OAK,            1
@@ -987,7 +987,7 @@ SquirtleAndFriendsCardList:
 	card_item EMOLGA,      2
 	card_item WATTREL,    1
 	card_item KILOWATTREL,     1
-	card_item ELECTABUZZ_LV35,   1
+	card_item IRON_HANDS_EX,   1
 	card_item RATTATA,           2
 	card_item RATICATE,          1
 	card_item MEOWTH_LV14,       1
@@ -1016,7 +1016,7 @@ BulbasaurAndFriendsCardList:
 	card_item EMOLGA,     2
 	card_item RAICHU_LV40,      1
 	card_item WATTREL,   1
-	card_item ELECTABUZZ_LV35,  1
+	card_item IRON_HANDS_EX,  1
 	card_item ABRA,             2
 	card_item KADABRA,          1
 	card_item GASTLY_LV8,       2
@@ -1132,7 +1132,7 @@ LegendaryZapdosCardList:
 	card_item LIGHTNING_ENERGY, 25
 	card_item VOLTORB,           4
 	card_item ELECTRODE_LV35,    3
-	card_item ELECTABUZZ_LV35,   4
+	card_item IRON_HANDS_EX,   4
 	card_item JOLTEON_LV29,      2
 	card_item ZAPDOS_LV40,       1
 	card_item ZAPDOS_LV64,       1

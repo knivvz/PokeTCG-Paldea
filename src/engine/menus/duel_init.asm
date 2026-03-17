@@ -52,6 +52,14 @@ Duel_Init:
 	call FadeScreenToWhite ; fade out
 	pop af
 	ld [wd291], a
+
+	ld a, [wOncePerTurnFlags]
+	res USED_SQUAWK_AND_SEIZE_F, a
+	ld [wOncePerTurnFlags], a
+
+	ld a, [wOncePerTurnFlags]
+	res USED_SUPPORTER_THIS_TURN_F, a
+	ld [wOncePerTurnFlags], a
 	ret
 
 OpponentTitleAndNameLabel:

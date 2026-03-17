@@ -797,3 +797,40 @@ GraspingDrawDescription:
 	line "in your hand. (This attack does)"
 	line "not require any Energy)"
 	done
+
+CanOnlyBeUsedOnYourFirstTurnText:
+	text "Can Only Be Used On Your First Turn."
+	done
+
+CanOnlyBeUsedOncePerDuelText:
+	text "Can only be used once per duel."
+	done
+
+SquawkAndSeizeName:
+	text "Squawk And Seize"
+	done
+
+SquawkAndSeizeDescription:
+	text "Once during your first turn, you may"
+	line "discard your hand and draw 6 cards."
+	line "You can't use more than 1 Squawk and"
+	line "Seize Ability during your turn."
+	done
+
+IronHandsExName:
+	text "Iron Hands EX"
+	done
+
+ArmPressName:
+	text "Arm Press"
+	done
+
+AmpYouVeryMuchName:
+	text "Amp You Very Much"
+	done
+
+AmpYouVeryMuchDescription:
+	text "If your opponent's Pokémon is"
+	line "Knocked Out by damage from this"
+	line "attack, take 1 more Prize card."
+	done

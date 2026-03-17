@@ -829,22 +829,22 @@ PersianDescription:
 	line "because of its fickle meanness."
 	done
 
-FarfetchdName:
-	text "Farfetch'd"
+SquawkabillyExName:
+	text "SquawkabillyEx"
 	done
 
-LeekSlapName:
-	text "Leek Slap"
-	done
+; LeekSlapName:
+; 	text "Leek Slap"
+; 	done
 
-LeekSlapDescription:
-	text "Flip a coin. If tails, this attack"
-	line "does nothing. Either way, you can't"
-	line "use this attack again as long as"
-	line "Farfetch'd stays in play (even"
-	line "putting Farfetch'd on the Bench"
-	line "won't let you use it again)."
-	done
+; LeekSlapDescription:
+; 	text "Flip a coin. If tails, this attack"
+; 	line "does nothing. Either way, you can't"
+; 	line "use this attack again as long as"
+; 	line "Farfetch'd stays in play (even"
+; 	line "putting Farfetch'd on the Bench"
+; 	line "won't let you use it again)."
+; 	done
 
 PotSmashName:
 	text "Pot Smash"

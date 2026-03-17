@@ -4245,7 +4245,7 @@ GoldeenCard:
 	dw GoldeenCollectEffectCommands ; effect commands
 	db DRAW_CARD ; flags 1
 	db NONE ; flags 2
-	db SPECIAL_AI_HANDLING ; flags 3
+	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_GLOW_EFFECT ; animation
 
@@ -5864,51 +5864,80 @@ ElectabuzzLv20Card:
 	tx ElectabuzzLv20Description ; description
 	db 0 ; AI info
 
-ElectabuzzLv35Card:
+IronHandsExCard:
 	db TYPE_PKMN_LIGHTNING ; type
 	gfx ElectabuzzLv35CardGfx ; gfx
-	tx ElectabuzzName ; name
+	tx IronHandsExName ; name
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw ELECTABUZZ_LV35
-	db 70 ; hp
+	dw IRON_HANDS_EX
+	db 120 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy LIGHTNING, 1 ; energies
-	tx ThundershockName ; name
-	tx MayInflictParalysisDescription ; description
+	energy LIGHTNING, 2, COLORLESS, 1 ; energies
+	tx ArmPressName ; name
+	dw NONE ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
+	db 80 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ElectabuzzThundershockEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_THUNDERSHOCK ; animation
-
-	; attack 2
-	energy LIGHTNING, 1, COLORLESS, 1 ; energies
-	tx ThunderpunchName ; name
-	tx ThunderpunchDescription ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_PLUS ; category
-	dw ElectabuzzThunderpunchEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
+	dw NONE ; effect commands
+	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_THUNDERPUNCH ; animation
 
-	db 2 ; retreat cost
+	; attack 1
+	energy LIGHTNING, 1, COLORLESS, 3 ; energies
+	tx AmpYouVeryMuchName ; name
+	tx AmpYouVeryMuchDescription ; description
+	dw NONE ; description (cont)
+	db 60 ; damage
+	db DAMAGE_NORMAL ; category
+	dw IronHandsExAmpYouVeryMuchEffectCommands;NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_THUNDERPUNCH ; animation
+
+
+	; attack 1
+	; energy LIGHTNING, 1 ; energies
+	; tx ThundershockName ; name
+	; tx MayInflictParalysisDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ElectabuzzThundershockEffectCommands ; effect commands
+	; db INFLICT_PARALYSIS ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDERSHOCK ; animation
+
+	; ; attack 2
+	; energy LIGHTNING, 1, COLORLESS, 1 ; energies
+	; tx ThunderpunchName ; name
+	; tx ThunderpunchDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw ElectabuzzThunderpunchEffectCommands ; effect commands
+	; db LOW_RECOIL ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_THUNDERPUNCH ; animation
+
+	db 4 ; retreat cost
 	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx ElectricName ; category
 	db 125 ; Pokedex number
-	db 35 ; level
+	db 50 ; level
 	db 3, 7 ; length
 	dw 66 * 10 ; weight
 	tx ElectabuzzLv35Description ; description
@@ -9521,44 +9550,72 @@ DudunsparceCard:
 	tx PersianDescription ; description
 	db 0 ; AI info
 
-FarfetchdCard:
+SquawkabillyExCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx FarfetchdCardGfx ; gfx
-	tx FarfetchdName ; name
+	tx SquawkabillyExName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
-	dw FARFETCHD
-	db 50 ; hp
+	dw SQUAWKABILLYEX
+	db 80 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx LeekSlapName ; name
-	tx LeekSlapDescription ; description
+	energy 0 ; energies
+	tx SquawkAndSeizeName ; name
+	tx SquawkAndSeizeDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw FarfetchdLeekSlapEffectCommands ; effect commands
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw SquawkabillyExSquawkAndSeizeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_WHIP ; animation
+	db ATK_ANIM_PKMN_POWER_1 ; animation
 
-	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx PotSmashName ; name
+	; attack 2 TODO replace this
+	energy COLORLESS, 1 ; energies
+	tx TackleName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POT_SMASH ; animation
+	db ATK_ANIM_HIT ; animation
+
+	; attack 1
+	; energy COLORLESS, 1 ; energies
+	; tx LeekSlapName ; name
+	; tx LeekSlapDescription ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw FarfetchdLeekSlapEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_WHIP ; animation
+
+	; ; attack 2
+	; energy COLORLESS, 3 ; energies
+	; tx PotSmashName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_POT_SMASH ; animation
 
 	db 1 ; retreat cost
 	db WR_LIGHTNING ; weakness

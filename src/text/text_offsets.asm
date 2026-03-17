@@ -2771,9 +2771,9 @@ TextOffsets::
 	textpointer PounceDescription
 	textpointer ClassyCatName
 	textpointer PersianDescription
-	textpointer FarfetchdName
-	textpointer LeekSlapName
-	textpointer LeekSlapDescription
+	textpointer SquawkabillyExName
+	; textpointer LeekSlapName
+	; textpointer LeekSlapDescription
 	textpointer PotSmashName
 	textpointer WildDuckName
 	textpointer FarfetchdDescription
@@ -3027,3 +3027,11 @@ TextOffsets::
 	textpointer BoiledPressDescription
 	textpointer GraspingDrawName
 	textpointer GraspingDrawDescription
+	textpointer CanOnlyBeUsedOnYourFirstTurnText
+	textpointer CanOnlyBeUsedOncePerDuelText
+	textpointer SquawkAndSeizeName
+	textpointer SquawkAndSeizeDescription
+	textpointer IronHandsExName
+	textpointer ArmPressName
+	textpointer AmpYouVeryMuchName
+	textpointer AmpYouVeryMuchDescription

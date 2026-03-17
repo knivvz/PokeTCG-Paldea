@@ -1,3 +1,88 @@
+AmpYouVeryMuch_DrawExtraPrize:
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetNonTurnDuelistVariable
+	cp 0
+	ret nz
+	ld a, 1
+	call SelectPrizeCards
+	ret
+
+Squawk_OncePerDuelCheck:
+	;call IsPlayerTurn
+	;jr nc, .opponent
+
+	ld a, [wOncePerTurnFlags]
+    bit USED_SQUAWK_AND_SEIZE_F, a   ; Check if USED_VSTAR flag is set
+    jp nz, .already_used
+	or a
+	ret
+
+; .opponent
+; 	ld a, [wOncePerTurnFlags]
+;     bit USED_VSTAR_OPP_F, a   ; Check if USED_VSTAR flag is set
+;     jp nz, .already_used
+; 	or a
+; 	ret
+.already_used
+ 	ldtx hl, CanOnlyBeUsedOncePerDuelText
+ 	scf
+ 	ret
+
+Squawk_SetUsedThisDuelFlag:
+	; call IsPlayerTurn
+	; jr nc, .opponent
+	ld a, [wOncePerTurnFlags]
+	set USED_SQUAWK_AND_SEIZE_F, a  ; Set the USED_VSTAR bit
+    ld [wOncePerTurnFlags], a   ; Store the updated flags byte back
+    ret
+; .opponent
+; 	ld a, [wOncePerTurnFlags]
+; 	set USED_VSTAR_OPP_F, a  ; Set the USED_VSTAR bit
+;     ld [wOncePerTurnFlags], a   ; Store the updated flags byte back
+;     ret
+
+SquawkAndSeize_Check:
+	call Initialization_Check
+	ret c
+	ld a, [wDuelTurns] ; 0 or 1
+	cp 2
+	jr nc, .set_carry
+
+	call Squawk_OncePerDuelCheck
+	ret
+
+.set_carry
+	ldtx hl, CanOnlyBeUsedOnYourFirstTurnText
+	scf
+	ret
+
+SquawkAndSeize_Effect:
+	call Squawk_SetUsedThisDuelFlag
+	
+	call CreateHandCardList
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.discard_loop
+	ld a, [hli]
+	cp $ff
+	jr z, .draw_cards
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+	jr .discard_loop
+
+.draw_cards
+	ld a, 6
+	bank1call DisplayDrawNCardsScreen
+	ld c, 6
+.draw_loop
+	call DrawCardFromDeck
+	jr c, .done
+	call AddCardToHand
+	dec c
+	jr nz, .draw_loop
+.done
+	ret
+
 ; input: e - number of cards to refill to
 CardRefillToE:
 	ld b, e                         ; Load e into register B
@@ -8180,34 +8265,34 @@ ThickSkinnedEffect:
 	scf
 	ret
 
-LeekSlap_AIEffect:
-	ld a, 30 / 2
-	lb de, 0, 30
-	jp SetExpectedAIDamage
+; LeekSlap_AIEffect:
+; 	ld a, 30 / 2
+; 	lb de, 0, 30
+; 	jp SetExpectedAIDamage
 
-; return carry if already used attack in this duel
-LeekSlap_OncePerDuelCheck:
-; can only use attack if it was never used before this duel
-	ld a, DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and USED_LEEK_SLAP_THIS_DUEL
-	ret z
-	ldtx hl, ThisAttackCannotBeUsedTwiceText
-	scf
-	ret
+; ; return carry if already used attack in this duel
+; LeekSlap_OncePerDuelCheck:
+; ; can only use attack if it was never used before this duel
+; 	ld a, DUELVARS_ARENA_CARD_FLAGS
+; 	call GetTurnDuelistVariable
+; 	and USED_LEEK_SLAP_THIS_DUEL
+; 	ret z
+; 	ldtx hl, ThisAttackCannotBeUsedTwiceText
+; 	scf
+; 	ret
 
-LeekSlap_SetUsedThisDuelFlag:
-	ld a, DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	set USED_LEEK_SLAP_THIS_DUEL_F, [hl]
-	ret
+; LeekSlap_SetUsedThisDuelFlag:
+; 	ld a, DUELVARS_ARENA_CARD_FLAGS
+; 	call GetTurnDuelistVariable
+; 	set USED_LEEK_SLAP_THIS_DUEL_F, [hl]
+; 	ret
 
-LeekSlap_NoDamage50PercentEffect:
-	ldtx de, DamageCheckIfTailsNoDamageText
-	call TossCoin
-	ret c
-	xor a ; 0 damage
-	jp SetDefiniteDamage
+; LeekSlap_NoDamage50PercentEffect:
+; 	ldtx de, DamageCheckIfTailsNoDamageText
+; 	call TossCoin
+; 	ret c
+; 	xor a ; 0 damage
+; 	jp SetDefiniteDamage
 
 FetchEffect:
 	ldtx hl, Draw1CardFromTheDeckText

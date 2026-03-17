@@ -116,7 +116,7 @@ CardPointers::
 	dab ElectrodeLv35Card
 	dab ElectrodeLv42Card
 	dab ElectabuzzLv20Card
-	dab ElectabuzzLv35Card
+	dab IronHandsExCard
 	dab JolteonLv24Card
 	dab JolteonLv29Card
 	dab ZapdosLv40Card
@@ -183,7 +183,7 @@ CardPointers::
 	dab MeowthLv14Card
 	dab DunsparceCard
 	dab DudunsparceCard
-	dab FarfetchdCard
+	dab SquawkabillyExCard
 	dab DoduoCard
 	dab DodrioCard
 	dab LickitungCard

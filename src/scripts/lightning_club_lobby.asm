@@ -39,19 +39,19 @@ Script_Chap2:
 	quit_script_fully
 
 .ows_e3b6
-	jump_if_card_owned ELECTABUZZ_LV35, .ows_e3be
+	jump_if_card_owned IRON_HANDS_EX, .ows_e3be
 	print_npc_text Text0613
 	quit_script_fully
 
 .ows_e3be
-	jump_if_card_in_collection ELECTABUZZ_LV35, .ows_e3c6
+	jump_if_card_in_collection IRON_HANDS_EX, .ows_e3c6
 	print_npc_text Text0614
 	quit_script_fully
 
 .ows_e3c6
 	set_event EVENT_CHAP2_TRADE_STATE, CHAP2_TRADE_COMPLETED
 	print_npc_text Text0615
-	take_card ELECTABUZZ_LV35
+	take_card IRON_HANDS_EX
 	give_card ELECTABUZZ_LV20
 	show_card_received_screen ELECTABUZZ_LV20
 	print_npc_text Text0616

@@ -187,7 +187,7 @@ SamsPracticeDeck:
 	card_item GUST_OF_WIND,            1
 	card_item JOLTEON_LV29,            1
 	card_item LIGHTNING_ENERGY,        1
-	card_item ELECTABUZZ_LV35,         1
+	card_item IRON_HANDS_EX,         1
 	card_item FIGHTING_ENERGY,         1
 	card_item HITMONCHAN,              1
 	card_item LIGHTNING_ENERGY,        1
@@ -329,7 +329,7 @@ SquirtleExtraDeck:
 	card_item EMOLGA,      2
 	card_item WATTREL,    1
 	card_item KILOWATTREL,     1
-	card_item ELECTABUZZ_LV35,   1
+	card_item IRON_HANDS_EX,   1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
 	tx SquirtleExtraDeckName
@@ -378,7 +378,7 @@ BulbasaurExtraDeck:
 	card_item EMOLGA,      2
 	card_item RAICHU_LV40,       1
 	card_item WATTREL,    1
-	card_item ELECTABUZZ_LV35,   1
+	card_item IRON_HANDS_EX,   1
 	card_item ABRA,              2
 	card_item KADABRA,           1
 	card_item JYNX,              1
@@ -477,7 +477,7 @@ GrassAndPsychicDeck:
 	card_item DROWZEE,         3
 	card_item HYPNO,           2
 	card_item JYNX,            1
-	card_item FARFETCHD,       1
+	card_item SQUAWKABILLYEX,       1
 	card_item TAUROS,          1
 	card_item NEMONA,            2
 	card_item ENERGY_SEARCH,   2
@@ -517,7 +517,7 @@ LegendaryZapdosDeck:
 	card_item LIGHTNING_ENERGY, 25
 	card_item VOLTORB,           4
 	card_item ELECTRODE_LV35,    3
-	card_item ELECTABUZZ_LV35,   4
+	card_item IRON_HANDS_EX,   4
 	card_item JOLTEON_LV29,      2
 	card_item ZAPDOS_LV40,       1
 	card_item ZAPDOS_LV64,       1
@@ -647,7 +647,7 @@ ZappingSelfdestructDeck:
 	card_item KILOWATTREL,            3
 	card_item VOLTORB,                  4
 	card_item ELECTRODE_LV35,           2
-	card_item ELECTABUZZ_LV35,          4
+	card_item IRON_HANDS_EX,          4
 	card_item KANGASKHAN,               2
 	card_item TAUROS,                   1
 	card_item PROFESSOR_OAK,            1
@@ -781,7 +781,7 @@ PowerfulRonaldDeck:
 	card_item FIGHTING_ENERGY,         9
 	card_item PSYCHIC_ENERGY,          7
 	card_item DOUBLE_COLORLESS_ENERGY, 3
-	card_item ELECTABUZZ_LV35,         3
+	card_item IRON_HANDS_EX,         3
 	card_item PALDEAN_TAUROS,               2
 	card_item HITMONCHAN,              2
 	card_item MR_MIME,                 1
@@ -887,7 +887,7 @@ HeatedBattleDeck:
 	card_item LIGHTNING_ENERGY,  4
 	card_item FIGHTING_ENERGY,  15
 	card_item MAGMAR_LV24,       4
-	card_item ELECTABUZZ_LV35,   2
+	card_item IRON_HANDS_EX,   2
 	card_item MANKEY,            3
 	card_item PRIMEAPE,          2
 	card_item PALDEAN_TAUROS,         3
@@ -1008,7 +1008,7 @@ WaterfrontPokemonDeck:
 	card_item STARMIE,           1
 	card_item SLOWPOKE_LV18,     2
 	card_item SLOWBRO,           1
-	card_item FARFETCHD,         1
+	card_item SQUAWKABILLYEX,         1
 	card_item DRATINI,           2
 	card_item DRAGONAIR,         1
 	card_item NEMONA,              2
@@ -1121,7 +1121,7 @@ PowerGeneratorDeck:
 	card_item ELECTRODE_LV35,    1
 	card_item ELECTRODE_LV42,    1
 	card_item ELECTABUZZ_LV20,   1
-	card_item ELECTABUZZ_LV35,   1
+	card_item IRON_HANDS_EX,   1
 	card_item JOLTEON_LV29,      3
 	card_item ZAPDOS_LV64,       2
 	card_item EEVEE,             4
@@ -1316,7 +1316,7 @@ LovelyNidoranDeck:
 	card_item WEEZING,          1
 	card_item TEALMASKOGERPONEX,           1
 	card_item DUNSPARCE,      2
-	card_item FARFETCHD,        2
+	card_item SQUAWKABILLYEX,        2
 	card_item DODUO,            2
 	card_item PROFESSOR_OAK,    1
 	card_item NEMONA,             2
@@ -1436,7 +1436,7 @@ ImakuniDeck:
 	card_item SLOWBRO,         3
 	card_item DROWZEE,         4
 	card_item HYPNO,           3
-	card_item FARFETCHD,       4
+	card_item SQUAWKABILLYEX,       4
 	card_item IMAKUNI_CARD,    4
 	card_item MAINTENANCE,     2
 	card_item POKEMON_FLUTE,   2
