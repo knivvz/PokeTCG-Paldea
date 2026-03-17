@@ -7013,9 +7013,17 @@ CountKnockedOutPokemon:
 	push de
 	call GetCardIDFromDeckIndex
 	call GetCardType
-	pop de
+	;pop de
 	cp TYPE_TRAINER
 	jr z, .next ; jump if this is a trainer card (Clefairy Doll or Mysterious Fossil)
+
+	; knocked out pokemon:
+	call LoadCardDataToBuffer1_FromCardID
+	ld a, [wLoadedCard1Level] 
+	cp 50 ; lvl 50+ gives 2 prizes
+	pop de
+	jr nc, .increment_prizes
+.back
 	inc b
 .next
 	inc hl
@@ -7028,6 +7036,10 @@ CountKnockedOutPokemon:
 	ret z
 	scf
 	ret
+.increment_prizes
+	inc b
+	jr .back
+
 
 ; returns carry if turn duelist has no Play Area Pokémon
 ; with non-zero HP, that is, all Pokémon are knocked out
