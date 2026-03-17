@@ -780,7 +780,7 @@ UpdateSubstatusConditions_EndOfTurn::
 
 ; return carry if turn holder has Blastoise and its Rain Dance Pkmn Power is active
 IsRainDanceActive::
-	ld de, QUAQUAVALEX
+	ld de, QUAQUAVAL_EX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	ret nc ; return if no Pkmn Power-capable Blastoise found in turn holder's play area
 	ld de, MUK

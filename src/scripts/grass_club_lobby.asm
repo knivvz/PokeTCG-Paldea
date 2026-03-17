@@ -108,11 +108,11 @@ Script_Lass2:
 	print_text_quit_fully Text06fd
 
 .ows_e6b6
-	jump_if_card_owned SKELEDIRGEEX, .ows_e6bd
+	jump_if_card_owned SKELEDIRGE_EX, .ows_e6bd
 	print_text_quit_fully Text06fe
 
 .ows_e6bd
-	jump_if_card_in_collection SKELEDIRGEEX, .ows_e6c4
+	jump_if_card_in_collection SKELEDIRGE_EX, .ows_e6c4
 	print_text_quit_fully Text06ff
 
 .ows_e6c4
@@ -120,9 +120,9 @@ Script_Lass2:
 	set_event EVENT_LASS2_TRADE_STATE, LASS2_TRADES_COMPLETE
 	print_npc_text Text0700
 	print_text Text0701
-	take_card SKELEDIRGEEX
-	give_card QUAQUAVALEX
-	show_card_received_screen QUAQUAVALEX
+	take_card SKELEDIRGE_EX
+	give_card QUAQUAVAL_EX
+	show_card_received_screen QUAQUAVAL_EX
 	print_text_quit_fully Text06f3
 
 Script_Granny2:

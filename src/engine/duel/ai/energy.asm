@@ -151,7 +151,7 @@ AIProcessEnergyCards:
 	ld de, MUK
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .check_if_active
-	ld de, VENUSAUR_LV67
+	ld de, VENUSAUR_EX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jr nc, .check_if_active
 	ld a, 1

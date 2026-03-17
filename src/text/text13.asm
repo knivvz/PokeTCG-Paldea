@@ -340,7 +340,7 @@ DangerousToxwhipDescription:
 	line "now Confused and Poisoned."
 	done
 
-VenusaurEXName:
+VenusaurExName:
 	text "Venusaur EX"
 	done
 
@@ -497,7 +497,7 @@ LeafStepName:
 	done
 
 SkeledirgeExName:
-	text "Skeledirge EX"
+	text "Skeledirge Ex"
 	done
 
 BurningVoiceName:

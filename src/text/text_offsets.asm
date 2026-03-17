@@ -2933,7 +2933,7 @@ TextOffsets::
 	textpointer TranquilFlowerDescription
 	textpointer DangerousToxwhipName
 	textpointer DangerousToxwhipDescription
-	textpointer VenusaurEXName
+	textpointer VenusaurExName
 	textpointer PsychicDrawName
 	textpointer KadabraPsychicDrawDescription
 	textpointer AlakazamPsychicDrawDescription

@@ -1971,9 +1971,9 @@ AIDecide_PokemonBreeder:
 	ld d, a
 	cp16 VENUSAUR_LV64
 	jr z, .found
-	cp16 VENUSAUR_LV67
+	cp16 VENUSAUR_EX
 	jr z, .found
-	cp16 QUAQUAVALEX
+	cp16 QUAQUAVAL_EX
 	jr z, .found
 	cp16 VILEPLUME
 	jr z, .found
@@ -2362,7 +2362,7 @@ AIDecide_ProfessorOak:
 	jr c, .check_hand
 
 ; no Muk in Play Area
-	ld de, QUAQUAVALEX
+	ld de, QUAQUAVAL_EX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jr nc, .check_hand
 
@@ -2647,7 +2647,7 @@ AIDecide_EnergyRetrieval:
 	ld de, MUK
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .start
-	ld de, QUAQUAVALEX
+	ld de, QUAQUAVAL_EX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 
@@ -2912,7 +2912,7 @@ AIDecide_SuperEnergyRetrieval:
 	ld de, MUK
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .start
-	ld de, QUAQUAVALEX
+	ld de, QUAQUAVAL_EX
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 
@@ -5041,7 +5041,7 @@ AIDecide_Pokeball:
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	ret c
 	ld bc, FLORAGATO
-	ld de, MEOWSCARADAEX
+	ld de, MEOWSCARADA_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	ret c
 	ld de, SPRIGATITO
@@ -5049,7 +5049,7 @@ AIDecide_Pokeball:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	ret c
 	ld de, FLORAGATO
-	ld bc, MEOWSCARADAEX
+	ld bc, MEOWSCARADA_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	ret c
 	ret
@@ -5636,7 +5636,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
 	ld bc, CROCALOR
-	ld de, SKELEDIRGEEX
+	ld de, SKELEDIRGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
 	ld de, FUECOCO
@@ -5644,7 +5644,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	ld de, CROCALOR
-	ld bc, SKELEDIRGEEX
+	ld bc, SKELEDIRGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	jr .no_carry
@@ -5824,11 +5824,11 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	ld bc, WIMPOD
-	ld de, GOLISOPODEX
+	ld de, GOLISOPOD_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
 	ld de, WIMPOD
-	ld bc, GOLISOPODEX
+	ld bc, GOLISOPOD_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	ld bc, HORSEA
@@ -5972,7 +5972,7 @@ AIDecide_PokemonTrader_FlowerGarden:
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld bc, IVYSAUR
-	ld de, VENUSAUR_LV67
+	ld de, VENUSAUR_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld de, BULBASAUR
@@ -5980,7 +5980,7 @@ AIDecide_PokemonTrader_FlowerGarden:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld de, IVYSAUR
-	ld bc, VENUSAUR_LV67
+	ld bc, VENUSAUR_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, BELLSPROUT
@@ -6058,7 +6058,7 @@ AIDecide_PokemonTrader_Flamethrower:
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld bc, CROCALOR
-	ld de, SKELEDIRGEEX
+	ld de, SKELEDIRGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld de, FUECOCO
@@ -6066,7 +6066,7 @@ AIDecide_PokemonTrader_Flamethrower:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld de, CROCALOR
-	ld bc, SKELEDIRGEEX
+	ld bc, SKELEDIRGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, VULPIX

@@ -50,7 +50,7 @@ AIActionTable_LegendaryDragonite:
 .list_energy
 	ai_energy FUECOCO,     3, +1
 	ai_energy CROCALOR,     4, +1
-	ai_energy SKELEDIRGEEX,      5, +0
+	ai_energy SKELEDIRGE_EX,      5, +0
 	ai_energy MAGIKARP,       3, +1
 	ai_energy GYARADOS,       4, -1
 	ai_energy DRATINI,        2, +0

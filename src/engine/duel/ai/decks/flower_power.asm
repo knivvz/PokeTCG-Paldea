@@ -48,7 +48,7 @@ AIActionTable_FlowerPower:
 .list_energy
 	ai_energy BULBASAUR,      3, +0
 	ai_energy IVYSAUR,        4, +0
-	ai_energy VENUSAUR_LV67,  4, +0
+	ai_energy VENUSAUR_EX,  4, +0
 	ai_energy ODDISH,         2, +0
 	ai_energy GLOOM,          3, -1
 	ai_energy VILEPLUME,      3, -1
@@ -57,7 +57,7 @@ AIActionTable_FlowerPower:
 	dw NULL
 
 .list_prize
-	dw VENUSAUR_LV67
+	dw VENUSAUR_EX
 	dw NULL
 
 .store_list_pointers

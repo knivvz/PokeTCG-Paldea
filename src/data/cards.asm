@@ -151,10 +151,10 @@ VenusaurLv64Card:
 VenusaurLv67Card:
 	db TYPE_PKMN_GRASS ; type
 	gfx VenusaurLv67CardGfx ; gfx
-	tx VenusaurEXName ; name
+	tx VenusaurExName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
-	dw VENUSAUR_LV67
+	dw VENUSAUR_EX
 	db 170 ; hp
 	db STAGE2 ; stage
 	tx IvysaurName ; pre-evo name
@@ -788,7 +788,7 @@ MeowscaradaExCard:
 	tx MeowscaradaExName ; name
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
-	dw MEOWSCARADAEX
+	dw MEOWSCARADA_EX
 	db 160 ; hp
 	db STAGE2 ; stage
 	tx FloragatoName ; pre-evo name
@@ -2094,7 +2094,7 @@ TealMaskOgerponExCard:
 	tx TealMaskOgerponExName ; name
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
-	dw TEALMASKOGERPONEX
+	dw TEAL_MASK_OGERPON_EX
 	db 110 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
@@ -2328,7 +2328,7 @@ SkeledirgeExCard:
 	tx SkeledirgeExName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
-	dw SKELEDIRGEEX
+	dw SKELEDIRGE_EX
 	db 170 ; hp
 	db STAGE2 ; stage
 	tx CharmeleonName ; pre-evo name
@@ -3262,7 +3262,7 @@ QuaquavalExCard:
 	tx QuaquavalExName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
-	dw QUAQUAVALEX
+	dw QUAQUAVAL_EX
 	db 160 ; hp
 	db STAGE2 ; stage
 	tx QuaxwellName ; pre-evo name
@@ -3924,7 +3924,7 @@ GolisopodExCard:
 	tx GolisopodExName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | FOSSIL ; sets
-	dw GOLISOPODEX
+	dw GOLISOPOD_EX
 	db 140 ; hp
 	db STAGE1 ; stage
 	tx WimpodName ; pre-evo name
@@ -7061,7 +7061,7 @@ GholdengoExCard:
 	tx GholdengoExName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | GB ; sets
-	dw GHOLDENGOEX
+	dw GHOLDENGO_EX
 	db 130 ; hp
 	db STAGE1 ; stage
 	tx GimmighoulName ; pre-evo name
@@ -9556,7 +9556,7 @@ SquawkabillyExCard:
 	tx SquawkabillyExName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
-	dw SQUAWKABILLYEX
+	dw SQUAWKABILLY_EX
 	db 80 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name

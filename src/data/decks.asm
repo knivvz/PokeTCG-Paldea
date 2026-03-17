@@ -88,10 +88,10 @@ UnnamedDeck2:
 	card_item KANGASKHAN,               4
 	card_item BULBASAUR,                4
 	card_item IVYSAUR,                  3
-	card_item VENUSAUR_LV67,            2
+	card_item VENUSAUR_EX,            2
 	card_item FUECOCO,               4
 	card_item CROCALOR,               3
-	card_item SKELEDIRGEEX,                2
+	card_item SKELEDIRGE_EX,                2
 	card_item POKEMON_BREEDER,          3
 	card_item POKEMON_TRADER,           3
 	card_item ENERGY_RETRIEVAL,         2
@@ -125,7 +125,7 @@ PracticePlayerDeck:
 	card_item QUAXWELL,      1
 	card_item NEMONA,           1
 	card_item WATER_ENERGY,   1
-	card_item QUAQUAVALEX,      1
+	card_item QUAQUAVAL_EX,      1
 	card_item WATER_ENERGY,   1
 	card_item PSYCHIC_ENERGY, 1
 	card_item WATER_ENERGY,   1
@@ -228,7 +228,7 @@ CharmanderAndFriendsDeck:
 	card_item FIGHTING_ENERGY,   6
 	card_item FUECOCO,        	 2
 	card_item CROCALOR,        	 1
-	card_item SKELEDIRGEEX,      1
+	card_item SKELEDIRGE_EX,      1
 	card_item FLAMIGO,         	 4
 	;card_item PONYTA,            2
 	card_item MAGMAR_LV24,       1
@@ -260,7 +260,7 @@ CharmanderExtraDeck:
 	card_item CATERPIE,        2
 	card_item METAPOD,         1
 	card_item NIDORANM,        1
-	card_item TEALMASKOGERPONEX,          1
+	card_item TEAL_MASK_OGERPON_EX,          1
 	card_item SEEL,            2
 	card_item DEWGONG,         1
 	card_item GOLDEEN,         2
@@ -279,7 +279,7 @@ SquirtleAndFriendsDeck:
 	card_item PSYCHIC_ENERGY,   8
 	card_item QUAXLY,         2
 	card_item QUAXWELL,        1
-	card_item QUAQUAVALEX,        1
+	card_item QUAQUAVAL_EX,        1
 	card_item SEEL,             2
 	card_item DEWGONG,          1
 	card_item STARYU,           1
@@ -320,7 +320,7 @@ SquirtleExtraDeck:
 	card_item METAPOD,           1
 	card_item WEEDLE,            1
 	card_item KAKUNA,            1
-	card_item TEALMASKOGERPONEX,            1
+	card_item TEAL_MASK_OGERPON_EX,            1
 	card_item FUECOCO,        2
 	card_item CROCALOR,        1
 	card_item MAGMAR_LV24,       1
@@ -341,7 +341,7 @@ BulbasaurAndFriendsDeck:
 	card_item WATER_ENERGY,     9
 	card_item BULBASAUR,        2
 	card_item IVYSAUR,          1
-	card_item VENUSAUR_LV67,    1
+	card_item VENUSAUR_EX,    1
 	card_item CATERPIE,         2
 	card_item METAPOD,          1
 	card_item SPRIGATITO,         2
@@ -401,7 +401,7 @@ LightningAndFireDeck:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item FUECOCO,               2
 	card_item CROCALOR,               1
-	card_item SKELEDIRGEEX,                1
+	card_item SKELEDIRGE_EX,                1
 	card_item GROWLITHE,                2
 	card_item ARCANINE_LV45,            1
 	card_item PONYTA,                   2
@@ -471,13 +471,13 @@ GrassAndPsychicDeck:
 	card_item PARASECT,        1
 	card_item EXEGGCUTE,       2
 	card_item EXEGGUTOR,       1
-	card_item TEALMASKOGERPONEX,          1
+	card_item TEAL_MASK_OGERPON_EX,          1
 	card_item ABRA,            3
 	card_item KADABRA,         2
 	card_item DROWZEE,         3
 	card_item HYPNO,           2
 	card_item JYNX,            1
-	card_item SQUAWKABILLYEX,       1
+	card_item SQUAWKABILLY_EX,       1
 	card_item TAUROS,          1
 	card_item NEMONA,            2
 	card_item ENERGY_SEARCH,   2
@@ -557,7 +557,7 @@ LegendaryDragoniteDeck:
 	card_item DOUBLE_COLORLESS_ENERGY,  4
 	card_item FUECOCO,               3
 	card_item CROCALOR,               2
-	card_item SKELEDIRGEEX,                2
+	card_item SKELEDIRGE_EX,                2
 	card_item MAGIKARP,                 3
 	card_item GYARADOS,                 2
 	card_item LAPRAS,                   2
@@ -621,7 +621,7 @@ GoGoRainDanceDeck:
 	card_item WATER_ENERGY,           24
 	card_item QUAXLY,                4
 	card_item QUAXWELL,               3
-	card_item QUAQUAVALEX,               2
+	card_item QUAQUAVAL_EX,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
 	card_item HORSEA,                  3
@@ -665,7 +665,7 @@ FlowerPowerDeck:
 	card_item PSYCHIC_ENERGY,    4
 	card_item BULBASAUR,         4
 	card_item IVYSAUR,           3
-	card_item VENUSAUR_LV67,     2
+	card_item VENUSAUR_EX,     2
 	card_item ODDISH,            4
 	card_item GLOOM,             3
 	card_item VILEPLUME,         2
@@ -927,13 +927,13 @@ ExcavationDeck:
 	card_item FIGHTING_ENERGY,    15
 	card_item WATER_ENERGY,        8
 	card_item WIMPOD,            3
-	card_item GOLISOPODEX,            1
+	card_item GOLISOPOD_EX,            1
 	card_item OMANYTE,             3
 	card_item OMASTAR,             2
 	card_item SANDSHREW,           4
 	card_item SANDSLASH,           2
 	card_item GIMMIGHOUL,              3
-	card_item GHOLDENGOEX,        1
+	card_item GHOLDENGO_EX,        1
 	card_item HITMONCHAN,          3
 	card_item KABUTO,              2
 	card_item KABUTOPS,            1
@@ -996,7 +996,7 @@ WaterfrontPokemonDeck:
 	card_item PSYCHIC_ENERGY,    7
 	card_item QUAXLY,          2
 	card_item QUAXWELL,         1
-	card_item QUAQUAVALEX,         1
+	card_item QUAQUAVAL_EX,         1
 	card_item PSYDUCK,           2
 	card_item GOLDUCK,           1
 	card_item POLIWAG,           2
@@ -1008,7 +1008,7 @@ WaterfrontPokemonDeck:
 	card_item STARMIE,           1
 	card_item SLOWPOKE_LV18,     2
 	card_item SLOWBRO,           1
-	card_item SQUAWKABILLYEX,         1
+	card_item SQUAWKABILLY_EX,         1
 	card_item DRATINI,           2
 	card_item DRAGONAIR,         1
 	card_item NEMONA,              2
@@ -1052,7 +1052,7 @@ SoundoftheWavesDeck:
 	card_item SEEL,            3
 	card_item DEWGONG,         2
 	card_item WIMPOD,        3
-	card_item GOLISOPODEX,        2
+	card_item GOLISOPOD_EX,        2
 	card_item KRABBY,          3
 	card_item KINGLER,         2
 	card_item HORSEA,          2
@@ -1167,7 +1167,7 @@ FlowerGardenDeck:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item BULBASAUR,                3
 	card_item IVYSAUR,                  2
-	card_item VENUSAUR_LV67,            2
+	card_item VENUSAUR_EX,            2
 	card_item ODDISH,                   3
 	card_item GLOOM,                    2
 	card_item VILEPLUME,                2
@@ -1306,7 +1306,7 @@ LovelyNidoranDeck:
 	card_item GRASS_ENERGY,    24
 	card_item SPRIGATITO,         4
 	card_item FLORAGATO,         2
-	card_item MEOWSCARADAEX,        2
+	card_item MEOWSCARADA_EX,        2
 	card_item NIDORANM,         3
 	card_item NIDORINO,         2
 	card_item NIDOKING,         1
@@ -1314,9 +1314,9 @@ LovelyNidoranDeck:
 	card_item MUK,              1
 	card_item KOFFING,          2
 	card_item WEEZING,          1
-	card_item TEALMASKOGERPONEX,           1
+	card_item TEAL_MASK_OGERPON_EX,           1
 	card_item DUNSPARCE,      2
-	card_item SQUAWKABILLYEX,        2
+	card_item SQUAWKABILLY_EX,        2
 	card_item DODUO,            2
 	card_item PROFESSOR_OAK,    1
 	card_item NEMONA,             2
@@ -1378,7 +1378,7 @@ FlamethrowerDeck:
 	card_item DOUBLE_COLORLESS_ENERGY,  4
 	card_item FUECOCO,               2
 	card_item CROCALOR,               2
-	card_item SKELEDIRGEEX,                1
+	card_item SKELEDIRGE_EX,                1
 	card_item VULPIX,                   2
 	card_item NINETALES_LV32,           1
 	card_item GROWLITHE,                2
@@ -1436,7 +1436,7 @@ ImakuniDeck:
 	card_item SLOWBRO,         3
 	card_item DROWZEE,         4
 	card_item HYPNO,           3
-	card_item SQUAWKABILLYEX,       4
+	card_item SQUAWKABILLY_EX,       4
 	card_item IMAKUNI_CARD,    4
 	card_item MAINTENANCE,     2
 	card_item POKEMON_FLUTE,   2

@@ -164,7 +164,7 @@ BoneAttackCardList:
 	card_item KLAWF,             4
 	card_item GIMMIGHOUL,           4
 	card_item MAROWAK_LV26,     1
-	card_item GHOLDENGOEX,     2
+	card_item GHOLDENGO_EX,     2
 	card_item RHYHORN,          2
 	card_item RHYDON,           1
 	card_item NEMONA,             2
@@ -180,13 +180,13 @@ ExcavationCardList:
 	card_item FIGHTING_ENERGY,   15
 	card_item WATER_ENERGY,       8
 	card_item WIMPOD,           3
-	card_item GOLISOPODEX,           1
+	card_item GOLISOPOD_EX,           1
 	card_item OMANYTE,            3
 	card_item OMASTAR,            2
 	card_item SANDSHREW,          4
 	card_item SANDSLASH,          2
 	card_item GIMMIGHOUL,             3
-	card_item GHOLDENGOEX,       1
+	card_item GHOLDENGO_EX,       1
 	card_item HITMONCHAN,         3
 	card_item KABUTO,             2
 	card_item KABUTOPS,           1
@@ -229,7 +229,7 @@ BlueWaterCardList:
 	card_item SEEL,               2
 	card_item DEWGONG,            1
 	card_item WIMPOD,           2
-	card_item GOLISOPODEX,           1
+	card_item GOLISOPOD_EX,           1
 	card_item KRABBY,             2
 	card_item KINGLER,            1
 	card_item HORSEA,             2
@@ -257,7 +257,7 @@ OnTheBeachCardList:
 	card_item SEEL,              2
 	card_item DEWGONG,           1
 	card_item WIMPOD,          3
-	card_item GOLISOPODEX,          2
+	card_item GOLISOPOD_EX,          2
 	card_item KRABBY,            3
 	card_item KINGLER,           2
 	card_item STARYU,            3
@@ -281,7 +281,7 @@ ParalyzeCardList:
 	card_item QUAXLY,                 3
 	card_item QUAXWELL,                2
 	card_item WIMPOD,                 3
-	card_item GOLISOPODEX,                 2
+	card_item GOLISOPOD_EX,                 2
 	card_item STARYU,                   4
 	card_item STARMIE,                  3
 	card_item PROFESSOR_OAK,            2
@@ -318,7 +318,7 @@ RainDancerCardList:
 	card_item WATER_ENERGY,           24
 	card_item QUAXLY,                4
 	card_item QUAXWELL,               3
-	card_item QUAQUAVALEX,               2
+	card_item QUAQUAVAL_EX,               2
 	card_item GOLDEEN,                 4
 	card_item SEAKING,                 3
 	card_item HORSEA,                  3
@@ -476,7 +476,7 @@ InsectCollectionCardList:
 	card_item VENONAT,          2
 	card_item VENOMOTH,         1
 	card_item SCYTHER,          1
-	card_item TEALMASKOGERPONEX,           1
+	card_item TEAL_MASK_OGERPON_EX,           1
 	card_item NEMONA,             2
 	card_item POKEMON_BREEDER,  2
 	card_item SWITCH,           2
@@ -503,7 +503,7 @@ JungleCardList:
 	card_item BELLSPROUT,               2
 	card_item WEEPINBELL,               1
 	card_item VICTREEBEL,               1
-	card_item TEALMASKOGERPONEX,                   1
+	card_item TEAL_MASK_OGERPON_EX,                   1
 	card_item LICKITUNG,                1
 	card_item KANGASKHAN,               1
 	card_item NEMONA,                     2
@@ -521,7 +521,7 @@ FlowerGardenCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item BULBASAUR,                3
 	card_item IVYSAUR,                  2
-	card_item VENUSAUR_LV67,            2
+	card_item VENUSAUR_EX,            2
 	card_item ODDISH,                   3
 	card_item GLOOM,                    2
 	card_item VILEPLUME,                2
@@ -570,7 +570,7 @@ FlowerPowerCardList:
 	card_item PSYCHIC_ENERGY,    4
 	card_item BULBASAUR,         4
 	card_item IVYSAUR,           3
-	card_item VENUSAUR_LV67,     2
+	card_item VENUSAUR_EX,     2
 	card_item ODDISH,            4
 	card_item GLOOM,             3
 	card_item VILEPLUME,         2
@@ -705,7 +705,7 @@ LovelyNidoranCardList:
 	card_item GRASS_ENERGY,     20
 	card_item SPRIGATITO,          4
 	card_item FLORAGATO,          3
-	card_item MEOWSCARADAEX,         2
+	card_item MEOWSCARADA_EX,         2
 	card_item NIDORANM,          4
 	card_item NIDORINO,          4
 	card_item NIDOKING,          4
@@ -726,7 +726,7 @@ ScienceCorpsCardList:
 	card_item ARBOK,            1
 	card_item SPRIGATITO,         2
 	card_item FLORAGATO,         1
-	card_item MEOWSCARADAEX,        1
+	card_item MEOWSCARADA_EX,        1
 	card_item NIDORANM,         3
 	card_item NIDORINO,         2
 	card_item NIDOKING,         1
@@ -840,10 +840,10 @@ ChariSaurCardList:
 	card_item FIRE_ENERGY,      10
 	card_item BULBASAUR,         4
 	card_item IVYSAUR,           3
-	card_item VENUSAUR_LV67,     2
+	card_item VENUSAUR_EX,     2
 	card_item FUECOCO,        4
 	card_item CROCALOR,        3
-	card_item SKELEDIRGEEX,         2
+	card_item SKELEDIRGE_EX,         2
 	card_item FLAREON_LV22,      3
 	card_item EEVEE,             4
 	card_item NEMONA,              2
@@ -881,7 +881,7 @@ FirePokemonCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item FUECOCO,               3
 	card_item CROCALOR,               2
-	card_item SKELEDIRGEEX,                1
+	card_item SKELEDIRGE_EX,                1
 	card_item VULPIX,                   3
 	card_item NINETALES_LV32,           1
 	card_item NINETALES_LV35,           1
@@ -938,10 +938,10 @@ CharmanderAndFriendsCardList:
 	card_item METAPOD,          1
 	card_item SPRIGATITO,         2
 	card_item NIDORANM,         1
-	card_item TEALMASKOGERPONEX,           1
+	card_item TEAL_MASK_OGERPON_EX,           1
 	card_item FUECOCO,       2
 	card_item CROCALOR,       1
-	card_item SKELEDIRGEEX,        1
+	card_item SKELEDIRGE_EX,        1
 	card_item GROWLITHE,        2
 	card_item ARCANINE_LV45,    1
 	card_item PONYTA,           2
@@ -976,7 +976,7 @@ SquirtleAndFriendsCardList:
 	card_item MAGMAR_LV24,       1
 	card_item QUAXLY,          2
 	card_item QUAXWELL,         1
-	card_item QUAQUAVALEX,         1
+	card_item QUAQUAVAL_EX,         1
 	card_item SEEL,              2
 	card_item DEWGONG,           1
 	card_item GOLDEEN,           1
@@ -1008,7 +1008,7 @@ BulbasaurAndFriendsCardList:
 	card_item PSYCHIC_ENERGY,   6
 	card_item BULBASAUR,        2
 	card_item IVYSAUR,          1
-	card_item VENUSAUR_LV67,    1
+	card_item VENUSAUR_EX,    1
 	card_item SPRIGATITO,         2
 	card_item NIDORANM,         2
 	card_item NIDORINO,         1
@@ -1170,7 +1170,7 @@ LegendaryDragoniteCardList:
 	card_item DOUBLE_COLORLESS_ENERGY,  4
 	card_item FUECOCO,               3
 	card_item CROCALOR,               2
-	card_item SKELEDIRGEEX,                2
+	card_item SKELEDIRGE_EX,                2
 	card_item MAGIKARP,                 3
 	card_item GYARADOS,                 2
 	card_item LAPRAS,                   2

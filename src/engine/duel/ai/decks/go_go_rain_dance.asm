@@ -49,7 +49,7 @@ AIActionTable_GoGoRainDance:
 .list_energy
 	ai_energy QUAXLY,  2, +0
 	ai_energy QUAXWELL, 3, +0
-	ai_energy QUAQUAVALEX, 5, +0
+	ai_energy QUAQUAVAL_EX, 5, +0
 	ai_energy GOLDEEN,   1, +0
 	ai_energy SEAKING,   2, +0
 	ai_energy HORSEA,    2, +0
@@ -61,7 +61,7 @@ AIActionTable_GoGoRainDance:
 	dw GAMBLER
 	dw ENERGY_RETRIEVAL
 	dw SUPER_ENERGY_RETRIEVAL
-	dw QUAQUAVALEX
+	dw QUAQUAVAL_EX
 	dw NULL
 
 .store_list_pointers

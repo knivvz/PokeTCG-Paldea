@@ -12,7 +12,7 @@
 	const BULBASAUR                   ; $08
 	const IVYSAUR                     ; $09
 	const VENUSAUR_LV64               ; $0a
-	const VENUSAUR_LV67               ; $0b
+	const VENUSAUR_EX               ; $0b
 	const CATERPIE                    ; $0c
 	const METAPOD                     ; $0d
 	const BUTTERFREE                  ; $0e
@@ -23,7 +23,7 @@
 	const ARBOK                       ; $13
 	const SPRIGATITO                    ; $14
 	const FLORAGATO                    ; $15
-	const MEOWSCARADAEX                   ; $16
+	const MEOWSCARADA_EX                   ; $16
 	const NIDORANM                    ; $17
 	const NIDORINO                    ; $18
 	const NIDOKING                    ; $19
@@ -48,10 +48,10 @@
 	const TANGELA_LV8                 ; $2c
 	const TANGELA_LV12                ; $2d
 	const SCYTHER                     ; $2e
-	const TEALMASKOGERPONEX                      ; $2f
+	const TEAL_MASK_OGERPON_EX                      ; $2f
 	const FUECOCO                  ; $30
 	const CROCALOR                  ; $31
-	const SKELEDIRGEEX                   ; $32
+	const SKELEDIRGE_EX                   ; $32
 	const VULPIX                      ; $33
 	const NINETALES_LV32              ; $34
 	const NINETALES_LV35              ; $35
@@ -68,7 +68,7 @@
 	const MOLTRES_LV37                ; $40
 	const QUAXLY                    ; $41
 	const QUAXWELL                   ; $42
-	const QUAQUAVALEX                   ; $43
+	const QUAQUAVAL_EX                   ; $43
 	const PSYDUCK                     ; $44
 	const GOLDUCK                     ; $45
 	const POLIWAG                     ; $46
@@ -79,7 +79,7 @@
 	const SEEL                        ; $4b
 	const DEWGONG                     ; $4c
 	const WIMPOD                    ; $4d
-	const GOLISOPODEX                    ; $4e
+	const GOLISOPOD_EX                    ; $4e
 	const KRABBY                      ; $4f
 	const KINGLER                     ; $50
 	const HORSEA                      ; $51
@@ -135,7 +135,7 @@
 	const KLAWF                        ; $83
 	const GIMMIGHOUL                      ; $84
 	const MAROWAK_LV26                ; $85
-	const GHOLDENGOEX                ; $86
+	const GHOLDENGO_EX                ; $86
 	const PALDEAN_TAUROS                   ; $87
 	const HITMONCHAN                  ; $88
 	const RHYHORN                     ; $89
@@ -181,7 +181,7 @@
 	const MEOWTH_LV14                 ; $b1
 	const DUNSPARCE                   ; $b2
 	const DUDUNSPARCE                 ; $b3
-	const SQUAWKABILLYEX                   ; $b4
+	const SQUAWKABILLY_EX                   ; $b4
 	const DODUO                       ; $b5
 	const DODRIO                      ; $b6
 	const LICKITUNG                   ; $b7
