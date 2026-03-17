@@ -104,40 +104,41 @@ _CopyCardNameAndLevel_HalfwidthText:
 	dec hl
 	ld a, [wLoadedCard1Type]
 	cp TYPE_ENERGY
-	jr nc, .level_done
-	ld a, [wLoadedCard1Level]
-	or a
-	jr z, .level_done
-	ld c, a
-	ld a, " "
-	ld [hli], a
-	dec b
-	ld a, "L"
-	ld [hli], a
-	dec b
-	ld a, "v"
-	ld [hli], a
-	dec b
-	ld a, c
-	cp 10
-	jr c, .got_level
-	push bc
-	ld b, "0" - 1
-.first_digit_loop
-	inc b
-	sub 10
-	jr nc, .first_digit_loop
-	add 10
-	ld [hl], b ; first digit
-	inc hl
-	pop bc
-	ld c, a
-	dec b
-.got_level
-	ld a, c
-	add "0"
-	ld [hli], a ; last (or only) digit
-	dec b
+	jr .level_done
+; 	jr nc, .level_done
+; 	ld a, [wLoadedCard1Level]
+; 	or a
+; 	jr z, .level_done
+; 	ld c, a
+; 	ld a, " "
+; 	ld [hli], a
+; 	dec b
+; 	ld a, "L"
+; 	ld [hli], a
+; 	dec b
+; 	ld a, "v"
+; 	ld [hli], a
+; 	dec b
+; 	ld a, c
+; 	cp 10
+; 	jr c, .got_level
+; 	push bc
+; 	ld b, "0" - 1
+; .first_digit_loop
+; 	inc b
+; 	sub 10
+; 	jr nc, .first_digit_loop
+; 	add 10
+; 	ld [hl], b ; first digit
+; 	inc hl
+; 	pop bc
+; 	ld c, a
+; 	dec b
+; .got_level
+; 	ld a, c
+; 	add "0"
+; 	ld [hli], a ; last (or only) digit
+; 	dec b
 .level_done
 	push hl
 	ld a, " "
