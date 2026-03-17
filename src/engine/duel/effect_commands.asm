@@ -35,6 +35,19 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+SandshrewDoubleScratchEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleScratch_MultiplierEffect
+	dbw EFFECTCMDTYPE_AI, DoubleScratch_AIEffect
+	db  $00
+SandslashSpikeRendEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SpikeRend_Damage
+	dbw EFFECTCMDTYPE_AI, SpikeRend_AIEffect
+	db $00
+
+SandslashRumbleEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AcidEffect
+	db  $00
+
 IronHandsExAmpYouVeryMuchEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, AmpYouVeryMuch_DrawExtraPrize
 	db $00
@@ -1188,14 +1201,14 @@ RhyhornLeerEffectCommands:
 ; 	dbw EFFECTCMDTYPE_AI_SELECTION, StretchKick_AISelectEffect
 ; 	db  $00
 
-SandshrewSandAttackEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
-	db  $00
+; SandshrewSandAttackEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SandAttackEffect
+; 	db  $00
 
-SandslashFurySwipesEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes20_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, FurySwipes20_AIEffect
-	db  $00
+; SandslashFurySwipesEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FurySwipes20_MultiplierEffect
+; 	dbw EFFECTCMDTYPE_AI, FurySwipes20_AIEffect
+; 	db  $00
 
 ; DugtrioEarthquakeEffectCommands:
 ; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EarthquakeEffect

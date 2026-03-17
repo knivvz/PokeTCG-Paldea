@@ -833,4 +833,31 @@ AmpYouVeryMuchDescription:
 	text "If your opponent's Pokémon is"
 	line "Knocked Out by damage from this"
 	line "attack, take 1 more Prize card."
+	
+RolloutName:
+	text "Rollout"
+	done
+
+DoubleScratchName:
+	text "Double Scratch"
+	done
+
+RumbleName:
+	text "Rumble"
+	done
+
+RumbleDescription:
+	text "During your opponent's next turn,"
+	line "the Defending Pokémon can't retreat."
+	done
+
+SpikeRendName:
+	text "Spike Rend"
+	done
+
+SpikeRendDescription:
+	text "If your opponent's Active Pokémon"
+	line "already has any damage counters on"
+	line "it, this attack does 100 more"
+	line "damage."
 	done

@@ -1,3 +1,42 @@
+DoubleScratch_AIEffect:
+	ld a, 20 / 2
+	lb de, 0, 20
+	jp SetExpectedAIDamage
+
+DoubleScratch_MultiplierEffect:
+	ld hl, 10
+	call LoadTxRam3
+	ldtx de, DamageCheckIfHeadsXDamageText
+	ld a, 2
+	call TossCoinATimes
+	call ATimes10
+	jp SetDefiniteDamage
+
+SpikeRend_AIEffect:
+	call SpikeRend_Damage
+	jp SetDefiniteAIDamage
+
+SpikeRend_Damage:
+	call SwapTurn
+	call CheckIfActivePokemonHasAnyDamage 
+	jr nc, .extra_damage
+	call SwapTurn
+	ret 
+.extra_damage
+	ld a, 50
+	call AddToDamage
+	call SwapTurn
+	ret
+
+CheckIfActivePokemonHasAnyDamage:
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	or a
+	ret nz ; found damage
+	; no damage found
+	scf
+	ret
+
 AmpYouVeryMuch_DrawExtraPrize:
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetNonTurnDuelistVariable
@@ -661,6 +700,7 @@ AquaHorn_Damage:
 	call GetPlayAreaCardAttachedEnergies
 	ld a, [wAttachedEnergies + WATER]
 	call SetDamageToATimes20
+	ld a, 10
 	call AddToDamage
 	ret
 
@@ -2894,11 +2934,11 @@ VictreebelLure_SwitchDefendingPokemon:
 	ld [wDuelDisplayedScreen], a
 	ret
 
-; If heads, defending Pokemon can't retreat next turn
+; defending Pokemon can't retreat next turn
 AcidEffect:
-	ldtx de, AcidCheckText
-	call TossCoin
-	ret nc
+	; ldtx de, AcidCheckText
+	; call TossCoin
+	; ret nc
 	ld a, SUBSTATUS2_UNABLE_RETREAT
 	jp ApplySubstatus2ToDefendingCard
 
@@ -6919,9 +6959,9 @@ StretchKick_BenchDamageEffect:
 	call DealDamageToPlayAreaPokemon_RegularAnim
 	jp SwapTurn
 
-SandAttackEffect:
-	ld a, SUBSTATUS2_SAND_ATTACK
-	jp ApplySubstatus2ToDefendingCard
+; SandAttackEffect:
+; 	ld a, SUBSTATUS2_SAND_ATTACK
+; 	jp ApplySubstatus2ToDefendingCard
 
 ; EarthquakeEffect:
 ; 	ld a, TRUE

@@ -6200,41 +6200,69 @@ SandshrewCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	dw SANDSHREW
-	db 40 ; hp
+	db 30 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1 ; energies
-	tx SandAttackName ; name
-	tx OpponentAttackMayDoNothingDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw SandshrewSandAttackEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_DARK_GAS ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
+	energy COLORLESS, 1 ; energies
+	tx RolloutName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_NONE ; animation
+	db ATK_ANIM_HIT ; animation
+
+	; attack 1
+	energy FIGHTING, 1, COLORLESS, 1 ; energies
+	tx DoubleScratchName ; name
+	tx DoubleAttackX10Description ; description
+	dw NONE ; description (cont)
+	db 10 ; damage
+	db DAMAGE_X ; category
+	dw SandshrewDoubleScratchEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HIT ; animation
+
+	; attack 1
+	; energy FIGHTING, 1 ; energies
+	; tx SandAttackName ; name
+	; tx OpponentAttackMayDoNothingDescription ; description
+	; dw NONE ; description (cont)
+	; db 10 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw SandshrewSandAttackEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_DARK_GAS ; animation
+
+	; ; attack 2
+	; energy 0 ; energies
+	; dw NONE ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_NONE ; animation
 
 	db 1 ; retreat cost
 	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	db NONE ; resistance
 	tx MouseName ; category
 	db 27 ; Pokedex number
 	db 12 ; level
@@ -6250,41 +6278,69 @@ SandslashCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | FOSSIL ; sets
 	dw SANDSLASH
-	db 70 ; hp
+	db 60 ; hp
 	db STAGE1 ; stage
 	tx SandshrewName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx SlashName ; name
-	dw NONE ; description
+	energy FIGHTING, 1 ; energies
+	tx RumbleName ; name
+	tx RumbleDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw SandslashRumbleEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NONE ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SLASH ; animation
+	db 1
+	db ATK_ANIM_GOO ; animation
 
 	; attack 2
-	energy FIGHTING, 2 ; energies
-	tx FurySwipesName ; name
-	tx TripleAttackX20Description ; description
+	energy FIGHTING, 1, COLORLESS, 2 ; energies
+	tx SpikeRendName ; name
+	tx SpikeRendDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_X ; category
-	dw SandslashFurySwipesEffectCommands ; effect commands
+	db 40 ; damage
+	db DAMAGE_PLUS ; category
+	dw SandslashSpikeRendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_MULTIPLE_SLASH ; animation
+	db ATK_ANIM_HIT ; animation
 
-	db 1 ; retreat cost
+	; attack 1
+	; energy COLORLESS, 2 ; energies
+	; tx SlashName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SLASH ; animation
+
+	; ; attack 2
+	; energy FIGHTING, 2 ; energies
+	; tx FurySwipesName ; name
+	; tx TripleAttackX20Description ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_X ; category
+	; dw SandslashFurySwipesEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_MULTIPLE_SLASH ; animation
+
+	db 2 ; retreat cost
 	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	db NONE ; resistance
 	tx MouseName ; category
 	db 28 ; Pokedex number
 	db 33 ; level

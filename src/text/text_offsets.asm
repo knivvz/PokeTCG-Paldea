@@ -3035,3 +3035,9 @@ TextOffsets::
 	textpointer ArmPressName
 	textpointer AmpYouVeryMuchName
 	textpointer AmpYouVeryMuchDescription
+	textpointer RolloutName
+	textpointer DoubleScratchName
+	textpointer RumbleName
+	textpointer RumbleDescription
+	textpointer SpikeRendName
+	textpointer SpikeRendDescription
