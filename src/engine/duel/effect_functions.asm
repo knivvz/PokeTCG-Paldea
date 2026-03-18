@@ -1,3 +1,106 @@
+CallForFamily_CheckDeckAndPlayArea:
+	call CheckIfDeckIsEmpty
+	ret c ; return if no cards in deck
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ldtx hl, NoSpaceOnTheBenchText
+	cp MAX_PLAY_AREA_POKEMON
+	ccf
+	ret
+
+CallForFamily_PlayerSelectEffect:
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+
+	call CreateDeckCardList
+	ldtx hl, ChooseBasicPokemonFromDeckText
+	ldtx bc, BasicPokemonDeckText
+	ld d, SEARCHEFFECT_BASIC
+	call LookForCardsInDeck
+	ret c
+
+; draw Deck list interface and print text
+	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+	ldtx hl, ChooseBasicPokemonText
+	ldtx de, DuelistDeckText
+	bank1call SetCardListHeaderText
+
+.loop
+	bank1call DisplayCardList
+	jr c, .pressed_b
+
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Stage]
+	or a
+	jr nz, .play_sfx ; is Basic?
+	ldh a, [hTempCardIndex_ff98]
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+.play_sfx
+	; play SFX and loop back
+	call PlaySFX_InvalidChoice
+	jr .loop
+
+.pressed_b
+; figure if Player can exit the screen without selecting,
+; that is, if the Deck has no Basic Fighting Pokemon.
+	ld a, DUELVARS_CARD_LOCATIONS
+	call GetTurnDuelistVariable
+.loop_b_press
+	ld a, [hl]
+	cp CARD_LOCATION_DECK
+	jr nz, .next
+	ld a, l
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard1Stage] 
+	or a ; BASIC
+	jr z, .play_sfx ; found, go back to top loop
+.next
+	inc l
+	ld a, l
+	cp DECK_SIZE
+	jr c, .loop_b_press
+
+; no valid card in Deck, can safely exit screen
+	ld a, $ff
+	ldh [hTemp_ffa0], a
+	or a
+	ret
+
+CallForFamily_AISelectEffect:
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+
+	ld a, [wLoadedCard2Stage]
+	or a ; BASIC
+	jr nz, .loop_deck
+; found
+	ret
+
+CallForFamily_PutInPlayAreaEffect:
+	ldh a, [hTemp_ffa0]
+	cp $ff
+	jr z, .shuffle
+	call SearchCardInDeckAndAddToHand
+	call AddCardToHand
+	call PutHandPokemonCardInPlayArea
+	call IsPlayerTurn
+	jr c, .shuffle
+	; display card on screen
+	ldh a, [hTemp_ffa0]
+	ldtx hl, PlacedOnTheBenchText
+	bank1call DisplayCardDetailScreen
+.shuffle
+	jp ShuffleCardsInDeck
+
 DoubleScratch_AIEffect:
 	ld a, 20 / 2
 	lb de, 0, 20
@@ -2091,6 +2194,7 @@ CheckIfDeckIsEmpty:
 ;	SEARCHEFFECT_NIDORAN = search for either NidoranM or SPRIGATITO
 ;	SEARCHEFFECT_BASIC_FIGHTING = search for any Basic Fighting Pokemon
 ;	SEARCHEFFECT_BASIC_ENERGY = search for any Basic Energy
+;	SEARCHEFFECT_BASIC = search for any Basic Pokemon
 ;	SEARCHEFFECT_POKEMON = search for any Pokemon card
 ; input:
 ;	d = SEARCHEFFECT_* constant
@@ -2136,7 +2240,8 @@ LookForCardsInDeck:
 .search_table
 	dw .SearchDeckForPokemon
 	dw .SearchDeckForNidoran
-	dw .SearchDeckForBasicFighting
+	;dw .SearchDeckForBasicFighting
+	dw .SearchDeckForBasic
 	dw .SearchDeckForBasicEnergy
 
 .set_carry
@@ -2176,20 +2281,20 @@ LookForCardsInDeck:
 	ret
 
 ; returns carry if no Basic Fighting Pokemon is found in Deck
-.SearchDeckForBasicFighting
-	ld hl, wDuelTempList
-.loop_deck_fighting
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp TYPE_PKMN_FIGHTING
-	jr nz, .loop_deck_fighting
-	ld a, [wLoadedCard2Stage]
-	or a ; BASIC
-	jr nz, .loop_deck_fighting
-	ret
+; .SearchDeckForBasicFighting
+; 	ld hl, wDuelTempList
+; .loop_deck_fighting
+; 	ld a, [hli]
+; 	cp $ff
+; 	jr z, .set_carry
+; 	call LoadCardDataToBuffer2_FromDeckIndex
+; 	ld a, [wLoadedCard2Type]
+; 	cp TYPE_PKMN_FIGHTING
+; 	jr nz, .loop_deck_fighting
+; 	ld a, [wLoadedCard2Stage]
+; 	or a ; BASIC
+; 	jr nz, .loop_deck_fighting
+; 	ret
 
 ; returns carry if no Basic Energy cards are found in Deck
 .SearchDeckForBasicEnergy
@@ -2219,6 +2324,18 @@ LookForCardsInDeck:
 	cp TYPE_ENERGY
 	jr nc, .loop_deck_pkmn
 	or a
+	ret
+
+.SearchDeckForBasic
+	ld hl, wDuelTempList
+.loop_deck_basic
+	ld a, [hli]
+	cp $ff
+	jr z, .set_carry
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Stage]
+	or a ; BASIC
+	jr nz, .loop_deck_basic
 	ret
 
 ; handles the Player selection of attack
@@ -6728,134 +6845,134 @@ AbsorbEffect:
 ; 	ld a, SUBSTATUS2_REDUCE_BY_20
 ; 	jp ApplySubstatus2ToDefendingCard
 
-Bonemerang_AIEffect:
-	ld a, 60 / 2
-	lb de, 0, 60
-	jp SetExpectedAIDamage
+; Bonemerang_AIEffect:
+; 	ld a, 60 / 2
+; 	lb de, 0, 60
+; 	jp SetExpectedAIDamage
 
-Bonemerang_MultiplierEffect:
-	ld hl, 30
-	call LoadTxRam3
-	ldtx de, DamageCheckIfHeadsXDamageText
-	ld a, 2
-	call TossCoinATimes
-	ld e, a
-	add a ; a = 2 * heads
-	add e ; a = 3 * heads
-	call ATimes10
-	jp SetDefiniteDamage
+; Bonemerang_MultiplierEffect:
+; 	ld hl, 30
+; 	call LoadTxRam3
+; 	ldtx de, DamageCheckIfHeadsXDamageText
+; 	ld a, 2
+; 	call TossCoinATimes
+; 	ld e, a
+; 	add a ; a = 2 * heads
+; 	add e ; a = 3 * heads
+; 	call ATimes10
+; 	jp SetDefiniteDamage
 
 ; returns carry if can't add Pokemon from deck
-MarowakCallForFamily_CheckDeckAndPlayArea:
-	call CheckIfDeckIsEmpty
-	ret c ; no cards in deck
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetTurnDuelistVariable
-	ldtx hl, NoSpaceOnTheBenchText
-	cp MAX_PLAY_AREA_POKEMON
-	ccf
-	ret
+; MarowakCallForFamily_CheckDeckAndPlayArea:
+; 	call CheckIfDeckIsEmpty
+; 	ret c ; no cards in deck
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetTurnDuelistVariable
+; 	ldtx hl, NoSpaceOnTheBenchText
+; 	cp MAX_PLAY_AREA_POKEMON
+; 	ccf
+; 	ret
 
-MarowakCallForFamily_PlayerSelectEffect:
-	ld a, $ff
-	ldh [hTemp_ffa0], a
+; MarowakCallForFamily_PlayerSelectEffect:
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
 
-	call CreateDeckCardList
-	ldtx hl, ChooseBasicFightingPokemonFromDeckText
-	ldtx bc, FightingPokemonDeckText
-	ld d, SEARCHEFFECT_BASIC_FIGHTING
-	call LookForCardsInDeck
-	ret c
+; 	call CreateDeckCardList
+; 	ldtx hl, ChooseBasicFightingPokemonFromDeckText
+; 	ldtx bc, FightingPokemonDeckText
+; 	ld d, SEARCHEFFECT_BASIC_FIGHTING
+; 	call LookForCardsInDeck
+; 	ret c
 
-; draw Deck list interface and print text
-	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
-	ldtx hl, ChooseBasicFightingPokemonText
-	ldtx de, DuelistDeckText
-	bank1call SetCardListHeaderText
+; ; draw Deck list interface and print text
+; 	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
+; 	ldtx hl, ChooseBasicFightingPokemonText
+; 	ldtx de, DuelistDeckText
+; 	bank1call SetCardListHeaderText
 
-.loop
-	bank1call DisplayCardList
-	jr c, .pressed_b
+; .loop
+; 	bank1call DisplayCardList
+; 	jr c, .pressed_b
 
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp FIGHTING
-	jr nz, .play_sfx ; is Fighting?
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .play_sfx ; is Basic?
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a
-	or a
-	ret
+; 	call LoadCardDataToBuffer2_FromDeckIndex
+; 	ld a, [wLoadedCard2Type]
+; 	cp FIGHTING
+; 	jr nz, .play_sfx ; is Fighting?
+; 	ld a, [wLoadedCard2Stage]
+; 	or a
+; 	jr nz, .play_sfx ; is Basic?
+; 	ldh a, [hTempCardIndex_ff98]
+; 	ldh [hTemp_ffa0], a
+; 	or a
+; 	ret
 
-.play_sfx
-	; play SFX and loop back
-	call PlaySFX_InvalidChoice
-	jr .loop
+; .play_sfx
+; 	; play SFX and loop back
+; 	call PlaySFX_InvalidChoice
+; 	jr .loop
 
-.pressed_b
-; figure if Player can exit the screen without selecting,
-; that is, if the Deck has no Basic Fighting Pokemon.
-	ld a, DUELVARS_CARD_LOCATIONS
-	call GetTurnDuelistVariable
-.loop_b_press
-	ld a, [hl]
-	cp CARD_LOCATION_DECK
-	jr nz, .next
-	ld a, l
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard1Type]
-	cp FIGHTING
-	jr nz, .next ; found, go back to top loop
-	ld a, [wLoadedCard1Stage]
-	or a
-	jr z, .play_sfx ; found, go back to top loop
-.next
-	inc l
-	ld a, l
-	cp DECK_SIZE
-	jr c, .loop_b_press
+; .pressed_b
+; ; figure if Player can exit the screen without selecting,
+; ; that is, if the Deck has no Basic Fighting Pokemon.
+; 	ld a, DUELVARS_CARD_LOCATIONS
+; 	call GetTurnDuelistVariable
+; .loop_b_press
+; 	ld a, [hl]
+; 	cp CARD_LOCATION_DECK
+; 	jr nz, .next
+; 	ld a, l
+; 	call LoadCardDataToBuffer2_FromDeckIndex
+; 	ld a, [wLoadedCard1Type]
+; 	cp FIGHTING
+; 	jr nz, .next ; found, go back to top loop
+; 	ld a, [wLoadedCard1Stage]
+; 	or a
+; 	jr z, .play_sfx ; found, go back to top loop
+; .next
+; 	inc l
+; 	ld a, l
+; 	cp DECK_SIZE
+; 	jr c, .loop_b_press
 
-; no valid card in Deck, can safely exit screen
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	or a
-	ret
+; ; no valid card in Deck, can safely exit screen
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
+; 	or a
+; 	ret
 
-MarowakCallForFamily_AISelectEffect:
-	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
-	ldh [hTemp_ffa0], a
-	cp $ff
-	ret z ; none found
-	call LoadCardDataToBuffer2_FromDeckIndex
-	ld a, [wLoadedCard2Type]
-	cp FIGHTING
-	jr nz, .loop_deck
-	ld a, [wLoadedCard2Stage]
-	or a
-	jr nz, .loop_deck
-; found
-	ret
+; MarowakCallForFamily_AISelectEffect:
+; 	call CreateDeckCardList
+; 	ld hl, wDuelTempList
+; .loop_deck
+; 	ld a, [hli]
+; 	ldh [hTemp_ffa0], a
+; 	cp $ff
+; 	ret z ; none found
+; 	call LoadCardDataToBuffer2_FromDeckIndex
+; 	ld a, [wLoadedCard2Type]
+; 	cp FIGHTING
+; 	jr nz, .loop_deck
+; 	ld a, [wLoadedCard2Stage]
+; 	or a
+; 	jr nz, .loop_deck
+; ; found
+; 	ret
 
-MarowakCallForFamily_PutInPlayAreaEffect:
-	ldh a, [hTemp_ffa0]
-	cp $ff
-	jr z, .shuffle
-	call SearchCardInDeckAndAddToHand
-	call AddCardToHand
-	call PutHandPokemonCardInPlayArea
-	call IsPlayerTurn
-	jr c, .shuffle
-	; display card on screen
-	ldh a, [hTemp_ffa0]
-	ldtx hl, PlacedOnTheBenchText
-	bank1call DisplayCardDetailScreen
-.shuffle
-	jp ShuffleCardsInDeck
+; MarowakCallForFamily_PutInPlayAreaEffect:
+; 	ldh a, [hTemp_ffa0]
+; 	cp $ff
+; 	jr z, .shuffle
+; 	call SearchCardInDeckAndAddToHand
+; 	call AddCardToHand
+; 	call PutHandPokemonCardInPlayArea
+; 	call IsPlayerTurn
+; 	jr c, .shuffle
+; 	; display card on screen
+; 	ldh a, [hTemp_ffa0]
+; 	ldtx hl, PlacedOnTheBenchText
+; 	bank1call DisplayCardDetailScreen
+; .shuffle
+; 	jp ShuffleCardsInDeck
 
 KarateChop_AIEffect:
 	call KarateChop_DamageSubtractionEffect
@@ -8378,22 +8495,22 @@ TaurosStomp_DamageBoostEffect:
 	ld a, 10
 	jp AddToDamage
 
-Rampage_AIEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	jp SetDefiniteAIDamage
+; Rampage_AIEffect:
+; 	ld e, PLAY_AREA_ARENA
+; 	call GetCardDamageAndMaxHP
+; 	call AddToDamage
+; 	jp SetDefiniteAIDamage
 
-Rampage_Confusion50PercentEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call AddToDamage
-	ldtx de, IfTailsYourPokemonBecomesConfusedText
-	call TossCoin
-	ret c ; heads
-	call SwapTurn
-	call ConfusionEffect
-	jp SwapTurn
+; Rampage_Confusion50PercentEffect:
+; 	ld e, PLAY_AREA_ARENA
+; 	call GetCardDamageAndMaxHP
+; 	call AddToDamage
+; 	ldtx de, IfTailsYourPokemonBecomesConfusedText
+; 	call TossCoin
+; 	ret c ; heads
+; 	call SwapTurn
+; 	call ConfusionEffect
+; 	jp SwapTurn
 
 FuryAttack_AIEffect:
 	ld a, (10 * 2) / 2

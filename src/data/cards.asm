@@ -7079,7 +7079,7 @@ MarowakLv26Card:
 	dw NONE ; description (cont)
 	db 30 ; damage
 	db DAMAGE_X ; category
-	dw MarowakBonemerangEffectCommands ; effect commands
+	dw NONE;MarowakBonemerangEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -7093,7 +7093,7 @@ MarowakLv26Card:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw MarowakCallforFriendEffectCommands ; effect commands
+	dw NONE;MarowakCallforFriendEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -9988,36 +9988,64 @@ TaurosCard:
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx StompName ; name
-	tx StompDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx GatherTheCrewName ; name
+	tx GatherTheCrewDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_PLUS ; category
-	dw TaurosStompEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw TaurosGatherTheCrewEffectCommands ; effect commands
 	db NONE ; flags 1
-	db FLAG_2_BIT_6 ; flags 2
-	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_HIT ; animation
+	db NONE ; flags 2
+	db SPECIAL_AI_HANDLING ; flags 3
+	db 0
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
-	energy COLORLESS, 3 ; energies
-	tx RampageName ; name
-	tx RampageDescription ; description
+	energy COLORLESS, 2 ; energies
+	tx RageName ; name
+	tx RageDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_PLUS ; category
-	dw TaurosRampageEffectCommands ; effect commands
+	dw TaurosRageEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db BOOST_IF_TAKEN_DAMAGE ; flags 3
 	db 0
 	db ATK_ANIM_RAMPAGE ; animation
 
+	; attack 1
+	; energy COLORLESS, 2 ; energies
+	; tx StompName ; name
+	; tx StompDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw TaurosStompEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db FLAG_2_BIT_6 ; flags 2
+	; db NONE ; flags 3
+	; db 1
+	; db ATK_ANIM_HIT ; animation
+
+	; ; attack 2
+	; energy COLORLESS, 3 ; energies
+	; tx RampageName ; name
+	; tx RampageDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_PLUS ; category
+	; dw TaurosRampageEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db BOOST_IF_TAKEN_DAMAGE ; flags 3
+	; db 0
+	; db ATK_ANIM_RAMPAGE ; animation
+
 	db 2 ; retreat cost
 	db WR_FIGHTING ; weakness
-	db WR_PSYCHIC ; resistance
+	db NONE ; resistance
 	tx WildBullName ; category
 	db 128 ; Pokedex number
 	db 32 ; level

@@ -232,9 +232,9 @@ ChooseAttackOpponentWillNotBeAbleToUseText:
 	line "not be able to use on the next turn."
 	done
 
-ChooseBasicFightingPokemonFromDeckText:
-	text "Choose a Basic Fighting Pokémon"
-	line "from the Deck."
+ChooseBasicPokemonFromDeckText:
+	text "Choose a Basic Pokémon from the"
+	line "Deck."
 	done
 
 ChooseAnOddishFromDeckText:
@@ -265,9 +265,8 @@ ChooseNidoranText:
 	line "or a Nidoran♂."
 	done
 
-ChooseBasicFightingPokemonText:
-	text "Choose a Basic"
-	line "Fighting Pokémon"
+ChooseBasicPokemonText:
+	text "Choose a Basic Pokémon"
 	done
 
 ProcedureForEnergyTransferText:
@@ -436,8 +435,8 @@ KrabbyText:
 	text "Krabby"
 	done
 
-FightingPokemonDeckText:
-	text "Fighting Pokémon"
+BasicPokemonDeckText:
+	text "Basic Pokémon"
 	done
 
 BasicEnergyText:

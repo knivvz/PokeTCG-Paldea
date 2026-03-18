@@ -267,14 +267,14 @@ TextOffsets::
 	textpointer ChooseAKrabbyFromDeckText
 	textpointer ChooseDiscardEnergyCardFromOpponentText
 	textpointer ChooseAttackOpponentWillNotBeAbleToUseText
-	textpointer ChooseBasicFightingPokemonFromDeckText
+	textpointer ChooseBasicPokemonFromDeckText
 	textpointer ChooseAnOddishFromDeckText
 	textpointer ChooseAnOddishText
 	textpointer ChooseAKrabbyText
 	textpointer ChooseBasicEnergyCardText
 	textpointer ChooseNidoranFromDeckText
 	textpointer ChooseNidoranText
-	textpointer ChooseBasicFightingPokemonText
+	textpointer ChooseBasicPokemonText
 	textpointer ProcedureForEnergyTransferText
 	textpointer ChooseABellsproutFromDeckText
 	textpointer ChooseABellsproutText
@@ -297,7 +297,7 @@ TextOffsets::
 	textpointer OddishText
 	textpointer BellsproutText
 	textpointer KrabbyText
-	textpointer FightingPokemonDeckText
+	textpointer BasicPokemonDeckText
 	textpointer BasicEnergyText
 	textpointer PeekWasUsedToLookInYourHandText
 	textpointer CardPeekWasUsedOnText
@@ -3041,3 +3041,6 @@ TextOffsets::
 	textpointer RumbleDescription
 	textpointer SpikeRendName
 	textpointer SpikeRendDescription
+	textpointer GatherTheCrewName
+	textpointer GatherTheCrewDescription
+	textpointer RageDescription

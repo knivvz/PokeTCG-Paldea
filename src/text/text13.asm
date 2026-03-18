@@ -861,3 +861,18 @@ SpikeRendDescription:
 	line "it, this attack does 100 more"
 	line "damage."
 	done
+
+GatherTheCrewName:
+	text "Gather The Crew"
+	done
+
+GatherTheCrewDescription:
+	text "Search your deck for a Basic Pokémon"
+	line "and put it onto your Bench. Then,"
+	line "shuffle your deck."
+	done
+
+RageDescription:
+	text "This attack does 10 more damage for"
+	line "each damage counter on this Pokémon."
+	done

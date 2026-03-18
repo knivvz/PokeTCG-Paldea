@@ -35,6 +35,18 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+TaurosRageEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
+	db  $00
+
+TaurosGatherTheCrewEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForFamily_CheckDeckAndPlayArea
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForFamily_PutInPlayAreaEffect
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForFamily_PlayerSelectEffect
+	dbw EFFECTCMDTYPE_AI_SELECTION, CallForFamily_AISelectEffect
+	db  $00
+
 SandshrewDoubleScratchEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DoubleScratch_MultiplierEffect
 	dbw EFFECTCMDTYPE_AI, DoubleScratch_AIEffect
@@ -1155,17 +1167,17 @@ KabutopsAbsorbEffectCommands:
 ; 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect
 ; 	db  $00
 
-MarowakBonemerangEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Bonemerang_MultiplierEffect
-	dbw EFFECTCMDTYPE_AI, Bonemerang_AIEffect
-	db  $00
+; MarowakBonemerangEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Bonemerang_MultiplierEffect
+; 	dbw EFFECTCMDTYPE_AI, Bonemerang_AIEffect
+; 	db  $00
 
-MarowakCallforFriendEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MarowakCallForFamily_CheckDeckAndPlayArea
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MarowakCallForFamily_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MarowakCallForFamily_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, MarowakCallForFamily_AISelectEffect
-	db  $00
+; MarowakCallforFriendEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, MarowakCallForFamily_CheckDeckAndPlayArea
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MarowakCallForFamily_PutInPlayAreaEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, MarowakCallForFamily_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, MarowakCallForFamily_AISelectEffect
+; 	db  $00
 
 MachokeKarateChopEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, KarateChop_DamageSubtractionEffect
@@ -1452,10 +1464,10 @@ TaurosStompEffectCommands:
 	dbw EFFECTCMDTYPE_AI, TaurosStomp_AIEffect
 	db  $00
 
-TaurosRampageEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rampage_Confusion50PercentEffect
-	dbw EFFECTCMDTYPE_AI, Rampage_AIEffect
-	db  $00
+; TaurosRampageEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rampage_Confusion50PercentEffect
+; 	dbw EFFECTCMDTYPE_AI, Rampage_AIEffect
+; 	db  $00
 
 ; DoduoFuryAttackEffectCommands:
 ; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, FuryAttack_MultiplierEffect
