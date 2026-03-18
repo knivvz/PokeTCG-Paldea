@@ -1939,7 +1939,7 @@ WeezingCard:
 	db 0 ; AI info
 
 SeviperCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_DARKNESS ; type
 	gfx TangelaLv8CardGfx ; gfx
 	tx SeviperName ; name
 	db CIRCLE ; rarity

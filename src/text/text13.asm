@@ -887,6 +887,6 @@ VenoshockName:
 
 VenoshockDescription:
 	text "If your opponent's Active Pokémon is"
-	line "Poisoned, this attack does 120 more"
+	line "Poisoned, this attack does 60 more"
 	line "damage."
 	done
