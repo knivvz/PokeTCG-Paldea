@@ -1938,47 +1938,75 @@ WeezingCard:
 	tx WeezingDescription ; description
 	db 0 ; AI info
 
-TangelaLv8Card:
+SeviperCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx TangelaLv8CardGfx ; gfx
-	tx TangelaName ; name
+	tx SeviperName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
-	dw TANGELA_LV8
-	db 50 ; hp
+	dw SEVIPER
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 1, COLORLESS, 1 ; energies
-	tx BindName ; name
-	tx MayInflictParalysisDescription ; description
-	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TangelaBindEffectCommands ; effect commands
-	db INFLICT_PARALYSIS ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_HIT ; animation
-
-	; attack 2
-	energy GRASS, 3 ; energies
-	tx PoisonPowderName ; name
+	energy DARKNESS, 1 ; energies
+	tx SpitPoisonName ; name
 	tx InflictPoisonDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw TangelaPoisonPowderEffectCommands ; effect commands
+	db 0 ; damage
+	db RESIDUAL ; category
+	dw SeviperSpitPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
-	db ATK_ANIM_POWDER_HIT_POISON ; animation
+	db ATK_ANIM_POISON_FANG ; animation
+
+	; attack 2
+	energy DARKNESS, 3 ; energies
+	tx VenoshockName ; name
+	tx VenoshockDescription ; description
+	dw NONE ; description (cont)
+	db 30 ; damage
+	db DAMAGE_NORMAL ; category
+	dw SeviperVenoshockEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_POISON_FANG ; animation
+
+	; attack 1
+	; energy GRASS, 1, COLORLESS, 1 ; energies
+	; tx BindName ; name
+	; tx MayInflictParalysisDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw TangelaBindEffectCommands ; effect commands
+	; db INFLICT_PARALYSIS ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
+
+	; ; attack 2
+	; energy GRASS, 3 ; energies
+	; tx PoisonPowderName ; name
+	; tx InflictPoisonDescription ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw TangelaPoisonPowderEffectCommands ; effect commands
+	; db INFLICT_POISON ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_POWDER_HIT_POISON ; animation
 
 	db 2 ; retreat cost
-	db WR_FIRE ; weakness
+	db WR_FIGHTING ; weakness
 	db NONE ; resistance
 	tx VineName ; category
 	db 114 ; Pokedex number

@@ -45,7 +45,7 @@
 	const EXEGGUTOR                   ; $29
 	const KOFFING                     ; $2a
 	const WEEZING                     ; $2b
-	const TANGELA_LV8                 ; $2c
+	const SEVIPER                 ; $2c
 	const TANGELA_LV12                ; $2d
 	const SCYTHER                     ; $2e
 	const TEAL_MASK_OGERPON_EX                      ; $2f

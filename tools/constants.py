@@ -76,7 +76,7 @@ cards = {
 	0x29: "EXEGGUTOR",
 	0x2a: "KOFFING",
 	0x2b: "WEEZING",
-	0x2c: "TANGELA_LV8",
+	0x2c: "SEVIPER",
 	0x2d: "TANGELA_LV12",
 	0x2e: "SCYTHER",
 	0x2f: "TEAL_MASK_OGERPON_EX",

@@ -3044,3 +3044,6 @@ TextOffsets::
 	textpointer GatherTheCrewName
 	textpointer GatherTheCrewDescription
 	textpointer RageDescription
+	textpointer SeviperName
+	textpointer VenoshockName
+	textpointer VenoshockDescription

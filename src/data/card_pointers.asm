@@ -47,7 +47,7 @@ CardPointers::
 	dab ExeggutorCard
 	dab KoffingCard
 	dab WeezingCard
-	dab TangelaLv8Card
+	dab SeviperCard
 	dab TangelaLv12Card
 	dab ScytherCard
 	dab TealMaskOgerponExCard

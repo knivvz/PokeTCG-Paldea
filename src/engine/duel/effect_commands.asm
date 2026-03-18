@@ -35,6 +35,15 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+SeviperVenoshockEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Venoshock_DamageBoostEffect
+	dbw EFFECTCMDTYPE_AI, Venoshock_AIEffect
+	db  $00
+SeviperSpitPoisonEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PoisonEffect
+	dbw EFFECTCMDTYPE_AI, PoisonFang_AIEffect
+	db  $00
+
 TaurosRageEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Rage_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Rage_AIEffect

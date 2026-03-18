@@ -876,3 +876,17 @@ RageDescription:
 	text "This attack does 10 more damage for"
 	line "each damage counter on this Pokémon."
 	done
+
+SeviperName:
+	text "Seviper"
+	done
+
+VenoshockName:
+	text "Venoshock"
+	done
+
+VenoshockDescription:
+	text "If your opponent's Active Pokémon is"
+	line "Poisoned, this attack does 120 more"
+	line "damage."
+	done

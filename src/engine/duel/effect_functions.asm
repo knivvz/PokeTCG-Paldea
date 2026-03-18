@@ -1,3 +1,17 @@
+Venoshock_DamageBoostEffect:
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	and CNF_SLP_PRZ
+	cp POISONED
+	ret nz ; return if not poisoned
+	ld a, 60
+	call AddToDamage
+	ret
+
+Venoshock_AIEffect:
+	call Venoshock_DamageBoostEffect
+	jp SetDefiniteAIDamage
+
 CallForFamily_CheckDeckAndPlayArea:
 	call CheckIfDeckIsEmpty
 	ret c ; return if no cards in deck

@@ -528,7 +528,7 @@ FlowerGardenCardList:
 	card_item BELLSPROUT,               2
 	card_item WEEPINBELL,               1
 	card_item VICTREEBEL,               1
-	card_item TANGELA_LV8,              2
+	card_item SEVIPER,              2
 	card_item TANGELA_LV12,             1
 	card_item LICKITUNG,                2
 	card_item POKEMON_TRADER,           2
