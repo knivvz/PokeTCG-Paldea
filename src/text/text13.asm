@@ -833,6 +833,7 @@ AmpYouVeryMuchDescription:
 	text "If your opponent's Pokémon is"
 	line "Knocked Out by damage from this"
 	line "attack, take 1 more Prize card."
+	done
 	
 RolloutName:
 	text "Rollout"
@@ -894,4 +895,8 @@ VenoshockDescription:
 NoBasicPokemonInPlayAreaText:
 	text "You have no Basic Pokémon in your"
 	line "Play Area."
+	done
+
+ContinuousCoinTossName:
+	text "Continuous Coin Toss"
 	done

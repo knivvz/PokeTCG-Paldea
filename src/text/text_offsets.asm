@@ -3048,3 +3048,4 @@ TextOffsets::
 	textpointer VenoshockName
 	textpointer VenoshockDescription
 	textpointer NoBasicPokemonInPlayAreaText
+	textpointer ContinuousCoinTossName

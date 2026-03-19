@@ -7024,7 +7024,7 @@ GimmighoulCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx StoneBarrageName ; name
+	tx ContinuousCoinTossName ; name
 	tx StoneBarrageDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
