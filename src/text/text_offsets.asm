@@ -3047,3 +3047,4 @@ TextOffsets::
 	textpointer SeviperName
 	textpointer VenoshockName
 	textpointer VenoshockDescription
+	textpointer NoBasicPokemonInPlayAreaText

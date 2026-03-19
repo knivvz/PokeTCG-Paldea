@@ -10841,7 +10841,7 @@ DefenderCard:
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	dw DEFENDER
-	dw DefenderEffectCommands ; effect commands
+	dw BraveryCharmEffectCommands;DefenderEffectCommands ; effect commands
 	tx DefenderDescription ; description
 	dw NONE ; description (cont)
 

@@ -1990,20 +1990,20 @@ ApplyAttachedPluspower::
 
 ; reduces de by 20 points for each Defender found in location b
 ApplyAttachedDefender::
-	push de
-	call GetTurnDuelistVariable
-	ld de, DEFENDER
-	call CountCardIDInLocation
-	ld l, a
-	ld h, 20
-	call HtimesL
-	pop de
-	ld a, e
-	sub l
-	ld e, a
-	ld a, d
-	sbc h
-	ld d, a
+	; push de
+	; call GetTurnDuelistVariable
+	; ld de, DEFENDER
+	; call CountCardIDInLocation
+	; ld l, a
+	; ld h, 20
+	; call HtimesL
+	; pop de
+	; ld a, e
+	; sub l
+	; ld e, a
+	; ld a, d
+	; sbc h
+	; ld d, a
 	ret
 
 ; hl: address to subtract HP from

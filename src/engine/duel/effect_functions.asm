@@ -1,3 +1,72 @@
+;check if any basics in play area to attach bravery charm to
+BraveryCharm_Check:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld c, a
+
+	ld b, PLAY_AREA_ARENA
+	ld l, DUELVARS_ARENA_CARD_STAGE
+.loop_play_area
+	ld a, [hli]
+	or a 
+	ret z ; found basic
+	inc b
+	dec c
+	jr nz, .loop_play_area
+	ldtx hl, NoBasicPokemonInPlayAreaText
+	scf
+	ret
+
+BraveryCharm_PlayerSelection:
+	ldtx hl, ChoosePokemonToAttachDefenderToText
+	call DrawWideTextBox_WaitForInput
+	bank1call HasAlivePokemonInPlayArea
+.loop_input
+	bank1call OpenPlayAreaScreenForSelection
+	ret c ; pressed b, exit
+	; check if basic pokemon selected
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_STAGE
+	call GetTurnDuelistVariable
+	or a ; basic
+	jr nz, .loop_input
+
+	ldh [hTemp_ffa0], a
+	ret
+
+; TODO adjust max hp print, also only on basic pkmn
+BraveryCharm_Effect:
+	; attach Trainer card to Play Area Pokemon
+	ldh a, [hTemp_ffa0]
+	ld e, a
+	ldh a, [hTempCardIndex_ff9f]
+	call PutHandCardInPlayArea
+
+
+	ld a, 30
+	ld e, a
+	call HealPlayAreaCardHP
+	
+	;wLoadedCard1HP
+	; ld [hl], a
+	; call LoadCardDataToBuffer2_FromDeckIndex
+	; ld a, e
+	; add DUELVARS_ARENA_CARD_HP
+	; ld l, a
+	; ld a, [wLoadedCard2HP]
+	; add b ; add HP
+
+; increase number of Defender cards of this location by 1
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	call GetTurnDuelistVariable
+	inc [hl]
+	call IsPlayerTurn
+	ret c
+
+	ldh a, [hTemp_ffa0]
+	jp DrawPlayAreaScreenToShowChanges
+
 Venoshock_DamageBoostEffect:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetNonTurnDuelistVariable

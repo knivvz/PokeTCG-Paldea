@@ -35,6 +35,12 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+BraveryCharmEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BraveryCharm_Check
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, BraveryCharm_PlayerSelection
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BraveryCharm_Effect
+	db  $00
+
 SeviperVenoshockEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Venoshock_DamageBoostEffect
 	dbw EFFECTCMDTYPE_AI, Venoshock_AIEffect
@@ -198,13 +204,8 @@ GolisopodExSwingAndSkedaddleEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, StarmieRecover_AISelectEffect
 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, StarmieRecover_DiscardEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, GolisopodExSwingAndSkedaddle_Effect
-
-; TODO
-BraveryCharmEffectCommands:
-	;dbw EFFECTCMDTYPE_BEFORE_DAMAGE, BraveryCharm_Effect
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Potion_PlayerSelection
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Potion_HealEffect
-	db  $00
+	db $00
+	
 TenRecoilEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, TenRecoil_Effect
 	db $00

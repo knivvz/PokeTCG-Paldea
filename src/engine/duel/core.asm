@@ -6380,9 +6380,9 @@ HandleBetweenTurnsEvents:
 	call IsArenaPokemonAsleepOrPoisoned
 	call SwapTurn
 	jr c, .something_to_handle
-	call DiscardAttachedPluspowers
+	;call DiscardAttachedPluspowers
 	call SwapTurn
-	call DiscardAttachedDefenders
+	;call DiscardAttachedDefenders
 	jp SwapTurn
 
 .something_to_handle

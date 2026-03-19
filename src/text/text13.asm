@@ -890,3 +890,8 @@ VenoshockDescription:
 	line "Poisoned, this attack does 60 more"
 	line "damage."
 	done
+
+NoBasicPokemonInPlayAreaText:
+	text "You have no Basic Pokémon in your"
+	line "Play Area."
+	done
