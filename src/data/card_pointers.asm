@@ -57,9 +57,9 @@ CardPointers::
 	dab VulpixCard
 	dab NinetalesLv32Card
 	dab NinetalesLv35Card
-	dab GrowlitheCard
+	dab CharcadetCard
 	dab ArcanineLv34Card
-	dab ArcanineLv45Card
+	dab CeruledgeExCard
 	dab PonytaCard
 	dab RapidashCard
 	dab MagmarLv24Card
@@ -140,8 +140,8 @@ CardPointers::
 	dab GholdengoExCard
 	dab PaldeanTaurosCard
 	dab HitmonchanCard
-	dab RhyhornCard
-	dab RhydonCard
+	dab SolrockCard
+	dab LunatoneCard
 	dab KabutoCard
 	dab KabutopsCard
 	dab AerodactylCard

@@ -1,3 +1,135 @@
+CosmicBeam_Damage:
+	; check for lunatone in play area
+	ld a, DUELVARS_ARENA_CARD
+ 	call GetTurnDuelistVariable
+ 	ld c, 0
+	ld b, PLAY_AREA_ARENA
+.loop_play_area
+ 	ld a, [hli]
+ 	cp $ff
+ 	jr z, .no_lunatone
+	push bc
+ 	call GetCardIDFromDeckIndex
+	pop bc
+ 	cp16 LUNATONE
+	ret z
+ 	inc b
+	jr .loop_play_area
+
+.no_lunatone ; no damage
+	ld a, 0
+	call SetDefiniteDamage
+	ret
+
+CosmicBeam_AIEffect:
+	call CosmicBeam_Damage
+	jp SetDefiniteAIDamage
+
+LunarCycle_Effect:
+	ld hl, wOncePerTurnFlags
+	set USED_LUNAR_CYCLE_THIS_TURN_F, [hl]
+	;call SetPkmnPowerAsUsed
+
+	ld c, TYPE_ENERGY_FIGHTING
+	call CreateHandCardList
+
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID ; TODO needed?
+	ld hl, wDuelTempList
+.loop
+	ld a, [hli]
+	ldh [hTempCardIndex_ff98], a
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp FIGHTING_ENERGY
+	jr nz, .loop
+
+	ldh a, [hTempCardIndex_ff98]
+	call RemoveCardFromHand
+	call PutCardInDiscardPile
+
+	; draw 1
+	ld c, 3
+	call DrawCCards
+	ret
+
+LunarCycle_Check:
+	ld a, [wOncePerTurnFlags]
+	and USED_LUNAR_CYCLE_THIS_TURN
+	jr z, .check_solrock
+	ldtx hl, AlreadyUsedLunarCycleText
+	scf
+	ret
+
+.check_solrock
+	; check for solrock in play area
+	ld a, DUELVARS_ARENA_CARD
+ 	call GetTurnDuelistVariable
+ 	ld c, 0
+	ld b, PLAY_AREA_ARENA
+.loop_play_area
+ 	ld a, [hli]
+ 	cp $ff
+ 	jr z, .no_solrock
+	push bc
+ 	call GetCardIDFromDeckIndex
+	pop bc
+ 	cp16 SOLROCK
+	jr z, .next
+ 	inc b
+	jr .loop_play_area
+
+.no_solrock
+	ldtx hl, NoSolrockInPlayAreaText
+	scf
+	ret
+
+.next
+	; check for grass energy in hand
+	call CreateHandCardList
+	ld a, [wDuelTempList]
+	call SortCardsInDuelTempListByID
+	ld hl, wDuelTempList
+.loop_hand
+	ld a, [hli]
+	cp $ff ; end of list
+	jr z, .set_carry
+    ;ld a, [hl]
+
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp FIGHTING_ENERGY
+    jr z, .done
+	jp .loop_hand
+.set_carry
+	ldtx hl, NoFightingEnergyCardsInHandText
+	scf
+.done
+	ret
+
+RagingAmethyst_DiscardEnergy:
+	call CreateListOfAllEnergyAttachedToArena
+	ld hl, wDuelTempList
+
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	call PutCardInDiscardPile
+	jr .loop
+
+AbyssalFlames_Damage:
+	call CreateEnergyCardListFromDiscardPile_AllEnergy
+	call CountCardsInDuelTempList
+	call ATimes10
+	;add 20 ; add base damage
+	call AddToDamage
+	ret
+
+AbyssalFlames_AIEffect:
+	call AbyssalFlames_Damage
+	jp SetDefiniteAIDamage
+
 ;check if any basics in play area to attach bravery charm to
 BraveryCharm_Check:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -6048,141 +6180,141 @@ InvisibleWallEffect:
 	ret
 
 ; returns carry if Damage Swap cannot be used.
-DamageSwap_CheckDamage:
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	call CheckIfPlayAreaHasAnyDamage
-	jr c, .no_damage
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	jp CheckIsIncapableOfUsingPkmnPower
-.no_damage
-	ldtx hl, NoPokemonWithDamageCountersText
-	scf
-	ret
+; DamageSwap_CheckDamage:
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	ldh [hTemp_ffa0], a
+; 	call CheckIfPlayAreaHasAnyDamage
+; 	jr c, .no_damage
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	jp CheckIsIncapableOfUsingPkmnPower
+; .no_damage
+; 	ldtx hl, NoPokemonWithDamageCountersText
+; 	scf
+; 	ret
 
-DamageSwap_SelectAndSwapEffect:
-	ld a, DUELVARS_DUELIST_TYPE
-	call GetTurnDuelistVariable
-	cp DUELIST_TYPE_PLAYER
-	jr z, .player
-; non-player
-	bank1call SetupPlayAreaScreen
-	bank1call PrintPlayAreaCardList_EnableLCD
-	ret
+; DamageSwap_SelectAndSwapEffect:
+; 	ld a, DUELVARS_DUELIST_TYPE
+; 	call GetTurnDuelistVariable
+; 	cp DUELIST_TYPE_PLAYER
+; 	jr z, .player
+; ; non-player
+; 	bank1call SetupPlayAreaScreen
+; 	bank1call PrintPlayAreaCardList_EnableLCD
+; 	ret
 
-.player
-	ldtx hl, ProcedureForDamageSwapText
-	bank1call DrawWholeScreenTextBox
-	xor a
-	ldh [hCurSelectionItem], a
-	bank1call SetupPlayAreaScreen
+; .player
+; 	ldtx hl, ProcedureForDamageSwapText
+; 	bank1call DrawWholeScreenTextBox
+; 	xor a
+; 	ldh [hCurSelectionItem], a
+; 	bank1call SetupPlayAreaScreen
 
-.start
-	bank1call PrintPlayAreaCardList_EnableLCD
-	push af
-	ldh a, [hCurSelectionItem]
-	ld hl, PlayAreaSelectionMenuParameters
-	call InitializeMenuParameters
-	pop af
-	ld [wNumMenuItems], a
+; .start
+; 	bank1call PrintPlayAreaCardList_EnableLCD
+; 	push af
+; 	ldh a, [hCurSelectionItem]
+; 	ld hl, PlayAreaSelectionMenuParameters
+; 	call InitializeMenuParameters
+; 	pop af
+; 	ld [wNumMenuItems], a
 
-; handle selection of Pokemon to take damage from
-.loop_input_first
-	call DoFrame
-	call HandleMenuInput
-	jr nc, .loop_input_first
-	cp $ff
-	ret z ; quit when B button is pressed
+; ; handle selection of Pokemon to take damage from
+; .loop_input_first
+; 	call DoFrame
+; 	call HandleMenuInput
+; 	jr nc, .loop_input_first
+; 	cp $ff
+; 	ret z ; quit when B button is pressed
 
-	ldh [hTempPlayAreaLocation_ffa1], a
-	ldh [hCurSelectionItem], a
+; 	ldh [hTempPlayAreaLocation_ffa1], a
+; 	ldh [hCurSelectionItem], a
 
-; if card has no damage, play sfx and return to start
-	call GetCardDamageAndMaxHP
-	or a
-	jr z, .no_damage
+; ; if card has no damage, play sfx and return to start
+; 	call GetCardDamageAndMaxHP
+; 	or a
+; 	jr z, .no_damage
 
-; take damage away temporarily to draw UI.
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	push af
-	push hl
-	add 10
-	ld [hl], a
-	bank1call PrintPlayAreaCardList_EnableLCD
-	pop hl
-	pop af
-	ld [hl], a
+; ; take damage away temporarily to draw UI.
+; 	ldh a, [hTempPlayAreaLocation_ffa1]
+; 	add DUELVARS_ARENA_CARD_HP
+; 	call GetTurnDuelistVariable
+; 	push af
+; 	push hl
+; 	add 10
+; 	ld [hl], a
+; 	bank1call PrintPlayAreaCardList_EnableLCD
+; 	pop hl
+; 	pop af
+; 	ld [hl], a
 
-; draw damage counter in cursor
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld b, SYM_HP_NOK
-	call DrawSymbolOnPlayAreaCursor
+; ; draw damage counter in cursor
+; 	ldh a, [hTempPlayAreaLocation_ffa1]
+; 	ld b, SYM_HP_NOK
+; 	call DrawSymbolOnPlayAreaCursor
 
-; handle selection of Pokemon to give damage to
-.loop_input_second
-	call DoFrame
-	call HandleMenuInput
-	jr nc, .loop_input_second
-	; if B is pressed, return damage counter
-	; to card that it was taken from
-	cp $ff
-	jr z, .update_ui
+; ; handle selection of Pokemon to give damage to
+; .loop_input_second
+; 	call DoFrame
+; 	call HandleMenuInput
+; 	jr nc, .loop_input_second
+; 	; if B is pressed, return damage counter
+; 	; to card that it was taken from
+; 	cp $ff
+; 	jr z, .update_ui
 
-; try to give the card selected the damage counter
-; if it would KO, ignore it.
-	ldh [hPlayAreaEffectTarget], a
-	ldh [hCurSelectionItem], a
-	call TryGiveDamageCounter_DamageSwap
-	jr c, .loop_input_second
+; ; try to give the card selected the damage counter
+; ; if it would KO, ignore it.
+; 	ldh [hPlayAreaEffectTarget], a
+; 	ldh [hCurSelectionItem], a
+; 	call TryGiveDamageCounter_DamageSwap
+; 	jr c, .loop_input_second
 
-	ld a, OPPACTION_6B15
-	ldh [hOppActionTableIndex], a
+; 	ld a, OPPACTION_6B15
+; 	ldh [hOppActionTableIndex], a
 
-.update_ui
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	ld b, SYM_SPACE
-	call DrawSymbolOnPlayAreaCursor
-	call EraseCursor
-	jr .start
+; .update_ui
+; 	ldh a, [hTempPlayAreaLocation_ffa1]
+; 	ld b, SYM_SPACE
+; 	call DrawSymbolOnPlayAreaCursor
+; 	call EraseCursor
+; 	jr .start
 
-.no_damage
-	call PlaySFX_InvalidChoice
-	jr .loop_input_first
+; .no_damage
+; 	call PlaySFX_InvalidChoice
+; 	jr .loop_input_first
 
-; tries to give damage counter to hPlayAreaEffectTarget,
-; and if successful updates UI screen.
-DamageSwap_SwapEffect:
-	call TryGiveDamageCounter_DamageSwap
-	ret c
-	bank1call PrintPlayAreaCardList_EnableLCD
-	or a
-	ret
+; ; tries to give damage counter to hPlayAreaEffectTarget,
+; ; and if successful updates UI screen.
+; DamageSwap_SwapEffect:
+; 	call TryGiveDamageCounter_DamageSwap
+; 	ret c
+; 	bank1call PrintPlayAreaCardList_EnableLCD
+; 	or a
+; 	ret
 
-; tries to give the damage counter to the target
-; chosen by the Player (hPlayAreaEffectTarget).
-; if the damage counter would KO card, then do
-; not give the damage counter and return carry.
-TryGiveDamageCounter_DamageSwap:
-	ldh a, [hPlayAreaEffectTarget]
-	add DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	sub 10
-	jr z, .set_carry ; would bring HP to zero?
-; has enough HP to receive a damage counter
-	ld [hl], a
-	ldh a, [hTempPlayAreaLocation_ffa1]
-	add DUELVARS_ARENA_CARD_HP
-	ld l, a
-	ld a, 10
-	add [hl]
-	ld [hl], a
-	or a
-	ret
-.set_carry
-	scf
-	ret
+; ; tries to give the damage counter to the target
+; ; chosen by the Player (hPlayAreaEffectTarget).
+; ; if the damage counter would KO card, then do
+; ; not give the damage counter and return carry.
+; TryGiveDamageCounter_DamageSwap:
+; 	ldh a, [hPlayAreaEffectTarget]
+; 	add DUELVARS_ARENA_CARD_HP
+; 	call GetTurnDuelistVariable
+; 	sub 10
+; 	jr z, .set_carry ; would bring HP to zero?
+; ; has enough HP to receive a damage counter
+; 	ld [hl], a
+; 	ldh a, [hTempPlayAreaLocation_ffa1]
+; 	add DUELVARS_ARENA_CARD_HP
+; 	ld l, a
+; 	ld a, 10
+; 	add [hl]
+; 	ld [hl], a
+; 	or a
+; 	ret
+; .set_carry
+; 	scf
+; 	ret
 
 PsywaveEffect:
 	call GetEnergyAttachedMultiplierDamage
@@ -6723,46 +6855,46 @@ Amnesia_DisableEffect:
 
 ; returns carry if Arena card has no Psychic Energy attached
 ; or if it doesn't have any damage counters.
-KadabraRecover_CheckEnergyHP:
-	ld e, PLAY_AREA_ARENA
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wAttachedEnergies + PSYCHIC]
-	ldtx hl, NotEnoughPsychicEnergyText
-	cp 1
-	ret c ; return if not enough energy
-	call GetCardDamageAndMaxHP
-	ldtx hl, NoDamageCountersText
-	cp 10
-	ret ; return carry if no damage
+; KadabraRecover_CheckEnergyHP:
+; 	ld e, PLAY_AREA_ARENA
+; 	call GetPlayAreaCardAttachedEnergies
+; 	ld a, [wAttachedEnergies + PSYCHIC]
+; 	ldtx hl, NotEnoughPsychicEnergyText
+; 	cp 1
+; 	ret c ; return if not enough energy
+; 	call GetCardDamageAndMaxHP
+; 	ldtx hl, NoDamageCountersText
+; 	cp 10
+; 	ret ; return carry if no damage
 
-KadabraRecover_PlayerSelectEffect:
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	xor a ; PLAY_AREA_ARENA
-	bank1call DisplayEnergyDiscardScreen
-	bank1call HandleEnergyDiscardMenuInput
-	ret c
-	ldh a, [hTempCardIndex_ff98]
-	ldh [hTemp_ffa0], a ; store card chosen
-	ret
+; KadabraRecover_PlayerSelectEffect:
+; 	ld a, TYPE_ENERGY_PSYCHIC
+; 	call CreateListOfEnergyAttachedToArena
+; 	xor a ; PLAY_AREA_ARENA
+; 	bank1call DisplayEnergyDiscardScreen
+; 	bank1call HandleEnergyDiscardMenuInput
+; 	ret c
+; 	ldh a, [hTempCardIndex_ff98]
+; 	ldh [hTemp_ffa0], a ; store card chosen
+; 	ret
 
-KadabraRecover_AISelectEffect:
-	ld a, TYPE_ENERGY_PSYCHIC
-	call CreateListOfEnergyAttachedToArena
-	ld a, [wDuelTempList] ; pick first card
-	ldh [hTemp_ffa0], a
-	ret
+; KadabraRecover_AISelectEffect:
+; 	ld a, TYPE_ENERGY_PSYCHIC
+; 	call CreateListOfEnergyAttachedToArena
+; 	ld a, [wDuelTempList] ; pick first card
+; 	ldh [hTemp_ffa0], a
+; 	ret
 
-KadabraRecover_DiscardEffect:
-	ldh a, [hTemp_ffa0]
-	jp PutCardInDiscardPile
+; KadabraRecover_DiscardEffect:
+; 	ldh a, [hTemp_ffa0]
+; 	jp PutCardInDiscardPile
 
-KadabraRecover_HealEffect:
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	ld e, a ; all damage for recovery
-	ld d, 0
-	jp ApplyAndAnimateHPRecovery
+; KadabraRecover_HealEffect:
+; 	ld e, PLAY_AREA_ARENA
+; 	call GetCardDamageAndMaxHP
+; 	ld e, a ; all damage for recovery
+; 	ld d, 0
+; 	jp ApplyAndAnimateHPRecovery
 
 JynxDoubleslap_AIEffect:
 	ld a, 20 / 2
@@ -7096,25 +7228,25 @@ GolemSelfdestructEffect:
 	call DealDamageToAllBenchedPokemon
 	jp SwapTurn
 
-Ram_SelectSwitchEffect:
-	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
-	call GetNonTurnDuelistVariable
-	cp 2
-	jr c, .no_bench
-	call DuelistSelectForcedSwitch
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	ldh [hTemp_ffa0], a
-	ret
-.no_bench
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-	ret
+; Ram_SelectSwitchEffect:
+; 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+; 	call GetNonTurnDuelistVariable
+; 	cp 2
+; 	jr c, .no_bench
+; 	call DuelistSelectForcedSwitch
+; 	ldh a, [hTempPlayAreaLocation_ff9d]
+; 	ldh [hTemp_ffa0], a
+; 	ret
+; .no_bench
+; 	ld a, $ff
+; 	ldh [hTemp_ffa0], a
+; 	ret
 
-Ram_RecoilSwitchEffect:
-	ld a, 20
-	call DealRecoilDamageToSelf
-	ldh a, [hTemp_ffa0]
-	jp HandleSwitchDefendingPokemonEffect
+; Ram_RecoilSwitchEffect:
+; 	ld a, 20
+; 	call DealRecoilDamageToSelf
+; 	ldh a, [hTemp_ffa0]
+; 	jp HandleSwitchDefendingPokemonEffect
 
 LeerEffect:
 	ldtx de, IfHeadsOpponentCannotAttackText

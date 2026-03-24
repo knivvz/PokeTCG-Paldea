@@ -2213,7 +2213,7 @@ TextOffsets::
 	textpointer DancingEmbersName
 	textpointer DancingEmbersDescription
 	textpointer NinetalesLv35Description
-	textpointer GrowlitheName
+	textpointer CharcadetName
 	textpointer FlareName
 	textpointer PuppyName
 	textpointer GrowlitheDescription
@@ -2580,12 +2580,12 @@ TextOffsets::
 	textpointer SpecialPunch
 	textpointer PunchingName
 	textpointer HitmonchanDescription
-	textpointer RhyhornName
+	textpointer SolrockName
 	textpointer LeerName
 	textpointer LeerDescription
 	textpointer SpikeName
 	textpointer RhyhornDescription
-	textpointer RhydonName
+	textpointer LunatoneName
 	textpointer RamName
 	textpointer RamDescription
 	textpointer RamDescriptionCont
@@ -3049,3 +3049,17 @@ TextOffsets::
 	textpointer VenoshockDescription
 	textpointer NoBasicPokemonInPlayAreaText
 	textpointer ContinuousCoinTossName
+	textpointer AbyssalFlamesName
+	textpointer AbyssalFlamesDescription
+	textpointer RagingAmethystName
+	textpointer RagingAmethystDescription
+	textpointer NoSolrockInPlayAreaText
+	textpointer NoFightingEnergyCardsInHandText
+	textpointer PowerGemName
+	textpointer LunarCycleName
+	textpointer LunarCycleDescription
+	textpointer CosmicBeamName
+	textpointer CosmicBeamDescription
+	textpointer CeruledgeExName
+	textpointer WillOWispName
+	textpointer AlreadyUsedLunarCycleText

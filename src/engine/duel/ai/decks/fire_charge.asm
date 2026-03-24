@@ -32,13 +32,13 @@ AIActionTable_FireCharge:
 	dw TAUROS
 	dw MAGMAR_LV24
 	dw JIGGLYPUFF_LV12
-	dw GROWLITHE
+	dw CHARCADET
 	dw NULL
 
 .list_bench
 	dw JIGGLYPUFF_LV14
 	dw CHANSEY
-	dw GROWLITHE
+	dw CHARCADET
 	dw MAGMAR_LV24
 	dw JIGGLYPUFF_LV12
 	dw TAUROS
@@ -47,12 +47,12 @@ AIActionTable_FireCharge:
 .list_retreat
 	ai_retreat JIGGLYPUFF_LV12, -1
 	ai_retreat CHANSEY,         -1
-	ai_retreat GROWLITHE,       -1
+	ai_retreat CHARCADET,       -1
 	dw NULL
 
 .list_energy
-	ai_energy GROWLITHE,       3, +0
-	ai_energy ARCANINE_LV45,   4, +0
+	ai_energy CHARCADET,       3, +0
+	ai_energy CERULEDGE_EX,   4, +0
 	ai_energy MAGMAR_LV24,     3, +0
 	ai_energy JIGGLYPUFF_LV12, 3, +0
 	ai_energy JIGGLYPUFF_LV14, 2, +0

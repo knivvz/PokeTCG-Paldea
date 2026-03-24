@@ -2578,23 +2578,23 @@ NinetalesLv35Card:
 	tx NinetalesLv35Description ; description
 	db 0 ; AI info
 
-GrowlitheCard:
+CharcadetCard:
 	db TYPE_PKMN_FIRE ; type
 	gfx GrowlitheCardGfx ; gfx
-	tx GrowlitheName ; name
+	tx CharcadetName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw GROWLITHE
-	db 60 ; hp
+	dw CHARCADET
+	db 40 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIRE, 1, COLORLESS, 1 ; energies
-	tx FlareName ; name
+	energy FIRE, 1 ; energies
+	tx WillOWispName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
+	db 10 ; damage
 	db DAMAGE_NORMAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
@@ -2602,6 +2602,20 @@ GrowlitheCard:
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_SMALL_FLAME ; animation
+
+	; attack 1
+	; energy FIRE, 1, COLORLESS, 1 ; energies
+	; tx FlareName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 20 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_SMALL_FLAME ; animation
 
 	; attack 2
 	energy 0 ; energies
@@ -2637,7 +2651,7 @@ ArcanineLv34Card:
 	dw ARCANINE_LV34
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx GrowlitheName ; pre-evo name
+	tx CharcadetName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -2678,51 +2692,79 @@ ArcanineLv34Card:
 	tx ArcanineLv34Description ; description
 	db 0 ; AI info
 
-ArcanineLv45Card:
+CeruledgeExCard:
 	db TYPE_PKMN_FIRE ; type
 	gfx ArcanineLv45CardGfx ; gfx
-	tx ArcanineName ; name
+	tx CeruledgeExName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
-	dw ARCANINE_LV45
-	db 100 ; hp
+	dw CERULEDGE_EX
+	db 140 ; hp
 	db STAGE1 ; stage
-	tx GrowlitheName ; pre-evo name
+	tx CharcadetName ; pre-evo name
 
 	; attack 1
-	energy FIRE, 2, COLORLESS, 1 ; energies
-	tx FlamethrowerName ; name
-	tx ArcaninesFlamethrowerDescription ; description
+	energy FIRE, 1 ; energies
+	tx AbyssalFlamesName ; name
+	tx AbyssalFlamesDescription ; description
 	dw NONE ; description (cont)
-	db 50 ; damage
+	db 20 ; damage
+	db DAMAGE_PLUS ; category
+	dw CeruledgeExAbyssalFlamesEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_BIG_FLAME ; animation
+
+	; attack 1
+	energy FIRE, 1, PSYCHIC, 1, METAL, 1 ; energies
+	tx RagingAmethystName ; name
+	tx RagingAmethystDescription ; description
+	dw NONE ; description (cont)
+	db 140 ; damage
 	db DAMAGE_NORMAL ; category
-	dw ArcanineFlamethrowerEffectCommands ; effect commands
+	dw CeruledgeExRagingAmethystEffectCommands ; effect commands
 	db NONE ; flags 1
 	db DISCARD_ENERGY ; flags 2
 	db NONE ; flags 3
 	db 3
 	db ATK_ANIM_BIG_FLAME ; animation
 
-	; attack 2
-	energy FIRE, 2, COLORLESS, 2 ; energies
-	tx TakeDownName ; name
-	tx TakeDownDescription ; description
-	dw NONE ; description (cont)
-	db 80 ; damage
-	db DAMAGE_NORMAL ; category
-	dw ArcanineTakeDownEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 30
-	db ATK_ANIM_HIT_RECOIL ; animation
+	; ; attack 1
+	; energy FIRE, 2, COLORLESS, 1 ; energies
+	; tx FlamethrowerName ; name
+	; tx ArcaninesFlamethrowerDescription ; description
+	; dw NONE ; description (cont)
+	; db 50 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ArcanineFlamethrowerEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db DISCARD_ENERGY ; flags 2
+	; db NONE ; flags 3
+	; db 3
+	; db ATK_ANIM_BIG_FLAME ; animation
 
-	db 3 ; retreat cost
+	; ; attack 2
+	; energy FIRE, 2, COLORLESS, 2 ; energies
+	; tx TakeDownName ; name
+	; tx TakeDownDescription ; description
+	; dw NONE ; description (cont)
+	; db 80 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw ArcanineTakeDownEffectCommands ; effect commands
+	; db LOW_RECOIL ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 30
+	; db ATK_ANIM_HIT_RECOIL ; animation
+
+	db 2 ; retreat cost
 	db WR_WATER ; weakness
 	db NONE ; resistance
 	tx LegendaryName ; category
 	db 59 ; Pokedex number
-	db 45 ; level
+	db 50 ; level
 	db 6, 3 ; length
 	dw 342 * 10 ; weight
 	tx ArcanineLv45Description ; description
@@ -5586,7 +5628,7 @@ KilowattrelCard:
 	db DAMAGE_TO_OPPONENT_BENCH ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 10
+	db 0
 	db ATK_ANIM_THUNDER_WHOLE_SCREEN ; animation
 
 	; attack 2
@@ -7345,48 +7387,76 @@ HitmonchanCard:
 	tx HitmonchanDescription ; description
 	db 0 ; AI info
 
-RhyhornCard:
+SolrockCard:
 	db TYPE_PKMN_FIGHTING ; type
 	gfx RhyhornCardGfx ; gfx
-	tx RhyhornName ; name
+	tx SolrockName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
-	dw RHYHORN
-	db 70 ; hp
+	dw SOLROCK
+	db 60 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 1 ; energies
-	tx LeerName ; name
-	tx LeerDescription ; description
+	energy FIGHTING, 1 ; energies
+	tx CosmicBeamName ; name
+	tx CosmicBeamDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 40 ; damage
 	db DAMAGE_NORMAL ; category
-	dw RhyhornLeerEffectCommands ; effect commands
-	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
-
-	; attack 2
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
-	tx HornAttackName ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 30 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	dw SolrockCosmicBeamEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	db 3 ; retreat cost
+	; attack 2 EMPTY ATTACK
+	energy 0 ; energies
+	dw NONE ; name
+	dw NONE ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db DAMAGE_NORMAL ; category
+	dw NONE ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_NONE ; animation
+
+	; attack 1
+	; energy COLORLESS, 1 ; energies
+	; tx LeerName ; name
+	; tx LeerDescription ; description
+	; dw NONE ; description (cont)
+	; db 0 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw RhyhornLeerEffectCommands ; effect commands
+	; db NONE ; flags 1
+	; db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_NONE ; animation
+
+	; ; attack 2
+	; energy FIGHTING, 1, COLORLESS, 2 ; energies
+	; tx HornAttackName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
+
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	db NONE ; resistance
 	tx SpikeName ; category
 	db 111 ; Pokedex number
 	db 18 ; level
@@ -7395,20 +7465,34 @@ RhyhornCard:
 	tx RhyhornDescription ; description
 	db HAS_EVOLUTION ; AI info
 
-RhydonCard:
+LunatoneCard:
 	db TYPE_PKMN_FIGHTING ; type
 	gfx RhydonCardGfx ; gfx
-	tx RhydonName ; name
+	tx LunatoneName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
-	dw RHYDON
-	db 100 ; hp
-	db STAGE1 ; stage
-	tx RhyhornName ; pre-evo name
+	dw LUNATONE
+	db 60 ; hp
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
-	energy FIGHTING, 1, COLORLESS, 2 ; energies
-	tx HornAttackName ; name
+	energy 0 ; energies
+	tx LunarCycleName ; name
+	tx LunarCycleDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw LunatoneLunarCycleEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_PKMN_POWER_1 ; animation
+
+	; attack 2
+	energy FIGHTING, 2 ; energies
+	tx PowerGemName ; name
 	dw NONE ; description
 	dw NONE ; description (cont)
 	db 30 ; damage
@@ -7420,23 +7504,37 @@ RhydonCard:
 	db 0
 	db ATK_ANIM_HIT ; animation
 
-	; attack 2
-	energy FIGHTING, 4 ; energies
-	tx RamName ; name
-	tx RamDescription ; description
-	tx RamDescriptionCont ; description (cont)
-	db 50 ; damage
-	db DAMAGE_NORMAL ; category
-	dw RhydonRamEffectCommands ; effect commands
-	db LOW_RECOIL ; flags 1
-	db SWITCH_OPPONENT_POKEMON ; flags 2
-	db NONE ; flags 3
-	db 20
-	db ATK_ANIM_HIT_RECOIL ; animation
+	; attack 1
+	; energy FIGHTING, 1, COLORLESS, 2 ; energies
+	; tx HornAttackName ; name
+	; dw NONE ; description
+	; dw NONE ; description (cont)
+	; db 30 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw NONE ; effect commands
+	; db NONE ; flags 1
+	; db NONE ; flags 2
+	; db NONE ; flags 3
+	; db 0
+	; db ATK_ANIM_HIT ; animation
 
-	db 3 ; retreat cost
+	; ; attack 2
+	; energy FIGHTING, 4 ; energies
+	; tx RamName ; name
+	; tx RamDescription ; description
+	; tx RamDescriptionCont ; description (cont)
+	; db 50 ; damage
+	; db DAMAGE_NORMAL ; category
+	; dw RhydonRamEffectCommands ; effect commands
+	; db LOW_RECOIL ; flags 1
+	; db SWITCH_OPPONENT_POKEMON ; flags 2
+	; db NONE ; flags 3
+	; db 20
+	; db ATK_ANIM_HIT_RECOIL ; animation
+
+	db 1 ; retreat cost
 	db WR_GRASS ; weakness
-	db WR_LIGHTNING ; resistance
+	db NONE ; resistance
 	tx DrillName ; category
 	db 112 ; Pokedex number
 	db 48 ; level
@@ -7753,8 +7851,8 @@ AlakazamCard:
 	tx PowerfulHandName ; name
 	tx PowerfulHandDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
+	db 10 ; damage
+	db DAMAGE_X ; category
 	dw AlakazamPowerfulHandEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2

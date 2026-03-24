@@ -212,9 +212,9 @@ SamsPracticeDeck:
 	card_item MACHOP,                  1
 	card_item MACHOKE,                 1
 	card_item KLAWF,                    1
-	card_item RHYHORN,                 1
-	card_item RHYHORN,                 1
-	card_item RHYDON,                  1
+	card_item SOLROCK,                 1
+	card_item SOLROCK,                 1
+	card_item LUNATONE,                  1
 	card_item RATTATA,                 1
 	card_item EEVEE,                   1
 	card_item EEVEE,                   1
@@ -324,8 +324,8 @@ SquirtleExtraDeck:
 	card_item FUECOCO,        2
 	card_item CROCALOR,        1
 	card_item MAGMAR_LV24,       1
-	card_item GROWLITHE,         1
-	card_item ARCANINE_LV45,     1
+	card_item CHARCADET,         1
+	card_item CERULEDGE_EX,     1
 	card_item EMOLGA,      2
 	card_item WATTREL,    1
 	card_item KILOWATTREL,     1
@@ -402,8 +402,8 @@ LightningAndFireDeck:
 	card_item FUECOCO,               2
 	card_item CROCALOR,               1
 	card_item SKELEDIRGE_EX,                1
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
+	card_item CHARCADET,                2
+	card_item CERULEDGE_EX,            1
 	card_item PONYTA,                   2
 	card_item RAPIDASH,                 1
 	card_item MAGMAR_LV24,              1
@@ -448,8 +448,8 @@ WaterAndFightingDeck:
 	card_item MACHOKE,                  2
 	card_item MACHAMP,                  1
 	card_item HITMONCHAN,               1
-	card_item RHYHORN,                  2
-	card_item RHYDON,                   1
+	card_item SOLROCK,                  2
+	card_item LUNATONE,                   1
 	card_item PROFESSOR_OAK,            1
 	card_item NEMONA,                     2
 	card_item ENERGY_SEARCH,            2
@@ -494,8 +494,8 @@ LegendaryMoltresDeck:
 	card_item FIRE_ENERGY,            25
 	card_item VULPIX,                  4
 	card_item NINETALES_LV35,          3
-	card_item GROWLITHE,               4
-	card_item ARCANINE_LV45,           2
+	card_item CHARCADET,               4
+	card_item CERULEDGE_EX,           2
 	card_item MAGMAR_LV24,             2
 	card_item MAGMAR_LV31,             2
 	card_item MOLTRES_LV35,            2
@@ -604,7 +604,7 @@ RockCrusherDeck:
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
 	card_item KLAWF,                     3
-	card_item RHYHORN,                  3
+	card_item SOLROCK,                  3
 	card_item PROFESSOR_OAK,            2
 	card_item POKEMON_BREEDER,          1
 	card_item ENERGY_REMOVAL,           2
@@ -728,8 +728,8 @@ FireChargeDeck:
 	deck_list_start
 	card_item FIRE_ENERGY,             21
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item GROWLITHE,                4
-	card_item ARCANINE_LV45,            3
+	card_item CHARCADET,                4
+	card_item CERULEDGE_EX,            3
 	card_item MAGMAR_LV24,              2
 	card_item JIGGLYPUFF_LV12,          3
 	card_item JIGGLYPUFF_LV14,          1
@@ -756,8 +756,8 @@ ImRonaldDeck:
 	card_item FIGHTING_ENERGY,   8
 	card_item FUECOCO,        3
 	card_item CROCALOR,        2
-	card_item GROWLITHE,         3
-	card_item ARCANINE_LV45,     1
+	card_item CHARCADET,         3
+	card_item CERULEDGE_EX,     1
 	card_item QUAXLY,          3
 	card_item QUAXWELL,         2
 	card_item SEEL,              2
@@ -956,8 +956,8 @@ BlisteringPokemonDeck:
 	card_item KLAWF,                    4
 	card_item GIMMIGHOUL,                  4
 	card_item MAROWAK_LV26,            2
-	card_item RHYHORN,                 4
-	card_item RHYDON,                  2
+	card_item SOLROCK,                 4
+	card_item LUNATONE,                  2
 	card_item JYNX,                    2
 	card_item PROFESSOR_OAK,           2
 	card_item NEMONA,                    3
@@ -979,8 +979,8 @@ HardPokemonDeck:
 	card_item KLAWF,             3
 	card_item GIMMIGHOUL,           3
 	card_item MAROWAK_LV26,     2
-	card_item RHYHORN,          2
-	card_item RHYDON,           1
+	card_item SOLROCK,          2
+	card_item LUNATONE,           1
 	card_item SNORLAX,          1
 	card_item NEMONA,             3
 	card_item POKE_BALL,        2
@@ -1354,7 +1354,7 @@ AngerDeck:
 	card_item FIRE_ENERGY,             10
 	card_item FIGHTING_ENERGY,          8
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item GROWLITHE,                3
+	card_item CHARCADET,                3
 	card_item ARCANINE_LV34,            2
 	card_item GIMMIGHOUL,                   3
 	card_item RATTATA,                  3
@@ -1381,8 +1381,8 @@ FlamethrowerDeck:
 	card_item SKELEDIRGE_EX,                1
 	card_item VULPIX,                   2
 	card_item NINETALES_LV32,           1
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
+	card_item CHARCADET,                2
+	card_item CERULEDGE_EX,            1
 	card_item MAGMAR_LV24,              3
 	card_item FLAREON_LV28,             2
 	card_item EEVEE,                    3
@@ -1402,8 +1402,8 @@ ReshuffleDeck:
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item VULPIX,                   4
 	card_item NINETALES_LV35,           3
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
+	card_item CHARCADET,                2
+	card_item CERULEDGE_EX,            1
 	card_item PONYTA,                   2
 	card_item PIDGEY,                   4
 	card_item PIDGEOTTO,                3

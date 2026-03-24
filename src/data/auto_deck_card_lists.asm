@@ -21,8 +21,8 @@ AllFightingPokemonCardList:
 	card_item MAROWAK_LV26,     1
 	card_item PALDEAN_TAUROS,        1
 	card_item HITMONCHAN,       1
-	card_item RHYHORN,          2
-	card_item RHYDON,           1
+	card_item SOLROCK,          2
+	card_item LUNATONE,           1
 	card_item PROFESSOR_OAK,    1
 	card_item NEMONA,             2
 	card_item SWITCH,           1
@@ -140,8 +140,8 @@ GreatQuakeCardList:
 	card_item WIGLETT,          4
 	card_item WUGTRIO,          3
 	card_item KLAWF,             4
-	card_item RHYHORN,          3
-	card_item RHYDON,           2
+	card_item SOLROCK,          3
+	card_item LUNATONE,           2
 	card_item KANGASKHAN,       2
 	card_item TAUROS,           1
 	card_item SNORLAX,          1
@@ -165,8 +165,8 @@ BoneAttackCardList:
 	card_item GIMMIGHOUL,           4
 	card_item MAROWAK_LV26,     1
 	card_item GHOLDENGO_EX,     2
-	card_item RHYHORN,          2
-	card_item RHYDON,           1
+	card_item SOLROCK,          2
+	card_item LUNATONE,           1
 	card_item NEMONA,             2
 	card_item MR_FUJI,          1
 	card_item POKE_BALL,        2
@@ -207,7 +207,7 @@ RockCrusherCardList:
 	card_item GRAVELER,                 3
 	card_item GOLEM,                    2
 	card_item KLAWF,                     3
-	card_item RHYHORN,                  3
+	card_item SOLROCK,                  3
 	card_item PROFESSOR_OAK,            2
 	card_item POKEMON_BREEDER,          1
 	card_item ENERGY_REMOVAL,           2
@@ -819,9 +819,9 @@ ReplaceEmAllCardList:
 	card_item VULPIX,                  4
 	card_item NINETALES_LV32,          2
 	card_item NINETALES_LV35,          1
-	card_item GROWLITHE,               4
+	card_item CHARCADET,               4
 	card_item ARCANINE_LV34,           1
-	card_item ARCANINE_LV45,           1
+	card_item CERULEDGE_EX,           1
 	card_item PIDGEY,                  4
 	card_item PIDGEOTTO,               3
 	card_item PIDGEOT_LV38,            1
@@ -885,8 +885,8 @@ FirePokemonCardList:
 	card_item VULPIX,                   3
 	card_item NINETALES_LV32,           1
 	card_item NINETALES_LV35,           1
-	card_item GROWLITHE,                2
-	card_item ARCANINE_LV45,            1
+	card_item CHARCADET,                2
+	card_item CERULEDGE_EX,            1
 	card_item PONYTA,                   2
 	card_item RAPIDASH,                 1
 	card_item MAGMAR_LV24,              1
@@ -909,8 +909,8 @@ FireChargeCardList:
 	deck_list_start
 	card_item FIRE_ENERGY,             21
 	card_item DOUBLE_COLORLESS_ENERGY,  4
-	card_item GROWLITHE,                4
-	card_item ARCANINE_LV45,            3
+	card_item CHARCADET,                4
+	card_item CERULEDGE_EX,            3
 	card_item MAGMAR_LV24,              2
 	card_item JIGGLYPUFF_LV12,          3
 	card_item JIGGLYPUFF_LV14,          1
@@ -942,8 +942,8 @@ CharmanderAndFriendsCardList:
 	card_item FUECOCO,       2
 	card_item CROCALOR,       1
 	card_item SKELEDIRGE_EX,        1
-	card_item GROWLITHE,        2
-	card_item ARCANINE_LV45,    1
+	card_item CHARCADET,        2
+	card_item CERULEDGE_EX,    1
 	card_item PONYTA,           2
 	card_item MAGMAR_LV24,      1
 	card_item SEEL,             2
@@ -971,8 +971,8 @@ SquirtleAndFriendsCardList:
 	card_item LIGHTNING_ENERGY,  6
 	card_item FUECOCO,        2
 	card_item CROCALOR,        1
-	card_item GROWLITHE,         1
-	card_item ARCANINE_LV45,     1
+	card_item CHARCADET,         1
+	card_item CERULEDGE_EX,     1
 	card_item MAGMAR_LV24,       1
 	card_item QUAXLY,          2
 	card_item QUAXWELL,         1
@@ -1110,8 +1110,8 @@ LegendaryMoltresCardList:
 	card_item FIRE_ENERGY,            25
 	card_item VULPIX,                  4
 	card_item NINETALES_LV35,          3
-	card_item GROWLITHE,               4
-	card_item ARCANINE_LV45,           2
+	card_item CHARCADET,               4
+	card_item CERULEDGE_EX,           2
 	card_item MAGMAR_LV24,             2
 	card_item MAGMAR_LV31,             2
 	card_item MOLTRES_LV35,            2

@@ -900,3 +900,71 @@ NoBasicPokemonInPlayAreaText:
 ContinuousCoinTossName:
 	text "Continuous Coin Toss"
 	done
+
+AbyssalFlamesName:
+	text "Abyssal Flames"
+	done
+
+AbyssalFlamesDescription:
+	text "This attack does 10 more damage for"
+	line "each Energy card in your discard"
+	line "pile."
+	done
+
+RagingAmethystName:
+	text "Raging Amethyst"
+	done
+
+RagingAmethystDescription:
+	text "Discard all Energy from this"
+	line "Pokémon."
+	done
+
+NoSolrockInPlayAreaText:
+	text "You have no Solrock in your Play"
+	line "Area."
+	done
+
+NoFightingEnergyCardsInHandText:
+	text "You have no Fighting Energy cards in"
+	line "your hand."
+	done
+
+PowerGemName:
+	text "Power Gem"
+	done
+
+LunarCycleName:
+	text "Lunar Cycle"
+	done
+
+LunarCycleDescription:
+	text "Once during your turn, if you have"
+	line "Solrock in play, you may discard a"
+	line "Basic <FIGHTING> Energy card from your hand"
+	line "in order to use this Ability. Draw"
+	line "3 cards. You can't use more than"
+	line "1 Lunar Cycle Ability each turn."
+	done
+
+CosmicBeamName:
+	text "Cosmic Beam"
+	done
+
+CosmicBeamDescription:
+	text "If you don't have Lunatone on your"
+	line "Bench, this attack does nothing."
+	done
+
+CeruledgeExName:
+	text "Ceruledge Ex"
+	done
+
+WillOWispName:
+	text "Will-O-Wisp"
+	done
+
+AlreadyUsedLunarCycleText:
+	text "You already used lunar cycle this"
+	line "turn."
+	done

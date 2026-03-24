@@ -1004,7 +1004,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Growlithe.
 .fire_charge_deck
 	call .GetArenaCardID
-	cp16 GROWLITHE
+	cp16 CHARCADET
 	jr z, .check_colorless_attached
 	jr .no_carry
 

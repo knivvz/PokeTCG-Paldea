@@ -27,7 +27,7 @@ AIActionTable_RockCrusher:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw RHYHORN
+	dw SOLROCK
 	dw KLAWF
 	dw GEODUDE
 	dw WIGLETT
@@ -36,7 +36,7 @@ AIActionTable_RockCrusher:
 .list_bench
 	dw WIGLETT
 	dw GEODUDE
-	dw RHYHORN
+	dw SOLROCK
 	dw KLAWF
 	dw NULL
 
@@ -51,12 +51,12 @@ AIActionTable_RockCrusher:
 	ai_energy GRAVELER, 3, +0
 	ai_energy GOLEM,    4, +0
 	ai_energy KLAWF,     2, -1
-	ai_energy RHYHORN,  3, +0
+	ai_energy SOLROCK,  3, +0
 	dw NULL
 
 .list_prize
 	dw ENERGY_REMOVAL
-	dw RHYHORN
+	dw SOLROCK
 	dw NULL
 
 .store_list_pointers

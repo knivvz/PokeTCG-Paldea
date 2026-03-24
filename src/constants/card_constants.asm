@@ -55,9 +55,9 @@
 	const VULPIX                      ; $33
 	const NINETALES_LV32              ; $34
 	const NINETALES_LV35              ; $35
-	const GROWLITHE                   ; $36
+	const CHARCADET                   ; $36
 	const ARCANINE_LV34               ; $37
-	const ARCANINE_LV45               ; $38
+	const CERULEDGE_EX               ; $38
 	const PONYTA                      ; $39
 	const RAPIDASH                    ; $3a
 	const MAGMAR_LV24                 ; $3b
@@ -138,8 +138,8 @@
 	const GHOLDENGO_EX                ; $86
 	const PALDEAN_TAUROS                   ; $87
 	const HITMONCHAN                  ; $88
-	const RHYHORN                     ; $89
-	const RHYDON                      ; $8a
+	const SOLROCK                     ; $89
+	const LUNATONE                      ; $8a
 	const KABUTO                      ; $8b
 	const KABUTOPS                    ; $8c
 	const AERODACTYL                  ; $8d

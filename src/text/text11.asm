@@ -1244,8 +1244,8 @@ HitmonchanDescription:
 	line "volleys that are impossible to see."
 	done
 
-RhyhornName:
-	text "Rhyhorn"
+SolrockName:
+	text "Solrock"
 	done
 
 LeerName:
@@ -1270,8 +1270,8 @@ RhyhornDescription:
 	line "easily knock a trailer flying."
 	done
 
-RhydonName:
-	text "Rhydon"
+LunatoneName:
+	text "Lunatone"
 	done
 
 RamName:

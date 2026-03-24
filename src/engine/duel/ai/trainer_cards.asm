@@ -4889,11 +4889,11 @@ AIDecide_Pokeball:
 ; this deck runs a deck check for specific
 ; card IDs in order of decreasing priority
 .hard_pokemon
-	ld de, RHYHORN
+	ld de, SOLROCK
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
-	ld de, RHYDON
+	ld de, LUNATONE
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	ret c
@@ -5147,7 +5147,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	jr z, .pop_de_and_no_carry
 	cp16 KLAWF
 	jr z, .pop_de_and_no_carry
-	cp16 RHYHORN
+	cp16 SOLROCK
 	jr z, .pop_de_and_no_carry
 
 ; if it's same as wAITrainerCardToPlay, skip this card.
@@ -5434,11 +5434,11 @@ AIDecide_ComputerSearch_Anger:
 	ld bc, RATICATE
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_discard_cards
-	ld bc, GROWLITHE
+	ld bc, CHARCADET
 	ld de, ARCANINE_LV34
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_discard_cards
-	ld de, GROWLITHE
+	ld de, CHARCADET
 	ld bc, ARCANINE_LV34
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_discard_cards
@@ -5762,12 +5762,12 @@ AIDecide_PokemonTrader_BlisteringPokemon:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld bc, RHYHORN
-	ld de, RHYDON
+	ld bc, SOLROCK
+	ld de, LUNATONE
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, RHYHORN
-	ld bc, RHYDON
+	ld de, SOLROCK
+	ld bc, LUNATONE
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, GIMMIGHOUL
@@ -6077,12 +6077,12 @@ AIDecide_PokemonTrader_Flamethrower:
 	ld bc, NINETALES_LV32
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, GROWLITHE
-	ld de, ARCANINE_LV45
+	ld bc, CHARCADET
+	ld de, CERULEDGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, GROWLITHE
-	ld bc, ARCANINE_LV45
+	ld de, CHARCADET
+	ld bc, CERULEDGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, EEVEE

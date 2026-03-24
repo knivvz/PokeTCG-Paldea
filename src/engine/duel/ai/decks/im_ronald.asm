@@ -32,7 +32,7 @@ AIActionTable_ImRonald:
 	dw FUECOCO
 	dw GIMMIGHOUL
 	dw QUAXLY
-	dw GROWLITHE
+	dw CHARCADET
 	dw NULL
 
 .list_bench
@@ -40,7 +40,7 @@ AIActionTable_ImRonald:
 	dw QUAXLY
 	dw SEEL
 	dw GIMMIGHOUL
-	dw GROWLITHE
+	dw CHARCADET
 	dw LAPRAS
 	dw NULL
 
@@ -50,8 +50,8 @@ AIActionTable_ImRonald:
 .list_energy
 	ai_energy FUECOCO,     3, +0
 	ai_energy CROCALOR,     5, +0
-	ai_energy GROWLITHE,      2, +0
-	ai_energy ARCANINE_LV45,  4, +0
+	ai_energy CHARCADET,      2, +0
+	ai_energy CERULEDGE_EX,  4, +0
 	ai_energy QUAXLY,       2, +0
 	ai_energy QUAXWELL,      3, +0
 	ai_energy SEEL,           3, +0

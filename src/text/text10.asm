@@ -929,8 +929,8 @@ NinetalesLv35Description:
 	line "reincarnated as this."
 	done
 
-GrowlitheName:
-	text "Growlithe"
+CharcadetName:
+	text "Charcadet"
 	done
 
 FlareName:

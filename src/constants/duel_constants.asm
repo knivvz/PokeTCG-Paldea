@@ -31,6 +31,9 @@ DEF USED_SUPPORTER_THIS_TURN		EQU 1 << USED_SUPPORTER_THIS_TURN_F
 DEF USED_SQUAWK_AND_SEIZE_F     	EQU 2
 DEF USED_SQUAWK_AND_SEIZE       	EQU 1 << USED_SQUAWK_AND_SEIZE_F
 
+DEF USED_LUNAR_CYCLE_THIS_TURN_F    EQU 3
+DEF USED_LUNAR_CYCLE_THIS_TURN		EQU 1 << USED_LUNAR_CYCLE_THIS_TURN_F
+
 ; wPlayerDuelVariables or wOpponentDuelVariables constants
 DEF DUELVARS_CARD_LOCATIONS                   EQUS "LOW(wPlayerCardLocations)"               ; 00
 DEF DUELVARS_PRIZE_CARDS                      EQUS "LOW(wPlayerPrizeCards)"                  ; 3c

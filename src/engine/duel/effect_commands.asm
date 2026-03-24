@@ -35,6 +35,25 @@ EffectCommands::
 ;	SpitPoison_Poison50PercentEffect ; unique effect made of more than one command.
 ;	SpitPoison_AIEffect              ;
 
+SolrockCosmicBeamEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, CosmicBeam_Damage
+	dbw EFFECTCMDTYPE_AI, CosmicBeam_AIEffect
+	db  $00
+LunatoneLunarCycleEffectCommands:
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, LunarCycle_Check
+	;dbw EFFECTCMDTYPE_REQUIRE_SELECTION, LunarCycle_PlayerSelectEffect
+	;dbw EFFECTCMDTYPE_AI_SELECTION, LunarCycle_AISelectEffect
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LunarCycle_Effect
+	db  $00
+
+CeruledgeExRagingAmethystEffectCommands:
+	dbw EFFECTCMDTYPE_AFTER_DAMAGE, RagingAmethyst_DiscardEnergy
+	db  $00
+
+CeruledgeExAbyssalFlamesEffectCommands:
+	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, AbyssalFlames_Damage
+	dbw EFFECTCMDTYPE_AI, AbyssalFlames_AIEffect
+	db  $00
 BraveryCharmEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, BraveryCharm_Check
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, BraveryCharm_PlayerSelection
@@ -944,9 +963,9 @@ MoltresLv37DiveBombEffectCommands:
 	dbw EFFECTCMDTYPE_AI, MoltresLv37DiveBomb_AIEffect
 	db  $00
 
-AbraPsyshockEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
-	db  $00
+; AbraPsyshockEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Paralysis50PercentEffect
+; 	db  $00
 
 GengarCurseEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, Curse_CheckDamageAndBench
@@ -1025,15 +1044,15 @@ MrMimeMeditateEffectCommands:
 	dbw EFFECTCMDTYPE_AI, Meditate_AIEffect
 	db  $00
 
-AlakazamDamageSwapEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageSwap_SwapEffect
-	db  $00
+; AlakazamDamageSwapEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, DamageSwap_CheckDamage
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, DamageSwap_SelectAndSwapEffect
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, DamageSwap_SwapEffect
+; 	db  $00
 
-AlakazamConfuseRayEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
-	db  $00
+; AlakazamConfuseRayEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Confusion50PercentEffect
+; 	db  $00
 
 MewPsywaveEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, PsywaveEffect
@@ -1114,13 +1133,13 @@ SlowpokeAmnesiaEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, Amnesia_AISelectEffect
 	db  $00
 
-KadabraRecoverEffectCommands:
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KadabraRecover_CheckEnergyHP
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, KadabraRecover_PlayerSelectEffect
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, KadabraRecover_HealEffect
-	dbw EFFECTCMDTYPE_DISCARD_ENERGY, KadabraRecover_DiscardEffect
-	dbw EFFECTCMDTYPE_AI_SELECTION, KadabraRecover_AISelectEffect
-	db  $00
+; KadabraRecoverEffectCommands:
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, KadabraRecover_CheckEnergyHP
+; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, KadabraRecover_PlayerSelectEffect
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, KadabraRecover_HealEffect
+; 	dbw EFFECTCMDTYPE_DISCARD_ENERGY, KadabraRecover_DiscardEffect
+; 	dbw EFFECTCMDTYPE_AI_SELECTION, KadabraRecover_AISelectEffect
+; 	db  $00
 
 JynxDoubleslapEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, JynxDoubleslap_MultiplierEffect
@@ -1206,15 +1225,15 @@ GravelerHardenEffectCommands:
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, HardenEffect
 	db  $00
 
-RhydonRamEffectCommands:
-	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ram_RecoilSwitchEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ram_SelectSwitchEffect
-	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Ram_SelectSwitchEffect
-	db  $00
+; RhydonRamEffectCommands:
+; 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, Ram_RecoilSwitchEffect
+; 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Ram_SelectSwitchEffect
+; 	dbw EFFECTCMDTYPE_AI_SWITCH_DEFENDING_PKMN, Ram_SelectSwitchEffect
+; 	db  $00
 
-RhyhornLeerEffectCommands:
-	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
-	db  $00
+; RhyhornLeerEffectCommands:
+; 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, LeerEffect
+; 	db  $00
 
 ; HitmonleeStretchKickEffectCommands:
 ; 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, StretchKick_CheckBench
