@@ -1176,11 +1176,11 @@ ScriptCommand_PickNextMan1RequestedCard:
 	jp IncreaseScriptPointerBy1
 
 Man1RequestedCardsList:
-	dw GRAVELER
-	dw OMASTAR
-	dw PARASECT
-	dw RAPIDASH
-	dw WEEZING
+	dw LAIRON
+	dw BAXCALIBUR
+	dw TOXTRICITY
+	dw CENTISKORCH
+	dw SPIDOPS_EX
 .end
 
 ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
@@ -1457,7 +1457,7 @@ ScriptCommand_PickChallengeCupPrizeCard:
 	jp IncreaseScriptPointerBy1
 
 ChallengeCupPrizeCards:
-	dw MEWTWO_LV60
+	dw DRIFLOON
 	tx MewtwoTradeCardName
 
 	dw MEW_LV8
@@ -1466,13 +1466,13 @@ ChallengeCupPrizeCards:
 	dw ARCANINE_LV34
 	tx ArcanineTradeCardName
 
-	dw PIKACHU_LV16
+	dw JOLTIK
 	tx PikachuTradeCardName
 
 	dw PIKACHU_ALT_LV16
 	tx PikachuTradeCardName
 
-	dw SURFING_PIKACHU_LV13
+	dw ZERAORA
 	tx SurfingPikachuTradeCardName
 
 	dw SURFING_PIKACHU_ALT_LV13
@@ -1481,26 +1481,26 @@ ChallengeCupPrizeCards:
 	dw ELECTABUZZ_LV20
 	tx ElectabuzzTradeCardName
 
-	dw SLOWPOKE_LV9
+	dw BRUTE_BONNET
 	tx SlowpokeTradeCardName
 
-	dw MEWTWO_ALT_LV60
+	dw LATIAS_EX
 	tx MewtwoTradeCardName
 
-	dw MEWTWO_LV60
+	dw DRIFLOON
 	tx MewtwoTradeCardName
 
 	dw MEW_LV8
 	tx MewTradeCardName
 
-	dw JIGGLYPUFF_LV12
+	dw SLAKOTH
 	tx JigglypuffTradeCardName
 
-	dw SUPER_ENERGY_RETRIEVAL
-	tx SuperEnergyRetrievalTradeCardName
+	dw SUPERIOR_ENERGY_RETRIEVAL
+	tx SuperiorEnergyRetrievalTradeCardName
 
-	dw FLYING_PIKACHU
-	tx FlyingPikachuTradeCardName
+	dw PIKACHU_EX
+	tx PikachuExTradeCardName
 .end
 
 ScriptCommand_PickLegendaryCard:
@@ -1536,10 +1536,10 @@ LegendaryCards:
 	dw ZAPDOS_LV68
 	tx ZapdosLegendaryCardName
 
-	dw MOLTRES_LV37
+	dw RESHIRAM_EX
 	tx MoltresLegendaryCardName
 
-	dw ARTICUNO_LV37
+	dw WELLSPRING_OGERPON_EX
 	tx ArticunoLegendaryCardName
 
 	dw DRAGONITE_LV41
