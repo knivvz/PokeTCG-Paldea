@@ -210,9 +210,9 @@ HandleTurn:
 	jr z, .player_turn
 
 ; opponent's turn
-	call SwapTurn
-	call IsClairvoyanceActive
-	call SwapTurn
+	; call SwapTurn
+	; call IsClairvoyanceActive
+	; call SwapTurn
 	call c, DisplayPlayerDrawCardScreen
 	jr DuelMainInterface
 
@@ -415,12 +415,12 @@ DuelMenu_Done:
 DuelMenu_Retreat:
 	call CheckAbleToRetreat
 	jr c, .unable_to_retreat
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	ldh [hTemp_ffa0], a
-	jr nz, .not_confused
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; and CNF_SLP_PRZ
+	; cp CONFUSED
+	; ldh [hTemp_ffa0], a
+	; jr nz, .not_confused
 	; ld a, [wOncePerTurnFlags]
 	; and UNABLE_TO_RETREAT_THIS_TURN
 	; jr nz, .unable_due_to_confusion
@@ -442,7 +442,7 @@ DuelMenu_Retreat:
 	call DrawDuelMainScene
 
 .unable_to_retreat
-	ldtx hl, UnableToRetreatText
+	;ldtx hl, UnableToRetreatText
 	call DrawWideTextBox_WaitForInput
 	jp PrintDuelMenuAndHandleInput
 
@@ -501,6 +501,7 @@ OpenPlayerHandScreen:
 	pop af
 	jp c, DuelMainInterface
 	ldh a, [hTempCardIndex_ff98]
+	;ldh a, [hTempCardIndex_ff9f] ; TODO does this break something? changed for headache allow supporter
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1Type]
 	ld c, a
@@ -513,7 +514,7 @@ OpenPlayerHandScreen:
 	jp DuelMainInterface
 .trainer_card
 	call PlayTrainerCard
-	jr c, ReloadCardListScreen ; jump if card not played
+	jp c, ReloadCardListScreen ; jump if card not played
 	jp DuelMainInterface
 
 ; play the energy card with deck index at hTempCardIndex_ff98
@@ -526,8 +527,15 @@ PlayEnergyCard:
 	jr c, .rain_dance_active
 	call IsOceanicAccompanimentActive
 	jr c, .oceanic_active
+	call IsInfernoFandangoActive
+	jr c, .inferno_fandango
 
 .not_water_energy
+	cp TYPE_ENERGY_FIRE
+	jr nz, .not_fire_energy
+	call IsInfernoFandangoActive
+	jr c, .inferno_fandango
+.not_fire_energy
 	ld a, [wAlreadyPlayedEnergy]
 	or a
 	jr nz, .already_played_energy
@@ -568,6 +576,19 @@ PlayEnergyCard:
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 	call CheckOceanicAccompanimentScenario
+	jr c, .play_energy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	jr z, .play_energy_set_played
+	ldtx hl, MayOnlyAttachOneEnergyCardText
+	call DrawWideTextBox_WaitForInput
+	jp OpenPlayerHandScreen
+
+.inferno_fandango
+	call HasAlivePokemonInPlayArea
+	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
+	jp c, DuelMainInterface ; exit if no card was chosen
+	call CheckInfernoFandangoScenario
 	jr c, .play_energy
 	ld a, [wAlreadyPlayedEnergy]
 	or a
@@ -1231,6 +1252,60 @@ CheckIfEnoughEnergiesToAttack:
 	call _CheckIfEnoughEnergiesToAttack
 	pop bc
 	pop hl
+	ret nc
+	call HandleConkeldurr ; not enough energy -> handlegolem
+	ret nc
+	call HandleUrsaluna
+	ret
+
+; returns nc if conditions met, carry if not
+; TODO this also makes first attack for free, adjust?
+HandleConkeldurr:
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp CONKELDURR
+	jr nz, .set_carry
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	or a
+	jr z, .set_carry ; no condition on active
+.done
+	or a
+	ret
+.set_carry
+	scf
+	ret
+
+; returns nc if conditions met, carry if not
+HandleUrsaluna:
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	cp BLOODMOON_URSALUNA_EX
+	jr nz, .set_carry
+
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+
+	call SwapTurn
+	call CountPrizes
+	call SwapTurn
+	ld b, a
+	ld a, 6
+	sub b 
+	ld b, a ; b = num of prizes taken
+
+	ld a, [wTotalAttachedEnergies]
+	add b
+	ld [wTotalAttachedEnergies], a
+	cp 5
+	ret
+
+.set_carry
+	scf
 	ret
 
 ; check if a pokemon card has enough energy attached to it in order to use an attack
@@ -1972,10 +2047,10 @@ ShuffleDeckAndDrawSevenCards:
 ; MYSTERIOUS_FOSSIL and CLEFAIRY_DOLL do count as basic Pokemon cards
 IsLoadedCard1BasicPokemon:
 	ld hl, wLoadedCard1ID
-	cphl MYSTERIOUS_FOSSIL
-	jr z, .basic
-	cphl CLEFAIRY_DOLL
-	jr z, .basic
+	;cphl MYSTERIOUS_FOSSIL
+	;jr z, .basic
+	; cphl CLEFAIRY_DOLL
+	; jr z, .basic
 ;	fallthrough
 
 ; return nc if the card at wLoadedCard1 is a basic Pokemon card
@@ -2893,7 +2968,7 @@ PracticeDuelVerify_Turn5:
 	cp 2
 	jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
-	cphl STARYU
+	cphl VAROOM
 	jr nz, ReturnWrongAction
 	ret
 
@@ -2907,13 +2982,13 @@ PracticeDuelVerify_Turn6:
 	cp 40
 	jr nz, ReturnWrongAction
 	ld hl, wTempCardID_ccc2
-	cphl STARYU
+	cphl VAROOM
 	jr nz, ReturnWrongAction
 	ret
 
 PracticeDuelVerify_Turn7Or8:
 	ld hl, wTempCardID_ccc2
-	cphl STARMIE
+	cphl REVAVROOM
 	jr nz, ReturnWrongAction
 	ld a, [wSelectedAttack]
 	cp SECOND_ATTACK
@@ -3477,6 +3552,14 @@ DrawWholeScreenTextBox:
 ; returns carry if all prize cards were taken
 TurnDuelistTakePrizes:
 	call FinishQueuedAnimations
+
+	; fez here
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	set SUBSTATUS3_POKEMON_KNOCKED_OUT_LAST_TURN_F, [hl]
+	call SwapTurn
+
 	ld a, [wNumberPrizeCardsToTake]
 	ld l, a
 	ld h, $00
@@ -4257,8 +4340,8 @@ DisplayCardPage_PokemonDescription:
 	call PrintPokemonCardPageGenericInformation
 	call LoadDuelCardSymbolTiles2
 	; print "LENGTH", "WEIGHT", "Lv", and "HP" where it corresponds in the page
-	ld hl, CardPageLengthWeightTextData
-	call PlaceTextItems
+	;ld hl, CardPageLengthWeightTextData
+	;call PlaceTextItems
 	ld hl, CardPageLvHPTextTileData
 	call WriteDataBlocksToBGMap0
 	; draw the card symbol associated to its TYPE_* at 3,2
@@ -4280,20 +4363,61 @@ DisplayCardPage_PokemonDescription:
 	ldtx hl, PokemonText
 	call ProcessTextFromID
 	; print the length and weight values at 5,11 and 5,12 respectively
-	lb bc, 5, 11
-	ld hl, wLoadedCard1Length
-	ld a, [hli]
-	ld l, [hl]
-	ld h, a
-	call PrintPokemonCardLength
-	lb bc, 5, 12
-	ld hl, wLoadedCard1Weight
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call PrintPokemonCardWeight
-	ldtx hl, LbsText
+	; lb bc, 5, 11
+	; ld hl, wLoadedCard1Length
+	; ld a, [hli]
+	; ld l, [hl]
+	; ld h, a
+	; call PrintPokemonCardLength
+	; lb bc, 5, 12
+	; ld hl, wLoadedCard1Weight
+	; ld a, [hli]
+	; ld h, [hl]
+	; ld l, a
+	; call PrintPokemonCardWeight
+	; ldtx hl, LbsText
+	; call InitTextPrinting_ProcessTextFromID
+	
+	lb de, 1, 12
+	ldtx hl, BoosterPack1Text
 	call InitTextPrinting_ProcessTextFromID
+	
+	ld a, [wLoadedCard1Set]
+	and $f0 ; keep the primary set (first set in the packed byte)
+	cp MYSTERY
+	jr z, .mystery
+	cp COLOSSEUM
+	jr z, .colosseum
+	cp LABORATORY
+	jr z, .laboratory
+	cp EVOLUTION
+	jr z, .evolution
+	jr .next ; TODO what to do with promotional cards?
+
+.mystery
+	ldtx hl, MysteryBoosterText
+	call ProcessTextFromID
+	jr .next
+.colosseum
+	ldtx hl, ColosseumBoosterText
+	call ProcessTextFromID
+	jr .next
+.laboratory
+	ldtx hl, LaboratoryBoosterText
+	call ProcessTextFromID
+	jr .next
+.evolution
+	ldtx hl, EvolutionBoosterText
+	call ProcessTextFromID
+	jr .next
+
+.next
+	
+	; ld hl, wLoadedCard1Set
+	; ld a, [hli]
+	; ld h, [hl]
+	; ld l, a
+
 	; print the card's description without line separation
 	call SetNoLineSeparation
 	ld hl, wLoadedCard1Description
@@ -5051,6 +5175,7 @@ PrintCurrentAndMaxHP:
 	call GetTurnDuelistVariable
 	or a
 	jr z, .zero_hp
+	; TODO bravery charm goes here?
 	cp 100
 	push af
 	jr nc, .current_hp_is_three_digits
@@ -5064,6 +5189,7 @@ PrintCurrentAndMaxHP:
 	inc b
 	inc b
 	ld a, [wLoadedCard1HP]
+	; TODO bravery charm goes here?
 	cp 100
 	jr c, .max_hp_is_two_digits
 	; max hp is 3 digits
@@ -5092,7 +5218,7 @@ PrintCurrentAndMaxHP:
 .zero_hp
 	ld d, b
 	ld e, c
-	ldtx hl, KnockOutText
+	ldtx hl, KnockedOutText
 	jp InitTextPrinting_ProcessTextFromID
 
 	; 	ld a, [wCurPlayAreaSlot]
@@ -5120,7 +5246,7 @@ PrintCurrentAndMaxHP:
 ; 	inc a
 ; 	ld e, a
 ; 	ld d, 7
-; 	ldtx hl, KnockOutText
+; 	ldtx hl, KnockedOutText
 ; 	jp InitTextPrinting_ProcessTextFromID
 
 ; print a turn holder's play area Pokemon card's name, level, face down stage card,
@@ -6372,6 +6498,11 @@ DrawWideTextBox_WaitForInput_Bank1:
 
 ; apply and/or refresh status conditions and other events that trigger between turns
 HandleBetweenTurnsEvents:
+	call IsFreezingShroudActive
+	jr nc, .next
+	call HandleFreezingShroud
+	call HandleBetweenTurnKnockOuts
+.next
 	call IsArenaPokemonAsleepOrPoisoned
 	jr c, .something_to_handle
 	cp PARALYZED
@@ -6381,9 +6512,10 @@ HandleBetweenTurnsEvents:
 	call SwapTurn
 	jr c, .something_to_handle
 	;call DiscardAttachedPluspowers
-	call SwapTurn
+	;call SwapTurn
 	;call DiscardAttachedDefenders
-	jp SwapTurn
+	;jp SwapTurn
+	ret
 
 .something_to_handle
 	; either:
@@ -6428,7 +6560,7 @@ HandleBetweenTurnsEvents:
 	call WaitForWideTextBoxInput
 
 .discard_pluspower
-	call DiscardAttachedPluspowers
+	;call DiscardAttachedPluspowers
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -6444,7 +6576,7 @@ HandleBetweenTurnsEvents:
 	call HandlePoisonDamage
 	call nc, HandleSleepCheck
 .asm_6c3a
-	call DiscardAttachedDefenders
+	;call DiscardAttachedDefenders
 	call SwapTurn
 	jp HandleBetweenTurnKnockOuts
 
@@ -6473,6 +6605,148 @@ DiscardAttachedDefenders:
 	jr nz, .unattach_defender_loop
 	ld de, DEFENDER
 	jp MoveCardToDiscardPileIfInPlayArea
+
+; returns carry if active - something wrong in here ?
+IsFreezingShroudActive:
+	ld a, FROSLASS
+	call CountPokemonIDInPlayArea
+	ret nc ; not found
+
+	; check for valid targets
+	call CheckApplyDamageFreezingShroud
+	ret c ; target found
+
+	call SwapTurn
+	call CheckApplyDamageFreezingShroud
+	call SwapTurn
+	ret
+
+; returns carry if valid target found
+CheckApplyDamageFreezingShroud:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	ld a, d
+	cp 0
+	ret z ; none found, no carry
+
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Atk1Category]
+	cp POKEMON_POWER
+	jr nz, .next ; no power
+
+	ld a, e
+	push de
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	pop de
+	cp FROSLASS
+	jr z, .next
+
+	; valid target found
+	scf
+	ret
+.next
+	inc e
+	dec d
+	jr nz, .loop_play_area	
+	ret
+
+; counts froslass in play and calls damage function
+HandleFreezingShroud:
+	ld a, FROSLASS
+	call CountPokemonIDInPlayArea
+	ret nc
+
+	ld c, a ; number of froslass
+	jr .froslass_found
+
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld c, 0
+.loop_play_area
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	cp16 FROSLASS
+	jr nz, .next
+	inc c
+.next
+	inc hl
+	jr .loop_play_area
+
+.done
+	ld a, c
+	cp 0
+	ret z
+
+.froslass_found
+	push bc
+	call EmptyScreen
+	ldtx hl, FreezingShroudBetweenTurnsText
+	ld a, d
+	; ld a, [hTempCardIndex_ff98]
+	; call DisplayCardDetailScreen
+	
+	call DrawWideTextBox_WaitForInput
+
+	call SwapTurn
+	call FreezingShroudDamage
+	call SwapTurn
+	call FreezingShroudDamage
+	
+	pop bc
+	dec c
+	cp 0
+	ret z
+	jr .done
+
+; deals 10 dmg to each pokemon in play with ability, except froslass
+FreezingShroudDamage:
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+	call GetTurnDuelistVariable
+	ld d, a
+	ld e, PLAY_AREA_ARENA
+.loop_play_area
+	ld a, d
+	cp 0
+	ret z
+	ld a, e
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Atk1Category]
+	cp POKEMON_POWER
+	jr nz, .next
+
+	ld a, e
+	push de
+	add DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	call GetCardIDFromDeckIndex
+	ld a, e
+	pop de
+	cp FROSLASS
+	jr z, .next
+
+	ld b, e
+	push de
+	ld de, 10
+	call DealDamageToPlayAreaPokemon_RegularAnim
+	pop de
+.next
+	inc e
+	dec d
+	jr nz, .loop_play_area
+	ret
 
 ; return carry if the turn holder's arena Pokemon card is asleep, poisoned, or double poisoned.
 ; also, if confused, paralyzed, or asleep, return the status condition in a.
@@ -6680,10 +6954,10 @@ ConvertSpecialTrainerCardToPokemon::
 	and CARD_LOCATION_PLAY_AREA
 	pop hl
 	ret z ; return if the card is not in the arena or bench
-	cp16 MYSTERIOUS_FOSSIL
-	jr z, .start_ram_data_overwrite
-	cp16 CLEFAIRY_DOLL
-	ret nz
+	;cp16 MYSTERIOUS_FOSSIL
+	;jr z, .start_ram_data_overwrite
+	; cp16 CLEFAIRY_DOLL
+	; ret nz
 .start_ram_data_overwrite
 	push de
 	ld [hl], TYPE_PKMN_COLORLESS
