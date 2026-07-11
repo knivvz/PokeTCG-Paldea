@@ -224,7 +224,7 @@ DeckIDDuelConfigurations:
 	tx ClubMemberText ; rank
 	tx ChallengeMachineWaterIconText ; element
 
-	db LONELY_FRIENDS_DECK_ID ; deck ID
+	db FIRE_CHARGE_DECK_ID;LONELY_FRIENDS_DECK_ID ; deck ID
 	db AMANDA_PIC ; NPC portrait
 	tx AmandaNPCName ; name text ID
 	db PRIZES_6 ; number of prize cards
