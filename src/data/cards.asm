@@ -11545,7 +11545,7 @@ MrMimeCard:
 
 ScreamTailCard:
 	db TYPE_PKMN_PSYCHIC ; type
-	gfx JynxCardGfx ; gfx
+	gfx ScreamTailCardGfx ; gfx
 	tx ScreamTailName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
@@ -14560,7 +14560,7 @@ SuperiorEnergyRetrievalCard:
 
 EarthenVesselCard:
 	db TYPE_TRAINER ; type
-	gfx EnergySearchCardGfx ; gfx
+	gfx EarthenVesselCardGfx ; gfx
 	tx EarthenVesselName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | FOSSIL ; sets
