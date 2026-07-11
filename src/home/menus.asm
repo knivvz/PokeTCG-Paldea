@@ -820,6 +820,7 @@ TwoItemHorizontalMenu::
 	call EnableLCD
 	jp HandleYesOrNoMenu.refresh_menu
 
+; returns carry if "no" selected
 YesOrNoMenuWithText_SetCursorToYes::
 	ld a, $01
 	ld [wDefaultYesOrNo], a
