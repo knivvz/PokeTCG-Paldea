@@ -77,10 +77,10 @@ HandleDamageReductionExceptSubstatus2::
 	jr z, .no_damage
 	cp SUBSTATUS1_NO_DAMAGE_17
 	jr z, .no_damage
-	cp SUBSTATUS1_REDUCE_BY_10
-	jr z, .reduce_damage_by_10
 	cp SUBSTATUS1_REDUCE_BY_20
 	jr z, .reduce_damage_by_20
+	cp SUBSTATUS1_REDUCE_BY_30
+	jr z, .reduce_damage_by_30
 	cp SUBSTATUS1_HARDEN
 	jr z, .prevent_less_than_40_damage
 	cp SUBSTATUS1_HALVE_DAMAGE
@@ -96,23 +96,25 @@ HandleDamageReductionExceptSubstatus2::
 	ld hl, wTempNonTurnDuelistCardID
 	cphl MR_MIME
 	jr z, .invisible_wall
-	cphl KABUTO
-	jr z, .kabuto_armor
+	cphl PIKACHU_EX
+	jr z, .handle_pikachu
+	; cphl KABUTO
+	; jr z, .kabuto_armor
 	ret
 
 .no_damage
 	ld de, 0
 	ret
 
-.reduce_damage_by_10
-	ld hl, -10
+.reduce_damage_by_20
+	ld hl, -20
 	add hl, de
 	ld e, l
 	ld d, h
 	ret
 
-.reduce_damage_by_20
-	ld hl, -20
+.reduce_damage_by_30
+	ld hl, -30
 	add hl, de
 	ld e, l
 	ld d, h
@@ -125,8 +127,34 @@ HandleDamageReductionExceptSubstatus2::
 	ld de, 0
 	ret
 
+.handle_pikachu
+	push de
+	; if has full hp and dmg >= hp, make damage to hp - 10
+	ld e, 0
+	call GetCardDamageAndMaxHP ; a = dmg, c = max hp
+	pop de
+	cp 0
+	ret nz ; return if not full hp
+	; e = wdamage, c = max hp
+	ld a, c
+	cp e
+	jr z, .reduce_damage
+	jr c, .reduce_damage
+	ret
+
+.reduce_damage
+	ld a, c
+	sub 10
+	;ret nc ; return if would not knock out
+	ld e, a
+	push de
+	ldtx hl, SurvivesDueToEnduringHeartText
+	call DrawWideTextBox_PrintText
+	pop de
+	ret
+
 .halve_damage
-	sla d ; bug, should be sra d
+	sra d ; bug, should be sra d
 	rr e
 	bit 0, e
 	ret z
@@ -146,16 +174,16 @@ HandleDamageReductionExceptSubstatus2::
 	ld de, 0
 	ret
 
-.kabuto_armor
-	sla d ; bug, should be sra d
-	rr e
-	bit 0, e
-	ret z
-	ld hl, -5
-	add hl, de
-	ld e, l
-	ld d, h
-	ret
+; .kabuto_armor
+; 	sla d ; bug, should be sra d
+; 	rr e
+; 	bit 0, e
+; 	ret z
+; 	ld hl, -5
+; 	add hl, de
+; 	ld e, l
+; 	ld d, h
+; 	ret
 
 ; check for Invisible Wall, Kabuto Armor, NShield, or Transparency, in order to
 ; possibly reduce or make zero the damage at de.
@@ -163,11 +191,11 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects::
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	push de
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	pop de
-	ret c
+	; push de
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; pop de
+	; ret c
 	ld a, [wTempPlayAreaLocation_cceb]
 	or a
 	call nz, HandleDamageReductionExceptSubstatus2.pkmn_power
@@ -180,7 +208,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects::
 	ld de, 0
 	ret
 
-; when MACHAMP is damaged, if its Strikes Back is active, the
+; when CONKELDURR is damaged, if its Strikes Back is active, the
 ; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
 ; ignore if damage taken at de is 0.
 ; used to bounce back a damaging attack.
@@ -192,19 +220,19 @@ HandleStrikesBack_AgainstDamagingAttack::
 	or a
 	ret nz
 	ld hl, wTempNonTurnDuelistCardID ; ID of defending Pokemon
-	cphl MACHAMP
+	cphl FLAMIGO;CONKELDURR
 	ret nz
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	ret c
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; ret c
 	ld a, [wLoadedAttackCategory] ; category of attack used
 	cp POKEMON_POWER
 	ret z
 	ld a, [wTempPlayAreaLocation_cceb] ; defending Pokemon's PLAY_AREA_*
 	or a ; cp PLAY_AREA_ARENA
 	jr nz, .in_bench
-	call CheckIsIncapableOfUsingPkmnPower_ArenaCard
-	ret c
+	;call CheckIsIncapableOfUsingPkmnPower_ArenaCard
+	;ret c
 .in_bench
 	push hl
 	push de
@@ -244,7 +272,7 @@ HandleStrikesBack_AgainstDamagingAttack::
 	pop hl
 	ret
 
-; return carry if NShield or Transparency activate (if MEW_LV8 or HAUNTER_LV17 is
+; return carry if NShield or Transparency activate (if MEW_LV8 or BANETTE_EX is
 ; the turn holder's arena Pokemon), and print their corresponding text if so
 HandleNShieldAndTransparency::
 	push de
@@ -254,7 +282,7 @@ HandleNShieldAndTransparency::
 	call GetCardIDFromDeckIndex
 	cp16 MEW_LV8
 	jr z, .nshield
-	cp16 HAUNTER_LV17
+	cp16 CINCCINO_EX
 	jr z, .transparency
 .done
 	pop de
@@ -276,12 +304,12 @@ HandleNShieldAndTransparency::
 .transparency
 	xor a
 	ld [wDuelDisplayedScreen], a
-	ldtx de, TransparencyCheckText
+	ldtx de, SmoothCoatCheckText
 	call TossCoin
 	jr nc, .done
 	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	ld [wNoDamageOrEffect], a
-	ldtx hl, NoDamageOrEffectDueToTransparencyText
+	ldtx hl, NoDamageOrEffectDueToSmoothCoatText
 	jr .print_text
 
 ; return carry if the turn holder's arena Pokemon is under a condition that makes
@@ -421,12 +449,12 @@ HandleNoDamageOrEffectSubstatus::
 	ldtx hl, NoDamageOrEffectDueToNShieldText
 	jr .no_damage_or_effect
 
-; if the Pokemon being attacked is HAUNTER_LV17, and its Transparency is active,
+; if the Pokemon being attacked is CINCCINO_EX, and its Transparency is active,
 ; there is a 50% chance that any damage or effect is prevented
 ; return carry if damage is prevented
 HandleTransparency::
 	ld hl, wTempNonTurnDuelistCardID
-	cphl HAUNTER_LV17
+	cphl CINCCINO_EX
 	jr z, .transparency
 .done
 	or a
@@ -440,12 +468,12 @@ HandleTransparency::
 	jr c, .done
 	xor a
 	ld [wDuelDisplayedScreen], a
-	ldtx de, TransparencyCheckText
+	ldtx de, SmoothCoatCheckText
 	call TossCoin
 	ret nc
 	ld a, NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	ld [wNoDamageOrEffect], a
-	ldtx hl, NoDamageOrEffectDueToTransparencyText
+	ldtx hl, NoDamageOrEffectDueToSmoothCoatText
 	scf
 	ret
 
@@ -481,17 +509,20 @@ NoDamageOrEffectTextIDTable::
 	tx NoDamageOrEffectDueToAgilityText      ; NO_DAMAGE_OR_EFFECT_AGILITY
 	tx NoDamageOrEffectDueToBarrierText      ; NO_DAMAGE_OR_EFFECT_BARRIER
 	tx NoDamageOrEffectDueToFlyText          ; NO_DAMAGE_OR_EFFECT_FLY
-	tx NoDamageOrEffectDueToTransparencyText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY
+	tx NoDamageOrEffectDueToSmoothCoatText ; NO_DAMAGE_OR_EFFECT_TRANSPARENCY
 	tx NoDamageOrEffectDueToNShieldText      ; NO_DAMAGE_OR_EFFECT_NSHIELD
 
 ; return carry if turn holder has Omanyte and its Clairvoyance Pkmn Power is active
 IsClairvoyanceActive::
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	ccf
-	ret nc
-	ld de, OMANYTE
-	jp CountTurnDuelistPokemonWithActivePkmnPower
+	scf
+	ret
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; ccf
+	; ret nc
+	;ld de, OMANYTE
+	;jp CountTurnDuelistPokemonWithActivePkmnPower
+	;ret
 
 ; returns carry if turn holder's arena card is paralyzed, asleep, confused,
 ; and/or toxic gas in play (i.e. its pkmn power cannot be used)
@@ -504,21 +535,23 @@ CheckIsIncapableOfUsingPkmnPower_ArenaCard::
 ;	a = play area location offset of the Pokémon to check (PLAY_AREA_* constant)
 CheckIsIncapableOfUsingPkmnPower::
 	or a
-	jr nz, .check_toxic_gas
+	ret nz;jr nz, .check_toxic_gas
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
 	ldtx hl, CannotUseDueToStatusText
 	scf
-	jr nz, .done ; return carry
-.check_toxic_gas
-	push de
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	pop de
-	ldtx hl, UnableDueToToxicGasText
-.done
 	ret
+
+;	jr nz, .done ; return carry
+; .check_toxic_gas
+; 	push de
+; 	ld de, MUK
+; 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
+; 	pop de
+; 	ldtx hl, UnableDueToToxicGasText
+; .done
+; 	ret
 
 ; return, in a, the amount of times that the Pokemon card with a given ID is found in the
 ; play area of both duelists. Also return carry if the Pokemon card is at least found once.
@@ -607,6 +640,7 @@ CountTurnDuelistPokemonWithActivePkmnPower::
 	pop hl
 	ret
 
+; id to check in a, returns in a number of times found.
 CountPokemonIDInPlayArea::
 	push hl
 	push de
@@ -621,10 +655,10 @@ CountPokemonIDInPlayArea::
 	ld a, [wTempPokemonID_ce7c]
 	cp e
 	jr nz, .check_bench
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	jr nz, .check_bench
+	; ld a, DUELVARS_ARENA_CARD_STATUS
+	; call GetTurnDuelistVariable
+	; and CNF_SLP_PRZ
+	; jr nz, .check_bench
 	inc c
 .check_bench
 	ld a, DUELVARS_BENCH
@@ -654,37 +688,91 @@ CountPokemonIDInPlayArea::
 	ret
 
 ; return, in a, the retreat cost of the card in wLoadedCard1,
-; adjusting for any Dodrio's Retreat Aid Pkmn Power that is active.
+; adjusting for: Spidops Ex (+1), latias ex (0 if basic)
 GetLoadedCard1RetreatCost::
-	ld c, 0
-	ld a, DUELVARS_BENCH
-	call GetTurnDuelistVariable
-.check_bench_loop
-	ld a, [hli]
-	cp -1
-	jr z, .no_more_bench
-	call GetCardIDFromDeckIndex
-	cp16 DODRIO
-	jr nz, .not_dodrio
+	; if basic, check for latias in play and if so, retreat cost is 0
+	ld a, [wLoadedCard1Stage]
+	or a ; basic
+	jr nz, .not_basic
+	ld de, LATIAS_EX
+	call CountTurnDuelistPokemonWithActivePkmnPower
+	jr c, .no_retreat_cost
+.not_basic
+	call SwapTurn
+	ld a, DUELVARS_ARENA_CARD
+ 	call GetTurnDuelistVariable
+ 	ld c, 0
+	ld b, PLAY_AREA_ARENA
+.loop_play_area
+ 	ld a, [hli]
+ 	cp $ff
+ 	jr z, .no_more_bench
+	push bc
+ 	call GetCardIDFromDeckIndex
+	pop bc
+ 	cp16 SPIDOPS_EX
+	jr nz, .not_spidops
 	inc c
-.not_dodrio
-	jr .check_bench_loop
+	jr .not_ariados
+
+.not_spidops
+	cp16 ARIADOS
+	jr nz, .not_ariados
+	ld a, [wLoadedCard1Stage]
+	or a ; basic
+	jr z, .not_ariados
+	inc c
+	
+.not_ariados
+ 	inc b
+	jr .loop_play_area
+
 .no_more_bench
-	ld a, c
-	or a
-	jr nz, .dodrio_found
-.muk_found
-	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
-	ret
-.dodrio_found
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .muk_found
+	call SwapTurn
 	ld a, [wLoadedCard1RetreatCost]
-	sub c ; apply Retreat Aid for each Pkmn Power-capable Dodrio
+	add c ; increase for each spidops ex found
 	ret nc
 	xor a
 	ret
+
+.no_retreat_cost
+	ld a, 0
+	ret
+	
+; GetLoadedCard1RetreatCost_Old::
+; 	ld c, 0
+; 	ld a, DUELVARS_BENCH
+; 	call GetTurnDuelistVariable
+
+; 	call SwapTurn
+; .check_bench_loop
+; 	ld a, [hli]
+; 	cp -1
+; 	jr z, .no_more_bench
+; 	call GetCardIDFromDeckIndex
+; 	cp16 SPIDOPS_EX
+; 	jr nz, .not_spidops
+; 	inc c
+; .not_spidops
+; 	jr .check_bench_loop
+; .no_more_bench
+; 	call SwapTurn
+; 	ld a, c
+; 	or a
+; 	jr nz, .dodrio_found
+; ;.muk_found
+; ;	ld a, [wLoadedCard1RetreatCost] ; return regular retreat cost
+; ;	ret
+; .dodrio_found
+; ;	ld de, MUK
+; ;	call CountPokemonWithActivePkmnPowerInBothPlayAreas
+; ;	jr c, .muk_found
+; 	ld a, [wLoadedCard1RetreatCost]
+; 	add c ; increase for each spidops ex found
+; 	;sub c ; apply Retreat Aid for each Pkmn Power-capable Dodrio
+; 	ret nc
+; 	xor a
+; 	ret
 
 ; return carry if the turn holder's arena Pokemon is affected by Acid and can't retreat
 CheckUnableToRetreatDueToEffect::
@@ -701,8 +789,25 @@ CheckUnableToRetreatDueToEffect::
 	scf
 	ret
 
-; return carry if the turn holder is affected by Headache and trainer cards can't be used
+; return carry if the turn holder is affected by Headache and item cards can't be used
 CheckCantUseTrainerDueToEffect::
+	; TODO move the supporter check down so it only gets checked if item lock is active, not everytime.
+
+	; supporters can still be used under item lock.
+	ld hl, wLoadedCard1ID
+	cphl LILLIES_DETERMINATION
+	ret z
+	cphl NEMONA
+	ret z
+	cphl PROFESSORS_RESEARCH
+	ret z
+	cphl BOSSS_ORDERS
+	ret z
+	cphl IONO
+	ret z
+	cphl CRISPIN
+	ret z
+
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	or a
@@ -717,8 +822,8 @@ IsPrehistoricPowerActive::
 	ld de, AERODACTYL
 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ret nc
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
 	ret
@@ -765,33 +870,54 @@ UpdateSubstatusConditions_EndOfTurn::
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
 	call GetTurnDuelistVariable
 	res SUBSTATUS3_HEADACHE_F, [hl]
+
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS3
+	call GetTurnDuelistVariable
+	res SUBSTATUS3_POKEMON_KNOCKED_OUT_LAST_TURN_F, [hl]
 	push hl
+
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS2
 	call GetTurnDuelistVariable
 	xor a
 	ld [hl], a
+
 	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
 	call GetTurnDuelistVariable
 	pop hl
 	cp SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
-	ret z
+	jr z, .check_next
 	res SUBSTATUS3_THIS_TURN_DOUBLE_DAMAGE_F, [hl]
+
+.check_next
+	ld a, DUELVARS_ARENA_CARD_SUBSTATUS1
+	call GetNonTurnDuelistVariable
+	cp SUBSTATUS1_NEXT_TURN_CANT_ATTACK
+	ret nz
+	ld a, SUBSTATUS2_BONE_ATTACK
+	farcall ApplySubstatus2ToDefendingCard
 	ret
 
-; return carry if turn holder has Blastoise and its Rain Dance Pkmn Power is active
+; return carry if turn holder has baxcalibur and its Rain Dance Pkmn Power is active
 IsRainDanceActive::
-	ld de, QUAQUAVAL_EX
+	ld de, BAXCALIBUR
 	call CountTurnDuelistPokemonWithActivePkmnPower
-	ret nc ; return if no Pkmn Power-capable Blastoise found in turn holder's play area
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	ccf
+	ret
+	;ret nc ; return if no Pkmn Power-capable baxcalibur found in turn holder's play area
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; ccf
+	;ret
+
+; return carry if turn holder has emboar and its Pkmn Power is active
+IsInfernoFandangoActive::
+	ld de, EMBOAR
+	call CountTurnDuelistPokemonWithActivePkmnPower
 	ret
 
 IsOceanicAccompanimentActive::
 	ld a, FINNEON
 	call CountPokemonIDInPlayArea
-	ret nc; return if no Pkmn Power-capable Blastoise found in turn holder's play area
+	ret nc; return if no Pkmn Power-capable finneon found in turn holder's play area
 	; check if any seadra or seaking in play
 	ld a, SEADRA
 	call CountPokemonIDInPlayArea
@@ -803,17 +929,25 @@ IsOceanicAccompanimentActive::
 	call CountPokemonIDInPlayArea
 	ret ; TODO is this enough?
 
-; return carry if card at [hTempCardIndex_ff98] is a water energy card AND
-; if card at [hTempPlayAreaLocation_ff9d] is a water Pokemon card.
+; return carry if card at [hTempCardIndex_ff98] is a water energy card
 CheckRainDanceScenario::
 	ldh a, [hTempCardIndex_ff98]
 	call GetCardIDFromDeckIndex
 	call GetCardType
 	cp TYPE_ENERGY_WATER
 	jr nz, .no_carry
-	ldh a, [hTempPlayAreaLocation_ff9d]
-	call GetPlayAreaCardColor
-	cp TYPE_PKMN_WATER
+	scf
+	ret
+.no_carry
+	or a
+	ret
+
+; return carry if card at [hTempCardIndex_ff98] is a FIRE energy card
+CheckInfernoFandangoScenario::
+	ldh a, [hTempCardIndex_ff98]
+	call GetCardIDFromDeckIndex
+	call GetCardType
+	cp TYPE_ENERGY_FIRE
 	jr nz, .no_carry
 	scf
 	ret
@@ -883,12 +1017,12 @@ HandleDestinyBondSubstatus::
 	ldtx hl, KnockedOutDueToDestinyBondText
 	jp DrawWideTextBox_WaitForInput
 
-; when MACHAMP is damaged, if its Strikes Back is active, the
+; when ORTHWORM_EX is damaged, if its Strikes Back is active, the
 ; attacking Pokemon (turn holder's arena Pokemon) takes 10 damage.
 ; used to bounce back an attack of the RESIDUAL category
-HandleStrikesBack_AgainstResidualAttack::
+HandlePummelingPayback_AgainstResidualAttack::
 	ld hl, wTempNonTurnDuelistCardID
-	cphl MACHAMP
+	cphl ORTHWORM_EX
 	jr z, .strikes_back
 	ret
 .strikes_back
@@ -898,14 +1032,25 @@ HandleStrikesBack_AgainstResidualAttack::
 	ld a, [wDealtDamage]
 	or a
 	ret z
+
 	call SwapTurn
-	call CheckIsIncapableOfUsingPkmnPower_ArenaCard
+	ld e, PLAY_AREA_ARENA
+	call GetPlayAreaCardAttachedEnergies
+	ld a, [wAttachedEnergies + METAL]
+	or a ; no metal energy
+	jr z, .no_damage ; no metal attached, no damage
+	call ATimes10
 	call SwapTurn
-	ret c
-	ld hl, 10 ; damage to be dealt to attacker
+	
+	ld l, a
+	ld h, 0
+	;ld hl, 10 ; damage to be dealt to attacker
 	call ApplyStrikesBack_AgainstResidualAttack
 	call nc, WaitForWideTextBoxInput
 	ret
+
+.no_damage
+	jp SwapTurn
 
 ApplyStrikesBack_AgainstResidualAttack::
 	push hl
@@ -941,20 +1086,20 @@ ApplyStrikesBack_AgainstResidualAttack::
 
 ; if the id of the card provided in register a as a deck index is MUK,
 ; clear the changed type of all arena and bench Pokemon
-ClearChangedTypesIfMuk::
-	call GetCardIDFromDeckIndex
-	cp16 MUK
-	ret nz
-	call SwapTurn
-	call .zero_changed_types
-	call SwapTurn
-.zero_changed_types
-	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
-	call GetTurnDuelistVariable
-	ld c, MAX_PLAY_AREA_POKEMON
-.zero_changed_types_loop
-	xor a
-	ld [hli], a
-	dec c
-	jr nz, .zero_changed_types_loop
-	ret
+; ClearChangedTypesIfMuk::
+; 	call GetCardIDFromDeckIndex
+; 	cp16 MUK
+; 	ret nz
+; 	call SwapTurn
+; 	call .zero_changed_types
+; 	call SwapTurn
+; .zero_changed_types
+; 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
+; 	call GetTurnDuelistVariable
+; 	ld c, MAX_PLAY_AREA_POKEMON
+; .zero_changed_types_loop
+; 	xor a
+; 	ld [hli], a
+; 	dec c
+; 	jr nz, .zero_changed_types_loop
+; 	ret
