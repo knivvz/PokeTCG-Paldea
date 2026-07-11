@@ -45,7 +45,8 @@ Script_Sara:
 
 .start_duel
 	print_npc_text SaraStartDuelText
-	start_duel PRIZES_6, WATERFRONT_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
+	;start_duel PRIZES_6, WATERFRONT_POKEMON_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, STRANGE_PSYSHOCK_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatSara:
@@ -69,7 +70,7 @@ Script_Amanda:
 
 .start_duel
 	print_npc_text AmandaDuelStartText
-	start_duel PRIZES_6, LONELY_FRIENDS_DECK_ID, MUSIC_DUEL_THEME_1
+	start_duel PRIZES_6, FIRE_CHARGE_DECK_ID, MUSIC_DUEL_THEME_1
 	quit_script_fully
 
 Script_BeatAmanda:

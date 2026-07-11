@@ -27,36 +27,36 @@ AIActionTable_InvincibleRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw KANGASKHAN
-	dw MAGMAR_LV31
+	dw BLOODMOON_URSALUNA_EX
+	dw HEARTHFLAME_MASK_OGERPON_EX
 	dw CHANSEY
-	dw GEODUDE
+	dw ARON
 	dw SCYTHER
-	dw GRIMER
+	dw GULPIN
 	dw NULL
 
 .list_bench
-	dw GRIMER
+	dw GULPIN
 	dw SCYTHER
-	dw GEODUDE
+	dw ARON
 	dw CHANSEY
-	dw MAGMAR_LV31
-	dw KANGASKHAN
+	dw HEARTHFLAME_MASK_OGERPON_EX
+	dw BLOODMOON_URSALUNA_EX
 	dw NULL
 
 .list_retreat
-	ai_retreat GRIMER, -1
+	ai_retreat GULPIN, -1
 	dw NULL
 
 .list_energy
-	ai_energy GRIMER,         1, -1
-	ai_energy MUK,            3, -1
+	ai_energy GULPIN,         1, -1
+	ai_energy SWALOT,            3, -1
 	ai_energy SCYTHER,        4, +1
-	ai_energy MAGMAR_LV31,    2, +0
-	ai_energy GEODUDE,        2, +0
-	ai_energy GRAVELER,       3, +0
+	ai_energy HEARTHFLAME_MASK_OGERPON_EX,    2, +0
+	ai_energy ARON,        2, +0
+	ai_energy LAIRON,       3, +0
 	ai_energy CHANSEY,        4, +0
-	ai_energy KANGASKHAN,     4, -1
+	ai_energy BLOODMOON_URSALUNA_EX,     4, -1
 	dw NULL
 
 .list_prize

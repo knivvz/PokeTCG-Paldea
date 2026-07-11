@@ -27,37 +27,37 @@ AIActionTable_ZappingSelfdestruct:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw IRON_HANDS_EX
 	dw TAUROS
 	dw WATTREL
-	dw VOLTORB
+	dw SHINX
 	dw NULL
 
 .list_bench
 	dw WATTREL
-	dw VOLTORB
+	dw SHINX
 	dw IRON_HANDS_EX
 	dw TAUROS
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw NULL
 
 .list_retreat
-	ai_retreat VOLTORB, -1
+	ai_retreat SHINX, -1
 	dw NULL
 
 .list_energy
 	ai_energy WATTREL,  3, +1
 	ai_energy KILOWATTREL,   4, +0
-	ai_energy VOLTORB,         3, +1
-	ai_energy ELECTRODE_LV35,  3, +0
+	ai_energy SHINX,         3, +1
+	ai_energy LUXIO,  3, +0
 	ai_energy IRON_HANDS_EX, 1, +0
-	ai_energy KANGASKHAN,      2, -2
+	ai_energy BLOODMOON_URSALUNA_EX,      2, -2
 	ai_energy TAUROS,          3, +0
 	dw NULL
 
 .list_prize
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw NULL
 
 .store_list_pointers

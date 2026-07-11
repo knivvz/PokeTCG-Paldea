@@ -115,7 +115,7 @@ AIProcessEnergyCards:
 	ld [wTempAI], a
 	ld a, [wAIEnergyAttachLogicFlags]
 	and AI_ENERGY_FLAG_SKIP_EVOLUTION
-	jr nz, .check_venusaur
+	jr nz, .check_if_active;.check_venusaur
 
 ; check if energy needed is found in hand
 ; and if there's an evolution in hand or deck
@@ -135,25 +135,12 @@ AIProcessEnergyCards:
 	ld [wTempAI], a ; store evolution card found
 	ld a, 2
 	call AIEncourage
-	jr .check_venusaur
+	jr .check_if_active;.check_venusaur
 
 .no_evolution_in_hand
 	ld a, [wCurCardCanAttack]
 	call CheckForEvolutionInDeck
-	jr nc, .check_venusaur
-	ld a, 1
-	call AIEncourage
-
-; if there's no Muk in any Play Area
-; and there's VenusaurLv67 in own Play Area,
-; add to AI score
-.check_venusaur
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .check_if_active
-	ld de, VENUSAUR_EX
-	call CountTurnDuelistPokemonWithActivePkmnPower
-	jr nc, .check_if_active
+	jr nc, .check_if_active;.check_venusaur
 	ld a, 1
 	call AIEncourage
 
@@ -460,7 +447,7 @@ DetermineAIScoreOfAttackEnergyRequirement:
 ; if there is no surplus energy, encourage playing energy.
 .discard_energy
 	ld hl, wLoadedCard1ID
-	cphl ZAPDOS_LV64
+	cphl ZEKROM_EX
 	jr z, .check_evolution
 	call CheckIfNoSurplusEnergyForAttack
 	jr c, .asm_166cd
@@ -712,7 +699,7 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 ; for these to be treated differently.
 ; for both attacks, load its energy cost.
 	ld hl, wLoadedCard2ID
-	cphl ZAPDOS_LV64
+	cphl ZEKROM_EX
 	jr z, .zapdos
 	; cphl CHARIZARD
 	; jr z, .charizard_or_exeggutor
@@ -996,7 +983,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 	call .GetArenaCardID
 	cp16 FUECOCO
 	jr z, .check_colorless_attached
-	cp16 DRATINI
+	cp16 BAGON
 	jr z, .check_colorless_attached
 	jr .no_carry
 
@@ -1012,7 +999,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Dratini.
 .legendary_ronald_deck
 	call .GetArenaCardID
-	cp16 DRATINI
+	cp16 BAGON
 	jr z, .check_colorless_attached
 	jr .no_carry
 

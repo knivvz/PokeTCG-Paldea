@@ -1,4 +1,4 @@
-AIActionTable_FireCharge:
+AIActionTable_NapTime:
 	dw .do_turn ; unused
 	dw .do_turn
 	dw .start_duel
@@ -7,7 +7,7 @@ AIActionTable_FireCharge:
 	dw .take_prize
 
 .do_turn
-	jp AIDoTurn_FireCharge
+	jp AIDoTurn_NapTime
 
 .start_duel
 	call InitAIDuelVars
@@ -27,33 +27,37 @@ AIActionTable_FireCharge:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw CHARCADET
-	dw SOLROCK
-	dw LUNATONE
+	dw UXIE
+	dw AZELF
+	dw SNORUNT
+    dw MUNKIDORI
 	dw NULL
 
 .list_bench
-	dw LUNATONE
-	dw SOLROCK
-	dw CHARCADET
+	dw SNORUNT
+	dw AZELF
+	dw UXIE
+    dw MUNKIDORI
 	dw NULL
 
 .list_retreat
-	ai_retreat LUNATONE, 		-3
-	ai_retreat SOLROCK,         +0
-	ai_retreat CHARCADET,       +3
+    ai_retreat MUNKIDORI, 		-3
+	ai_retreat SNORUNT, 		-3
+	ai_retreat AZELF,         +0
+	ai_retreat UXIE,       +3
 	dw NULL
 
 .list_energy
-	ai_energy CHARCADET,       1, +5
-	ai_energy CERULEDGE_EX,    1, +5
-	ai_energy SOLROCK,	       1, +0
-	ai_energy LUNATONE,        0, +0
+	ai_energy UXIE,       1, +5
+	ai_energy AZELF,        2, +4
+	ai_energy SNORUNT,	       0, +0
+	ai_energy MUNKIDORI,        0, +0
 	dw NULL
 
 .list_prize
-	dw CERULEDGE_EX
-	dw CHARCADET
+	dw MUNKIDORI
+	dw UXIE
+    dw AZELF
 	dw NULL
 
 .store_list_pointers
@@ -65,7 +69,7 @@ AIActionTable_FireCharge:
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
-AIDoTurn_FireCharge:
+AIDoTurn_NapTime:
 	call InitAITurnVars
 
 .start

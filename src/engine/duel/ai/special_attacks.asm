@@ -12,46 +12,46 @@ HandleSpecialAIAttacks:
 
 	; cp16 NIDORANF
 	; jp z, .NidoranFCallForFamily
-	cp16 ODDISH
-	jp z, .CallForFamily
-	cp16 BELLSPROUT
-	jp z, .CallForFamily
-	cp16 EXEGGUTOR
-	jp z, .Teleport
+	; cp16 ODDISH
+	; jp z, .CallForFamily
+	; cp16 BELLSPROUT
+	; jp z, .CallForFamily
+	; cp16 EXEGGUTOR
+	; jp z, .Teleport
 	cp16 SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp16 KRABBY
-	jp z, .CallForFamily
+	; cp16 KRABBY
+	; jp z, .CallForFamily
 	cp16 VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
-	cp16 ELECTRODE_LV42
-	jp z, .ChainLightning
+	; cp16 ELECTRODE_LV42
+	; jp z, .ChainLightning
 	cp16 MAROWAK_LV26
 	jp z, .CallForFriend
 	cp16 MEW_LV23
 	jp z, .DevolutionBeam
-	cp16 JIGGLYPUFF_LV13
-	jp z, .FriendshipSong
-	cp16 PORYGON
-	jp z, .Conversion
-	cp16 MEWTWO_ALT_LV60
+	; cp16 JIGGLYPUFF_LV13
+	; jp z, .FriendshipSong
+	; cp16 PORYGON
+	; jp z, .Conversion
+	cp16 LATIAS_EX
 	jp z, .EnergyAbsorption
-	cp16 MEWTWO_LV60
+	cp16 DRIFLOON
 	jp z, .EnergyAbsorption
-	cp16 NINETALES_LV35
+	cp16 CHANDELURE
 	jp z, .MixUp
 	cp16 ZAPDOS_LV68
 	jp z, .BigThunder
-	cp16 KANGASKHAN
+	cp16 BLOODMOON_URSALUNA_EX
 	jp z, .Fetch
 	;cp16 WUGTRIO
 	;jp z, .Earthquake
-	cp16 ELECTRODE_LV35
-	jp z, .EnergySpike
-	cp16 GOLDUCK
-	jp z, .HyperBeam
-	cp16 DRAGONAIR
-	jp z, .HyperBeam
+	; cp16 ELECTRODE_LV35
+	; jp z, .EnergySpike
+	; cp16 FROSLASS
+	; jp z, .HyperBeam
+	; cp16 DRAGONAIR
+	; jp z, .HyperBeam
 
 ; return zero score.
 .zero_score
@@ -100,7 +100,7 @@ HandleSpecialAIAttacks:
 ; if any of them are found, return a score of
 ; $80 + slots available in bench.
 .CallForFriend:
-	ld de, GEODUDE
+	ld de, ARON
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
@@ -210,34 +210,34 @@ HandleSpecialAIAttacks:
 ; - if that number is >= 2 and this attack is Conversion 2
 ; then return score of $80 + 2.
 ; otherwise return score of $80 + 1.
-.Conversion:
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	jp z, .zero_score
+; .Conversion:
+; 	ld a, DUELVARS_ARENA_CARD_STATUS
+; 	call GetTurnDuelistVariable
+; 	and CNF_SLP_PRZ
+; 	cp CONFUSED
+; 	jp z, .zero_score
 
-	ld a, [wSelectedAttack]
-	or a
-	jr nz, .conversion_2
+; 	ld a, [wSelectedAttack]
+; 	or a
+; 	jr nz, .conversion_2
 
-; conversion 1
-	call CountNumberOfSetUpBenchPokemon
-	cp 2
-	jr c, .low_conversion_score
-	ld a, $82
-	ret
+; ; conversion 1
+; 	call CountNumberOfSetUpBenchPokemon
+; 	cp 2
+; 	jr c, .low_conversion_score
+; 	ld a, $82
+; 	ret
 
-.conversion_2
-	call CountNumberOfSetUpBenchPokemon
-	cp 2
-	jr nc, .low_conversion_score
-	ld a, $82
-	ret
+; .conversion_2
+; 	call CountNumberOfSetUpBenchPokemon
+; 	cp 2
+; 	jr nc, .low_conversion_score
+; 	ld a, $82
+; 	ret
 
-.low_conversion_score
-	ld a, $81
-	ret
+; .low_conversion_score
+; 	ld a, $81
+; 	ret
 
 ; if any Psychic Energy is found in the Discard Pile,
 ; return a score of $80 + 2.

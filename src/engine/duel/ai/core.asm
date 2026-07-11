@@ -190,18 +190,24 @@ CheckIfEnergyIsUseful:
 	jp z, .set_carry
 	ld hl, wTempCardID
 
+	ld bc, DARKNESS_ENERGY
+	cphl MUNKIDORI
+	jp z, .check_energy
+	; cphl VENONAT
+	; jp z, .not_useful
+
 	ld bc, PSYCHIC_ENERGY
-	cphl EXEGGCUTE
+	cphl BINACLE
 	jr z, .check_energy
-	cphl EXEGGUTOR
+	cphl BARBARACLE
 	jr z, .check_energy
-	cphl PSYDUCK
+	cphl SNORUNT
 	jr z, .check_energy
-	cphl GOLDUCK
+	cphl FROSLASS
 	jr z, .check_energy
 
 	ld bc, WATER_ENERGY
-	cphl SURFING_PIKACHU_LV13
+	cphl ZERAORA
 	jr z, .check_energy
 	cphl SURFING_PIKACHU_ALT_LV13
 	jr z, .check_energy
@@ -224,6 +230,7 @@ CheckIfEnergyIsUseful:
 	ld a, [wTempCardType]
 	cp d
 	jr z, .set_carry
+.not_useful
 	pop de
 	pop bc
 	pop hl
@@ -396,6 +403,18 @@ CheckEnergyNeededForAttack:
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	jr nz, .is_attack
+	; check for munkidori
+	; ldh a, [hTempPlayAreaLocation_ff9d]
+	; add DUELVARS_ARENA_CARD
+	; call GetTurnDuelistVariable
+	; call GetCardIDFromDeckIndex
+	; cp16 MUNKIDORI
+	; jr nz, .no_attack
+	; ; check if energy attached already
+	; lb bc, 1, 0
+	; ld de, $07
+	; or a
+	; ret
 .no_attack
 	lb bc, 0, 0
 	ld de, 0
@@ -406,7 +425,7 @@ CheckEnergyNeededForAttack:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ld e, a
 	call GetPlayAreaCardAttachedEnergies
-	;bank1call HandleEnergyBurn
+	bank1call HandleUrsaluna ; TODO test this
 
 	xor a
 	ld [wTempLoadedAttackEnergyCost], a
@@ -734,7 +753,7 @@ LookForCardIDInHandList_Bank5:
 	scf
 	ret
 
-; returns carry if card ID in a
+; returns carry if card ID in de
 ; is found in Play Area, starting with
 ; location in b
 ; input:
@@ -772,6 +791,56 @@ LookForCardIDInPlayArea_Bank5:
 
 .found
 	ld a, b
+	scf
+	ret
+
+; returns carry if card ID in de
+; is found in Play Area with no energy attached, starting with
+; location in b
+; input:
+;	de = card ID
+;	b = PLAY_AREA_* to start with
+; output:
+;	a = PLAY_AREA_* of found card
+;	carry set if found
+LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5:
+.loop
+	ld a, DUELVARS_ARENA_CARD
+	add b
+	call GetTurnDuelistVariable
+	cp $ff
+	ret z
+	call LoadCardDataToBuffer1_FromDeckIndex
+	push bc
+	ld a, [wLoadedCard1ID + 0]
+	ld c, a
+	ld a, [wLoadedCard1ID + 1]
+	ld b, a
+	call CompareDEtoBC
+	pop bc
+	jr z, .found
+
+.next
+	inc b
+	ld a, MAX_PLAY_AREA_POKEMON
+	cp b
+	jr nz, .loop
+
+; not found
+	ld b, $ff
+	or a
+	ret
+
+.found
+	push de
+	ld a, b
+	ld e, a
+	call CountNumberOfEnergyCardsAttached
+	pop de
+	or a ; cp 0
+	jr nz, .next
+	
+	ld a, b ; play area of found pkmn with energy attached
 	scf
 	ret
 
@@ -1571,8 +1640,13 @@ CheckEnergyFlagsNeededInList:
 ;	a = bits of each energy requirement
 GetAttacksEnergyCostBits:
 	call LoadCardDataToBuffer2_FromDeckIndex
+
+	;cp16 MUNKIDORI
+	;jr z, .munkidori
+
 	ld hl, wLoadedCard2Atk1EnergyCost
 	call .GetEnergyCostBits
+.next
 	ld b, a
 
 	push bc
@@ -1581,6 +1655,11 @@ GetAttacksEnergyCostBits:
 	pop bc
 	or b
 	ret
+
+.munkidori
+	ld hl, wLoadedCard2Atk1EnergyCost
+	call MunkidoriEnergy
+	jr .next
 
 ; returns in a the energy cost of an attack in [hl]
 ; represented by energy flags
@@ -1669,6 +1748,99 @@ GetAttacksEnergyCostBits:
 	ld c, a
 .done
 	ld a, c
+	ret
+
+MunkidoriEnergy:
+	ld c, $00
+	ld a, [hli]
+	ld b, a
+
+; fire
+	and $f0
+	jr z, .grass
+	ld c, FIRE_F
+.grass
+	ld a, b
+	and $0f
+	jr z, .lightning
+	ld a, GRASS_F
+	or c
+	ld c, a
+.lightning
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .water
+	ld a, LIGHTNING_F
+	or c
+	ld c, a
+.water
+	ld a, b
+	and $0f
+	jr z, .fighting
+	ld a, WATER_F
+	or c
+	ld c, a
+.fighting
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .psychic
+	ld a, FIGHTING_F
+	or c
+	ld c, a
+.psychic
+	ld a, b
+	and $0f
+	jr z, .darkness
+	ld a, PSYCHIC_F
+	or c
+	ld c, a
+.darkness
+	ld a, [hli]
+	ld b, a
+	and $f0
+	;jr z, .metal
+	ld a, DARKNESS_F
+	or c
+	ld c, a
+.metal
+	ld a, b
+	and $0f
+	jr z, .fairy
+	ld a, METAL_F
+	or c
+	ld c, a
+.fairy
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .colorless
+	ld a, FAIRY_F
+	or c
+	ld c, a
+.colorless ; We skip Dragon on account of no Dragon energy
+	ld a, [hli]
+	ld b, a
+	and $f0
+	jr z, .done
+	ld a, %11111111
+	or c ; unnecessary
+	ld c, a
+.done
+	ld a, c
+	ret
+
+
+
+	ld c, $00
+	ld a, [hli]
+	ld b, a
+
+	ld a, DARKNESS_F
+	or c
+	ld c, a
+
 	ret
 
 ; set carry flag if any card in
@@ -1982,14 +2154,14 @@ AISelectSpecialAttackParameters:
 	call GetCardIDFromDeckIndex
 	cp16 MEW_LV23
 	jr z, .DevolutionBeam
-	cp16 MEWTWO_ALT_LV60
+	cp16 LATIAS_EX
 	jr z, .EnergyAbsorption
-	cp16 MEWTWO_LV60
-	jr z, .EnergyAbsorption
-	cp16 EXEGGUTOR
+	; cp16 DRIFLOON
+	; jr z, .EnergyAbsorption
+	cp16 BARBARACLE
 	jr z, .Teleport
-	cp16 ELECTRODE_LV35
-	jr z, .EnergySpike
+	; cp16 ELECTRODE_LV35
+	; jr z, .EnergySpike
 	; fallthrough
 
 .no_carry
@@ -2413,46 +2585,46 @@ CheckIfNotABossDeckID:
 ; - 0% for boss decks.
 ; used for certain decks to randomly choose
 ; not to play Trainer card or use PKMN Power
-AIChooseRandomlyNotToDoAction:
-; boss decks always use Trainer cards.
-	push hl
-	push de
-	call CheckIfNotABossDeckID
-	jr c, .check_deck
-	pop de
-	pop hl
-	ret
+; AIChooseRandomlyNotToDoAction:
+; ; boss decks always use Trainer cards.
+; 	push hl
+; 	push de
+; 	call CheckIfNotABossDeckID
+; 	jr c, .check_deck
+; 	pop de
+; 	pop hl
+; 	ret
 
-.check_deck
-	ld a, [wOpponentDeckID]
-	cp MUSCLES_FOR_BRAINS_DECK_ID
-	jr z, .carry_50_percent
-	cp BLISTERING_POKEMON_DECK_ID
-	jr z, .carry_50_percent
-	cp WATERFRONT_POKEMON_DECK_ID
-	jr z, .carry_50_percent
-	cp BOOM_BOOM_SELFDESTRUCT_DECK_ID
-	jr z, .carry_50_percent
-	cp KALEIDOSCOPE_DECK_ID
-	jr z, .carry_50_percent
-	cp RESHUFFLE_DECK_ID
-	jr z, .carry_50_percent
+; .check_deck
+; 	ld a, [wOpponentDeckID]
+; 	cp MUSCLES_FOR_BRAINS_DECK_ID
+; 	jr z, .carry_50_percent
+; 	cp BLISTERING_POKEMON_DECK_ID
+; 	jr z, .carry_50_percent
+; 	cp WATERFRONT_POKEMON_DECK_ID
+; 	jr z, .carry_50_percent
+; 	cp BOOM_BOOM_SELFDESTRUCT_DECK_ID
+; 	jr z, .carry_50_percent
+; 	cp KALEIDOSCOPE_DECK_ID
+; 	jr z, .carry_50_percent
+; 	cp RESHUFFLE_DECK_ID
+; 	jr z, .carry_50_percent
 
-; carry 25 percent
-	ld a, 4
-	call Random
-	cp 1
-	pop de
-	pop hl
-	ret
+; ; carry 25 percent
+; 	ld a, 4
+; 	call Random
+; 	cp 1
+; 	pop de
+; 	pop hl
+; 	ret
 
-.carry_50_percent
-	ld a, 4
-	call Random
-	cp 2
-	pop de
-	pop hl
-	ret
+; .carry_50_percent
+; 	ld a, 4
+; 	call Random
+; 	cp 2
+; 	pop de
+; 	pop hl
+; 	ret
 
 ; checks if any bench Pokémon has same ID
 ; as input, and sets carry if it has more than

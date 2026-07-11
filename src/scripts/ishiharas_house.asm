@@ -120,11 +120,11 @@ Script_Ishihara:
 	print_text_quit_fully Text072c
 
 .check_if_clefable_owned
-	jump_if_card_owned CLEFABLE, .check_if_clefable_in_collection
+	jump_if_card_owned CINCCINO_EX, .check_if_clefable_in_collection
 	print_text_quit_fully Text072d
 
 .check_if_clefable_in_collection
-	jump_if_card_in_collection CLEFABLE, .do_clefable_trade
+	jump_if_card_in_collection CINCCINO_EX, .do_clefable_trade
 	print_text_quit_fully Text072e
 
 .do_clefable_trade
@@ -133,35 +133,35 @@ Script_Ishihara:
 	zero_out_event_value EVENT_ISHIHARA_WANTS_TO_TRADE
 	print_npc_text Text072f
 	print_text Text0730
-	take_card CLEFABLE
-	give_card SURFING_PIKACHU_LV13
-	show_card_received_screen SURFING_PIKACHU_LV13
+	take_card CINCCINO_EX
+	give_card ZERAORA
+	show_card_received_screen ZERAORA
 	print_text_quit_fully Text0731
 
 .ows_dbcc
 	test_if_event_equal EVENT_ISHIHARA_TRADE_STATE, ISHIHARA_TRADE_2_RUMORED
 	print_variable_npc_text Text0732, Text0733
 	set_event EVENT_ISHIHARA_TRADE_STATE, ISHIHARA_TRADE_2_OFFERED
-	ask_question_jump Text072b, .check_if_ditto_owned
+	ask_question_jump Text072b, .check_if_UXIE_owned
 	print_text_quit_fully Text072c
 
-.check_if_ditto_owned
-	jump_if_card_owned DITTO, .check_if_ditto_in_collection
+.check_if_UXIE_owned
+	jump_if_card_owned UXIE, .check_if_UXIE_in_collection
 	print_text_quit_fully Text0734
 
-.check_if_ditto_in_collection
-	jump_if_card_in_collection DITTO, .do_ditto_trade
+.check_if_UXIE_in_collection
+	jump_if_card_in_collection UXIE, .do_UXIE_trade
 	print_text_quit_fully Text0735
 
-.do_ditto_trade
+.do_UXIE_trade
 	max_out_event_value EVENT_TEMP_TRADED_WITH_ISHIHARA
 	set_event EVENT_ISHIHARA_TRADE_STATE, ISHIHARA_TRADE_3_RUMORED
 	zero_out_event_value EVENT_ISHIHARA_WANTS_TO_TRADE
 	print_npc_text Text072f
 	print_text Text0736
-	take_card DITTO
-	give_card FLYING_PIKACHU
-	show_card_received_screen FLYING_PIKACHU
+	take_card UXIE
+	give_card PIKACHU_EX
+	show_card_received_screen PIKACHU_EX
 	print_text_quit_fully Text0737
 
 .ows_dc05

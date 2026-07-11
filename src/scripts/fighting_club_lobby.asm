@@ -129,8 +129,8 @@ Script_BeatImakuni:
 	print_npc_text ImakuniPlayerWonSixWinsText
 .give_imakuni_card
 	print_npc_text ImakuniGivesImakuniText
-	give_card IMAKUNI_CARD
-	show_card_received_screen IMAKUNI_CARD
+	give_card CRISPIN
+	show_card_received_screen CRISPIN
 .done
 	print_npc_text ImakuniPlayerWonEndText
 	script_jump Script_LostToImakuni.imakuni_common

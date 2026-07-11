@@ -28,7 +28,7 @@ AIActionTable_ImRonald:
 
 .list_arena
 	dw LAPRAS
-	dw SEEL
+	dw MELTAN
 	dw FUECOCO
 	dw GIMMIGHOUL
 	dw QUAXLY
@@ -38,7 +38,7 @@ AIActionTable_ImRonald:
 .list_bench
 	dw FUECOCO
 	dw QUAXLY
-	dw SEEL
+	dw MELTAN
 	dw GIMMIGHOUL
 	dw CHARCADET
 	dw LAPRAS
@@ -54,8 +54,8 @@ AIActionTable_ImRonald:
 	ai_energy CERULEDGE_EX,  4, +0
 	ai_energy QUAXLY,       2, +0
 	ai_energy QUAXWELL,      3, +0
-	ai_energy SEEL,           3, +0
-	ai_energy DEWGONG,        4, +0
+	ai_energy MELTAN,           3, +0
+	ai_energy MELMETAL_EX,        4, +0
 	ai_energy LAPRAS,         3, +0
 	ai_energy GIMMIGHOUL,         3, +0
 	ai_energy MAROWAK_LV26,   3, +0

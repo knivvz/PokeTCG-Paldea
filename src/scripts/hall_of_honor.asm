@@ -19,8 +19,8 @@ Script_fbf1:
 	max_out_event_value EVENT_RECEIVED_LEGENDARY_CARDS
 	print_text Text05b8
 	give_card ZAPDOS_LV68
-	give_card MOLTRES_LV37
-	give_card ARTICUNO_LV37
+	give_card RESHIRAM_EX
+	give_card WELLSPRING_OGERPON_EX
 	give_card DRAGONITE_LV41
 	show_card_received_screen $ffff
 .ows_fc05

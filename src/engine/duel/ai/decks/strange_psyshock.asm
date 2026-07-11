@@ -7,7 +7,7 @@ AIActionTable_StrangePsyshock:
 	dw .take_prize
 
 .do_turn
-	jp AIMainTurnLogic
+	jp AIDoTurn_StrangePsyshock
 
 .start_duel
 	call InitAIDuelVars
@@ -27,41 +27,29 @@ AIActionTable_StrangePsyshock:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw KANGASKHAN
-	dw CHANSEY
-	dw SNORLAX
-	dw MR_MIME
 	dw ABRA
+	dw DUNSPARCE
 	dw NULL
 
 .list_bench
+	dw DUNSPARCE
 	dw ABRA
-	dw MR_MIME
-	dw KANGASKHAN
-	dw SNORLAX
-	dw CHANSEY
 	dw NULL
 
 .list_retreat
-	ai_retreat ABRA,       -3
-	ai_retreat SNORLAX,    -3
-	ai_retreat KANGASKHAN, -1
-	ai_retreat CHANSEY,    -1
+	ai_retreat ABRA,       +8
+	ai_retreat DUNSPARCE,    -8
 	dw NULL
 
 .list_energy
-	ai_energy ABRA,       3, +1
-	ai_energy KADABRA,    3, +0
-	ai_energy ALAKAZAM,   3, +0
-	ai_energy MR_MIME,    2, +0
-	ai_energy CHANSEY,    2, -2
-	ai_energy KANGASKHAN, 4, -2
-	ai_energy SNORLAX,    0, -8
+	ai_energy ABRA,       1, +8
+	ai_energy KADABRA,    1, +8
+	ai_energy ALAKAZAM,   1, +8
+	ai_energy DUNSPARCE,    0, +0
+	ai_energy DUDUNSPARCE,    0, -8
 	dw NULL
 
 .list_prize
-	dw GAMBLER
-	dw MR_MIME
 	dw ALAKAZAM
 	dw SWITCH
 	dw NULL
@@ -71,6 +59,69 @@ AIActionTable_StrangePsyshock:
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing 
+	store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
+	ret
+
+; where to put call AIProcessRetreat ?
+AIDoTurn_StrangePsyshock:
+	call InitAITurnVars
+
+.start
+	farcall UnsetAIModifiedHandFlag
+
+	ld a, AI_TRAINER_CARD_PHASE_06 ; RARE_CANDY
+	call AIProcessHandTrainerCards
+
+	; play and evolve pokemon
+	call AIDecidePlayPokemonCard
+	; if hand was changed through evolving into kadabra or alakazam, start over to re-evaluate hand
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
+
+	; use dudunsparce if possible
+	farcall HandleAIPkmnPowers
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
+
+	ld a, AI_TRAINER_CARD_PHASE_02 ; NEST_BALL
+	call AIProcessHandTrainerCards
+	
+	ld a, AI_TRAINER_CARD_PHASE_04 ; NEMONA
+	call AIProcessHandTrainerCards
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
+
+	ld a, AI_TRAINER_CARD_PHASE_08 ; SUPER_ROD
+	call AIProcessHandTrainerCards
+
+	ld a, AI_TRAINER_CARD_PHASE_03 ; ULTRA_BALL
+	call AIProcessHandTrainerCards
+
+	ld a, AI_TRAINER_CARD_PHASE_06 ; RARE_CANDY
+	call AIProcessHandTrainerCards
+
+	ld a, AI_TRAINER_CARD_PHASE_07 ; ENERGY_REMOVAL
+	call AIProcessHandTrainerCards
+
+	call AIProcessRetreat ; where to put this?
+
+	; play Energy card if possible
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
+
+	ld a, AI_TRAINER_CARD_PHASE_13 ; LILLIES_DETERMINATION
+	call AIProcessHandTrainerCards
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
+
+.try_attack
+; attack if possible, if not,
+; finish turn without attacking.
+	call AIProcessAndTryToUseAttack
+	ret c ; return if turn ended
+	ld a, OPPACTION_FINISH_NO_ATTACK
+	bank1call AIMakeDecision
 	ret

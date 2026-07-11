@@ -1,4 +1,4 @@
-AIActionTable_FireCharge:
+AIActionTable_MusclesForBrains:
 	dw .do_turn ; unused
 	dw .do_turn
 	dw .start_duel
@@ -7,7 +7,7 @@ AIActionTable_FireCharge:
 	dw .take_prize
 
 .do_turn
-	jp AIDoTurn_FireCharge
+	jp AIDoTurn_MusclesForBrains
 
 .start_duel
 	call InitAIDuelVars
@@ -27,33 +27,36 @@ AIActionTable_FireCharge:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw CHARCADET
-	dw SOLROCK
-	dw LUNATONE
+	dw KLAWF
+	dw TIMBURR
+	dw BRUTE_BONNET
 	dw NULL
 
 .list_bench
-	dw LUNATONE
-	dw SOLROCK
-	dw CHARCADET
+	dw BRUTE_BONNET
+	dw TIMBURR
+	dw KLAWF
 	dw NULL
 
 .list_retreat
-	ai_retreat LUNATONE, 		-3
-	ai_retreat SOLROCK,         +0
-	ai_retreat CHARCADET,       +3
+	ai_retreat BRUTE_BONNET,    -3
+	ai_retreat GURDURR,         -1
+	ai_retreat TIMBURR,         +0
+	ai_retreat CONKELDURR,      +2
+	ai_retreat KLAWF,           +3
 	dw NULL
 
 .list_energy
-	ai_energy CHARCADET,       1, +5
-	ai_energy CERULEDGE_EX,    1, +5
-	ai_energy SOLROCK,	       1, +0
-	ai_energy LUNATONE,        0, +0
+	ai_energy KLAWF,           2, +5
+	ai_energy CONKELDURR,      0, +0
+	ai_energy TIMBURR,         0, +0
+	ai_energy GURDURR,         0, +0
+	ai_energy BRUTE_BONNET,    0, +0
 	dw NULL
 
 .list_prize
-	dw CERULEDGE_EX
-	dw CHARCADET
+	dw BRUTE_BONNET
+	dw CONKELDURR
 	dw NULL
 
 .store_list_pointers
@@ -65,7 +68,7 @@ AIActionTable_FireCharge:
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
-AIDoTurn_FireCharge:
+AIDoTurn_MusclesForBrains:
 	call InitAITurnVars
 
 .start
@@ -101,6 +104,9 @@ AIDoTurn_FireCharge:
 	ld a, AI_TRAINER_CARD_PHASE_07 ; ENERGY_REMOVAL
 	call AIProcessHandTrainerCards
 
+	ld a, AI_TRAINER_CARD_PHASE_13 ; DEFENDER1
+	call AIProcessHandTrainerCards
+
 	call AIProcessRetreat ; where to put this?
 
 	; play Energy card if possible
@@ -108,7 +114,15 @@ AIDoTurn_FireCharge:
 	or a
 	call z, AIProcessAndTryToPlayEnergy
 
-	ld a, AI_TRAINER_CARD_PHASE_15 ; PROFESSORS_RESEARCH
+	; use toxic powder
+	farcall HandleAIToxicPowder
+
+	ld a, AI_TRAINER_CARD_PHASE_13 ; LILLIES_DETERMINATION
+	call AIProcessHandTrainerCards
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
+
+	ld a, AI_TRAINER_CARD_PHASE_11 ; IONO
 	call AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand

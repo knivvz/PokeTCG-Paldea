@@ -409,7 +409,7 @@ GetAIScoreOfAttack:
 	jr z, .chansey
 	cp16 WATTREL
 	jr z, .magnemite1_or_weezing
-	cp16 WEEZING
+	cp16 SPIDOPS_EX
 	jr z, .magnemite1_or_weezing
 	ld b, 20 ; bench damage
 	jr .check_bench_kos

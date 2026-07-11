@@ -177,12 +177,12 @@ AIDecideWhetherToRetreat:
 	ld a, 2
 	call AIEncourage
 
-	push de
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	cp16 PORYGON
-	pop de
+	; push de
+	; ld a, DUELVARS_ARENA_CARD
+	; call GetTurnDuelistVariable
+	; call GetCardIDFromDeckIndex
+	; cp16 PORYGON
+	; pop de
 	jr nz, .check_weakness_3
 
 ; handle Porygon
@@ -251,7 +251,7 @@ AIDecideWhetherToRetreat:
 .success
 	pop bc
 	pop hl
-	ld a, 2
+	ld a, 20 ; TODO how much should encourage be?
 	call AIEncourage
 
 ; a bench Pokémon was found that can KO
@@ -368,20 +368,20 @@ AIDecideWhetherToRetreat:
 	pop hl
 	pop de
 
-	ld a, [wLoadedCard2ID + 0]
-	cp LOW(MYSTERIOUS_FOSSIL)
-	jr nz, .not_mysterious_fossil
-	ld a, [wLoadedCard2ID + 1]
-	cp HIGH(MYSTERIOUS_FOSSIL)
-	jr z, .loop_ko_2
+	; ld a, [wLoadedCard2ID + 0]
+	; cp LOW(MYSTERIOUS_FOSSIL)
+	; jr nz, .not_mysterious_fossil
+	; ld a, [wLoadedCard2ID + 1]
+	; cp HIGH(MYSTERIOUS_FOSSIL)
+	; jr z, .loop_ko_2
 
-.not_mysterious_fossil
-	ld a, [wLoadedCard2ID + 0]
-	cp LOW(CLEFAIRY_DOLL)
-	jr nz, .not_clefairy_doll
-	ld a, [wLoadedCard2ID + 1]
-	cp HIGH(CLEFAIRY_DOLL)
-	jr z, .loop_ko_2
+; .not_mysterious_fossil
+; 	ld a, [wLoadedCard2ID + 0]
+; 	cp LOW(CLEFAIRY_DOLL)
+; 	jr nz, .not_clefairy_doll
+; 	ld a, [wLoadedCard2ID + 1]
+; 	cp HIGH(CLEFAIRY_DOLL)
+; 	jr z, .loop_ko_2
 
 .not_clefairy_doll
 	ld a, e
@@ -401,10 +401,10 @@ AIDecideWhetherToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 MYSTERIOUS_FOSSIL
-	jr z, .mysterious_fossil_or_clefairy_doll
-	cp16 CLEFAIRY_DOLL
-	jr z, .mysterious_fossil_or_clefairy_doll
+	; cp16 MYSTERIOUS_FOSSIL
+	; jr z, .mysterious_fossil_or_clefairy_doll
+	; cp16 CLEFAIRY_DOLL
+	; jr z, .mysterious_fossil_or_clefairy_doll
 
 ; if wAIScore is at least 131, set carry
 	ld a, [wAIScore]
@@ -691,7 +691,7 @@ AIDecideBenchPokemonToSwitchTo:
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld hl, wLoadedCard1ID
-	cphl MR_MIME
+	cphl ABRA;MR_MIME
 	jr z, .raise_score
 	cphl MEW_LV8
 	jr nz, .check_if_has_bench_utility
@@ -702,7 +702,7 @@ AIDecideBenchPokemonToSwitchTo:
 	or a
 	jr z, .check_if_has_bench_utility
 .raise_score
-	ld a, 5
+	ld a, 100;5
 	call AIEncourage
 
 ; if wLoadedCard1AIInfo == AI_INFO_BENCH_UTILITY,
@@ -719,10 +719,10 @@ AIDecideBenchPokemonToSwitchTo:
 ; lower AI score
 .mysterious_fossil_or_clefairy_doll
 	ld hl, wLoadedCard1ID
-	cphl MYSTERIOUS_FOSSIL
-	jr z, .lower_score_2
-	cphl CLEFAIRY_DOLL
-	jr nz, .ai_score_bonus
+	; cphl MYSTERIOUS_FOSSIL
+	; jr z, .lower_score_2
+	; cphl CLEFAIRY_DOLL
+	; jr nz, .ai_score_bonus
 .lower_score_2
 	ld a, 10
 	call AIDiscourage
@@ -840,10 +840,10 @@ AITryToRetreat:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 MYSTERIOUS_FOSSIL
-	jp z, .mysterious_fossil_or_clefairy_doll
-	cp16 CLEFAIRY_DOLL
-	jp z, .mysterious_fossil_or_clefairy_doll
+	; cp16 MYSTERIOUS_FOSSIL
+	; jp z, .mysterious_fossil_or_clefairy_doll
+	; cp16 CLEFAIRY_DOLL
+	; jp z, .mysterious_fossil_or_clefairy_doll
 
 ; if card is Asleep or Paralyzed, set carry and exit
 ; else, load the status in hTemp_ffa0

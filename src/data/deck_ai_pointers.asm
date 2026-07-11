@@ -28,10 +28,10 @@ DeckAIPointerTable::
 	dw AIActionTable_PowerfulRonald      ; POWERFUL_RONALD_DECK
 	dw AIActionTable_InvincibleRonald    ; INVINCIBLE_RONALD_DECK
 	dw AIActionTable_LegendaryRonald     ; LEGENDARY_RONALD_DECK
-	dw AIActionTable_GeneralNoRetreat    ; MUSCLES_FOR_BRAINS_DECK
+	dw AIActionTable_MusclesForBrains    ; MUSCLES_FOR_BRAINS_DECK
 	dw AIActionTable_GeneralDecks        ; HEATED_BATTLE_DECK
 	dw AIActionTable_GeneralDecks        ; LOVE_TO_BATTLE_DECK
-	dw AIActionTable_GeneralDecks        ; EXCAVATION_DECK
+	dw AIActionTable_Excavation          ; EXCAVATION_DECK
 	dw AIActionTable_GeneralDecks        ; BLISTERING_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; HARD_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; WATERFRONT_POKEMON_DECK
@@ -42,11 +42,11 @@ DeckAIPointerTable::
 	dw AIActionTable_GeneralDecks        ; POWER_GENERATOR_DECK
 	dw AIActionTable_GeneralDecks        ; ETCETERA_DECK
 	dw AIActionTable_GeneralDecks        ; FLOWER_GARDEN_DECK
-	dw AIActionTable_GeneralDecks        ; KALEIDOSCOPE_DECK
+	dw AIActionTable_Kaleidoscope        ; KALEIDOSCOPE_DECK
 	dw AIActionTable_GeneralDecks        ; GHOST_DECK
-	dw AIActionTable_GeneralDecks        ; NAP_TIME_DECK
+	dw AIActionTable_NapTime 	         ; NAP_TIME_DECK
 	dw AIActionTable_GeneralDecks        ; STRANGE_POWER_DECK
-	dw AIActionTable_GeneralDecks        ; FLYIN_POKEMON_DECK
+	dw AIActionTable_FlyinPokemon        ; FLYIN_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; LOVELY_NIDORAN_DECK
 	dw AIActionTable_GeneralDecks        ; POISON_DECK
 	dw AIActionTable_GeneralDecks        ; ANGER_DECK

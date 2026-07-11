@@ -86,10 +86,10 @@ Script_Specs2:
 	print_text_quit_fully Text074d
 
 Data_ebe7:
-	dw PORYGON
-	dw DITTO
-	dw MUK
-	dw WEEZING
+	dw AZELF
+	dw UXIE
+	dw SWALOT
+	dw SPIDOPS_EX
 
 NPCMovement_ebeb:
 	db WEST | NO_MOVE

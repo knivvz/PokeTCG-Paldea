@@ -62,7 +62,7 @@ SetSamsStartingPlayArea:
 	ld e, a
 	ld a, [wLoadedCard1ID + 1]
 	ld d, a
-	cp16 MACHOP
+	cp16 TIMBURR
 	jr nz, .loop_hand
 	ldh a, [hTempCardIndex_ff98]
 	call PutHandPokemonCardInPlayArea
@@ -119,7 +119,7 @@ AIPerformScriptedTurn:
 	dw .turn_7
 
 .turn_1
-	ld bc, MACHOP
+	ld bc, TIMBURR
 	ld de, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInPlayArea
 	jp AIAttachEnergyInHandToCardInPlayArea
@@ -154,18 +154,18 @@ AIPerformScriptedTurn:
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_5
-	ld de, MACHOP
+	ld de, TIMBURR
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld bc, MACHOP
+	ld bc, TIMBURR
 	ld de, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInBench
 
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	cp16 MACHOP ; wrong
+	cp16 TIMBURR ; wrong
 	ld a, PLAY_AREA_BENCH_1
 	jr nz, .retreat
 	inc a ; PLAY_AREA_BENCH_2
@@ -174,11 +174,11 @@ AIPerformScriptedTurn:
 	jp AITryToRetreat
 
 .turn_6
-	ld bc, MACHOP
+	ld bc, TIMBURR
 	ld de, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_7
-	ld bc, MACHOP
+	ld bc, TIMBURR
 	ld de, FIGHTING_ENERGY
 	jp AIAttachEnergyInHandToCardInPlayArea

@@ -13,7 +13,7 @@ CheckIfPlayerHasPokemonOtherThanMewtwoLv53:
 	cp TYPE_ENERGY
 	jp nc, .next ; can be a jr
 	ld hl, wLoadedCard2ID
-	cphl MEWTWO_LV53
+	cphl MUNKIDORI
 	jr nz, .not_mewtwo1
 .next
 	inc e
@@ -538,7 +538,7 @@ LookForCardIDInLocation_Bank8:
 	scf
 	ret
 
-; return carry if card ID loaded in a is found in hand
+; return carry if card ID loaded in de is found in hand
 ; and outputs in a the deck index of that card
 ; input:
 ;	de = card ID
@@ -559,7 +559,8 @@ LookForCardIDInHandList_Bank8:
 	ret z
 
 	ldh [hTempCardIndex_ff98], a
-	call LoadCardDataToBuffer1_FromDeckIndex
+	;call LoadCardDataToBuffer1_FromDeckIndex
+	call GetCardIDFromDeckIndex
 	ld a, [wTempCardIDToLook + 0]
 	cp e
 	jr nz, .loop
@@ -571,8 +572,42 @@ LookForCardIDInHandList_Bank8:
 	scf
 	ret
 
-; searches in deck for card ID 1 in a, and
-; if found, searches in Hand/Play Area for card ID 2 in b, and
+; return carry if card ID loaded in de is found in wDuelTempList
+; and outputs in a the deck index of that card
+; input:
+;	de = card ID
+; output:
+;	a = card deck index, if found
+;	carry set if found
+LookForCardIDInDuelTempList_Bank8:
+	ld a, e
+	ld [wTempCardIDToLook + 0], a
+	ld a, d
+	ld [wTempCardIDToLook + 1], a
+	;call CreateHandCardList
+	ld hl, wDuelTempList
+
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+
+	ldh [hTempCardIndex_ff98], a
+	;call LoadCardDataToBuffer1_FromDeckIndex
+	call GetCardIDFromDeckIndex
+	ld a, [wTempCardIDToLook + 0]
+	cp e
+	jr nz, .loop
+	ld a, [wTempCardIDToLook + 1]
+	cp d
+	jr nz, .loop
+
+	ldh a, [hTempCardIndex_ff98]
+	scf
+	ret
+
+; searches in deck for card ID 1 in de, and
+; if found, searches in Hand/Play Area for card ID 2 in bc, and
 ; if found, searches for card ID 1 in Hand/Play Area, and
 ; if none found, return carry and output deck index
 ; of the card ID 1 in deck.
@@ -715,7 +750,8 @@ LookForCardIDInPlayArea_Bank8:
 	call GetTurnDuelistVariable
 	cp $ff
 	ret z
-	call LoadCardDataToBuffer1_FromDeckIndex
+	;call LoadCardDataToBuffer1_FromDeckIndex
+	call GetCardIDFromDeckIndex
 	ld a, [wTempCardIDToLook + 0]
 	cp e
 	jr nz, .next
@@ -736,6 +772,56 @@ LookForCardIDInPlayArea_Bank8:
 
 .found
 	ld a, b
+	scf
+	ret
+
+; returns carry if card ID in de
+; is found in Play Area with no energy attached, starting with
+; location in b
+; input:
+;	de = card ID
+;	b = PLAY_AREA_* to start with
+; output:
+;	a = PLAY_AREA_* of found card
+;	carry set if found
+LookForCardIDInPlayAreaWithNoEnergyAttached_Bank8:
+.loop
+	ld a, DUELVARS_ARENA_CARD
+	add b
+	call GetTurnDuelistVariable
+	cp $ff
+	ret z
+	call LoadCardDataToBuffer1_FromDeckIndex
+	push bc
+	ld a, [wLoadedCard1ID + 0]
+	ld c, a
+	ld a, [wLoadedCard1ID + 1]
+	ld b, a
+	call CompareDEtoBC
+	pop bc
+	jr z, .found
+
+.next
+	inc b
+	ld a, MAX_PLAY_AREA_POKEMON
+	cp b
+	jr nz, .loop
+
+; not found
+	ld b, $ff
+	or a
+	ret
+
+.found
+	push de
+	ld a, b
+	ld e, a
+	call CountNumberOfEnergyCardsAttached
+	pop de
+	or a ; cp 0
+	jr nz, .next
+	
+	ld a, b ; play area of found pkmn with energy attached
 	scf
 	ret
 
@@ -1007,6 +1093,62 @@ FindDuplicatePokemonCards:
 	or a
 	ret
 
+; returns carry if a duplicate Energy card is found in wDuelTempList.
+; outputs in a the deck index of one of them.
+FindDuplicateEnergyCardsInDuelTempList:
+	ld a, $ff
+	ld [wTempAI], a
+	;call CreateHandCardList
+	ld hl, wDuelTempList
+	push hl
+
+.loop_hand_outer
+	pop hl
+	ld a, [hli]
+	cp $ff
+	jr z, .done
+	call GetCardIDFromDeckIndex
+	ld b, d
+	ld c, e
+	push hl
+
+.loop_hand_inner
+	ld a, [hli]
+	cp $ff
+	jr z, .loop_hand_outer
+	call GetCardIDFromDeckIndex
+	call CompareDEtoBC
+	jr nz, .loop_hand_inner
+
+; found two cards with same ID,
+; if they are Pokemon cards, store its deck index.
+	push bc
+	call GetCardType
+	pop bc
+	and TYPE_ENERGY
+	jr z, .loop_hand_outer
+	;jr nc, .loop_hand_outer
+	dec hl
+	ld a, [hli]
+	ld [wTempAI], a
+	; for some reason loop still continues
+	; even though if some other duplicate
+	; cards are found, it overwrites the result.
+	jr .loop_hand_outer
+
+.done
+	ld a, [wTempAI]
+	cp $ff
+	jr z, .no_carry
+
+; found
+	scf
+	ret
+.no_carry
+	or a
+	ret
+
+
 ; return carry flag if attack is not high recoil.
 AICheckIfAttackIsHighRecoil:
 	farcall AIProcessButDontUseAttack
@@ -1020,4 +1162,32 @@ AICheckIfAttackIsHighRecoil:
 	ld a, ATTACK_FLAG1_ADDRESS | HIGH_RECOIL_F
 	call CheckLoadedAttackFlag
 	ccf
+	ret
+
+; check if active is pokemon with id in de and can evolve this turn
+; return carry if true.
+CheckIfActiveWithIDAtDECanEvolveThisTurn:
+	ld a, PLAY_AREA_ARENA
+	add DUELVARS_ARENA_CARD_FLAGS
+	call GetTurnDuelistVariable
+	and CAN_EVOLVE_THIS_TURN
+	jr nz, .can_evolve
+
+	or a
+	ret
+
+; check if ID matches
+.can_evolve
+	ld b, PLAY_AREA_ARENA
+	; make sure de is unchanged
+	call LookForCardIDInPlayArea_Bank8
+	ret ; carry if found.
+	
+
+; play area at a
+; returns nz if can evolve, z if can't evolve
+CheckIfPokemonCanEvolveThisTurn:
+	ld a, PLAY_AREA_ARENA
+	add DUELVARS_ARENA_CARD_FLAGS
+	and CAN_EVOLVE_THIS_TURN
 	ret

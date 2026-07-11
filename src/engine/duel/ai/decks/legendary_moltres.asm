@@ -27,50 +27,50 @@ AIActionTable_LegendaryMoltres:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw MAGMAR_LV31
+	dw HEARTHFLAME_MASK_OGERPON_EX
 	dw CHARCADET
-	dw VULPIX
+	dw LITWICK
 	dw MAGMAR_LV24
-	dw MOLTRES_LV35
-	dw MOLTRES_LV37
+	dw MOLTRES
+	dw RESHIRAM_EX
 	dw NULL
 
 .list_bench
-	dw MOLTRES_LV35
-	dw VULPIX
+	dw MOLTRES
+	dw LITWICK
 	dw CHARCADET
-	dw MAGMAR_LV31
+	dw HEARTHFLAME_MASK_OGERPON_EX
 	dw MAGMAR_LV24
 	dw NULL
 
 .list_play_hand
-	dw MOLTRES_LV37
-	dw MOLTRES_LV35
-	dw VULPIX
+	dw RESHIRAM_EX
+	dw MOLTRES
+	dw LITWICK
 	dw CHARCADET
-	dw MAGMAR_LV31
+	dw HEARTHFLAME_MASK_OGERPON_EX
 	dw MAGMAR_LV24
 	dw NULL
 
 .list_retreat
 	ai_retreat CHARCADET, -5
-	ai_retreat VULPIX,    -5
+	ai_retreat LITWICK,    -5
 	dw NULL
 
 .list_energy
-	ai_energy VULPIX,         3, +0
-	ai_energy NINETALES_LV35, 3, +1
+	ai_energy LITWICK,         3, +0
+	ai_energy CHANDELURE, 3, +1
 	ai_energy CHARCADET,      3, +1
 	ai_energy CERULEDGE_EX,  4, +1
 	ai_energy MAGMAR_LV24,    4, -1
-	ai_energy MAGMAR_LV31,    1, -1
-	ai_energy MOLTRES_LV37,   3, +2
-	ai_energy MOLTRES_LV35,   4, +2
+	ai_energy HEARTHFLAME_MASK_OGERPON_EX,    1, -1
+	ai_energy RESHIRAM_EX,   3, +2
+	ai_energy MOLTRES,   4, +2
 	dw NULL
 
 .list_prize
 	dw ENERGY_REMOVAL
-	dw MOLTRES_LV37
+	dw RESHIRAM_EX
 	dw NULL
 
 .store_list_pointers
@@ -104,10 +104,10 @@ AIDoTurn_LegendaryMoltres:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres ; skip if cards in deck <= 9
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .skip_moltres ; skip if Muk in play
-	ld de, MOLTRES_LV37
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; jr c, .skip_moltres ; skip if Muk in play
+	ld de, RESHIRAM_EX
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -137,7 +137,7 @@ AIDoTurn_LegendaryMoltres:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 MAGMAR_LV31
+	cp16 HEARTHFLAME_MASK_OGERPON_EX
 	jr nz, .attach_normally
 	; MagmarLv31 is the Arena card
 	call CreateEnergyCardListFromHand

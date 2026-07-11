@@ -29,6 +29,9 @@ AIDecidePlayPokemonCard:
 	ld a, 130
 	ld [wAIScore], a
 	call AIDecidePlayLegendaryBirds
+	call AIDecidePlayLunatoneSolrock
+	call AIDecidePlaySnorunt
+	jr c, .skip
 
 ; if Play Area has more than 4 Pokémon, decrease AI score
 ; else, increase AI score
@@ -36,8 +39,8 @@ AIDecidePlayPokemonCard:
 	call GetTurnDuelistVariable
 	cp 4
 	jr c, .has_4_or_fewer
-	ld a, 20
-	call AIDiscourage
+	;ld a, 20
+	;call AIDiscourage
 	jr .check_defending_can_ko
 .has_4_or_fewer
 	ld a, 50
@@ -47,7 +50,7 @@ AIDecidePlayPokemonCard:
 .check_defending_can_ko
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
-	call CheckIfDefendingPokemonCanKnockOut
+	call CheckIfDefendingPokemonCanKnockOut ; carry if yes
 	jr nc, .check_energy_cards
 	ld a, 20
 	call AIEncourage
@@ -117,8 +120,8 @@ AIDecideEvolution:
 ; check if Prehistoric Power is active
 ; and if so, skip to next card in hand
 	push hl
-	call IsPrehistoricPowerActive
-	jp c, .done_hand_card
+	;call IsPrehistoricPowerActive
+	;jp c, .done_hand_card
 
 ; load evolution data to buffer1
 ; skip if it's not a Pokémon card
@@ -202,7 +205,7 @@ AIDecideEvolution:
 	call CheckIfSelectedAttackIsUnusable
 	jr c, .evolution_cant_attack
 .evolution_can_attack
-	ld a, 5
+	ld a, 50
 	call AIEncourage
 	jr .check_evolution_ko
 .evolution_cant_attack
@@ -328,31 +331,31 @@ AIDecideEvolution:
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld hl, wLoadedCard1ID
-	cphl MYSTERIOUS_FOSSIL
-	jr z, .mysterious_fossil
+	;cphl MYSTERIOUS_FOSSIL
+	;jr z, .mysterious_fossil
 	ld a, [wLoadedCard1AIInfo]
 	; bug, should mask out HAS_EVOLUTION flag first
 	cp AI_INFO_ENCOURAGE_EVO
 	jr nz, .pikachu_deck
-	ld a, 2
+	ld a, 180
 	call AIEncourage
 	jr .pikachu_deck
 
-.mysterious_fossil
-	ld a, 5
-	call AIEncourage
+; .mysterious_fossil
+; 	ld a, 5
+; 	call AIEncourage
 
 ; in Pikachu Deck, decrease AI score for evolving Pikachu
 .pikachu_deck
 	ld a, [wOpponentDeckID]
 	cp PIKACHU_DECK_ID
-	jr nz, .check_score
+	jr nz, .alakazam_deck;check_score
 	ld hl, wLoadedCard1ID
 	cphl EMOLGA
 	jr z, .pikachu
-	cphl PIKACHU_LV14
+	cphl POLTCHAGEIST
 	jr z, .pikachu
-	cphl PIKACHU_LV16
+	cphl JOLTIK
 	jr z, .pikachu
 	cphl PIKACHU_ALT_LV16
 	jr nz, .check_score
@@ -360,10 +363,21 @@ AIDecideEvolution:
 	ld a, 3
 	call AIDiscourage
 
+.alakazam_deck
+	ld a, [wOpponentDeckID]
+	cp STRANGE_PSYSHOCK_DECK_ID
+	jr nz, .check_score
+	ld hl, wLoadedCard1ID
+	cphl DUNSPARCE
+	jr nz, .check_score
+	; if dudunsparce, increase ai score
+	ld a, 180
+	call AIEncourage
+
 ; if AI score >= 133, go through with the evolution
 .check_score
 	ld a, [wAIScore]
-	cp 133
+	cp 50;133
 	jr c, .done_bench_pokemon
 	ld a, [wTempAI]
 	ldh [hTempPlayAreaLocation_ffa1], a
@@ -404,9 +418,9 @@ AIDecideSpecialEvolutions:
 	ld hl, wLoadedCard2ID
 	cphl CROCALOR
 	jr z, .crocalor
-	cphl MAGIKARP
+	cphl WAILMER
 	jr z, .magikarp
-	cphl DRAGONAIR
+	cphl SHELGON
 	jr z, .dragonair
 	ret
 
@@ -445,7 +459,7 @@ AIDecideSpecialEvolutions:
 
 .invincible_ronald
 	ld hl, wLoadedCard2ID
-	cphl GRIMER
+	cphl GULPIN
 	jr z, .grimer
 	ret
 
@@ -459,7 +473,7 @@ AIDecideSpecialEvolutions:
 
 .legendary_ronald
 	ld hl, wLoadedCard2ID
-	cphl DRAGONAIR
+	cphl SHELGON
 	jr z, .dragonair
 	ret
 
@@ -487,20 +501,20 @@ AIDecideSpecialEvolutions:
 	ld a, b
 	or a
 	jr nz, .loop
-	ld a, 70
-	cp c
-	jr c, .check_muk
+	; ld a, 70
+	; cp c
+	; jr c, .check_muk
 .lower_score
 	ld a, 10
 	jp AIDiscourage
 
 ; if there's no Muk, raise score
-.check_muk
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .lower_score
-	ld a, 10
-	jp AIEncourage
+; .check_muk
+; 	ld de, MUK
+; 	call CountPokemonWithActivePkmnPowerInBothPlayAreas
+; 	jr c, .lower_score
+; 	ld a, 10
+; 	jp AIEncourage
 
 ; if Dragonair is active, check its damage in HP
 ; if this result is >= 50,
@@ -516,7 +530,75 @@ AIDecideSpecialEvolutions:
 	ld a, [wTotalAttachedEnergies]
 	cp 3
 	jr c, .lower_score
-	jr .check_muk
+ 	jp AIEncourage
+
+; returns carry if has no Snorunt or Froslass in play, to prevent them from having more than 1 in play
+AIDecidePlaySnorunt:
+	ld hl, wLoadedCard1ID
+	cphl SNORUNT
+	jr z, .check_play_area
+	cphl FROSLASS
+	jr z, .check_play_area
+	or a
+	ret
+
+.check_play_area
+	ld b, PLAY_AREA_ARENA
+	ld de, SNORUNT
+	farcall LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr c, .discourage
+
+	ld b, PLAY_AREA_ARENA
+	ld de, FROSLASS
+	farcall LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr c, .discourage
+	ret
+	
+.discourage
+	ld a, 50
+	call AIDiscourage
+	ret
+
+; returns c if already has lunatone/solrock in play, so skip the card
+; if not, encourages playing them
+AIDecidePlayLunatoneSolrock:
+; check if deck applies
+	ld a, [wOpponentDeckID]
+	cp FIRE_CHARGE_DECK_ID
+	jr z, .begin
+	or a
+	ret
+
+.begin
+	ld hl, wLoadedCard1ID
+	cphl LUNATONE
+	jr z, .lunatone
+	cphl SOLROCK
+	jr z, .solrock
+	or a
+	ret
+
+; dont play if lunatone already in play area
+.lunatone
+	ld b, PLAY_AREA_ARENA
+	ld de, LUNATONE
+	farcall LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr nc, .encourage
+	scf
+	ret
+
+.solrock
+	ld b, PLAY_AREA_ARENA
+	ld de, SOLROCK
+	farcall LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr nc, .encourage
+	scf
+	ret
+
+.encourage
+	ld a, 50
+	call AIEncourage
+	ret
 
 ; determine AI score for the legendary cards
 ; Moltres, Zapdos and Articuno
@@ -534,9 +616,9 @@ AIDecidePlayLegendaryBirds:
 ; check if card applies
 .begin
 	ld hl, wLoadedCard1ID
-	cphl ARTICUNO_LV37
+	cphl WELLSPRING_OGERPON_EX
 	jr z, .articuno
-	cphl MOLTRES_LV37
+	cphl RESHIRAM_EX
 	jr z, .moltres
 	cphl ZAPDOS_LV68
 	jr z, .zapdos
@@ -573,20 +655,20 @@ AIDecidePlayLegendaryBirds:
 	call SwapTurn
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
-	jr z, .check_muk_and_snorlax
+	jr z, .check_snorlax
 
 	; return if no space on the bench
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp MAX_BENCH_POKEMON
-	jr c, .check_muk_and_snorlax
+	jr c, .check_snorlax
 	ret
 
-.check_muk_and_snorlax
+.check_snorlax
 	; checks for Muk in both Play Areas
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .subtract
+	;ld de, MUK
+	;call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	;jr c, .subtract
 	; checks if player's active card is Snorlax
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -613,7 +695,7 @@ AIDecidePlayLegendaryBirds:
 
 .zapdos
 	; checks for Muk in both Play Areas
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .subtract
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; jr c, .subtract
 	ret

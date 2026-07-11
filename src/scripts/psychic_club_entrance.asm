@@ -144,8 +144,8 @@ Script_FirstRonaldDuel:
 Script_BeatFirstRonaldDuel:
 	start_script
 	print_npc_text Text064c
-	give_card JIGGLYPUFF_LV12
-	show_card_received_screen JIGGLYPUFF_LV12
+	give_card SLAKOTH
+	show_card_received_screen SLAKOTH
 	print_npc_text Text064d
 	script_jump Script_LostToFirstRonaldDuel.ows_e8fb
 
@@ -208,8 +208,8 @@ Script_SecondRonaldDuel:
 Script_BeatSecondRonaldDuel:
 	start_script
 	print_npc_text Text0651
-	give_card SUPER_ENERGY_RETRIEVAL
-	show_card_received_screen SUPER_ENERGY_RETRIEVAL
+	give_card SUPERIOR_ENERGY_RETRIEVAL
+	show_card_received_screen SUPERIOR_ENERGY_RETRIEVAL
 	print_npc_text Text0652
 	script_jump Script_LostToSecondRonaldDuel.ows_e959
 

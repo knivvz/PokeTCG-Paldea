@@ -76,7 +76,7 @@ AIDoTurn_GeneralNoRetreat:
 	ret c ; return if turn ended
 	farcall HandleAIGoGoRainDanceEnergy
 	ld a, AI_ENERGY_TRANS_ATTACK
-	farcall HandleAIEnergyTrans
+	;farcall HandleAIEnergyTrans
 ; process Trainer cards phases 13 and 15
 	ld a, AI_TRAINER_CARD_PHASE_13
 	call AIProcessHandTrainerCards
@@ -85,7 +85,7 @@ AIDoTurn_GeneralNoRetreat:
 ; if used Professor Oak, process new hand
 ; if not, then proceed to attack.
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSORS_RESEARCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards

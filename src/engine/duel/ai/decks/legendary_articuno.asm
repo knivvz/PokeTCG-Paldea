@@ -29,38 +29,38 @@ AIActionTable_LegendaryArticuno:
 .list_arena
 	dw CHANSEY
 	dw LAPRAS
-	dw DITTO
-	dw SEEL
-	dw ARTICUNO_LV35
-	dw ARTICUNO_LV37
+	dw UXIE
+	dw MELTAN
+	dw YVELTAL
+	dw WELLSPRING_OGERPON_EX
 	dw NULL
 
 .list_bench
-	dw ARTICUNO_LV35
-	dw SEEL
+	dw YVELTAL
+	dw MELTAN
 	dw LAPRAS
 	dw CHANSEY
-	dw DITTO
+	dw UXIE
 	dw NULL
 
 .list_retreat
-	ai_retreat SEEL,  -3
-	ai_retreat DITTO, -3
+	ai_retreat MELTAN,  -3
+	ai_retreat UXIE, -3
 	dw NULL
 
 .list_energy
-	ai_energy SEEL,          3, +1
-	ai_energy DEWGONG,       4, +0
+	ai_energy MELTAN,          3, +1
+	ai_energy MELMETAL_EX,       4, +0
 	ai_energy LAPRAS,        3, +0
-	ai_energy ARTICUNO_LV35, 4, +1
-	ai_energy ARTICUNO_LV37, 3, +0
+	ai_energy YVELTAL, 4, +1
+	ai_energy WELLSPRING_OGERPON_EX, 3, +0
 	ai_energy CHANSEY,       0, -8
-	ai_energy DITTO,         3, +0
+	ai_energy UXIE,         3, +0
 	dw NULL
 
 .list_prize
 	dw GAMBLER
-	dw ARTICUNO_LV37
+	dw WELLSPRING_OGERPON_EX
 	dw NULL
 
 .store_list_pointers
@@ -93,10 +93,10 @@ ScoreLegendaryArticunoCards:
 	ld de, LAPRAS
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .articuno
-	ld de, ARTICUNO_LV35
+	ld de, YVELTAL
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
-	ld de, DEWGONG
+	ld de, MELMETAL_EX
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
 	jr .articuno
@@ -119,27 +119,27 @@ ScoreLegendaryArticunoCards:
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .articuno
-	ld de, ARTICUNO_LV35
+	ld de, YVELTAL
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .dewgong
-	ld bc, ARTICUNO_LV35
+	ld bc, YVELTAL
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .dewgong
-	ld de, DEWGONG
+	ld de, MELMETAL_EX
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .seel
-	ld bc, DEWGONG
+	ld bc, MELMETAL_EX
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .seel
-	ld de, SEEL
+	ld de, MELTAN
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	ret nc
-	ld bc, SEEL
+	ld bc, MELTAN
 	jp RaiseAIScoreToAllMatchingIDsInBench
 
 AIDoTurn_LegendaryArticuno:
@@ -172,7 +172,7 @@ AIDoTurn_LegendaryArticuno:
 	call AIProcessHandTrainerCards
 ; if used Professor Oak, process new hand
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSORS_RESEARCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards

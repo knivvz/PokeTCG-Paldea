@@ -28,34 +28,34 @@ AIActionTable_LegendaryZapdos:
 
 .list_arena
 	dw IRON_HANDS_EX
-	dw VOLTORB
+	dw SHINX
 	dw EEVEE
 	dw ZAPDOS_LV40
-	dw ZAPDOS_LV64
+	dw ZEKROM_EX
 	dw ZAPDOS_LV68
 	dw NULL
 
 .list_bench
-	dw ZAPDOS_LV64
+	dw ZEKROM_EX
 	dw ZAPDOS_LV40
 	dw EEVEE
-	dw VOLTORB
+	dw SHINX
 	dw IRON_HANDS_EX
 	dw NULL
 
 .list_retreat
 	ai_retreat EEVEE,           -5
-	ai_retreat VOLTORB,         -5
+	ai_retreat SHINX,         -5
 	ai_retreat IRON_HANDS_EX, -5
 	dw NULL
 
 .list_energy
-	ai_energy VOLTORB,         1, -1
-	ai_energy ELECTRODE_LV35,  3, +0
+	ai_energy SHINX,         1, -1
+	ai_energy LUXIO,  3, +0
 	ai_energy IRON_HANDS_EX, 2, -1
-	ai_energy JOLTEON_LV29,    3, +1
+	ai_energy ESPEON_EX,    3, +1
 	ai_energy ZAPDOS_LV40,     4, +2
-	ai_energy ZAPDOS_LV64,     4, +2
+	ai_energy ZEKROM_EX,     4, +2
 	ai_energy ZAPDOS_LV68,     3, +1
 	ai_energy EEVEE,           3, +0
 	dw NULL
@@ -97,7 +97,7 @@ AIDoTurn_LegendaryZapdos:
 	or a
 	jr nz, .skip_energy_attach
 
-; if Arena card is Voltorb and there's ElectrodeLv35 in hand,
+; if Arena card is SHINX and there's ElectrodeLv35 in hand,
 ; or if it's Electabuzz, try attaching Energy card
 ; to the Arena card if it doesn't have any energy attached.
 ; Otherwise if Energy card is not needed,
@@ -105,17 +105,17 @@ AIDoTurn_LegendaryZapdos:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 VOLTORB
+	cp16 SHINX
 	jr nz, .check_electabuzz
-	ld de, ELECTRODE_LV35
+	ld de, LUXIO
 	call LookForCardIDInHandList_Bank5
 	jr nc, .attach_normally
-	jr .voltorb_or_electabuzz
+	jr .SHINX_or_electabuzz
 .check_electabuzz
 	cp16 IRON_HANDS_EX
 	jr nz, .attach_normally
 
-.voltorb_or_electabuzz
+.SHINX_or_electabuzz
 	call CreateEnergyCardListFromHand
 	jr c, .skip_energy_attach
 	ld e, PLAY_AREA_ARENA

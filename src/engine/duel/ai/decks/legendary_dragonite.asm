@@ -27,43 +27,43 @@ AIActionTable_LegendaryDragonite:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw LAPRAS
 	dw FUECOCO
-	dw DRATINI
-	dw MAGIKARP
+	dw BAGON
+	dw WAILMER
 	dw NULL
 
 .list_bench
 	dw FUECOCO
-	dw MAGIKARP
-	dw DRATINI
+	dw WAILMER
+	dw BAGON
 	dw LAPRAS
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw NULL
 
 .list_retreat
 	ai_retreat FUECOCO, -1
-	ai_retreat MAGIKARP,   -5
+	ai_retreat WAILMER,   -5
 	dw NULL
 
 .list_energy
 	ai_energy FUECOCO,     3, +1
 	ai_energy CROCALOR,     4, +1
 	ai_energy SKELEDIRGE_EX,      5, +0
-	ai_energy MAGIKARP,       3, +1
-	ai_energy GYARADOS,       4, -1
-	ai_energy DRATINI,        2, +0
-	ai_energy DRAGONAIR,      4, +0
+	ai_energy WAILMER,       3, +1
+	ai_energy WAILORD,       4, -1
+	ai_energy BAGON,        2, +0
+	ai_energy SHELGON,      4, +0
 	ai_energy DRAGONITE_LV41, 3, -1
-	ai_energy KANGASKHAN,     2, -2
+	ai_energy BLOODMOON_URSALUNA_EX,     2, -2
 	ai_energy LAPRAS,         3, +0
 	dw NULL
 
 .list_prize
 	dw GAMBLER
 	dw DRAGONITE_LV41
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw NULL
 
 .store_list_pointers
@@ -106,7 +106,7 @@ AIDoTurn_LegendaryDragonite:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 KANGASKHAN
+	cp16 BLOODMOON_URSALUNA_EX
 	jr nz, .attach_normally
 	call CreateEnergyCardListFromHand
 	jr c, .skip_energy_attach_1
@@ -129,7 +129,7 @@ AIDoTurn_LegendaryDragonite:
 ; if used Professor Oak, process new hand
 ; if not, then proceed to attack.
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSORS_RESEARCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards

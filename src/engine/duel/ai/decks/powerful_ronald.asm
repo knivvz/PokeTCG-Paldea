@@ -27,33 +27,33 @@ AIActionTable_PowerfulRonald:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw IRON_HANDS_EX
 	dw HITMONCHAN
 	dw MR_MIME
-	dw LICKITUNG
+	dw ORTHWORM_EX
 	dw PALDEAN_TAUROS
 	dw TAUROS
-	dw JYNX
-	dw MEWTWO_LV53
+	dw SCREAM_TAIL
+	dw MUNKIDORI
 	dw DODUO
 	dw NULL
 
 .list_bench
-	dw KANGASKHAN
+	dw BLOODMOON_URSALUNA_EX
 	dw PALDEAN_TAUROS
 	dw HITMONCHAN
 	dw TAUROS
 	dw DODUO
-	dw JYNX
-	dw MEWTWO_LV53
+	dw SCREAM_TAIL
+	dw MUNKIDORI
 	dw IRON_HANDS_EX
 	dw MR_MIME
-	dw LICKITUNG
+	dw ORTHWORM_EX
 	dw NULL
 
 .list_retreat
-	ai_retreat KANGASKHAN, -1
+	ai_retreat BLOODMOON_URSALUNA_EX, -1
 	ai_retreat DODUO,      -1
 	ai_retreat DODRIO,     -1
 	dw NULL
@@ -63,12 +63,12 @@ AIActionTable_PowerfulRonald:
 	ai_energy PALDEAN_TAUROS,       3, +1
 	ai_energy HITMONCHAN,      3, +1
 	ai_energy MR_MIME,         2, +0
-	ai_energy JYNX,            3, +0
-	ai_energy MEWTWO_LV53,     2, +0
+	ai_energy SCREAM_TAIL,            3, +0
+	ai_energy MUNKIDORI,     2, +0
 	ai_energy DODUO,           3, -1
 	ai_energy DODRIO,          3, -1
-	ai_energy LICKITUNG,       2, +0
-	ai_energy KANGASKHAN,      4, -1
+	ai_energy ORTHWORM_EX,       2, +0
+	ai_energy BLOODMOON_URSALUNA_EX,      4, -1
 	ai_energy TAUROS,          3, +0
 	dw NULL
 

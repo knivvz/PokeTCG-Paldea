@@ -1,5 +1,6 @@
 INCLUDE "data/duel/ai_trainer_card_logic.asm"
 
+; after decide function, loads a into wAITrainerCardParameter
 _AIProcessHandTrainerCards:
 	ld [wAITrainerCardPhase], a
 ; create hand list in wDuelTempList and wTempHandCardList.
@@ -20,8 +21,9 @@ _AIProcessHandTrainerCards:
 	ld d, a
 	ld hl, AITrainerCardLogic
 .loop_data
-	xor a
-	ld [wCurrentAIFlags], a
+	; this resets the AI_MODIFIED_HAND_FLAG
+	;xor a
+	;ld [wCurrentAIFlags], a
 	ld a, [hli]
 	cp $ff
 	jp z, .pop_hl
@@ -73,8 +75,8 @@ _AIProcessHandTrainerCards:
 	jp c, .next_in_data
 
 ; AI can randomly choose not to play card.
-	farcall AIChooseRandomlyNotToDoAction
-	jr c, .next_in_data
+	;farcall AIChooseRandomlyNotToDoAction
+	;jr c, .next_in_data
 
 ; call routine to decide whether to play Trainer card
 	pop de
@@ -116,6 +118,7 @@ _AIProcessHandTrainerCards:
 	pop hl
 	and AI_FLAG_MODIFIED_HAND
 	jp z, .loop_hand
+	;jp .loop_hand
 
 ; the hand was modified during the Trainer effect
 ; so it needs to be re-listed again and
@@ -154,6 +157,36 @@ _AIProcessHandTrainerCards:
 .pop_hl
 	pop hl
 	jp .loop_hand
+
+; checks if AI modified hand.
+; returns nz if set.
+CheckAIModifiedHandFlag:
+	ld a, [wCurrentAIFlags]
+	and AI_FLAG_MODIFIED_HAND
+	ret nz
+	ld [wPreviousAIFlags], a
+	and AI_FLAG_MODIFIED_HAND
+	ret ; nz if flag is set.
+	
+SetAIModifiedHandFlag:
+	ld a, [wCurrentAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
+
+	ld a, [wPreviousAIFlags]
+	or AI_FLAG_MODIFIED_HAND
+	ld [wPreviousAIFlags], a
+	ret
+
+UnsetAIModifiedHandFlag:
+	ld a, [wCurrentAIFlags]
+	and ~AI_FLAG_MODIFIED_HAND
+	ld [wCurrentAIFlags], a
+
+	ld a, [wPreviousAIFlags]
+	and ~AI_FLAG_MODIFIED_HAND
+	ld [wPreviousAIFlags], a
+	ret
 
 ; makes AI use Potion card.
 AIPlay_Potion:
@@ -596,7 +629,8 @@ AIDecide_SuperPotion2:
 AIPlay_Defender:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	xor a ; PLAY_AREA_ARENA
+	;xor a ; PLAY_AREA_ARENA
+	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
@@ -606,6 +640,26 @@ AIPlay_Defender:
 ; by the defending Pokémon.
 ; this takes into account both attacks and whether they're useable.
 AIDecide_Defender1:
+	ld a, [wOpponentDeckID]
+	cp MUSCLES_FOR_BRAINS_DECK_ID
+	jr nz, .next
+	
+	ld de, BRUTE_BONNET
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	ret nc ; not found, dont use
+
+	ldh [hTempPlayAreaLocation_ff9d], a
+	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	call GetTurnDuelistVariable
+	or a
+	ret z ; already has defender attached
+
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	scf
+	ret
+
+.next
 	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	farcall CheckIfAnyAttackKnocksOutDefendingCard
@@ -987,6 +1041,24 @@ AIPlay_Switch:
 ; than the retreat cost and if AI can't play an energy
 ; card from the hand to fulfill the cost
 AIDecide_Switch:
+	ld a, [wOpponentDeckID]
+	cp KALEIDOSCOPE_DECK_ID
+	jr nz, .next
+
+	; if has venomoth in play but not in play area, switch to venomoth
+	ld de, VENOMOTH
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	ret nc ; no venomoth in play, dont use
+	or a ; is in active
+	ret z ; already in active, dont use
+	
+	ldh [hTempPlayAreaLocation_ff9d], a
+	scf
+	ret
+
+
+.next
 ; check if AI can already play an energy card from hand to retreat
 	ld a, [wAIPlayEnergyCardForRetreat]
 	or a
@@ -1032,9 +1104,9 @@ AIDecide_Switch:
 	ccf
 	ret
 
-AIPlay_GustOfWind:
+AIPlay_BosssOrders:
 	ld a, [wCurrentAIFlags]
-	or AI_FLAG_USED_GUST_OF_WIND
+	or AI_FLAG_USED_BOSSS_ORDERS
 	ld [wCurrentAIFlags], a
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
@@ -1044,7 +1116,7 @@ AIPlay_GustOfWind:
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_GustOfWind:
+AIDecide_BosssOrders:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetNonTurnDuelistVariable
 	dec a
@@ -1054,7 +1126,7 @@ AIDecide_GustOfWind:
 ; if used Gust Of Wind already,
 ; do not use it again.
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_GUST_OF_WIND
+	and AI_FLAG_USED_BOSSS_ORDERS
 	ret nz
 
 	farcall CheckIfActivePokemonCanUseAnyNonResidualAttack
@@ -1076,7 +1148,7 @@ AIDecide_GustOfWind:
 	call GetCardIDFromDeckIndex
 	cp16 MEW_LV23
 	jr z, .no_carry
-	cp16 MEWTWO_LV53
+	cp16 MUNKIDORI
 	jr z, .no_carry
 
 	call .FindBenchCardToKnockOut
@@ -1419,6 +1491,8 @@ AIDecide_GustOfWind:
 	ret
 
 AIPlay_Nemona:
+	call SetAIModifiedHandFlag
+
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -1645,7 +1719,7 @@ AIDecide_EnergyRemoval:
 	pop de
 	ret
 
-AIPlay_SuperEnergyRemoval:
+AIPlay_EnergySwitch:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wAITrainerCardParameter]
@@ -1665,7 +1739,7 @@ AIPlay_SuperEnergyRemoval:
 	ret
 
 ; picks two energy cards in the player's Play Area to remove
-AIDecide_SuperEnergyRemoval:
+AIDecide_EnergySwitch:
 	ld e, PLAY_AREA_BENCH_1
 .loop_1
 ; first find an Arena card with a color energy card
@@ -1932,20 +2006,20 @@ AIDecide_SuperEnergyRemoval:
 	pop de
 	ret
 
-AIPlay_PokemonBreeder:
+AIPlay_RareCandy:
 	ld a, [wAITrainerCardToPlay]
-	ldh [hTempCardIndex_ff9f], a
+	ldh [hTempCardIndex_ff9f], a ; stage 2
 	ld a, [wAITrainerCardParameter]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ldh [hTempPlayAreaLocation_ffa1], a ; basic
 	ld a, [wce1a]
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_PokemonBreeder:
-	call IsPrehistoricPowerActive
-	jp c, .done
+AIDecide_RareCandy_Old:
+	; call IsPrehistoricPowerActive
+	; jp c, .done
 
 	ld a, 7
 	ld hl, wce08
@@ -1969,17 +2043,17 @@ AIDecide_PokemonBreeder:
 	ld e, a
 	ld a, [wLoadedCard1ID + 1]
 	ld d, a
-	cp16 VENUSAUR_LV64
+	cp16 FEZANDIPITY_EX
 	jr z, .found
 	cp16 VENUSAUR_EX
 	jr z, .found
 	cp16 QUAQUAVAL_EX
 	jr z, .found
-	cp16 VILEPLUME
+	cp16 HYDREIGON_EX
 	jr z, .found
 	cp16 ALAKAZAM
 	jr z, .found
-	cp16 GENGAR
+	cp16 GARDEVOIR_EX
 	jr nz, .loop_hand_1
 
 .found
@@ -2047,8 +2121,12 @@ AIDecide_PokemonBreeder:
 .not_found_in_hand
 	ld a, [wce06]
 	or a
-	jr z, .check_evolution_and_dragonite
+	jr nz, .process_found_evolutions
 
+	; no evolution was found in first pass
+	jp .check_evolution_and_dragonite
+
+.process_found_evolutions
 ; an evolution has been found before
 	xor a
 	ld [wce06], a
@@ -2088,7 +2166,7 @@ AIDecide_PokemonBreeder:
 	ld a, [hl]
 	ld [wce1a], a
 	ld a, [wce07]
-	scf
+	scf ; if reach here, play rare candy
 	ret
 
 .check_evolution_and_dragonite
@@ -2121,7 +2199,7 @@ AIDecide_PokemonBreeder:
 	push de
 	call CheckIfCanEvolveInto_BasicToStage2
 	pop de
-	call nc, .HandleDragoniteLv41Evolution
+	;call nc, .HandleDragoniteLv41Evolution
 	call nc, .can_evolve
 
 ; not possible to evolve or returned carry
@@ -2288,10 +2366,81 @@ AIDecide_PokemonBreeder:
 	scf
 	ret
 
-AIPlay_ProfessorOak:
-	ld a, [wCurrentAIFlags]
-	or AI_FLAG_USED_PROFESSOR_OAK | AI_FLAG_MODIFIED_HAND
-	ld [wCurrentAIFlags], a
+AIDecide_RareCandy:
+	call CreateHandCardList
+	ld hl, wDuelTempList
+
+.loop_hand
+	ld a, [hli]
+	cp $ff
+	ret z
+	
+	ld b, a ; preserve deck index of hand Stage2 card candidate
+	ldh [hTempCardIndex_ff9f], a
+
+	call LoadCardDataToBuffer1_FromDeckIndex ; load hand card into wLoadedCard1
+	; wLoadedCard1ID now holds the 2-byte card ID for this hand card
+	ld a, [wLoadedCard1ID + 0]
+	ld e, a
+	ld a, [wLoadedCard1ID + 1]
+	ld d, a
+	; compare the 16-bit card ID against accepted Stage2 targets
+	; TODO make it generic instead of checking against hard coded card ids
+	cp16 BEEDRILL_EX
+	jr z, .check_basic
+	cp16 VENUSAUR_EX
+	jr z, .check_basic
+	cp16 QUAQUAVAL_EX
+	jr z, .check_basic
+	cp16 HYDREIGON_EX
+	jr z, .check_basic
+	cp16 ALAKAZAM
+	jr z, .check_basic
+	cp16 GARDEVOIR_EX
+	jr z, .check_basic
+	
+	jp .loop_hand
+
+.check_basic
+	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
+
+	push hl
+	call GetTurnDuelistVariable
+	pop hl
+
+	ld c, a
+	ld e, PLAY_AREA_ARENA
+
+.loop_play
+	push hl
+	push bc
+	push de
+	ldh a, [hTempCardIndex_ff9f] ; stage 2 from hand
+	ld d, a
+	; d = deck index of stage 2, e = play_area of basic
+	call CheckIfCanEvolveInto_BasicToStage2
+	pop de
+	pop bc
+	jr nc, .found
+	
+	pop hl
+	inc e
+	dec c
+	jr nz, .loop_play
+	jp .loop_hand
+
+.found
+	pop hl ; clean up stack
+	
+	ldh a, [hTempCardIndex_ff9f]
+	ld [wce1a], a
+	ld a, e
+	scf
+	ret
+
+AIPlay_ProfessorsResearch:
+	call SetAIModifiedHandFlag
+
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -2300,12 +2449,15 @@ AIPlay_ProfessorOak:
 
 ; sets carry if AI determines a score of playing
 ; Professor Oak is over a certain threshold.
-AIDecide_ProfessorOak:
-; return if cards in deck <= 6
+AIDecide_ProfessorsResearch:
+; return if cards in deck <= 10
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetTurnDuelistVariable
-	cp DECK_SIZE - 6
+	cp DECK_SIZE - 10
 	ret nc
+
+	scf
+	ret
 
 	ld a, [wOpponentDeckID]
 	cp LEGENDARY_ARTICUNO_DECK_ID
@@ -2357,12 +2509,12 @@ AIDecide_ProfessorOak:
 	ld [wce06], a
 
 .handle_blastoise
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .check_hand
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; jr c, .check_hand
 
 ; no Muk in Play Area
-	ld de, QUAQUAVAL_EX
+	ld de, BAXCALIBUR
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jr nc, .check_hand
 
@@ -2547,9 +2699,9 @@ AIDecide_ProfessorOak:
 ; before checking for playable cards
 	call CreateHandCardList
 	ld hl, wDuelTempList
-	ld de, PROFESSOR_OAK
+	ld de, PROFESSORS_RESEARCH
 	farcall RemoveCardIDInList
-	ld de, PROFESSOR_OAK
+	ld de, PROFESSORS_RESEARCH
 	farcall RemoveCardIDInList
 
 ; look in hand for cards that can be played.
@@ -2578,25 +2730,25 @@ AIDecide_ProfessorOak:
 	ret nc
 
 ; look for Mysterious Fossil
-	ld de, MYSTERIOUS_FOSSIL
-	call LookForCardIDInHandAndPlayArea
-	jr c, .found_mysterious_fossil
+	; ld de, MYSTERIOUS_FOSSIL
+	; call LookForCardIDInHandAndPlayArea
+	; jr c, .found_mysterious_fossil
 	ld a, $50
 	ld [wce06], a
 	jp .check_cards_hand
-.found_mysterious_fossil
-	ld a, $1e
-	ld [wce06], a
-	jp .check_cards_hand
+; .found_mysterious_fossil
+; 	ld a, $1e
+; 	ld [wce06], a
+; 	jp .check_cards_hand
 
 ; handles Wonders of Science AI logic.
 ; if there's either Grimer or Muk in hand,
 ; do not play Professor Oak.
 .HandleWondersOfScienceDeck
-	ld de, GRIMER
+	ld de, GULPIN
 	call LookForCardIDInHandList_Bank8
 	jr c, .found_grimer_or_muk
-	ld de, MUK
+	ld de, SWALOT
 	call LookForCardIDInHandList_Bank8
 	jr c, .found_grimer_or_muk
 
@@ -2644,10 +2796,10 @@ AIDecide_EnergyRetrieval:
 	ld a, [wOpponentDeckID]
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	jr nz, .start
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .start
-	ld de, QUAQUAVAL_EX
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; jr c, .start
+	ld de, BAXCALIBUR
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 
@@ -2866,7 +3018,7 @@ FindDuplicateCards:
 	or a
 	ret
 
-AIPlay_SuperEnergyRetrieval:
+AIPlay_SuperiorEnergyRetrieval:
 	ld a, [wCurrentAIFlags]
 	or AI_FLAG_MODIFIED_HAND
 	ld [wCurrentAIFlags], a
@@ -2897,7 +3049,7 @@ AIPlay_SuperEnergyRetrieval:
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_SuperEnergyRetrieval:
+AIDecide_SuperiorEnergyRetrieval:
 ; return no carry if no cards in hand
 	farcall CreateEnergyCardListFromHand
 	jp nc, .no_carry
@@ -2909,10 +3061,10 @@ AIDecide_SuperEnergyRetrieval:
 	ld a, [wOpponentDeckID]
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	jr nz, .start
-	ld de, MUK
-	call CountPokemonWithActivePkmnPowerInBothPlayAreas
-	jr c, .start
-	ld de, QUAQUAVAL_EX
+	; ld de, MUK
+	; call CountPokemonWithActivePkmnPowerInBothPlayAreas
+	; jr c, .start
+	ld de, BAXCALIBUR
 	call CountTurnDuelistPokemonWithActivePkmnPower
 	jp nc, .no_carry
 
@@ -3196,15 +3348,50 @@ AIDecide_PokemonCenter:
 	ret
 
 AIPlay_Iono:
+	call SetAIModifiedHandFlag
+	
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-; sets carry depending on player's number of cards
-; in deck in in hand.
+; sets carry if:
+; AI has less cards in hand than prizes OR
+; player has more cards in hand than prizes OR
+; AI has at least 5 prizes left
 AIDecide_Iono:
+	; if ai has less cards in hand than prizes, use
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	ld b, a
+
+	call CountPrizes
+	cp b
+	jr nc, .set_carry
+
+	; if player has more cards in hand than prizes, use
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetNonTurnDuelistVariable
+	ld b, a
+
+	call SwapTurn
+	call CountPrizes
+	cp b
+
+	call SwapTurn
+	jr c, .set_carry
+
+	; OR if ai has 5 or 6 prizes left, still use it (in case they have a dead hand)
+	call CountPrizes
+	cp 5
+	jr nc, .set_carry
+
+	or a
+	ret 
+
+
+
 	ld a, DUELVARS_NUMBER_OF_CARDS_NOT_IN_DECK
 	call GetNonTurnDuelistVariable
 	cp DECK_SIZE - 14
@@ -3231,7 +3418,7 @@ AIDecide_Iono:
 	scf
 	ret
 
-AIPlay_EnergySearch:
+AIPlay_EarthenVessel:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, [wAITrainerCardParameter]
@@ -3241,7 +3428,7 @@ AIPlay_EnergySearch:
 	ret
 
 ; AI checks for playing Energy Search
-AIDecide_EnergySearch:
+AIDecide_EarthenVessel:
 	farcall CreateEnergyCardListFromHand
 	jr c, .start
 	call .CheckForUsefulEnergyCards
@@ -3820,15 +4007,15 @@ AIDecide_FullHeal:
 .asleep
 ; set carry if any of the following
 ; cards are in the Play Area.
-	ld de, GASTLY_LV8
+	ld de, RALTS
 	ld b, PLAY_AREA_ARENA
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .set_carry
-	ld de, GASTLY_LV17
+	ld de, SHUPPET
 	ld b, PLAY_AREA_ARENA
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .set_carry
-	ld de, HAUNTER_LV22
+	ld de, KIRLIA
 	ld b, PLAY_AREA_ARENA
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .set_carry
@@ -4071,7 +4258,7 @@ AIDecide_ScoopUp:
 	jr c, .no_carry
 
 ; look for ArticunoLv37 in bench
-	ld de, ARTICUNO_LV37
+	ld de, WELLSPRING_OGERPON_EX
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .articuno_bench
@@ -4080,7 +4267,7 @@ AIDecide_ScoopUp:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 ARTICUNO_LV37
+	cp16 WELLSPRING_OGERPON_EX
 	jr z, .articuno_or_chansey
 	cp16 CHANSEY
 	jr nz, .no_carry
@@ -4150,7 +4337,7 @@ AIDecide_ScoopUp:
 	cp 3
 	jp c, .no_carry
 
-	ld de, ARTICUNO_LV37
+	ld de, WELLSPRING_OGERPON_EX
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .articuno_bench
@@ -4158,28 +4345,141 @@ AIDecide_ScoopUp:
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .check_attached_energy
-	ld de, MOLTRES_LV37
+	ld de, RESHIRAM_EX
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank8
 	jr c, .check_attached_energy
 	jp .no_carry
 
-AIPlay_Maintenance:
-	ld a, [wCurrentAIFlags]
-	or AI_FLAG_MODIFIED_HAND
-	ld [wCurrentAIFlags], a
+; cards to return in hTempList
+AIPlay_SuperRod:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
+
+	ld a, [wAITrainerCardParameter]
+
+	ld hl, hTempList
 	ld a, [wce1a]
-	ldh [hTemp_ffa0], a
+	ld [hl], a
+	inc hl
+
 	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
+	ld [hl], a
+	inc hl
+
+	ld a, [wce1c]
+	ld [hl], a
+	inc hl
+
+	ld a, $ff
+	ld [hl], a
+
+	; list in htemplist
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-; AI logic for playing Maintenance
-AIDecide_Maintenance:
+; TODO, make the decision process more intelligent, which cards to pick and their priorities
+AIDecide_SuperRod:
+	farcall CreatePokemonCardListFromDiscardPile
+	jr c, .dont_use
+
+	call CountCardsInDuelTempList
+	cp 3
+	jr c, .dont_use
+
+	ld a, $ff
+	ld [wce1a], a
+	ld [wce1b], a
+	ld [wce1c], a
+	ld hl, wce1a
+	
+	ld a, [wOpponentDeckID]
+	cp STRANGE_PSYSHOCK_DECK_ID
+	jr z, AIDecide_SuperRod_StrangePsyshock
+
+	ld a, [wOpponentDeckID]
+	cp FIRE_CHARGE_DECK_ID
+	jr z, AIDecide_SuperRod_FireCharge
+
+.dont_use
+	or a
+	ret
+
+AIDecide_SuperRod_StrangePsyshock:
+	ld de, wDuelTempList
+	ld c, 0 ; counter, need to push?
+	push de
+.loop
+	pop de
+	ld a, [de]
+	cp $ff
+	jr z, AIDecide_SuperRod.dont_use
+	inc de
+	push de
+	ld [wAITrainerCardParameter], a ; preserve deck index , somewhere else
+	call GetCardIDFromDeckIndex
+	cp16 ALAKAZAM
+	jr z, .choose_card
+	cp16 ABRA
+	jr z, .choose_card
+	cp16 KADABRA
+	jr z, .choose_card
+	jr .loop
+
+.choose_card
+	; add to hTempList
+	ld a, [wAITrainerCardParameter]
+	ld [hl], a
+	inc hl ; set to next position
+	inc c
+	ld a, c
+	cp 3
+	jr z, .done
+	jr .loop
+
+.done
+	pop de
+	scf
+	ret
+
+AIDecide_SuperRod_FireCharge:
+	ld de, wDuelTempList
+	ld c, 0 ; counter, need to push?
+	push de
+.loop
+	pop de
+	ld a, [de]
+	cp $ff
+	jr z, AIDecide_SuperRod.dont_use
+	inc de
+	push de
+	ld [wAITrainerCardParameter], a ; preserve deck index , somewhere else
+	call GetCardIDFromDeckIndex
+	cp16 CERULEDGE_EX
+	jr z, .choose_card
+	cp16 CHARCADET
+	jr z, .choose_card
+	jr .loop
+.choose_card
+	; add to hTempList
+	ld a, [wAITrainerCardParameter]
+	ld [hl], a
+	inc hl ; set to next position
+	inc c
+	ld a, c
+	cp 3
+	jr z, .done
+	jr .loop
+
+.done
+	pop de
+	scf
+	ret	
+
+
+; AI logic for playing SuperRod
+AIDecide_SuperRod_Old:
 ; Imakuni? has his own thing
 	ld a, [wOpponentDeckID]
 	cp IMAKUNI_DECK_ID
@@ -4261,30 +4561,173 @@ AIDecide_Maintenance:
 	scf
 	ret
 
-AIPlay_Recycle:
+; card to add to hand in hTemp_ffa0
+AIPlay_NightStretcher:
+	call SetAIModifiedHandFlag
+
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ldtx de, TrainerCardSuccessCheckText
-	bank1call TossCoin
-	jr nc, .asm_216ae
-	ld a, [wAITrainerCardParameter]
+	;ldh [hTemp_ffa0], a
+
+	ld a, [wAITrainerCardParameter] ; card to search
 	ldh [hTemp_ffa0], a
-	jr .asm_216b2
-.asm_216ae
-	ld a, $ff
-	ldh [hTemp_ffa0], a
-.asm_216b2
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
+
+AIDecide_NightStretcher:
+	farcall CreateAllPokemonAndEnergyCardListFromDiscardPile
+	jr c, .no_carry
+
+	ld a, [wOpponentDeckID]
+	cp STRANGE_PSYSHOCK_DECK_ID
+	jr z, .strange_psyshock
+	cp FIRE_CHARGE_DECK_ID
+	jp z, .fire_charge
+	cp KALEIDOSCOPE_DECK_ID
+	jr z, .kaleidoscope
+
+
+.no_carry
+	or a
+	ret
+
+; tries to add venomoth to hand if pokemon in play that can evolve into it
+.kaleidoscope
+	ld de, VENONAT
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	jr nc, .check_froslass
+
+	; found venonat in play area, check if it can evolve this turn
+	call CheckIfPokemonCanEvolveThisTurn
+	jr z, .check_froslass
+
+	; venonat found and can evolve, so try to add back venomoth
+	ld de, VENOMOTH
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jp c, .choose_card
+
+.check_froslass
+	ld de, SNORUNT
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	jr nc, .check_energy
+
+	; found snorunt in play area, check if it can evolve this turn
+	call CheckIfPokemonCanEvolveThisTurn
+	jr z, .check_energy
+
+	; snorunt found and can evolve, so try to add back venomoth
+	ld de, FROSLASS
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jp c, .choose_card
+
+.check_energy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	jr nz, .check_munkidori
+
+	ld de, MUNKIDORI
+	ld b, PLAY_AREA_ARENA
+	farcall LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	jr nc, .check_munkidori
+
+	; munkidori without energy found AND can still play energy for turn, so try to target darkness energy
+	ld de, DARKNESS_ENERGY
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose_card
+
+	ld de, VENOMOTH
+	ld b, PLAY_AREA_ARENA
+	farcall LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	jr nc, .check_munkidori
+
+	; venomoth without energy found AND can still play energy for turn, so try to target grass energy
+	ld de, GRASS_ENERGY
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose_card
+
+.check_munkidori
+	ld de, MUNKIDORI
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose_card
+	
+	jr .no_carry
+
+; tries to add alakazam or kadabra to hand if pokemon in play that can evolve into it
+.strange_psyshock
+	ld de, KADABRA
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	jr nc, .check_kadabra ; no kadabra in play, so check if add back kadabra
+
+	; kadabra found, so add back alakazam if possible and evolvable
+	call CheckIfPokemonCanEvolveThisTurn
+	jr z, .check_kadabra ; can't evolve, so dont add back
+
+	; kadabra found and can evolve, so try to add back alakazam
+	ld de, ALAKAZAM
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose_card
+
+.check_kadabra
+	ld de, ABRA
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	jr nc, .check_kadabra ; no abra in play, so check if add back abra
+
+	; kadabra found, so add back alakazam if possible and evolvable
+	call CheckIfPokemonCanEvolveThisTurn
+	ret z;jr z, .check_kadabra ; can't evolve, so dont add back
+
+	; abra found and can evolve, so try to add back kadabra
+	ld de, KADABRA
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose_card
+	jp .no_carry
+
+; tries to add ceruledge ex to hand, if there's a charcadet in play that can evolve this turn.
+.fire_charge
+	; find a charcadet
+	ld de, CHARCADET
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	ret nc ; no charcadet, so dont add back ceruledge ex
+
+	call CheckIfPokemonCanEvolveThisTurn
+	ret z ; can't evolve, so dont add back ceruledge ex
+
+	ld de, CERULEDGE_EX
+	ld a, CARD_LOCATION_DISCARD_PILE
+	call LookForCardIDInLocation_Bank8
+	
+	jr c, .choose_card
+	jp .no_carry
+
+.choose_card
+	ld [wce08], a
+	scf
+	ret
+
+
+
 
 ; lists cards to look for in the Discard Pile.
 ; has priorities for Ghost Deck, and a "default" priority list
 ; (which is the Fire Charge deck, since it's the only other
 ; deck that runs a Recycle card in it.)
-AIDecide_Recycle:
+AIDecide_NightStretcher_Old:
 ; no use checking if no cards in Discard Pile
 	call CreateDiscardPileCardList
+	
 	jr c, .no_carry
 
 	ld a, $ff
@@ -4335,7 +4778,7 @@ AIDecide_Recycle:
 	jr .loop_1
 
 .jigglypuff
-	cp16 JIGGLYPUFF_LV12
+	cp16 SLAKOTH
 	jr nz, .loop_1
 	ld a, b
 	ld [wce08 + 3], a
@@ -4374,14 +4817,14 @@ AIDecide_Recycle:
 	ld d, a
 
 ; gastly2
-	cp16 GASTLY_LV17
+	cp16 SHUPPET
 	jr nz, .gastly1
 	ld a, b
 	ld [wce08], a
 	jr .loop_2
 
 .gastly1
-	cp16 GASTLY_LV8
+	cp16 RALTS
 	jr nz, .murkrow
 	ld a, b
 	ld [wce08 + 1], a
@@ -4395,7 +4838,7 @@ AIDecide_Recycle:
 	jr .loop_2
 
 .ditto
-	cp16 DITTO
+	cp16 UXIE
 	jr nz, .meowth
 	ld a, b
 	ld [wce08 + 3], a
@@ -4408,48 +4851,75 @@ AIDecide_Recycle:
 	ld [wce08 + 4], a
 	jr .loop_2
 
-AIPlay_Lass:
-	ld a, [wCurrentAIFlags]
-	or AI_FLAG_MODIFIED_HAND
-	ld [wCurrentAIFlags], a
+; does not set the flag properly?
+AIPlay_LilliesDetermination:
+	call SetAIModifiedHandFlag
+
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_Lass:
-; skip if player has less than 7 cards in hand
-	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
-	call GetNonTurnDuelistVariable
-	cp 7
-	jr c, .no_carry
+	; ld a, [wCurrentAIFlags]
+	; or AI_FLAG_MODIFIED_HAND
+	; ld [wCurrentAIFlags], a
+	; ld a, [wAITrainerCardToPlay]
+	; ldh [hTempCardIndex_ff9f], a
+	; ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
+	; bank1call AIMakeDecision
+	; ret
 
-; look for Trainer cards in hand (except for Lass)
-; if any is found, return no carry.
-; otherwise, return carry.
-	call CreateHandCardList
-	ld hl, wDuelTempList
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .set_carry
-	ld b, a
-	call LoadCardDataToBuffer1_FromDeckIndex
-	push hl
-	ld hl, wLoadedCard1ID
-	cphl LASS
-	pop hl
-	jr z, .loop
-	ld a, [wLoadedCard1Type]
-	cp TYPE_TRAINER
-	jr nz, .loop
-.no_carry
-	or a
-	ret
-.set_carry
+; always use if possible for now.
+AIDecide_LilliesDetermination:
+; skip if player has more than 6 cards in hand
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
 	scf
 	ret
+
+	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+	call GetTurnDuelistVariable
+	cp 6
+	ret
+
+;	jr nc, .no_carry
+
+	scf 
+	ret
+
+
+; ; skip if player has less than 7 cards in hand
+; 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
+; 	call GetNonTurnDuelistVariable
+; 	cp 7
+; 	jr c, .no_carry
+
+; ; look for Trainer cards in hand (except for Lass)
+; ; if any is found, return no carry.
+; ; otherwise, return carry.
+; 	call CreateHandCardList
+; 	ld hl, wDuelTempList
+; .loop
+; 	ld a, [hli]
+; 	cp $ff
+; 	jr z, .set_carry
+; 	ld b, a
+; 	call LoadCardDataToBuffer1_FromDeckIndex
+; 	push hl
+; 	ld hl, wLoadedCard1ID
+; 	cphl LILLIES_DETERMINATION
+; 	pop hl
+; 	jr z, .loop
+; 	ld a, [wLoadedCard1Type]
+; 	cp TYPE_TRAINER
+; 	jr nz, .loop
+; .no_carry
+; 	or a
+; 	ret
+; .set_carry
+; 	scf
+; 	ret
 
 AIPlay_ItemFinder:
 	ld a, [wCurrentAIFlags]
@@ -4550,7 +5020,7 @@ AIDecide_ItemFinder:
 	or a
 	ret
 
-AIPlay_Imakuni:
+AIPlay_Crispin:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
@@ -4558,7 +5028,7 @@ AIPlay_Imakuni:
 	ret
 
 ; only sets carry if Active card is not confused.
-AIDecide_Imakuni:
+AIDecide_Crispin:
 	ld a, DUELVARS_ARENA_CARD_STATUS
 	call GetTurnDuelistVariable
 	and CNF_SLP_PRZ
@@ -4682,7 +5152,7 @@ AIDecide_Revive:
 	jr z, .set_carry
 	cp16 TAUROS
 	jr z, .set_carry
-	cp16 KANGASKHAN
+	cp16 BLOODMOON_URSALUNA_EX
 	jr nz, .loop_discard_pile
 
 .set_carry
@@ -4820,7 +5290,7 @@ AIDecide_ClefairyDollOrMysteriousFossil:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	cp16 WIGGLYTUFF
+	cp16 SLAKING_EX
 	jr z, .set_carry
 
 ; if number of Play Area Pokemon >= 4, return no carry
@@ -4835,244 +5305,132 @@ AIDecide_ClefairyDollOrMysteriousFossil:
 	or a
 	ret
 
-AIPlay_Pokeball:
+; [hTemp_ffa0]
+AIPlay_NestBall:
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ldtx de, TrainerCardSuccessCheckText
-	bank1call TossCoin
-	ldh [hTemp_ffa0], a
-	jr nc, .asm_219bc
-	ld a, [wAITrainerCardParameter]
-	ldh [hTempPlayAreaLocation_ffa1], a
-	jr .asm_219c0
-.asm_219bc
-	ld a, $ff
-	ldh [hTempPlayAreaLocation_ffa1], a
-.asm_219c0
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
-AIDecide_Pokeball:
+
+AIDecide_NestBall:
 ; go to the routines associated with deck ID
 	ld a, [wOpponentDeckID]
+	cp EXCAVATION_DECK_ID
+	jr z, .excavation
+	cp STRANGE_PSYSHOCK_DECK_ID
+	jr z, .strange_psyshock
 	cp FIRE_CHARGE_DECK_ID
 	jr z, .fire_charge
-	cp HARD_POKEMON_DECK_ID
-	jr z, .hard_pokemon
-	cp PIKACHU_DECK_ID
-	jr z, .pikachu
-	cp ETCETERA_DECK_ID
-	jr z, .etcetera
-	cp LOVELY_NIDORAN_DECK_ID
-	jp z, .lovely_nidoran
-	or a
+	cp KALEIDOSCOPE_DECK_ID
+	jr z, .kaleidoscope
+	; cp HARD_POKEMON_DECK_ID
+	; jr z, .hard_pokemon
+	; cp PIKACHU_DECK_ID
+	; jp z, .pikachu
+	;cp ETCETERA_DECK_ID
+	;jp z, .etcetera
+	; cp LOVELY_NIDORAN_DECK_ID
+	; jp z, .lovely_nidoran
+
+	; search a "random" basic (first one in deck to be found)
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+
+	ld a, [wLoadedCard2Stage]
+	or a ; BASIC
+	jr nz, .loop_deck
+	scf 
 	ret
 
-; this deck runs a deck check for specific
-; card IDs in order of decreasing priority
+.excavation
+	farcall AIDecide_NestBall_Excavation
+	ret
+
+.kaleidoscope
+	farcall AIDecide_NestBall_Kaleidoscope
+	ret
+
+.strange_psyshock
+	ld de, ABRA
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose
+	ld de, DUNSPARCE
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8
+	jr c, .choose
+	or a ; no targets, dont use
+	ret
+
+.choose
+	ldh [hTemp_ffa0], a
+	scf
+	ret
+
+; search lunatone or solrock if not both in play already
+; else search another charcadet.
 .fire_charge
-	ld de, CHANSEY
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, TAUROS
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, JIGGLYPUFF_LV12
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ret
+	ld de, LUNATONE
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr c, .check_solrock
 
-; this deck runs a deck check for specific
-; card IDs in order of decreasing priority
-.hard_pokemon
-	ld de, SOLROCK
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
 	ld de, LUNATONE
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, KLAWF
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ret
+	jr c, .choose ; search lunatone
+	jr .check_charcadet
 
-; this deck runs a deck check for specific
-; card IDs in order of decreasing priority
-.pikachu
-	ld de, PIKACHU_LV14
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, PIKACHU_LV16
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, PIKACHU_ALT_LV16
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, EMOLGA
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, FLYING_PIKACHU
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ret
+.check_solrock
+	ld de, SOLROCK
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr c, .check_charcadet
 
-; this deck runs a deck check for specific
-; card IDs in order of decreasing priority
-; given a specific energy card in hand.
-; also it avoids redundancy, so if it already
-; has that card ID in the hand, it is skipped.
-.etcetera
-; fire
-	ld de, FIRE_ENERGY
-	call LookForCardIDInHandList_Bank8
-	jr nc, .lightning
-	ld de, FUECOCO
-	call LookForCardIDInHandList_Bank8
-	jr c, .lightning
-	ld de, MAGMAR_LV31
-	call LookForCardIDInHandList_Bank8
-	jr c, .lightning
-	ld de, FUECOCO
+	ld de, SOLROCK
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, MAGMAR_LV31
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
+	jr c, .choose
 
-.lightning
-	ld de, LIGHTNING_ENERGY
-	call LookForCardIDInHandList_Bank8
-	jr nc, .fighting
-	ld de, EMOLGA
-	call LookForCardIDInHandList_Bank8
-	jr c, .fighting
-	ld de, WATTREL
-	call LookForCardIDInHandList_Bank8
-	jr c, .fighting
-	ld de, EMOLGA
+.check_charcadet
+	ld de, CHARCADET
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, WATTREL
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-
-.fighting
-	ld de, FIGHTING_ENERGY
-	call LookForCardIDInHandList_Bank8
-	jr nc, .psychic
-	ld de, WIGLETT
-	call LookForCardIDInHandList_Bank8
-	jr c, .psychic
-	ld de, MACHOP
-	call LookForCardIDInHandList_Bank8
-	jr c, .psychic
-	ld de, WIGLETT
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, MACHOP
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-
-.psychic
-	ld de, PSYCHIC_ENERGY
-	call LookForCardIDInHandList_Bank8
-	jr nc, .done_etcetera
-	ld de, GASTLY_LV8
-	call LookForCardIDInHandList_Bank8
-	jr c, .done_etcetera
-	ld de, JYNX
-	call LookForCardIDInHandList_Bank8
-	jr c, .done_etcetera
-	ld de, GASTLY_LV8
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-	ld de, JYNX
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	ret c
-.done_etcetera
+	jr c, .choose
 	or a
-	ret
+	ret ; dont use
 
-; this deck looks for card evolutions if
-; its pre-evolution is in hand or in Play Area.
-; if none of these are found, it looks for pre-evolutions
-; of cards it has in hand.
-; it does this for both the NidoranM (first)
-; and NidoranF (second) families.
-.lovely_nidoran
-	ld bc, NIDORANM
-	ld de, NIDORINO
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld bc, NIDORINO
-	ld de, NIDOKING
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld de, NIDORANM
-	ld bc, NIDORINO
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld de, NIDORINO
-	ld bc, NIDOKING
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld bc, SPRIGATITO
-	ld de, FLORAGATO
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld bc, FLORAGATO
-	ld de, MEOWSCARADA_EX
-	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
-	ret c
-	ld de, SPRIGATITO
-	ld bc, FLORAGATO
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ld de, FLORAGATO
-	ld bc, MEOWSCARADA_EX
-	call LookForCardIDInDeck_GivenCardIDInHand
-	ret c
-	ret
-
-AIPlay_ComputerSearch:
-	ld a, [wCurrentAIFlags]
-	or AI_FLAG_MODIFIED_HAND
-	ld [wCurrentAIFlags], a
+AIPlay_UltraBall:
+	call SetAIModifiedHandFlag
 	ld a, [wAITrainerCardToPlay]
 	ldh [hTempCardIndex_ff9f], a
-	ld a, [wAITrainerCardParameter]
-	ldh [hTempRetreatCostCards], a
-	ld a, [wce1a]
-	ldh [hTemp_ffa0], a
-	ld a, [wce1b]
-	ldh [hTempPlayAreaLocation_ffa1], a
+
+	ld a, [wce1a] ; discard 1
+	ldh [hTempList], a
+
+	ld a, [wce1b] ; discard 2
+	ldh [hTempList + 1], a
+
+	ld a, [wAITrainerCardParameter] ; card to search
+	ldh [hTempList + 2], a
+
 	ld a, OPPACTION_EXECUTE_TRAINER_EFFECTS
 	bank1call AIMakeDecision
 	ret
 
 ; checks what Deck ID AI is playing and handle
 ; them in their own routine.
-AIDecide_ComputerSearch:
+; loads card to search into a and wAITrainerCardParameter,
+; wce1a = card to discard 1, wce1b = card to discard 2.
+AIDecide_UltraBall:
 ; skip if number of cards in hand < 3
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
@@ -5081,19 +5439,214 @@ AIDecide_ComputerSearch:
 
 	ld a, [wOpponentDeckID]
 	cp ROCK_CRUSHER_DECK_ID
-	jr z, AIDecide_ComputerSearch_RockCrusher
+	jp z, AIDecide_UltraBall_RockCrusher
 	cp WONDERS_OF_SCIENCE_DECK_ID
-	jp z, AIDecide_ComputerSearch_WondersOfScience
+	jp z, AIDecide_UltraBall_WondersOfScience
 	cp FIRE_CHARGE_DECK_ID
-	jp z, AIDecide_ComputerSearch_FireCharge
+	jp z, AIDecide_UltraBall_FireCharge
 	cp ANGER_DECK_ID
-	jp z, AIDecide_ComputerSearch_Anger
+	jp z, AIDecide_UltraBall_Anger
+	cp STRANGE_PSYSHOCK_DECK_ID
+	jp z, AIDecide_UltraBall_StrangePsyshock
+	cp KALEIDOSCOPE_DECK_ID
+	jp z, AIDecide_UltraBall_Kaleidoscope
 
 .no_carry
 	or a
 	ret
 
-AIDecide_ComputerSearch_RockCrusher:
+; searches for either venomoth or froslass if needed
+AIDecide_UltraBall_Kaleidoscope:
+	; check if already has venomoth in hand, if so, dont use
+	ld de, VENOMOTH
+	call CheckIfHasCardIDInHand ; carry if found
+	jr c, .check_froslass ; already has venomoth, check for froslass instead
+
+	; no venomoth in hand, check if has venonat in active that can evolve this turn, if yes search venomoth
+	ld de, VENONAT
+	call CheckIfActiveWithIDAtDECanEvolveThisTurn
+	jr nc, .check_froslass ; no evolvable venonat in play, check for froslass
+
+	ld de, VENOMOTH
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8
+	jr c, .find_discard_cards ; venomoth in deck, so search it.
+
+.check_froslass
+	; check if already has froslass in hand, if so, dont use
+	ld de, FROSLASS
+	call CheckIfHasCardIDInHand ; carry if found
+	jr c, .no_carry ; already has froslass, no need to use ultra ball
+
+	; no venomoth in hand, check if has snorunt in bench that can evolve this turn, if yes search froslass
+	ld de, SNORUNT
+	ld b, PLAY_AREA_BENCH_1
+	call LookForCardIDInPlayArea_Bank8
+	ret nc
+
+	add DUELVARS_ARENA_CARD_FLAGS
+	and CAN_EVOLVE_THIS_TURN
+	ret z ; cant evolve, so dont search
+
+	ld de, FROSLASS
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8
+	jr c, .find_discard_cards ; venomoth in deck, so search it.
+
+	jr .no_carry
+
+.find_discard_cards
+	ld [wce06], a ; card to search
+	ld a, $ff
+	ld [wce1a], a ; discard 1
+	ld [wce1b], a ; discard 2
+
+ 	call CreateHandCardList
+ 	ld hl, wDuelTempList
+	ld a, [wAITrainerCardToPlay]
+	call FindAndRemoveCardFromList ; remove ultraball
+ 	ld de, wce1a
+
+	ld c, 2 ; counter
+.find
+	push bc
+	push de
+	farcall FindDuplicateEnergyCardsInDuelTempList
+	jr c, .store_card
+	
+	; does not pick fighting energy?
+	ld de, SNORUNT
+	call LookForCardIDInDuelTempList_Bank8
+	jr c, .store_card
+
+	ld de, FROSLASS
+	call LookForCardIDInDuelTempList_Bank8
+	jr c, .store_card
+
+	call FindDuplicateCards
+	jr nc, .store_card
+	pop de
+	pop bc
+
+.no_carry
+	or a
+	ret
+
+.store_card
+	pop de
+	ld [de], a
+	inc de
+	ld hl, wDuelTempList
+	call FindAndRemoveCardFromList
+	pop bc
+	dec c
+	jr nz, .find
+
+.check_discard_cards
+; check if two cards were found
+; if so, output in a the deck index of card to search and set carry.
+	ld a, [wce1b] ; discard 2
+	cp $ff
+	jp z, .no_carry ; no 2 cards found to discard
+	ld a, [wce06] ; card to search
+	scf
+	ret
+
+; search for alakazam if needed and not already in hand
+AIDecide_UltraBall_StrangePsyshock:
+	; check if already has alakazam in hand, if so, dont use
+	ld de, ALAKAZAM
+	call CheckIfHasCardIDInHand ; carry if found
+	ret nc ; already has alakazam, no need to use ultra ball, OR maybe search dudunsparce instead?
+
+	; check if kadabra is in active and can evolve, if so, look for alakazam in deck
+	ld de, KADABRA
+	call CheckIfActiveWithIDAtDECanEvolveThisTurn
+	jr c, .find_discard_cards ; if found, look for discard targets
+
+	; check if abra is in active and can evolve, if so, check for candy and look for alakazam in deck
+	ld de, ABRA
+	call CheckIfActiveWithIDAtDECanEvolveThisTurn
+	ret nc
+
+	; if abra in active that can evolve AND candy in hand AND no alakazam in hand, search alakazam
+	ld bc, RARE_CANDY
+	ld de, ALAKAZAM
+	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
+	jr c, .find_discard_cards
+
+.no_carry
+	or a
+	ret
+
+.find_discard_cards
+	; this might be redundant.
+	ld de, ALAKAZAM
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8
+	ret nc ; no alakazam in deck
+	
+	ld [wce06], a ; card to search
+	ld a, $ff
+	ld [wce1a], a ; discard 1
+	ld [wce1b], a ; discard 2
+
+ 	call CreateHandCardList
+ 	ld hl, wDuelTempList
+	ld a, [wAITrainerCardToPlay]
+	call FindAndRemoveCardFromList ; remove ultraball
+ 	ld de, wce1a
+; .loop_hand
+	; ld a, [hli]
+	; cp $ff
+	; jr z, .check_discard_cards
+	; find cards
+
+	ld c, 2 ; counter
+	; duplicate energy cards, or energy removal, or ?
+.find
+	push de
+	call FindDuplicateEnergyCardsInDuelTempList
+	jr c, .store_card
+
+	; does not pick fighting energy?
+	ld de, FIGHTING_ENERGY
+	call LookForCardIDInDuelTempList_Bank8;LookForCardIDInHandList_Bank8
+	jr c, .store_card
+
+	ld de, ENERGY_REMOVAL
+	call LookForCardIDInDuelTempList_Bank8;LookForCardIDInHandList_Bank8
+	jr c, .store_card
+
+	call FindDuplicateCards
+	jr nc, .store_card
+
+	pop de
+	jr .no_carry ; not enough cards found to discard
+
+.store_card
+	pop de
+	ld [de], a
+	inc de
+	; removes from hl, is it still in handlist?
+	ld hl, wDuelTempList
+	call FindAndRemoveCardFromList
+	dec c
+	jr nz, .find
+	;jr .find
+
+.check_discard_cards
+; check if two cards were found
+; if so, output in a the deck index of card to search and set carry.
+	ld a, [wce1b] ; discard 2
+	cp $ff
+	jp z, .no_carry ; no 2 cards found to discard
+	ld a, [wce06] ; card to search
+	scf
+	ret
+
+
+AIDecide_UltraBall_RockCrusher:
 ; if number of cards in hand is equal to 3,
 ; target Professor Oak in deck
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
@@ -5101,7 +5654,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	cp 3
 	jp nz, .graveler
 
-	ld de, PROFESSOR_OAK
+	ld de, PROFESSORS_RESEARCH
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr c, .find_discard_cards_1
@@ -5112,10 +5665,10 @@ AIDecide_ComputerSearch_RockCrusher:
 	ret
 
 .find_discard_cards_1
-	ld [wce06], a
+	ld [wce06], a ; card to search
 	ld a, $ff
-	ld [wce1a], a
-	ld [wce1b], a
+	ld [wce1a], a ; discard 1
+	ld [wce1b], a ; discard 2
 
 	call CreateHandCardList
 	ld hl, wDuelTempList
@@ -5135,7 +5688,7 @@ AIDecide_ComputerSearch_RockCrusher:
 
 ; if any of the following cards are in the hand,
 ; return no carry.
-	cp16 PROFESSOR_OAK
+	cp16 PROFESSORS_RESEARCH
 	jr z, .pop_de_and_no_carry
 	cp16 FIGHTING_ENERGY
 	jr z, .pop_de_and_no_carry
@@ -5143,7 +5696,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	jr z, .pop_de_and_no_carry
 	cp16 WIGLETT
 	jr z, .pop_de_and_no_carry
-	cp16 GEODUDE
+	cp16 ARON
 	jr z, .pop_de_and_no_carry
 	cp16 KLAWF
 	jr z, .pop_de_and_no_carry
@@ -5167,10 +5720,10 @@ AIDecide_ComputerSearch_RockCrusher:
 ; check if two cards were found
 ; if so, output in a the deck index
 ; of Professor Oak card found in deck and set carry.
-	ld a, [wce1b]
+	ld a, [wce1b] ; discard 2
 	cp $ff
 	jp z, .no_carry
-	ld a, [wce06]
+	ld a, [wce06] ; card to search
 	scf
 	ret
 
@@ -5182,24 +5735,24 @@ AIDecide_ComputerSearch_RockCrusher:
 ; specific evolution cards.
 
 ; checks if there is a Graveler card in the deck to target.
-; if so, check if there's Geodude in hand or Play Area,
+; if so, check if there's ARON in hand or Play Area,
 ; and if there's no Graveler card in hand, proceed.
-; also removes Geodude from hand list so that it is not discarded.
+; also removes ARON from hand list so that it is not discarded.
 .graveler
-	ld de, GRAVELER
+	ld de, LAIRON
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr nc, .golem
 	ld [wce06], a
-	ld de, GEODUDE
+	ld de, ARON
 	call LookForCardIDInHandAndPlayArea
 	jr nc, .golem
-	ld de, GRAVELER
+	ld de, LAIRON
 	call LookForCardIDInHandList_Bank8
 	jr c, .golem
 	call CreateHandCardList
 	ld hl, wDuelTempList
-	ld de, GEODUDE
+	ld de, ARON
 	farcall RemoveCardIDInList
 	jr .find_discard_cards_2
 
@@ -5207,15 +5760,15 @@ AIDecide_ComputerSearch_RockCrusher:
 ; if so, check if there's Graveler in Play Area,
 ; and if there's no Golem card in hand, proceed.
 .golem
-	ld de, GOLEM
+	ld de, AGGRON
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr nc, .WUGTRIO
 	ld [wce06], a
-	ld de, GRAVELER
+	ld de, LAIRON
 	call LookForCardIDInPlayArea_Bank8
 	jr nc, .WUGTRIO
-	ld de, GOLEM
+	ld de, AGGRON
 	call LookForCardIDInHandList_Bank8
 	jr c, .WUGTRIO
 	call CreateHandCardList
@@ -5282,7 +5835,7 @@ AIDecide_ComputerSearch_RockCrusher:
 	scf
 	ret
 
-AIDecide_ComputerSearch_WondersOfScience:
+AIDecide_UltraBall_WondersOfScience:
 ; if number of cards in hand < 5, target Professor Oak in deck
 	ld a, DUELVARS_NUMBER_OF_CARDS_IN_HAND
 	call GetTurnDuelistVariable
@@ -5290,7 +5843,7 @@ AIDecide_ComputerSearch_WondersOfScience:
 	jr nc, .look_in_hand
 
 ; target Professor Oak for Computer Search
-	ld de, PROFESSOR_OAK
+	ld de, PROFESSORS_RESEARCH
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jp nc, .look_in_hand ; can be a jr
@@ -5302,12 +5855,12 @@ AIDecide_ComputerSearch_WondersOfScience:
 ; if Grimer or Muk are not in hand,
 ; check whether to use Computer Search on them.
 .look_in_hand
-	ld de, GRIMER
+	ld de, GULPIN
 	call LookForCardIDInHandList_Bank8
 	jr nc, .target_grimer
-	ld de, MUK
+	ld de, SWALOT
 	call LookForCardIDInHandList_Bank8
-	jr nc, .target_muk
+	jr nc, .target_swalot
 
 .no_carry
 	or a
@@ -5316,7 +5869,7 @@ AIDecide_ComputerSearch_WondersOfScience:
 ; first check Grimer
 ; if in deck, check cards to discard.
 .target_grimer
-	ld de, GRIMER
+	ld de, GULPIN
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jp nc, .no_carry ; can be a jr
@@ -5325,8 +5878,8 @@ AIDecide_ComputerSearch_WondersOfScience:
 
 ; first check Muk
 ; if in deck, check cards to discard.
-.target_muk
-	ld de, MUK
+.target_swalot
+	ld de, SWALOT
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jp nc, .no_carry ; can be a jr
@@ -5355,72 +5908,99 @@ AIDecide_ComputerSearch_WondersOfScience:
 	scf
 	ret
 
-AIDecide_ComputerSearch_FireCharge:
-; pick target card in deck from highest to lowest priority.
-; if not found in hand, go to corresponding branch.
-	ld de, CHANSEY
+; searches ceruledge ex. discards energy cards or energy removal
+AIDecide_UltraBall_FireCharge:
+	; already in hand?
+	ld de, CERULEDGE_EX
 	call LookForCardIDInHandList_Bank8
-	jr nc, .chansey
-	ld de, TAUROS
-	call LookForCardIDInHandList_Bank8
-	jr nc, .tauros
-	ld de, JIGGLYPUFF_LV12
-	call LookForCardIDInHandList_Bank8
-	jr nc, .jigglypuff
+	jr nc, .check_charcadet
 	; fallthrough
 
 .no_carry
 	or a
 	ret
 
+; check if there is a charcadet in play area that can evolve
+.check_charcadet
+	ld de, CHARCADET
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8
+	ret nc ; no charcadet found, so no use searching ceruledge
+
+	call CheckIfPokemonCanEvolveThisTurn
+	jr z, .no_carry
+
 ; for each card targeted, check if it's in deck and,
 ; if not, then return no carry.
 ; else, look for cards to discard.
-.chansey
-	ld de, CHANSEY
+.ceruledge_ex
+	ld de, CERULEDGE_EX
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jp nc, .no_carry
 	ld [wce06], a
 	jr .find_discard_cards
-.tauros
-	ld de, TAUROS
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	jp nc, .no_carry
-	ld [wce06], a
-	jr .find_discard_cards
-.jigglypuff
-	ld de, JIGGLYPUFF_LV12
-	ld a, CARD_LOCATION_DECK
-	call LookForCardIDInLocation_Bank8
-	jp nc, .no_carry
-	ld [wce06], a
 
-; only discard Trainer cards from hand.
-; if there are less than 2 Trainer cards to discard,
-; then return with no carry.
-; else, store the cards to discard and the
-; target card deck index, and return carry.
+; looks for duplicate energy cards first, then for any other duplicates.
 .find_discard_cards
-	call CreateHandCardList
-	ld hl, wDuelTempList
-	ld d, $00 ; first consider Trainer cards
+	ld [wce06], a ; card to search
+	ld a, $ff
+	ld [wce1a], a ; discard 1
+	ld [wce1b], a ; discard 2
 
-; ignore wAITrainerCardToPlay for the discard effects.
-	ld a, [wAITrainerCardToPlay]
-	ld e, a
-	call RemoveFromListDifferentCardOfGivenType
-	jr nc, .no_carry
-	ld [wce1a], a
-	call RemoveFromListDifferentCardOfGivenType
-	jr nc, .no_carry
-	ld [wce1b], a
-	ld a, [wce06]
+ 	call CreateHandCardList
+ 	ld hl, wDuelTempList
+ 	ld de, wce1a
+
+	ld c, 2 ; counter
+	; duplicate energy cards, or energy removal, or ?
+.find
+	push bc
+	push de
+	push hl
+	call FindDuplicateEnergyCardsInDuelTempList
+	jr c, .store_card
+
+	ld de, FIGHTING_ENERGY
+	;call LookForCardIDInHandList_Bank8
+	call LookForCardIDInDuelTempList_Bank8
+	jr c, .store_card
+
+	ld de, ENERGY_REMOVAL
+	;call LookForCardIDInHandList_Bank8
+	call LookForCardIDInDuelTempList_Bank8
+	jr c, .store_card
+
+	call FindDuplicateCards
+	jr nc, .store_card
+
+	pop hl
+	pop de
+	pop bc
+	jr .no_carry ; not enough cards found to discard
+
+.store_card
+	pop hl
+	pop de
+	ld [de], a
+	inc de
+	; removes from hl, is it still handlist?
+	call FindAndRemoveCardFromList ; does it really get removed?
+	pop bc
+	dec c
+	jr nz, .find
+
+.check_discard_cards
+; check if two cards were found
+; if so, output in a the deck index of card to search and set carry.
+	ld a, [wce1b] ; discard 2
+	cp $ff
+	jp z, .no_carry ; no 2 cards found to discard
+	ld a, [wce06] ; card to search
 	scf
 	ret
 
-AIDecide_ComputerSearch_Anger:
+AIDecide_UltraBall_Anger:
 ; for each of the following cards,
 ; first run a check if there's a pre-evolution in
 ; Play Area or in the hand. If there is, choose it as target.
@@ -5521,8 +6101,8 @@ AIDecide_PokemonTrader:
 AIDecide_PokemonTrader_LegendaryMoltres:
 ; look for MoltresLv37 card in deck to trade with a
 ; card in hand different from MoltresLv35.
-	ld de, MOLTRES_LV37
-	ld bc, MOLTRES_LV35
+	ld de, RESHIRAM_EX
+	ld bc, MOLTRES
 	call LookForCardIDToTradeWithDifferentHandCard
 	jr nc, .no_carry
 ; success
@@ -5536,7 +6116,7 @@ AIDecide_PokemonTrader_LegendaryMoltres:
 
 AIDecide_PokemonTrader_LegendaryArticuno:
 ; if has none of these cards in Hand or Play Area, proceed
-	ld de, ARTICUNO_LV35
+	ld de, YVELTAL
 	call LookForCardIDInHandAndPlayArea
 	jr c, .no_carry
 	ld de, LAPRAS
@@ -5546,11 +6126,11 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 ; if doesn't have Seel in Hand or Play Area,
 ; look for it in the deck.
 ; otherwise, look for Dewgong instead.
-	ld de, SEEL
+	ld de, MELTAN
 	call LookForCardIDInHandAndPlayArea
 	jr c, .dewgong
 
-	ld de, SEEL
+	ld de, MELTAN
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr nc, .dewgong
@@ -5558,10 +6138,10 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 	jr .check_hand
 
 .dewgong
-	ld de, DEWGONG
+	ld de, MELMETAL_EX
 	call LookForCardIDInHandAndPlayArea
 	jr c, .no_carry
-	ld de, DEWGONG
+	ld de, MELMETAL_EX
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr nc, .no_carry
@@ -5573,10 +6153,10 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 	ld de, CHANSEY
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, DITTO
+	ld de, UXIE
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, ARTICUNO_LV37
+	ld de, WELLSPRING_OGERPON_EX
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	; doesn't have any of the cards in hand
@@ -5607,27 +6187,27 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld bc, MAGIKARP
-	ld de, GYARADOS
+	ld bc, WAILMER
+	ld de, WAILORD
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, MAGIKARP
-	ld bc, GYARADOS
+	ld de, WAILMER
+	ld bc, WAILORD
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, DRATINI
-	ld de, DRAGONAIR
+	ld bc, BAGON
+	ld de, SHELGON
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld bc, DRAGONAIR
+	ld bc, SHELGON
 	ld de, DRAGONITE_LV41
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, DRATINI
-	ld bc, DRAGONAIR
+	ld de, BAGON
+	ld bc, SHELGON
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld de, DRAGONAIR
+	ld de, SHELGON
 	ld bc, DRAGONITE_LV41
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
@@ -5650,7 +6230,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	jr .no_carry
 
 .kangaskhan
-	ld de, KANGASKHAN
+	ld de, BLOODMOON_URSALUNA_EX
 	ld a, CARD_LOCATION_DECK
 	call LookForCardIDInLocation_Bank8
 	jr nc, .no_carry
@@ -5659,22 +6239,22 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 ; look for card in hand to trade with
 .choose_hand
 	ld [wce1a], a
-	ld de, DRAGONAIR
+	ld de, SHELGON
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, CROCALOR
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, GYARADOS
+	ld de, WAILORD
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, MAGIKARP
+	ld de, WAILMER
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, FUECOCO
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, DRATINI
+	ld de, BAGON
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	; non found
@@ -5716,19 +6296,19 @@ AIDecide_PokemonTrader_LegendaryRonald:
 	ld bc, JOLTEON_LV24
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, DRATINI
-	ld de, DRAGONAIR
+	ld bc, BAGON
+	ld de, SHELGON
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld bc, DRAGONAIR
+	ld bc, SHELGON
 	ld de, DRAGONITE_LV41
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, DRATINI
-	ld bc, DRAGONAIR
+	ld de, BAGON
+	ld bc, SHELGON
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld de, DRAGONAIR
+	ld de, SHELGON
 	ld bc, DRAGONITE_LV41
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
@@ -5741,10 +6321,10 @@ AIDecide_PokemonTrader_LegendaryRonald:
 	ld de, ZAPDOS_LV68
 	call LookForCardIDInHandList_Bank8
 	jr c, .set_carry
-	ld de, ARTICUNO_LV37
+	ld de, WELLSPRING_OGERPON_EX
 	call LookForCardIDInHandList_Bank8
 	jr c, .set_carry
-	ld de, MOLTRES_LV37
+	ld de, RESHIRAM_EX
 	call LookForCardIDInHandList_Bank8
 	jr c, .set_carry
 	; none found
@@ -5778,12 +6358,12 @@ AIDecide_PokemonTrader_BlisteringPokemon:
 	ld bc, MAROWAK_LV26
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, PONYTA
-	ld de, RAPIDASH
+	ld bc, SIZZLIPEDE
+	ld de, CENTISKORCH
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, PONYTA
-	ld bc, RAPIDASH
+	ld de, SIZZLIPEDE
+	ld bc, CENTISKORCH
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	jr .no_carry
@@ -5807,20 +6387,20 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld bc, SEEL
-	ld de, DEWGONG
+	ld bc, MELTAN
+	ld de, MELMETAL_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, SEEL
-	ld bc, DEWGONG
+	ld de, MELTAN
+	ld bc, MELMETAL_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
-	ld bc, KRABBY
-	ld de, KINGLER
+	ld bc, DRILBUR
+	ld de, EXCADRILL_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .choose_hand
-	ld de, KRABBY
-	ld bc, KINGLER
+	ld de, DRILBUR
+	ld bc, EXCADRILL_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .choose_hand
 	ld bc, WIMPOD
@@ -5853,10 +6433,10 @@ AIDecide_PokemonTrader_SoundOfTheWaves:
 ; look for card in hand to trade with
 .choose_hand
 	ld [wce1a], a
-	ld de, SEEL
+	ld de, MELTAN
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
-	ld de, KRABBY
+	ld de, DRILBUR
 	call CheckIfHasCardIDInHand
 	jr c, .set_carry
 	ld de, HORSEA
@@ -5883,63 +6463,63 @@ AIDecide_PokemonTrader_PowerGenerator:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld bc, PIKACHU_LV14
-	ld de, RAICHU_LV40
+	ld bc, POLTCHAGEIST
+	ld de, GALVANTULA_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jp c, .find_duplicates
 	ld bc, EMOLGA
-	ld de, RAICHU_LV40
+	ld de, GALVANTULA_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jp c, .find_duplicates
-	ld de, PIKACHU_LV14
-	ld bc, RAICHU_LV40
+	ld de, POLTCHAGEIST
+	ld bc, GALVANTULA_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jp c, .find_duplicates
 	ld de, EMOLGA
-	ld bc, RAICHU_LV40
+	ld bc, GALVANTULA_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jp c, .find_duplicates
-	ld bc, VOLTORB
-	ld de, ELECTRODE_LV42
+	ld bc, SHINX
+	ld de, LUXRAY_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, VOLTORB
-	ld de, ELECTRODE_LV35
+	ld bc, SHINX
+	ld de, LUXIO
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, VOLTORB
-	ld bc, ELECTRODE_LV42
+	ld de, SHINX
+	ld bc, LUXRAY_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, VOLTORB
-	ld bc, ELECTRODE_LV35
+	ld de, SHINX
+	ld bc, LUXIO
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, WATTREL
-	ld de, MAGNETON_LV35
+	ld de, EELEKTRIK
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, MAGNEMITE_LV15
-	ld de, MAGNETON_LV35
+	ld bc, TYNAMO
+	ld de, EELEKTRIK
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld bc, WATTREL
 	ld de, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, MAGNEMITE_LV15
+	ld bc, TYNAMO
 	ld de, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, MAGNEMITE_LV15
-	ld bc, MAGNETON_LV35
+	ld de, TYNAMO
+	ld bc, EELEKTRIK
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld de, WATTREL
-	ld bc, MAGNETON_LV35
+	ld bc, EELEKTRIK
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, MAGNEMITE_LV15
+	ld de, TYNAMO
 	ld bc, KILOWATTREL
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
@@ -5983,36 +6563,36 @@ AIDecide_PokemonTrader_FlowerGarden:
 	ld bc, VENUSAUR_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, BELLSPROUT
-	ld de, WEEPINBELL
+	ld bc, BELDUM
+	ld de, METANG
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, WEEPINBELL
-	ld de, VICTREEBEL
+	ld bc, METANG
+	ld de, METAGROSS
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, BELLSPROUT
-	ld bc, WEEPINBELL
+	ld de, BELDUM
+	ld bc, METANG
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, WEEPINBELL
-	ld bc, VICTREEBEL
+	ld de, METANG
+	ld bc, METAGROSS
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, ODDISH
-	ld de, GLOOM
+	ld bc, DEINO
+	ld de, ZWEILOUS
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld bc, GLOOM
-	ld de, VILEPLUME
+	ld bc, ZWEILOUS
+	ld de, HYDREIGON_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, ODDISH
-	ld bc, GLOOM
+	ld de, DEINO
+	ld bc, ZWEILOUS
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld de, GLOOM
-	ld bc, VILEPLUME
+	ld de, ZWEILOUS
+	ld bc, HYDREIGON_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	jr .no_carry
@@ -6069,12 +6649,12 @@ AIDecide_PokemonTrader_Flamethrower:
 	ld bc, SKELEDIRGE_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
-	ld bc, VULPIX
-	ld de, NINETALES_LV32
+	ld bc, LITWICK
+	ld de, LAMPENT
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld de, VULPIX
-	ld bc, NINETALES_LV32
+	ld de, LITWICK
+	ld bc, LAMPENT
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, CHARCADET
@@ -6086,11 +6666,11 @@ AIDecide_PokemonTrader_Flamethrower:
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	ld bc, EEVEE
-	ld de, FLAREON_LV28
+	ld de, FLAREON_EX
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
 	ld de, EEVEE
-	ld bc, FLAREON_LV28
+	ld bc, FLAREON_EX
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates
 	jr .no_carry

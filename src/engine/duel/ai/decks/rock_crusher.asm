@@ -29,13 +29,13 @@ AIActionTable_RockCrusher:
 .list_arena
 	dw SOLROCK
 	dw KLAWF
-	dw GEODUDE
+	dw ARON
 	dw WIGLETT
 	dw NULL
 
 .list_bench
 	dw WIGLETT
-	dw GEODUDE
+	dw ARON
 	dw SOLROCK
 	dw KLAWF
 	dw NULL
@@ -47,9 +47,9 @@ AIActionTable_RockCrusher:
 .list_energy
 	ai_energy WIGLETT,  3, +1
 	ai_energy WUGTRIO,  4, +0
-	ai_energy GEODUDE,  2, +1
-	ai_energy GRAVELER, 3, +0
-	ai_energy GOLEM,    4, +0
+	ai_energy ARON,  2, +1
+	ai_energy LAIRON, 3, +0
+	ai_energy AGGRON,    4, +0
 	ai_energy KLAWF,     2, -1
 	ai_energy SOLROCK,  3, +0
 	dw NULL

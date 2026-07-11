@@ -1,4 +1,4 @@
-AIActionTable_FireCharge:
+AIActionTable_Excavation:
 	dw .do_turn ; unused
 	dw .do_turn
 	dw .start_duel
@@ -7,7 +7,7 @@ AIActionTable_FireCharge:
 	dw .take_prize
 
 .do_turn
-	jp AIDoTurn_FireCharge
+	jp AIDoTurn_Excavation
 
 .start_duel
 	call InitAIDuelVars
@@ -27,33 +27,32 @@ AIActionTable_FireCharge:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw CHARCADET
-	dw SOLROCK
-	dw LUNATONE
+	dw ORTHWORM_EX
+	;dw DUNSPARCE
+	dw BELDUM
 	dw NULL
 
 .list_bench
-	dw LUNATONE
-	dw SOLROCK
-	dw CHARCADET
+	dw BELDUM
+	;dw DUNSPARCE
+	dw ORTHWORM_EX
 	dw NULL
 
 .list_retreat
-	ai_retreat LUNATONE, 		-3
-	ai_retreat SOLROCK,         +0
-	ai_retreat CHARCADET,       +3
+	ai_retreat METANG,	 		-3
+	ai_retreat BELDUM,          +0
+	ai_retreat ORTHWORM_EX,     +3
 	dw NULL
 
 .list_energy
-	ai_energy CHARCADET,       1, +5
-	ai_energy CERULEDGE_EX,    1, +5
-	ai_energy SOLROCK,	       1, +0
-	ai_energy LUNATONE,        0, +0
+	ai_energy ORTHWORM_EX,     4, +5
+	ai_energy METANG,	       1, +0
+	; ai_energy DUNSPARCE,       0, +0
 	dw NULL
 
 .list_prize
-	dw CERULEDGE_EX
-	dw CHARCADET
+	dw ORTHWORM_EX
+	dw METANG
 	dw NULL
 
 .store_list_pointers
@@ -65,7 +64,7 @@ AIActionTable_FireCharge:
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
-AIDoTurn_FireCharge:
+AIDoTurn_Excavation:
 	call InitAITurnVars
 
 .start
@@ -121,3 +120,42 @@ AIDoTurn_FireCharge:
 	ld a, OPPACTION_FINISH_NO_ATTACK
 	bank1call AIMakeDecision
 	ret
+
+AIDecide_NestBall_Excavation:
+	ld a, ORTHWORM_EX
+	call CountPokemonIDInPlayArea
+	cp 2
+	jr nc, .check_beldum
+	
+	ld de, ORTHWORM_EX
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8 ; carry set if found
+	jr c, .choose
+
+.check_beldum
+	ld de, BELDUM
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayArea_Bank8 ; carry set if found
+	jr c, .check_dunsparce
+	ld de, BELDUM
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8 ; carry set if found
+	jr c, .choose
+
+.check_dunsparce
+	ld de, DUNSPARCE
+	ld a, CARD_LOCATION_DECK
+	call LookForCardIDInLocation_Bank8 ; carry set if found
+	jr c, .choose
+
+	or a ; no targets, dont use
+	ret
+
+.choose
+	ldh [hTemp_ffa0], a
+	scf
+	ret
+
+AIDecide_UltraBall_Excavation:
+	or a
+    ret

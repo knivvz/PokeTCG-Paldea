@@ -27,39 +27,39 @@ AIActionTable_WondersOfScience:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw MEWTWO_LV53
-	dw MEWTWO_ALT_LV60
-	dw MEWTWO_LV60
-	dw GRIMER
-	dw KOFFING
-	dw PORYGON
+	dw MUNKIDORI
+	dw LATIAS_EX
+	dw DRIFLOON
+	dw GULPIN
+	dw TAROUNTULA
+	dw AZELF
 	dw NULL
 
 .list_bench
-	dw GRIMER
-	dw KOFFING
-	dw MEWTWO_ALT_LV60
-	dw MEWTWO_LV60
-	dw MEWTWO_LV53
-	dw PORYGON
+	dw GULPIN
+	dw TAROUNTULA
+	dw LATIAS_EX
+	dw DRIFLOON
+	dw MUNKIDORI
+	dw AZELF
 	dw NULL
 
 .list_retreat
 	dw NULL
 
 .list_energy
-	ai_energy GRIMER,          3, +0
-	ai_energy MUK,             4, +0
-	ai_energy KOFFING,         2, +0
-	ai_energy WEEZING,         3, +0
-	ai_energy MEWTWO_LV53,     2, -1
-	ai_energy MEWTWO_ALT_LV60, 2, -1
-	ai_energy MEWTWO_LV60,     2, -1
-	ai_energy PORYGON,         2, -1
+	ai_energy GULPIN,          3, +0
+	ai_energy SWALOT,             4, +0
+	ai_energy TAROUNTULA,         2, +0
+	ai_energy SPIDOPS_EX,         3, +0
+	ai_energy MUNKIDORI,     2, -1
+	ai_energy LATIAS_EX, 2, -1
+	ai_energy DRIFLOON,     2, -1
+	ai_energy AZELF,         2, -1
 	dw NULL
 
 .list_prize
-	dw MUK
+	dw SWALOT
 	dw NULL
 
 .store_list_pointers

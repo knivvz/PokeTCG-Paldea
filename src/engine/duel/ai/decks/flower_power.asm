@@ -27,20 +27,20 @@ AIActionTable_FlowerPower:
 	jp AIPickPrizeCards
 
 .list_arena
-	dw ODDISH
-	dw EXEGGCUTE
+	dw DEINO
+	dw BINACLE
 	dw BULBASAUR
 	dw NULL
 
 .list_bench
 	dw BULBASAUR
-	dw EXEGGCUTE
-	dw ODDISH
+	dw BINACLE
+	dw DEINO
 	dw NULL
 
 .list_retreat
-	ai_retreat GLOOM,     -2
-	ai_retreat VILEPLUME, -2
+	ai_retreat ZWEILOUS,     -2
+	ai_retreat HYDREIGON_EX, -2
 	ai_retreat BULBASAUR, -2
 	ai_retreat IVYSAUR,   -2
 	dw NULL
@@ -49,11 +49,11 @@ AIActionTable_FlowerPower:
 	ai_energy BULBASAUR,      3, +0
 	ai_energy IVYSAUR,        4, +0
 	ai_energy VENUSAUR_EX,  4, +0
-	ai_energy ODDISH,         2, +0
-	ai_energy GLOOM,          3, -1
-	ai_energy VILEPLUME,      3, -1
-	ai_energy EXEGGCUTE,      3, +0
-	ai_energy EXEGGUTOR,     22, +0
+	ai_energy DEINO,         2, +0
+	ai_energy ZWEILOUS,          3, -1
+	ai_energy HYDREIGON_EX,      3, -1
+	ai_energy BINACLE,      3, +0
+	ai_energy BARBARACLE,     22, +0
 	dw NULL
 
 .list_prize
