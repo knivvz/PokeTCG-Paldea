@@ -1,3 +1,21 @@
+SuperPsyBoltName:
+	text "Super Psy Bolt"
+	done
+
+KadabraDescription:
+	text "It emits special alpha waves from"
+	line "its body that induce headaches even"
+	line "to those just nearby."
+	done
+
+AlakazamName:
+	text "Alakazam"
+	done
+
+DamageSwapName:
+	text "Damage Swap"
+	done
+
 DamageSwapDescription:
 	text "As often as you like during your"
 	line "turn (before your attack), you may"
@@ -85,8 +103,8 @@ SlowbroDescription:
 	line "the host's left-over scraps."
 	done
 
-GastlyName:
-	text "Gastly"
+ShuppetName:
+	text "Shuppet"
 	done
 
 SleepingGasName:
@@ -141,22 +159,18 @@ GastlyLv17Description:
 	line "from smog."
 	done
 
-HaunterName:
-	text "Haunter"
+BanetteExName:
+	text "Banette Ex"
 	done
 
-TransparencyName:
-	text "Transparency"
+SmoothCoatName:
+	text "SmoothCoat"
 	done
 
-TransparencyDescription:
-	text "Whenever an attack does anything to"
-	line "Haunter, flip a coin. If heads,"
-	line "prevent all effects of that attack,"
-	line "including damage, done to Haunter."
-	line "This power stops working while"
-	line "Haunter is Asleep, Confused, or"
-	line "Paralyzed."
+SmoothCoatDescription:
+	text "If any damage is done to this"
+	line "Pokémon by attacks, flip a coin. If"
+	line "heads, prevent that damage."
 	done
 
 NightmareName:
@@ -178,8 +192,8 @@ DreamEaterDescription:
 	line "the Defending Pokémon is Asleep."
 	done
 
-GengarName:
-	text "Gengar"
+GardevoirExName:
+	text "Gardevoir Ex"
 	done
 
 CurseName:
@@ -218,8 +232,8 @@ GengarDescription:
 	line "and laugh at their fright."
 	done
 
-DrowzeeName:
-	text "Drowzee"
+PumpkabooName:
+	text "Pumpkaboo"
 	done
 
 PoundName:
@@ -232,8 +246,8 @@ DrowzeeDescription:
 	line "from eating bad dreams."
 	done
 
-HypnoName:
-	text "Hypno"
+GourgeistExName:
+	text "Gourgeist Ex"
 	done
 
 ProphecyName:
@@ -294,8 +308,8 @@ MrMimeDescription:
 	line "hands."
 	done
 
-JynxName:
-	text "Jynx"
+ScreamTailName:
+	text "Scream Tail"
 	done
 
 DoubleAttackX10Description:
@@ -313,10 +327,8 @@ HumanShapeName:
 	text "Human Shape"
 	done
 
-JynxDescription:
-	text "Merely by meditating, the Pokémon"
-	line "launches a powerful psychic energy"
-	line "attack."
+ScreamTailDescription:
+	text "Sprite by: DoveTortle"
 	done
 
 MewtwoName:
@@ -643,8 +655,8 @@ ClefairyDescription:
 	line "in certain areas."
 	done
 
-ClefableName:
-	text "Clefable"
+CinccinoExName:
+	text "Cinccino Ex"
 	done
 
 ClefablesMetronomeDescription:
@@ -740,8 +752,8 @@ JigglypuffLv14Description:
 	line "that lulls its enemies to sleep."
 	done
 
-WigglytuffName:
-	text "Wigglytuff"
+SlakingExName:
+	text "Slaking Ex"
 	done
 
 DoTheWaveName:
@@ -830,7 +842,7 @@ PersianDescription:
 	done
 
 SquawkabillyExName:
-	text "SquawkabillyEx"
+	text "Squawkabilly Ex"
 	done
 
 ; LeekSlapName:
@@ -907,8 +919,8 @@ DodrioDescription:
 	line "sleep, one head stays awake."
 	done
 
-LickitungName:
-	text "Lickitung"
+OrthwormExName:
+	text "Orthworm Ex"
 	done
 
 TongueWrapName:
@@ -950,8 +962,8 @@ ChanseyDescription:
 	line "who manage to catch it."
 	done
 
-KangaskhanName:
-	text "Kangaskhan"
+BloodmoonUrsalunaExName:
+	text "Bloodmoon Ursaluna Ex"
 	done
 
 FetchName:
@@ -1001,8 +1013,8 @@ TaurosDescription:
 	line "with its long tails."
 	done
 
-DittoName:
-	text "Ditto"
+UxieName:
+	text "Uxie"
 	done
 
 MorphName:
@@ -1057,8 +1069,8 @@ EeveeDescription:
 	line "radiation from elemental stones."
 	done
 
-PorygonName:
-	text "Porygon"
+AzelfName:
+	text "Azelf"
 	done
 
 Conversion1Name:
@@ -1122,8 +1134,8 @@ SnorlaxDescription:
 	line "it becomes steadily more slothful."
 	done
 
-DratiniName:
-	text "Dratini"
+BagonName:
+	text "Bagon"
 	done
 
 DratiniDescription:
@@ -1132,8 +1144,8 @@ DratiniDescription:
 	line "was found living underwater."
 	done
 
-DragonairName:
-	text "Dragonair"
+ShelgonName:
+	text "Shelgon"
 	done
 
 SlamName:
@@ -1191,11 +1203,11 @@ DragoniteDescription:
 	line "to match that of humans."
 	done
 
-ProfessorOakName:
-	text "Professor Oak"
+ProfessorsResearchName:
+	text "Professor's Research"
 	done
 
-ProfessorOakDescription:
+ProfessorsResearchDescription:
 	text "Discard your hand, then draw 7"
 	line "cards."
 	done
@@ -1218,6 +1230,15 @@ NemonaDescription:
 	text "Draw 3 cards."
 	done
 
+NemonaDescriptionCont:
+	text "Supporter Card:"
+	line "You may play only 1 Supporter card"
+	line "during your turn."
+	line ""
+	line "Sprite by: ()"
+	line "Pack: Colosseum"
+	done
+
 MrFujiName:
 	text "Mr.Fuji"
 	done
@@ -1228,28 +1249,28 @@ MrFujiDescription:
 	line "to it into your deck."
 	done
 
-LassName:
-	text "Lass"
+LilliesDeterminationName:
+	text "Lillie's Determination"
 	done
 
-LassDescription:
-	text "You and your opponent show each"
-	line "other your hands, then shuffle all"
-	line "the Trainer cards from your hands"
-	line "into your decks."
+LilliesDeterminationDescription:
+	text "Shuffle your hand into your deck."
+	line "Then, draw 6 cards. If you have"
+	line "exactly 6 Prize cards remaining,"
+	line "draw 8 cards instead."
 	done
 
-ImakuniName:
-	text "Imakuni?"
+CrispinName:
+	text "Crispin"
 	done
 
-ImakuniDescription:
-	text "Your Active Pokémon is now Confused."
-	line "Imakuni wants you to play him as a"
-	line "Basic Pokémon, but you can't."
-	line "A mysterious creature not listed in"
-	line "the Pokédex. He asks kids around the"
-	line "world,”Who is cuter-Pikachu or me?”"
+CrispinDescription:
+	text "Search your deck for up to 2 Basic"
+	line "Energy cards of different types,"
+	line "reveal them, and put 1 of them into"
+	line "your hand. Attach the other to 1 of"
+	line "your Pokémon. Then, shuffle your"
+	line "deck."
 	done
 
 PokemonTraderName:
@@ -1265,11 +1286,11 @@ PokemonTraderDescription:
 	line "Shuffle your deck afterward."
 	done
 
-PokemonBreederName:
-	text "Pokémon Breeder"
+RareCandyName:
+	text "Rare Candy"
 	done
 
-PokemonBreederDescription:
+RareCandyDescription:
 	text "Put a Stage 2 Evolution card from"
 	line "your hand on the matching Basic"
 	line "Pokémon. You can only play this card"
@@ -1331,24 +1352,36 @@ EnergyRetrievalDescription:
 	line "from your discard pile."
 	done
 
-SuperEnergyRetrievalName:
+SuperiorEnergyRetrievalName:
 	text "Super Energy Retrieval"
 	done
 
-SuperEnergyRetrievalDescription:
+SuperiorEnergyRetrievalDescription:
 	text "Trade 2 of the other cards in your"
 	line "hand for up to 4 basic Energy cards"
 	line "from your discard pile."
 	done
 
-EnergySearchName:
-	text "Energy Search"
+EarthenVesselName:
+	text "Earthen Vessel"
 	done
 
-EnergySearchDescription:
-	text "Search your deck for a basic Energy"
-	line "card and put it into your hand."
-	line "Shuffle your deck afterward."
+EarthenVesselDescription:
+	text "You can use this card only if you"
+	line "discard another card from your hand."
+	line "Search your deck for up to 2 Basic"
+	line "Energy cards, reveal them, and put"
+	line "them into your hand. Then, shuffle"
+	line "your deck."
+	done
+
+EarthenVesselDescriptionCont:
+	text "Item Card:"
+	line "You may play any number of Item"
+	line "cards during your turn."
+	line ""
+	line "Sprite by: DoveTortle"
+	line "Pack: Evolution"
 	done
 
 EnergyRemovalName:
@@ -1361,8 +1394,8 @@ EnergyRemovalDescription:
 	line "discard it."
 	done
 
-SuperEnergyRemovalName:
-	text "Super Energy Removal"
+EnergySwitchName:
+	text "Energy Switch"
 	done
 
 SuperEnergyRemovalDescription:
@@ -1394,17 +1427,14 @@ PokemonCenterDescription:
 	line "Pokémon."
 	done
 
-PokeBallName:
-	text "Poké Ball"
+NestBallName:
+	text "Nest Ball"
 	done
 
-PokeBallDescription:
-	text "Flip a coin. If heads, you may"
-	line "search your deck for any Basic"
-	line "Pokémon or Evolution card. Show that"
-	line "card to your opponent, then put it"
-	line "into your hand. Shuffle your deck"
-	line "afterward."
+NestBallDescription:
+	text "Search your deck for a Basic Pokémon"
+	line "and put it onto your Bench. Then,"
+	line "shuffle your deck."
 	done
 
 ScoopUpName:

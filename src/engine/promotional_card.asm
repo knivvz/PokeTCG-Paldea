@@ -10,9 +10,9 @@ _ShowPromotionalCardScreen:
 	ld a, d
 	or e
 	jr nz, .else
-	ld de, MOLTRES_LV37
+	ld de, RESHIRAM_EX
 	call .legendary_card_text
-	ld de, ARTICUNO_LV37
+	ld de, WELLSPRING_OGERPON_EX
 	call .legendary_card_text
 	ld de, ZAPDOS_LV68
 	call .legendary_card_text
@@ -22,15 +22,15 @@ _ShowPromotionalCardScreen:
 	jr .print_text
 .else
 	ldtx hl, ReceivedCardText
-	cp16 VILEPLUME
+	cp16 HYDREIGON_EX
 	jr z, .print_text
 	cp16 QUAQUAVAL_EX
 	jr z, .print_text
-	ldtx hl, ReceivedPromotionalFlyingPikachuText
-	cp16 FLYING_PIKACHU
+	ldtx hl, ReceivedPromotionalPikachuExText
+	cp16 PIKACHU_EX
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalSurfingPikachuText
-	cp16 SURFING_PIKACHU_LV13
+	cp16 ZERAORA
 	jr z, .print_text
 	cp16 SURFING_PIKACHU_ALT_LV13
 	jr z, .print_text

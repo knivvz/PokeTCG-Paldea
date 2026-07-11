@@ -298,8 +298,8 @@ BenchText:
 	text "Bench"
 	done
 
-KnockOutText:
-	text "Knock Out"
+KnockedOutText:
+	text "Knocked Out  "
 	done
 
 DamageToSelfDueToConfusionText:
@@ -727,8 +727,8 @@ NoEnergyCardsAttachedToPokemonInOppPlayAreaText:
 	done
 
 EnergyCardsRequiredToRetreatText:
-	text "<RAMNUM> Energy cards"
-	line "are required to Retreat."
+	text "<RAMNUM> Energy card(s) required"
+	line "to Retreat."
 	done
 
 NotEnoughEnergyCardsText:
@@ -938,32 +938,3 @@ CardCheckIfHeads8CardsIfTails1CardText:
 	line "If Heads, 8 cards! If Tails, 1 card!"
 	done
 
-IfHeadsNoDamageNextTurnText:
-	text "If Heads, you will not receive"
-	line "damage during opponent's next turn!"
-	done
-
-DamageCheckIfHeadsPlusDamageText:
-	text "Damage check!"
-	line "If Heads, +<RAMNUM> damage!!"
-	done
-
-DamageCheckIfHeadsXDamageText:
-	text "Damage check!"
-	line "If Heads, x <RAMNUM> damage!!"
-	done
-
-DeclinedPracticeDuelText:
-	text "Well, if you change your mind,"
-	line "Sam would be happy to help you."
-	line "He can answer a lot of questions"
-	line "that you might have about the game,"
-	line "and he's always up for a match"
-	line "using the practice decks."
-	line "Sam can usually be found near"
-	line "the card table to your left."
-	done
-
-MayOnlyRetreatOncePerTurnText:
-	text "You may only retreat once per turn."
-	done

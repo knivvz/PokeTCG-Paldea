@@ -5,11 +5,11 @@ ScoopUpDescription:
 	line "attached to that card.)"
 	done
 
-ComputerSearchName:
-	text "Computer Search"
+UltraBallName:
+	text "Ultra Ball"
 	done
 
-ComputerSearchDescription:
+UltraBallDescription:
 	text "Discard 2 of the other cards from"
 	line "your hand in order to search your"
 	line "deck for any card and put it into"
@@ -66,11 +66,11 @@ ItemFinderDescription:
 	line "your hand."
 	done
 
-GustOfWindName:
-	text "Gust of Wind"
+BosssOrdersName:
+	text "Boss's Orders"
 	done
 
-GustOfWindDescription:
+BosssOrdersDescription:
 	text "Choose 1 of your opponent's Benched"
 	line "Pokémon and switch it with his or"
 	line "her Active Pokémon."
@@ -142,14 +142,15 @@ ReviveDescription:
 	line "Revive if your Bench is full.)"
 	done
 
-MaintenanceName:
-	text "Maintenance"
+SuperRodName:
+	text "Super Rod"
 	done
 
-MaintenanceDescription:
-	text "Shuffle 2 of the other cards from"
-	line "your hand into your deck in order"
-	line "to draw a card."
+SuperRodDescription:
+	text "Shuffle up to 3 in any combination"
+	line "of Pokémon and Basic Energy cards"
+	line "from your discard pile into your"
+	line "deck."
 	done
 
 PokemonFluteName:
@@ -174,14 +175,14 @@ GamblerDescription:
 	line "If tails, draw 1 card."
 	done
 
-RecycleName:
-	text "Recycle"
+NightStretcherName:
+	text "Night Stretcher"
 	done
 
-RecycleDescription:
-	text "Flip a coin. If heads, put a card"
-	line "in your discard pile on top of your"
-	line "deck."
+NightStretcherDescription:
+	text "Put a Pokémon or a Basic Energy card"
+	line "from your discard pile into your"
+	line "hand."
 	done
 
 ColorListText:
@@ -847,7 +848,7 @@ RumbleName:
 	text "Rumble"
 	done
 
-RumbleDescription:
+NoRetreatDescription:
 	text "During your opponent's next turn,"
 	line "the Defending Pokémon can't retreat."
 	done
@@ -897,10 +898,6 @@ NoBasicPokemonInPlayAreaText:
 	line "Play Area."
 	done
 
-ContinuousCoinTossName:
-	text "Continuous Coin Toss"
-	done
-
 AbyssalFlamesName:
 	text "Abyssal Flames"
 	done
@@ -915,7 +912,7 @@ RagingAmethystName:
 	text "Raging Amethyst"
 	done
 
-RagingAmethystDescription:
+DiscardAllEnergyDescription:
 	text "Discard all Energy from this"
 	line "Pokémon."
 	done
@@ -967,4 +964,743 @@ WillOWispName:
 AlreadyUsedLunarCycleText:
 	text "You already used lunar cycle this"
 	line "turn."
+	done
+
+MetalClawName:
+	text "Metal Claw"
+	done
+
+SteelTackleName:
+	text "Steel Tackle"
+	done
+
+AngrySlamName:
+	text "Angry Slam"
+	done
+
+AngrySlamDescription:
+	text "This attack does 30 damage for each"
+	line "of your Pokémon that has any damage"
+	line "counters on it."
+	done
+
+GuardClawName:
+	text "Guard Claw"
+	done
+
+GuardClawDescription:
+	text "During your opponent's next turn,"
+	line "this Pokémon takes 50 less damage"
+	line "from attacks (after applying"
+	line "Weakness and Resistance)."
+	done
+
+NoDarknessPkmnInBenchText:
+	text "You Have No Darkness Pokémon In your"
+	line "Bench"
+	done
+
+Choose1DarknessEnergyCardFromDeckText:
+	text "Choose 1 Darkness Energy Card From"
+	line "Your Deck."
+	done
+
+DarknessEnergyText:
+	text "Darkness Energy"
+	done
+
+GentleSlapName:
+	text "Gentle Slap"
+	done
+
+SinisterSurgeName:
+	text "Sinister Surge"
+	done
+
+SinisterSurgeDescription:
+	text "Once during your turn, you may"
+	line "search your deck for a Basic <DARKNESS>"
+	line "Energy card and attach it to 1 of"
+	line "your Benched <DARKNESS> Pokémon. Then,"
+	line "shuffle your deck. If you attached"
+	line "Energy to a Pokémon in this way, do"
+	line "10 damage to it."
+	done
+
+PlayfulKickName:
+	text "Playful Kick"
+	done
+
+NoDarknessPokemonOnBenchText:
+	text "You Have No Darkness Pokemon On"
+	line "Your Bench."
+	done
+
+PunishingScissorsName:
+	text "Punishing Scissors"
+	done
+
+PunishingScissorsDescription:
+	text "This attack does 30 damage for each"
+	line "of your opponent's Pokémon in play"
+	line "that has an Ability."
+	done
+
+CutName:
+	text "Cut"
+	done
+
+NoDarknessEnergyCardAttachedText:
+	text "No <DARKNESS> Energy attached."
+	done
+
+AdrenaBrainName:
+	text "Adrena-Brain"
+	done
+
+AdrenaBrainDescription:
+	text "Once during your turn, if this"
+	line "Pokémon has any <DARKNESS> Energy attached,"
+	line "you may move up to 1 damage counters"
+	line "from 1 of your Pokémon to 1 of your"
+	line "opponent's Pokémon."
+	done
+MindBendName:
+	text "Mind Bend"
+	done
+
+InflictConfusionDescription:
+	text "Your opponent's Active Pokémon is"
+	line "now Confused."
+	done
+
+MunkidoriName:
+	text "Munkidori"
+	done
+
+ChoosePkmnToAttachGrassEnergyToText:
+	text "Choose Pokémon To Attach <GRASS> Energy."
+	done
+
+RipeningChargeName:
+	text "Ripening Charge"
+	done
+
+RipeningChargeDescription:
+	text "Once during your turn, you may"
+	line "attach a Basic <GRASS> Energy card from"
+	line "your hand to 1 of your Pokémon. If"
+	line "you attached Energy to a Pokémon in"
+	line "this way, heal 20 damage from that"
+	line "Pokémon."
+	done
+
+SyrupStormName:
+	text "Syrup Storm"
+	done
+
+SyrupStormDescription:
+	text "This attack does 20 more damage for"
+	line "each <GRASS> Energy attached to all of"
+	line "your Pokémon."
+	done
+
+SprayFluidName:
+	text "Spray Fluid"
+	done
+
+EnergyLoopName:
+	text "Energy Loop"
+	done
+
+EnergyLoopDescription:
+	text "Put an Energy attached to this"
+	line "Pokémon into your hand."
+	done
+
+MenacingFangsName:
+	text "Menacing Fangs"
+	done
+
+MenacingFangsDescription:
+	text "Your opponent discards 2 cards from"
+	line "their hand."
+	done
+
+BindDownName:
+	text "Bind Down"
+	done
+
+PoisonBlendName:
+	text "Poison Blend"
+	done
+
+PoisonBlendDescription:
+	text "Flip a coin. If heads, your"
+	line "opponent's Active Pokémon is now"
+	line "Confused and Poisoned."
+	done
+
+PeerlessEdgeName:
+	text "Peerless Edge"
+	done
+
+PeerlessEdgeDescription:
+	text "This attack does 40 damage for each"
+	line "Prize card you have taken."
+	done
+
+DoubleEdgedSlashName:
+	text "Double-Edged Slash"
+	done
+
+TwentyRecoilDescription:
+	text "This Pokémon also does 20 damage to"
+	line "itself."
+	done
+
+CutUpName:
+	text "Cut Up"
+	done
+
+SlicingBladeName:
+	text "Slicing Blade"
+	done
+
+RoaringScreamName:
+	text "Roaring Scream"
+	done
+
+RoaringScreamDescription:
+	text "This attack does 20 damage to 1 of"
+	line "your opponent's Pokémon for each"
+	line "damage counter on this Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
+	done
+
+NoValidTargetsInPlayAreaText:
+	text "No valid targets in play area."
+	done
+
+NoPsychicEnergyInDiscardPileText:
+	text "There are no <PSYCHIC> Energy cards in your"
+    line "discard pile."
+    done
+
+MiracleForceName:
+	text "Miracle Force"
+	done
+
+MiracleForceDescription:
+	text "This Pokémon recovers from all Special Conditions."
+	done
+
+PsychicEmbraceName:
+	text "Psychic Embrace"
+	done
+
+PsychicEmbraceDescription:
+	text "As often as you like during your"
+	line "turn, you may attach a Basic [P]"
+	line "Energy card from your discard pile"
+	line "to 1 of your [P] Pokémon. If you"
+	line "attached Energy to a Pokémon in this"
+	line "way, put 1 damage counter on that"
+	line "Pokémon. You can't use this Ability"
+	done
+	
+PsychicEmbraceDescriptionCont:
+	text "on a Pokémon that would be Knocked"
+	line "Out."
+	done
+
+RaltsName:
+	text "Ralts"
+	done
+
+KirliaName:
+	text "Kirlia"
+	done
+
+MagicalShotName:
+	text "Magical Shot"
+	done
+
+BalloonBlastName:
+	text "Balloon Blast"
+	done
+
+BalloonBlastDescription:
+	text "This attack does 30 damage for each"
+	line "damage counter on this Pokémon."
+	done
+
+DrifloonName:
+	text "Drifloon"
+	done
+
+GustName:
+	text "Gust"
+	done
+
+TrapTerritoryName:
+	text "Trap Territory"
+	done
+
+TrapTerritoryDescription:
+	text "Your opponent's Active Pokémon's"
+	line "Retreat Cost is <COLORLESS> more."
+	done
+	
+WireHangName:
+	text "Wire Hang"
+	done
+
+WireHangDescription:
+	text "This attack does 20 more damage for"
+	line "each <COLORLESS> in your opponent's Active"
+	line "Pokémon's Retreat Cost."
+	done
+
+SubjugatingChainsName:
+	text "Subjugating Chains"
+	done
+
+SubjugatingChainsDescription:
+	text "Once during your turn, you may"
+	line "switch 1 of your Benched 	<DARKNESS> Pokémon,"
+	line "except any Pecharunt ex, with your"
+	line "Active Pokémon. If you do, the new"
+	line "Active Pokémon is now Poisoned. You"
+	line "can't use more than 1 Subjugating"
+	line "Chains Ability each turn."
+	done
+
+IrritatedOutburstName:
+	text "Irritated Outburst"
+	done
+
+IrritatedOutburstDescription:
+	text "This attack does 30 damage for each"
+	line "Prize card your opponent has taken."
+	done
+
+AlreadyUsedSubjugatingChainsText:
+	text "You already used Subjugating Chains"
+	line "this turn."
+	done
+
+AlluringLightName:
+	text "Alluring Light"
+	done
+
+AlluringLightDescription:
+	text "Once during your turn, you may have"
+	line "each player draw a card."
+	done
+
+MindRulerName:
+	text "Mind Ruler"
+	done
+
+MindRulerDescription:
+	text "This attack does 20 damage for each"
+	line "card in your opponent's hand."
+	done
+
+ChandelureName:
+	text "Chandelure"
+	done
+
+BurnItAllUpName:
+	text "Burn It All Up"
+	done
+
+FightingWingsName:
+	text "Fighting Wings"
+	done
+
+FightingWingsDescription:
+	text "If your opponent's Active Pokémon is"
+	line "a Pokémon ex, this attack does 50"
+	line "more damage."
+	done
+
+PerplexingPowderName:
+	text "Perplexing Powder"
+	done
+
+PerplexingPowderDescription:
+	text "Your opponent's Active Pokémon is"
+	line "now Confused. During your opponent's"
+	line "next turn, they can't play any Item"
+	line "cards from their hand."
+	done
+
+BeamName:
+	text "Beam"
+	done
+
+FreezingShroudBetweenTurnsText:
+	text "Froslass's Freezing shroud does 10"
+	line "damage to each pokemon with ability"
+	done
+
+FrostSmashName:
+	text "Frost Smash"
+	done
+
+FreezingShroudName:
+	text "Freezing Shroud"
+	done
+
+FreezingShroudDescription:
+	text "When you end your turn, put 1 damage"
+	line "counter on each Pokémon that has an"
+	line "Ability (both yours and your"
+	line "opponent's), except any Froslass."
+	done
+
+ChillyName:
+	text "Chilly"
+	done
+
+DevouringMouthName:
+	text "Devouring Mouth"
+	done
+
+DevouringMouthDescription:
+	text "If this Pokémon has more Energy"
+	line "attached than your opponent's Active"
+	line "Pokémon, this attack does 80 more"
+	line "damage."
+	done
+
+VenomousHitName:
+	text "Venomous Hit"
+	done
+
+SuperPoisonBreathName:
+	text "Super Poison Breath"
+	done
+
+DroolName:
+	text "Drool"
+	done
+
+HearthflameMaskOgerponExName:
+	text "Hearthflame Ogerpon EX"
+	done
+
+WrathfulHearthName:
+	text "Wrathful Hearth"
+	done
+
+WrathfulHearthDescription:
+	text "This attack does 20 damage for each"
+	line "damage counter on this Pokémon."
+	done
+	
+DynamicBlazeName:
+	text "Dynamic Blaze"
+	done
+
+DynamicBlazeDescription:
+	text "If your opponent's Active Pokémon is"
+	line "an Evolution Pokémon, this attack"
+	line "does 70 more damage, and discard all"
+	line "Energy from this Pokémon."
+	done
+
+NeurokinesisName:
+	text "Neurokinesis"
+	done
+
+NeurokinesisDescription:
+	text "This attack does 10 more damage for"
+	line "each damage counter on all of your"
+	line "opponent's Pokémon."
+	done
+
+PainfulMemoriesName:
+	text "Painful Memories"
+	done
+
+PainfulMemoriesDescription:
+	text "Put 1 damage counter on each of your"
+	line "opponent's Pokémon."
+	done
+
+CardRefillTooManyCardsInHandText:
+	text "You have too many cards in your"
+	line "hand to use this PokéPower."
+	done
+
+StokedStrawName:
+	text "Stoked Straw"
+	done
+
+StokedStrawDescription:
+	text "Once during your turn, you may draw"
+	line "cards until you have 6 cards in your"
+	line "hand."
+	done
+
+EntanglingStringName:
+	text "Entangling String"
+	done
+
+EntanglingStringDescription:
+	text "Flip a coin. If heads, during your"
+	line "opponent's next turn, the Defending"
+	line "Pokémon can't attack."
+	done
+
+BugBiteName:
+	text "Bug Bite"
+	done
+
+RumblingMarchName:
+	text "Rumbling March"
+	done
+
+RumblingMarchDescription:
+	text "This attack does 20 more damage for"
+	line "each Stage 2 Pokémon on your Bench."
+	done
+
+MammothHaulerName:
+	text "Mammoth Hauler"
+	done
+
+MammothHaulerDescription:
+	text "Once during your turn, you may"
+	line "search your deck for a Pokémon,"
+	line "reveal it, and put it into your"
+	line "hand. Then, shuffle your deck."
+	done
+
+ImpalingTuskName:
+	text "Impaling Tusk"
+	done
+
+StrengthName:
+	text "Strength"
+	done
+
+LungeOutName:
+	text "Lunge Out"
+	done
+
+ChooseAFlamigoFromDeckText:
+	text "Choose a Flamigo"
+	line "from the Deck."
+	done
+
+ChooseAFlamigoText:
+	text "Choose a Flamigo."
+	done
+
+WouldYouLikeToDrawCardsText:
+	text "Would you like to draw cards?"
+	done
+
+AlreadyUsedQuickSearchText:
+	text "You already used quick search this"
+	line "turn."
+	done
+
+PidgeotExName:
+	text "Pidgeot EX"
+	done
+
+QuickSearchName:
+	text "Quick Search"
+	done
+
+QuickSearchDescription:
+	text "Once during your turn, you may"
+	line "search your deck for a card and put"
+	line "it into your hand. Then, shuffle"
+	line "your deck. You can't use more than 1"
+	line "Quick Search Ability each turn."
+	done
+	
+BlusteryWindName:
+	text "Blustery Wind"
+	done
+
+KnockAwayName:
+	text "Knock Away"
+	done
+
+KnockAwayDescription:
+	text "Flip a coin. If heads, this attack"
+	line "does 50 more damage."
+	done
+
+RumblingEngineName:
+	text "Rumbling Engine"
+	done
+
+RumblingEngineDescription:
+	text "You must discard an Energy card from"
+	line "your hand in order to use this"
+	line "Ability. Once during your turn, you"
+	line "may draw cards until you have 6"
+	line "cards in your hand."
+	done
+
+SpinningDrawName:
+	text "Spinning Draw"
+	done
+
+ClutchName:
+	text "Clutch"
+	done
+
+DarkFeatherName:
+	text "Dark Feather"
+	done
+
+YveltalName:
+	text "Yveltal"
+	done
+
+WasDiscardedText:
+	text "<RAMTEXT> was discarded"
+	line "from the Hand."
+	done
+
+PiercingGazeName:
+	text "Piercing Gaze"
+	done
+
+PiercingGazeDescription:
+	text "Your opponent reveals their hand."
+	line "Discard a card you find there."
+	done
+
+VoltStrikeName:
+	text "Volt Strike"
+	done
+	
+LuxrayExName:
+	text "Luxray EX"
+	done
+
+BigBiteName:
+	text "Big Bite"
+	done
+
+ZekromExName:
+	text "Zekrom EX"
+	done
+
+VoltageBurstName:
+	text "Voltage Burst"
+	done
+
+VoltageBurstDescription:
+	text "This attack does 20 more damage for"
+	line "each Prize card your opponent has"
+	line "taken. This Pokémon also does 30"
+	line "damage to itself."
+	done
+
+Choose1MetalEnergyCardFromDeckText:
+	text "Choose 1 Metal Energy Card From"
+	line "Your Deck."
+	done
+
+MetalEnergyText:
+	text "Metal Energy"
+	done
+
+ChooseMetalEnergyCardText:
+	text "Choose a Basic"
+	line "<METAL> Energy card."
+	done
+
+MetalBolizeName:
+	text "Metal-Bolize"
+	done
+
+MetalBolizeDescription:
+	text "Search your deck for up to 2 Basic"
+	line "<METAL> Energy cards and attach them to"
+	line "this Pokémon. Then, shuffle your"
+	line "deck."
+	done
+
+FullMetalKnuckleName:
+	text "Full Metal Knuckle"
+	done
+
+FullMetalKnuckleDescription:
+	text "This attack does 20 more damage for"
+	line "each <METAL> Energy attached to this"
+	line "Pokémon."
+	done
+
+WideBlastName:
+	text "Wide Blast"
+	done
+
+WideBlastDescription:
+	text "This attack does 30 damage to each"
+	line "of your opponent's Benched Pokémon."
+	line "(Don't apply Weakness and Resistance"
+	line "for Benched Pokémon.)"
+	done
+
+DragonImpactName:
+	text "Dragon Impact"
+	done
+
+DragonImpactDescription:
+	text "Discard 2 Energy from this Pokémon."
+	done
+
+SalamenceExName:
+	text "Salamence Ex"
+	done
+
+HeavyImpactName:
+	text "Heavy Impact"
+	done
+
+GuardPressName:
+	text "Guard Press"
+	done
+
+GuardPressDescription:
+	text "During your opponent's next turn,"
+	line "this Pokémon takes 20 less damage"
+	line "from attacks (after applying"
+	line "Weakness and Resistance)."
+	done
+
+RockTombName:
+	text "Rock Tomb"
+	done
+
+ReshiramExName:
+	text "Reshiram Ex"
+	done
+
+BlazingBurstName:
+	text "Blazing Burst"
+	done
+
+BlazingBurstDescription:
+	text "This attack does 20 more damage for"
+	line "each Prize card your opponent has"
+	line "taken. Discard an Energy from this"
+	line "Pokémon."
+	done
+
+MetalMakerName:
+	text "Metal Maker"
 	done

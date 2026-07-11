@@ -1,10 +1,40 @@
+IfHeadsNoDamageNextTurnText:
+	text "If Heads, you will not receive"
+	line "damage during opponent's next turn!"
+	done
+	
+DamageCheckIfHeadsPlusDamageText:
+	text "Damage check!"
+	line "If Heads, +<RAMNUM> damage!!"
+	done
+
+DamageCheckIfHeadsXDamageText:
+	text "Damage check!"
+	line "If Heads, x <RAMNUM> damage!!"
+	done
+	
+DeclinedPracticeDuelText:
+	text "Well, if you change your mind,"
+	line "Sam would be happy to help you."
+	line "He can answer a lot of questions"
+	line "that you might have about the game,"
+	line "and he's always up for a match"
+	line "using the practice decks."
+	line "Sam can usually be found near"
+	line "the card table to your left."
+	done
+	
+MayOnlyRetreatOncePerTurnText:
+	text "You may only retreat once per turn."
+	done
+	
 AcidCheckText:
 	text "Acid check! If Heads,"
 	line "unable to Retreat during next turn."
 	done
 
-TransparencyCheckText:
-	text "Transparency check! If Heads,"
+SmoothCoatCheckText:
+	text "Smooth Coat check! If Heads,"
 	line "do not receive opponent's Attack!"
 	done
 
@@ -111,9 +141,9 @@ NoDamageOrEffectDueToNShieldText:
 	line "due to the effects of N Shield."
 	done
 
-NoDamageOrEffectDueToTransparencyText:
+NoDamageOrEffectDueToSmoothCoatText:
 	text "No damage or effect on next Attack"
-	line "due to the effects of Transparency"
+	line "due to the effects of Smooth Coat"
 	done
 
 MetamorphsToText:
@@ -246,8 +276,8 @@ ChooseAnOddishText:
 	text "Choose an Oddish"
 	done
 
-ChooseAKrabbyText:
-	text "Choose a Krabby."
+ChooseADarknessEnergyText:
+	text "Choose a <DARKNESS> Energy."
 	done
 
 ChooseBasicEnergyCardText:
@@ -266,7 +296,8 @@ ChooseNidoranText:
 	done
 
 ChooseBasicPokemonText:
-	text "Choose a Basic Pokémon"
+	text "Choose a Basic"
+	line "Pokémon"
 	done
 
 ProcedureForEnergyTransferText:
@@ -799,9 +830,9 @@ ReceivedLegendaryCardText:
 	line "card <RAMTEXT>!"
 	done
 
-ReceivedPromotionalFlyingPikachuText:
+ReceivedPromotionalPikachuExText:
 	text "<RAMNAME> received a Promotinal"
-	line "card Flyin' Pikachu!"
+	line "card Pikachu Ex!"
 	done
 
 ReceivedPromotionalSurfingPikachuText:

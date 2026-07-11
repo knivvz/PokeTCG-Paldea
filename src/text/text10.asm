@@ -4,8 +4,8 @@ KakunaDescription:
 	line "protect itself from predators."
 	done
 
-BeedrillName:
-	text "Beedrill"
+AegislashExName:
+	text "Aegislash Ex"
 	done
 
 TwineedleName:
@@ -49,8 +49,8 @@ EkansDescription:
 	line "and Spearow, whole."
 	done
 
-ArbokName:
-	text "Arbok"
+ArbokExName:
+	text "Arbok Ex"
 	done
 
 TerrorStrikeName:
@@ -166,8 +166,8 @@ NidoqueenDescription:
 	line "to execute powerful moves."
 	done
 
-NidoranMName:
-	text "Nidoran♂"
+ApplinName:
+	text "Applin"
 	done
 
 HornHazardName:
@@ -185,8 +185,8 @@ NidoranMDescription:
 	line "horns secretes venom."
 	done
 
-NidorinoName:
-	text "Nidorino"
+DipplinName:
+	text "Dipplin"
 	done
 
 HornDrillName:
@@ -199,8 +199,8 @@ NidorinoDescription:
 	line "secretes a powerful venom."
 	done
 
-NidokingName:
-	text "Nidoking"
+HydrappleExName:
+	text "Hydrapple Ex"
 	done
 
 ThrashName:
@@ -259,8 +259,8 @@ ZubatDescription:
 	line "identify and approach targets."
 	done
 
-GolbatName:
-	text "Golbat"
+PecharuntExName:
+	text "Pecharunt Ex"
 	done
 
 WingAttackName:
@@ -282,8 +282,8 @@ GolbatDescription:
 	line "if it gets too heavy to fly."
 	done
 
-OddishName:
-	text "Oddish"
+DeinoName:
+	text "Deino"
 	done
 
 SproutName:
@@ -308,8 +308,8 @@ OddishDescription:
 	line "wanders around sowing its seeds."
 	done
 
-GloomName:
-	text "Gloom"
+ZweilousName:
+	text "Zweilous"
 	done
 
 FoulOdorName:
@@ -328,8 +328,8 @@ GloomDescription:
 	line "used to attract prey."
 	done
 
-VileplumeName:
-	text "Vileplume"
+HydreigonExName:
+	text "Hydreigon Ex"
 	done
 
 HealName:
@@ -366,8 +366,8 @@ VileplumeDescription:
 	line "head is heavy and hard to hold up."
 	done
 
-ParasName:
-	text "Paras"
+ToxelName:
+	text "Toxel"
 	done
 
 ScratchName:
@@ -392,8 +392,8 @@ ParasDescription:
 	line "drawing nutrients from the bug host."
 	done
 
-ParasectName:
-	text "Parasect"
+ToxtricityName:
+	text "Toxtricity"
 	done
 
 SlashName:
@@ -467,8 +467,8 @@ VenomothDescription:
 	line "the kinds of poison it has."
 	done
 
-BellsproutName:
-	text "Bellsprout"
+BeldumName:
+	text "Beldum"
 	done
 
 BellsproutsCallForFamilyDescription:
@@ -485,8 +485,8 @@ BellsproutDescription:
 	line "soak up needed moisture."
 	done
 
-WeepinbellName:
-	text "Weepinbell"
+MetangName:
+	text "Metang"
 	done
 
 RazorLeafName:
@@ -504,8 +504,8 @@ WeepinbellDescription:
 	line "acid."
 	done
 
-VictreebelName:
-	text "Victreebel"
+MetagrossName:
+	text "Metagross"
 	done
 
 LureName:
@@ -534,8 +534,8 @@ VictreebelDescription:
 	line "returned from there."
 	done
 
-GrimerName:
-	text "Grimer"
+GulpinName:
+	text "Gulpin"
 	done
 
 NastyGooName:
@@ -563,8 +563,8 @@ GrimerDescription:
 	line "pumped out of factories."
 	done
 
-MukName:
-	text "Muk"
+SwalotName:
+	text "Swalot"
 	done
 
 ToxicGasName:
@@ -584,8 +584,8 @@ MukDescription:
 	line "footprints contain poison."
 	done
 
-ExeggcuteName:
-	text "Exeggcute"
+BinacleName:
+	text "Binacle"
 	done
 
 HypnosisName:
@@ -608,8 +608,8 @@ ExeggcuteDescription:
 	line "and attack in swarms."
 	done
 
-ExeggutorName:
-	text "Exeggutor"
+BarbaracleName:
+	text "Barbaracle"
 	done
 
 TeleportName:
@@ -643,8 +643,8 @@ ExeggutorDescription:
 	line "Exeggcute."
 	done
 
-KoffingName:
-	text "Koffing"
+TarountulaName:
+	text "Tarountula"
 	done
 
 FoulGasName:
@@ -667,8 +667,8 @@ KoffingDescription:
 	line "to exploding without warning."
 	done
 
-WeezingName:
-	text "Weezing"
+SpidopsExName:
+	text "Spidops Ex"
 	done
 
 SmogName:
@@ -693,8 +693,8 @@ WeezingDescription:
 	line "Weezing over many years."
 	done
 
-TangelaName:
-	text "Tangela"
+ScizorName:
+	text "Scizor"
 	done
 
 BindName:
@@ -850,8 +850,8 @@ CharizardDescription:
 	line "unintentionally cause forest fires."
 	done
 
-VulpixName:
-	text "Vulpix"
+LitwickName:
+	text "Litwick"
 	done
 
 ConfuseRayName:
@@ -868,8 +868,8 @@ VulpixDescription:
 	line "tip as it grows older."
 	done
 
-NinetalesName:
-	text "Ninetails"
+LampentName:
+	text "Lampent"
 	done
 
 NinetalesLureDescription:
@@ -1004,8 +1004,8 @@ ArcanineLv45Description:
 	line "as if on wings."
 	done
 
-PonytaName:
-	text "Ponyta"
+SizzlipedeName:
+	text "Sizzlipede"
 	done
 
 SmashKickName:
@@ -1026,8 +1026,8 @@ PonytaDescription:
 	line "flat in moments."
 	done
 
-RapidashName:
-	text "Rapidash"
+CentiskorchName:
+	text "Centiskorch"
 	done
 
 StompName:
@@ -1260,11 +1260,9 @@ HydroPumpName:
 	done
 
 HydroPumpDescription:
-	text "Does 40 damage plus 10 more damage"
-	line "for each <WATER> Energy attached to"
-	line "Blastoise but not used to pay for"
-	line "this attack's Energy cost. You can't"
-	line "add more than 20 damage in this way."
+	text "This attack does 30 damage for each"
+	line "<WATER> Energy attached to this"
+	line "Pokémon."
 	done
 
 ShellfishName:
@@ -1277,8 +1275,8 @@ BlastoiseDescription:
 	line "used for high-speed tackles."
 	done
 
-PsyduckName:
-	text "Psyduck"
+SnoruntName:
+	text "Snorunt"
 	done
 
 HeadacheName:
@@ -1300,8 +1298,8 @@ PsyduckDescription:
 	line "use psychokinetic powers."
 	done
 
-GolduckName:
-	text "Golduck"
+FroslassName:
+	text "Froslass"
 	done
 
 PsyshockName:
@@ -1324,8 +1322,8 @@ GolduckDescription:
 	line "for the Japanese monster, Kappa."
 	done
 
-PoliwagName:
-	text "Poliwag"
+FroakieName:
+	text "Froakie"
 	done
 
 WaterGunName:
@@ -1350,8 +1348,8 @@ PoliwagDescription:
 	line "swimming over trying to stand."
 	done
 
-PoliwhirlName:
-	text "Poliwhirl"
+FrogadierName:
+	text "Frogadier"
 	done
 
 AmnesiaName:
@@ -1375,8 +1373,8 @@ PoliwhirlsDescription:
 	line "to keep its body slimy."
 	done
 
-PoliwrathName:
-	text "Poliwrath"
+GreninjaExName:
+	text "Greninja Ex"
 	done
 
 PoliwrathsWaterGunDescription:
@@ -1440,8 +1438,8 @@ TentacruelDescription:
 	line "to ensnare and immobilize prey."
 	done
 
-SeelName:
-	text "Seel"
+MeltanName:
+	text "Meltan"
 	done
 
 HeadbuttName:
@@ -1458,8 +1456,8 @@ SeelDescription:
 	line "bashing through thick ice."
 	done
 
-DewgongName:
-	text "Dewgong"
+MelmetalExName:
+	text "Melmetal Ex"
 	done
 
 AuroraBeamName:
@@ -1526,8 +1524,8 @@ CloysterDescription:
 	line "never been seen."
 	done
 
-KrabbyName:
-	text "Krabby"
+DrilburName:
+	text "Drilbur"
 	done
 
 KrabbysCallForFamilyDescription:
@@ -1548,8 +1546,8 @@ KrabbyDescription:
 	line "when walking sideways."
 	done
 
-KinglerName:
-	text "Kingler"
+ExcadrillExName:
+	text "Excadrill Ex"
 	done
 
 FlailName:
@@ -1578,15 +1576,4 @@ KinglerDescription:
 
 HorseaName:
 	text "Horsea"
-	done
-
-OpponentAttackMayDoNothingDescription:
-	text "If the Defending Pokémon tries to"
-	line "attack during your opponent's next"
-	line "turn, your opponent flips a coin."
-	line "If tails, that attack does nothing."
-	done
-
-DragonName:
-	text "Dragon"
 	done

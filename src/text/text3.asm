@@ -1724,12 +1724,12 @@ DragoniteLegendaryCardName:
 	text "<Lv>41 DRAGONITE"
 	done
 
-SuperEnergyRetrievalTradeCardName:
-	text "Super Energy Retrieval"
+SuperiorEnergyRetrievalTradeCardName:
+	text "Superior Energy Retrieval"
 	done
 
-FlyingPikachuTradeCardName:
-	text "<Lv>12 FLYING PIKACHU"
+PikachuExTradeCardName:
+	text "<Lv>50 Pikachu Ex"
 	done
 
 LightningAndFireDeckChoiceText:

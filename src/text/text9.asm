@@ -1285,8 +1285,8 @@ IvysaurDescription:
 	line "ability to stand on its hind legs."
 	done
 
-VenusaurName:
-	text "Venusaur"
+FezandipityExName:
+	text "Fezandipity Ex"
 	done
 
 SolarPowerName:
@@ -1357,8 +1357,8 @@ VenusaurLv67Description:
 	line "the move to seek sunlight."
 	done
 
-CaterpieName:
-	text "Caterpie"
+WeedleName:
+	text "Weedle"
 	done
 
 StringShotName:
@@ -1380,8 +1380,8 @@ CaterpieDescription:
 	line "tirelessly climb slopes and walls."
 	done
 
-MetapodName:
-	text "Metapod"
+KakunaName:
+	text "Kakuna"
 	done
 
 StiffenName:
@@ -1409,8 +1409,8 @@ MetapodDescription:
 	line "and tender body."
 	done
 
-ButterfreeName:
-	text "Butterfree"
+BeedrillExName:
+	text "Beedrill Ex"
 	done
 
 WhirlwindName:
@@ -1450,8 +1450,8 @@ ButterfreeDescription:
 	line "dust into the air."
 	done
 
-WeedleName:
-	text "Weedle"
+HonedgeName:
+	text "Honedge"
 	done
 
 PoisonStingName:
@@ -1473,8 +1473,8 @@ WeedleDescription:
 	line "stinger on its head."
 	done
 
-KakunaName:
-	text "Kakuna"
+DoubladeName:
+	text "Doublade"
 	done
 
 KakunasStiffenDescription:

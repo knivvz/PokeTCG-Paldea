@@ -1,3 +1,14 @@
+OpponentAttackMayDoNothingDescription:
+	text "If the Defending Pokémon tries to"
+	line "attack during your opponent's next"
+	line "turn, your opponent flips a coin."
+	line "If tails, that attack does nothing."
+	done
+
+DragonName:
+	text "Dragon"
+	done
+
 HorseaDescription:
 	text "Known to shoot down flying bugs with"
 	line "precision blasts of ink from the"
@@ -61,8 +72,8 @@ SeakingDescription:
 	line "rivers and creeks."
 	done
 
-StaryuName:
-	text "Staryu"
+VaroomName:
+	text "Varoom"
 	done
 
 SlapName:
@@ -79,8 +90,8 @@ StaryuDescription:
 	line "appendage it loses in battle."
 	done
 
-StarmieName:
-	text "Starmie"
+RevavroomName:
+	text "Revavroom"
 	done
 
 RecoverName:
@@ -108,8 +119,8 @@ StarmieDescription:
 	line "people value this core as a gem."
 	done
 
-MagikarpName:
-	text "Magikarp"
+WailmerName:
+	text "Wailmer"
 	done
 
 TackleName:
@@ -131,8 +142,8 @@ MagikarpDescription:
 	line "that exist today."
 	done
 
-GyaradosName:
-	text "Gyarados"
+WailordName:
+	text "Wailord"
 	done
 
 DragonRageName:
@@ -213,12 +224,12 @@ VaporeonLv42Description:
 	line "mistaken for a mermaid's."
 	done
 
-OmanyteName:
-	text "Omanyte"
+ArctibaxName:
+	text "Arctibax"
 	done
 
-MysteriousFossilName:
-	text "Mysterious Fossil"
+SwinubName:
+	text "Swinub"
 	done
 
 ClairvoyanceName:
@@ -250,8 +261,8 @@ OmanyteDescription:
 	line "resurrected from fossils."
 	done
 
-OmastarName:
-	text "Omastar"
+BaxcaliburName:
+	text "Baxcalibur"
 	done
 
 OmastarsWaterGunDescription:
@@ -400,8 +411,8 @@ PikachuLv16Description:
 	line "build and cause lightning storms."
 	done
 
-FlyingPikachuName:
-	text "Flying Pikachu"
+PikachuExName:
+	text "Pikachu Ex"
 	done
 
 FlyName:
@@ -483,8 +494,8 @@ RaichuLv45Description:
 	line "voltage power."
 	done
 
-MagnemiteName:
-	text "Magnemite"
+TynamoName:
+	text "Tynamo"
 	done
 
 ThunderWaveName:
@@ -525,8 +536,8 @@ MagnemiteLv15Description:
 	line "electromagnetic waves."
 	done
 
-MagnetonName:
-	text "Magneton"
+EelektrikName:
+	text "Eelektrik"
 	done
 
 MagnetonLv28sSelfdestructDescription:
@@ -569,8 +580,8 @@ MagnetonLv35Description:
 	line "when sunspots flare up."
 	done
 
-VoltorbName:
-	text "Voltorb"
+ShinxName:
+	text "Shinx"
 	done
 
 BallName:
@@ -583,8 +594,8 @@ VoltorbDescription:
 	line "has zapped many people."
 	done
 
-ElectrodeName:
-	text "Electrode"
+LuxioName:
+	text "Luxio"
 	done
 
 EnergySpikeName:
@@ -900,8 +911,8 @@ MankeyDescription:
 	line "away the next."
 	done
 
-PrimeapeName:
-	text "Primeape"
+BloodmoonUrsalunaName:
+	text "Bloodmoon Ursaluna"
 	done
 
 TantrumName:
@@ -909,8 +920,7 @@ TantrumName:
 	done
 
 TantrumDescription:
-	text "Flip a coin. If tails, Primeape is"
-	line "now Confused (after doing damage)."
+	text "This Pokémon is now Confused."
 	done
 
 PrimeapeDescription:
@@ -920,8 +930,8 @@ PrimeapeDescription:
 	line "caught."
 	done
 
-MachopName:
-	text "Machop"
+TimburrName:
+	text "Timburr"
 	done
 
 LowKickName:
@@ -938,8 +948,8 @@ MachopDescription:
 	line "to become even stronger."
 	done
 
-MachokeName:
-	text "Machoke"
+GurdurrName:
+	text "Gurdurr"
 	done
 
 KarateChopName:
@@ -965,8 +975,8 @@ MachokeDescription:
 	line "to help regulate its motions."
 	done
 
-MachampName:
-	text "Machamp"
+ConkeldurrName:
+	text "Conkeldurr"
 	done
 
 StrikesBackName:
@@ -999,15 +1009,15 @@ MachampDescription:
 	line "victim clear over the horizon."
 	done
 
-GeodudeName:
-	text "Geodude"
+AronName:
+	text "Aron"
 	done
 
-StoneBarrageName:
-	text "Stone Barrage"
+ContinuousCoinTossName:
+	text "Continuous Coin Toss"
 	done
 
-StoneBarrageDescription:
+ContinuousCoinTossDescription:
 	text "Flip a coin until you get tails."
 	line "This attack does 10 damage times"
 	line "the number of heads."
@@ -1023,8 +1033,8 @@ GeodudeDescription:
 	line "often step or trip on them."
 	done
 
-GravelerName:
-	text "Graveler"
+LaironName:
+	text "Lairon"
 	done
 
 HardenName:
@@ -1050,8 +1060,8 @@ GravelerDescription:
 	line "or changing its direction."
 	done
 
-GolemName:
-	text "Golem"
+AggronName:
+	text "Aggron"
 	done
 
 AvalancheName:
@@ -1298,8 +1308,8 @@ RhydonDescription:
 	line "of 3600 degrees."
 	done
 
-KabutoName:
-	text "Kabuto"
+PiloswineName:
+	text "Piloswine"
 	done
 
 KabutoArmorName:
@@ -1328,8 +1338,8 @@ KabutoDescription:
 	line "ocean floor eons ago."
 	done
 
-KabutopsName:
-	text "Kabutops"
+MamoswineExName:
+	text "Mamoswine Ex"
 	done
 
 SharpSickleName:
@@ -1409,22 +1419,4 @@ KadabrasRecoverDescription:
 	line "Kadabra in order to use this attack."
 	line "Remove all damage counters from"
 	line "Kadabra."
-	done
-
-SuperPsyBoltName:
-	text "Super Psy Bolt"
-	done
-
-KadabraDescription:
-	text "It emits special alpha waves from"
-	line "its body that induce headaches even"
-	line "to those just nearby."
-	done
-
-AlakazamName:
-	text "Alakazam"
-	done
-
-DamageSwapName:
-	text "Damage Swap"
 	done
