@@ -1758,9 +1758,9 @@ MrMimeCardGfx::
 	INCBIN "gfx/cards/mrmime.2bpp"
 	INCBIN "gfx/cards/mrmime.pal"
 
-JynxCardGfx::
-	INCBIN "gfx/cards/jynx.2bpp"
-	INCBIN "gfx/cards/jynx.pal"
+ScreamTailCardGfx::
+	INCBIN "gfx/cards/screamtail.2bpp"
+	INCBIN "gfx/cards/screamtail.pal"
 
 MewtwoLv53CardGfx::
 	INCBIN "gfx/cards/mewtwo1.2bpp"
@@ -1970,9 +1970,9 @@ SuperEnergyRetrievalCardGfx::
 	INCBIN "gfx/cards/superenergyretrieval.2bpp"
 	INCBIN "gfx/cards/superenergyretrieval.pal"
 
-EnergySearchCardGfx::
-	INCBIN "gfx/cards/energysearch.2bpp"
-	INCBIN "gfx/cards/energysearch.pal"
+EarthenVesselCardGfx::
+	INCBIN "gfx/cards/earthenvessel.2bpp"
+	INCBIN "gfx/cards/earthenvessel.pal"
 
 EnergyRemovalCardGfx::
 	INCBIN "gfx/cards/energyremoval.2bpp"
