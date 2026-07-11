@@ -480,11 +480,12 @@ CreateHandCardList::
 
 .check_next_card_loop
 	ld a, [hld]
-	push hl
-	ld l, a
-	bit CARD_LOCATION_JUST_DRAWN_F, [hl]
-	pop hl
-	jr nz, .skip_card
+	; TODO does this break something?
+	 push hl
+	 ld l, a
+	 bit CARD_LOCATION_JUST_DRAWN_F, [hl]
+	 pop hl
+	 jr nz, .skip_card
 	ld [de], a
 	inc de
 
@@ -711,7 +712,7 @@ GetCardIDFromDeckIndex::
 	pop af
 	ret
 
-; remove card c from wDuelTempList (it contains a $ff-terminated list of deck indexes)
+; remove card a from wDuelTempList (it contains a $ff-terminated list of deck indexes)
 ; returns carry if no matches were found.
 RemoveCardFromDuelTempList::
 	push hl
@@ -1348,7 +1349,7 @@ GetNonTurnDuelistVariable::
 ; the player, and possibly to use it if it triggers when the card is played.
 ProcessPlayedPokemonCard::
 	ldh a, [hTempCardIndex_ff98]
-	call ClearChangedTypesIfMuk
+;	call ClearChangedTypesIfMuk
 	ldh a, [hTempCardIndex_ff98]
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
@@ -1374,9 +1375,9 @@ ProcessPlayedPokemonCard::
 	call LoadTxRam2
 	ldtx hl, HavePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	ld hl, wLoadedCard1ID
-	cphl MUK
-	jr z, .use_pokemon_power
+	;ld hl, wLoadedCard1ID
+	;cphl MUK
+	;jr z, .use_pokemon_power
 	ld a, PLAY_AREA_BENCH_1 ; don't check status
 	call CheckIsIncapableOfUsingPkmnPower
 	jr nc, .use_pokemon_power
@@ -1603,7 +1604,7 @@ HandleAfterDamageEffects::
 	ld [wTempNonTurnDuelistCardID + 0], a
 	ld a, d
 	ld [wTempNonTurnDuelistCardID + 1], a
-	call HandleStrikesBack_AgainstResidualAttack
+	call HandlePummelingPayback_AgainstResidualAttack
 	bank1call ApplyStatusConditionQueue
 	call Func_1bb4
 	bank1call UpdateArenaCardLastTurnDamage
@@ -1875,7 +1876,7 @@ ApplyDamageModifiers_DamageToTarget::
 	call SwapTurn
 	and b
 	jr z, .check_pluspower_and_defender ; jump if not resistant
-	ld hl, -30
+	ld hl, -20
 	add hl, de
 	ld e, l
 	ld d, h
@@ -1956,7 +1957,7 @@ ApplyDamageModifiers_DamageToSelf::
 	call GetArenaCardResistance
 	and b
 	jr z, .not_resistant
-	ld hl, -30
+	ld hl, -20
 	add hl, de
 	ld e, l
 	ld d, h
@@ -2188,7 +2189,7 @@ DealDamageToPlayAreaPokemon::
 	call PrintKnockedOutIfHLZero
 	pop de
 .skip_knocked_out
-	call HandleStrikesBack_AgainstDamagingAttack
+	;call HandleStrikesBack_AgainstDamagingAttack ; TODO is this still needed?
 	pop bc
 	pop de
 	pop hl
