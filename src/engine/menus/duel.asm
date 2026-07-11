@@ -151,6 +151,7 @@ OpenYourOrOppPlayAreaScreen_NonTurnHolderDiscardPile:
 DuelCheckMenu_OppPlayArea:
 	call ResetCheckMenuCursorPositionAndBlink
 	call IsClairvoyanceActive
+	;scf
 	jr c, .clairvoyance1
 
 	ld a, %10000000
@@ -198,8 +199,9 @@ DuelCheckMenu_OppPlayArea:
 ; place text items depending on clairvoyance
 ; when active, allows to look at opp. hand
 	call IsClairvoyanceActive
+	;scf
 	jr c, .clairvoyance2
-	ld hl, OppPlayAreaMenuData
+	ld hl, OppPlayAreaMenuData_WithClairvoyance
 	call PlaceTextItems
 	jr .loop
 .clairvoyance2
