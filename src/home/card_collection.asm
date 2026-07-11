@@ -230,7 +230,7 @@ RemoveCardFromCollection::
 	ret
 
 ; return the amount of different cards that the player has collected in de
-; return NUM_CARDS in bc, minus 1 if VENUSAUR_LV64 or MEW_LV15 has not been collected (minus 2 if neither)
+; return NUM_CARDS in bc, minus 1 if FEZANDIPITY_EX or MEW_LV15 has not been collected (minus 2 if neither)
 GetCardAlbumProgress::
 	push hl
 	call EnableSRAM
@@ -250,12 +250,12 @@ GetCardAlbumProgress::
 	jr nz, .next_card
 
 	ld bc, NUM_CARDS
-	ld hl, sCardCollection + VENUSAUR_LV64
+	ld hl, sCardCollection + FEZANDIPITY_EX
 	bit CARD_NOT_OWNED_F, [hl]
 	jr z, .has_venusaur_lv64
 	dec bc
 .has_venusaur_lv64
-	ld hl, sCardCollection + MEW_LV15
+	ld hl, sCardCollection + MEW_EX
 	bit CARD_NOT_OWNED_F, [hl]
 	jr z, .has_mew_lv15
 	dec bc
