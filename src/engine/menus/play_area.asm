@@ -9,14 +9,14 @@ OpenInPlayAreaScreen::
 	ld [wCheckMenuCursorBlinkCounter], a
 	farcall DrawInPlayAreaScreen
 	call EnableLCD
-	call IsClairvoyanceActive
-	jr c, .clairvoyance_on
+	; call IsClairvoyanceActive
+	; jr c, .clairvoyance_on
 
 	ld de, OpenInPlayAreaScreen_TransitionTable1
 	jr .clairvoyance_off
 
-.clairvoyance_on
-	ld de, OpenInPlayAreaScreen_TransitionTable2
+; .clairvoyance_on
+; 	ld de, OpenInPlayAreaScreen_TransitionTable2
 .clairvoyance_off
 	ld hl, wMenuInputTablePointer
 	ld [hl], e
