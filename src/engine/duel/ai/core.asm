@@ -717,7 +717,7 @@ AIProcessHandTrainerCards:
 	farcall _AIProcessHandTrainerCards
 	ret
 
-INCLUDE "engine/duel/ai/deck_ai.asm"
+;INCLUDE "engine/duel/ai/deck_ai.asm"
 
 ; return carry if card ID loaded in a is found in hand
 ; and outputs in a the deck index of that card

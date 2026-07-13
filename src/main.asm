@@ -75,12 +75,11 @@ INCLUDE "data/npc_map_data.asm"
 INCLUDE "data/map_objects.asm"
 
 SECTION "AI Logic 1", ROMX
-;INCLUDE "data/deck_ai_pointers.asm"
 INCLUDE "engine/duel/ai/core.asm"
 
 SECTION "AI Logic 3", ROMX
+INCLUDE "engine/duel/ai/deck_ai.asm"
 INCLUDE "data/deck_ai_pointers.asm"
-;INCLUDE "engine/duel/ai/core.asm"
 
 SECTION "Menus 4", ROMX
 INCLUDE "engine/copy_card_name.asm"
