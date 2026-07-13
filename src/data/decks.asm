@@ -996,26 +996,42 @@ ExcavationDeck:
 
 BlisteringPokemonDeck:
 	deck_list_start
-	card_item FIRE_ENERGY,             4
-	card_item FIGHTING_ENERGY,         8
-	card_item PSYCHIC_ENERGY,          5
-	card_item DOUBLE_COLORLESS_ENERGY, 2
-	card_item SIZZLIPEDE,                  3
-	card_item CENTISKORCH,                2
-	card_item KLAWF,                    4
-	card_item GIMMIGHOUL,                  4
-	card_item MAROWAK_LV26,            2
-	card_item SOLROCK,                 4
-	card_item LUNATONE,                  2
-	card_item SCREAM_TAIL,                    2
-	card_item PROFESSORS_RESEARCH,           2
-	card_item NEMONA,                    3
-	card_item POKEMON_TRADER,          2
-	card_item ENERGY_RETRIEVAL,        1
-	card_item MR_FUJI,                 2
-	card_item SWITCH,                  3
-	card_item DEFENDER,                3
-	card_item BOSSS_ORDERS,            2
+	card_item METAL_ENERGY,             6
+	card_item FIGHTING_ENERGY,         10
+	card_item GIMMIGHOUL,           	4
+	card_item GHOLDENGO_EX,     	    4
+	card_item LUNATONE,     	        3
+	card_item SOLROCK,		         	3
+	card_item LILLIES_DETERMINATION,	4
+	card_item NEMONA,			        4
+	card_item NEST_BALL,	            4
+	card_item ULTRA_BALL,		        4
+	card_item EARTHEN_VESSEL,           4
+	card_item SUPERIOR_ENERGY_RETRIEVAL,4
+	card_item SUPER_ROD,	            2
+	card_item BOSSS_ORDERS,				2
+	card_item IONO,						2
+
+	; card_item FIRE_ENERGY,             4
+	; card_item FIGHTING_ENERGY,         8
+	; card_item PSYCHIC_ENERGY,          5
+	; card_item DOUBLE_COLORLESS_ENERGY, 2
+	; card_item SIZZLIPEDE,                  3
+	; card_item CENTISKORCH,                2
+	; card_item KLAWF,                    4
+	; card_item GIMMIGHOUL,                  4
+	; card_item MAROWAK_LV26,            2
+	; card_item SOLROCK,                 4
+	; card_item LUNATONE,                  2
+	; card_item SCREAM_TAIL,                    2
+	; card_item PROFESSORS_RESEARCH,           2
+	; card_item NEMONA,                    3
+	; card_item POKEMON_TRADER,          2
+	; card_item ENERGY_RETRIEVAL,        1
+	; card_item MR_FUJI,                 2
+	; card_item SWITCH,                  3
+	; card_item DEFENDER,                3
+	; card_item BOSSS_ORDERS,            2
 	deck_list_end
 	tx BlisteringPokemonDeckName
 

@@ -32,7 +32,7 @@ DeckAIPointerTable::
 	dw AIActionTable_GeneralDecks        ; HEATED_BATTLE_DECK
 	dw AIActionTable_GeneralDecks        ; LOVE_TO_BATTLE_DECK
 	dw AIActionTable_Excavation          ; EXCAVATION_DECK
-	dw AIActionTable_GeneralDecks        ; BLISTERING_POKEMON_DECK
+	dw AIActionTable_BlisteringPokemon   ; BLISTERING_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; HARD_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; WATERFRONT_POKEMON_DECK
 	dw AIActionTable_GeneralDecks        ; LONELY_FRIENDS_DECK
