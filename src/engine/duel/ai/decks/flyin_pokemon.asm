@@ -69,116 +69,100 @@ AIActionTable_FlyinPokemon:
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
-; AIDecide_NestBall_FlyinPokemon:
-; 	ld a, VENONAT
-; 	call CountPokemonIDInPlayArea
-; 	ld b, a
-; 	ld a, VENOMOTH
-; 	call CountPokemonIDInPlayArea
-; 	add b
-; 	cp 2
-; 	jr c, .search_venonat
-
-; 	ld a, MUNKIDORI
-; 	call CountPokemonIDInPlayArea
-; 	cp 2
-; 	jr c, .search_munkidori
-
-; 	ld a, SNORUNT
-; 	call CountPokemonIDInPlayArea
-; 	ld b, a
-; 	ld a, FROSLASS
-; 	call CountPokemonIDInPlayArea
-; 	add b
-; 	cp 2
-; 	jr c, .search_snorunt
-
-; .search_venonat
-; 	ld de, VENONAT
-; 	ld a, CARD_LOCATION_DECK
-; 	farcall LookForCardIDInLocation_Bank8
-; 	jr c, .choose
-
-; .search_munkidori
-; 	ld de, MUNKIDORI
-; 	ld a, CARD_LOCATION_DECK
-; 	farcall LookForCardIDInLocation_Bank8
-; 	jr c, .choose
-
-; .search_snorunt
-; 	ld de, SNORUNT
-; 	ld a, CARD_LOCATION_DECK
-; 	farcall LookForCardIDInLocation_Bank8
-; 	jr c, .choose
-; 	or a ; dont use, no targets
-; 	ret
-
-; .choose
-; 	ldh [hTemp_ffa0], a
-; 	scf
-; 	ret
-
-; 	call CreateDeckCardList
-; 	ld hl, wDuelTempList
-; .loop_deck
-; 	ld a, [hli]
-; 	ldh [hTemp_ffa0], a
-; 	cp $ff
-; 	ret z ; none found
-; 	call LoadCardDataToBuffer2_FromDeckIndex
-
-; 	ld a, [wLoadedCard2Stage]
-; 	or a ; BASIC
-; 	jr nz, .loop_deck
-; 	scf 
-; 	ret
+AIDecide_NestBall_FlyinPokemon:
+	ld a, VENONAT
+	call CountPokemonIDInPlayArea
+	ld b, a
+	ld a, VENOMOTH
+	call CountPokemonIDInPlayArea
+	add b
+	cp 2
+	jr c, .search_venonat
+	ld a, MUNKIDORI
+	call CountPokemonIDInPlayArea
+	cp 2
+	jr c, .search_munkidori
+	ld a, SNORUNT
+	call CountPokemonIDInPlayArea
+	ld b, a
+	ld a, FROSLASS
+	call CountPokemonIDInPlayArea
+	add b
+	cp 2
+	jr c, .search_snorunt
+.search_venonat
+	ld de, VENONAT
+	ld a, CARD_LOCATION_DECK
+	farcall LookForCardIDInLocation_Bank8
+	jr c, .choose
+.search_munkidori
+	ld de, MUNKIDORI
+	ld a, CARD_LOCATION_DECK
+	farcall LookForCardIDInLocation_Bank8
+	jr c, .choose
+.search_snorunt
+	ld de, SNORUNT
+	ld a, CARD_LOCATION_DECK
+	farcall LookForCardIDInLocation_Bank8
+	jr c, .choose
+	or a ; dont use, no targets
+	ret
+.choose
+	ldh [hTemp_ffa0], a
+	scf
+	ret
+	call CreateDeckCardList
+	ld hl, wDuelTempList
+.loop_deck
+	ld a, [hli]
+	ldh [hTemp_ffa0], a
+	cp $ff
+	ret z ; none found
+	call LoadCardDataToBuffer2_FromDeckIndex
+	ld a, [wLoadedCard2Stage]
+	or a ; BASIC
+	jr nz, .loop_deck
+	scf 
+	ret
 
 ; ; carry set if energy played
-; AIAttachEnergy_FlyinPokemon:
-; 	ld de, DARKNESS_ENERGY
-; 	call LookForCardIDInHandList_Bank5
-; 	jr nc, .check_grass ; not found
-	
-; 	ldh [hTemp_ffa0], a ; energy
-
-; 	ld de, MUNKIDORI
-; 	ld b, PLAY_AREA_ARENA
-; 	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
-; 	jr nc, .check_grass ; not found, dont use
-; 	ldh [hTempPlayAreaLocation_ff9d], a
-; 	jr .play_energy_card
-
-; .check_grass
-; 	ld de, GRASS_ENERGY
-; 	call LookForCardIDInHandList_Bank5
-; 	ret nc ; no energy found
-	
-; 	ldh [hTemp_ffa0], a ; energy
-
-; 	ld de, VENOMOTH
-; 	ld b, PLAY_AREA_ARENA
-; 	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
-; 	jr nc, .check_venonat ; not found, dont use
-; 	ldh [hTempPlayAreaLocation_ff9d], a
-; 	jr .play_energy_card
-
-; .check_venonat
-; 	ld de, VENONAT
-; 	ld b, PLAY_AREA_ARENA
-; 	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
-; 	ret nc ; not found, dont use
-; 	ldh [hTempPlayAreaLocation_ff9d], a
-
-
-; ; plays energy card loaded in hTemp_ffa0 and sets carry flag.
-; ; TODO set wAlreadyPlayedEnergy?
-; .play_energy_card
-; 	ldh a, [hTempPlayAreaLocation_ff9d]
-; 	ldh [hTempPlayAreaLocation_ffa1], a
-; 	ld a, OPPACTION_PLAY_ENERGY
-; 	bank1call AIMakeDecision
-; 	scf
-; 	ret
+AIAttachEnergy_FlyinPokemon:
+	ld de, DARKNESS_ENERGY
+	call LookForCardIDInHandList_Bank5
+	jr nc, .check_grass ; not found
+	ldh [hTemp_ffa0], a ; energy
+	ld de, MUNKIDORI
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	jr nc, .check_grass ; not found, dont use
+	ldh [hTempPlayAreaLocation_ff9d], a
+	jr .play_energy_card
+.check_grass
+	ld de, GRASS_ENERGY
+	call LookForCardIDInHandList_Bank5
+	ret nc ; no energy found
+	ldh [hTemp_ffa0], a ; energy
+	ld de, VENOMOTH
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	jr nc, .check_venonat ; not found, dont use
+	ldh [hTempPlayAreaLocation_ff9d], a
+	jr .play_energy_card
+.check_venonat
+	ld de, VENONAT
+	ld b, PLAY_AREA_ARENA
+	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	ret nc ; not found, dont use
+	ldh [hTempPlayAreaLocation_ff9d], a
+; plays energy card loaded in hTemp_ffa0 and sets carry flag.
+; TODO set wAlreadyPlayedEnergy?
+.play_energy_card
+	ldh a, [hTempPlayAreaLocation_ff9d]
+	ldh [hTempPlayAreaLocation_ffa1], a
+	ld a, OPPACTION_PLAY_ENERGY
+	bank1call AIMakeDecision
+	scf
+	ret
 
 AIDoTurn_FlyinPokemon:
 	call InitAITurnVars
