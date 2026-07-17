@@ -317,31 +317,31 @@ AIPickPrizeCards:
 	db $1 << 6
 	db $1 << 7
 
-; routine for AI to play all Basic cards from its hand
-; in the beginning of the Duel.
-AIPlayInitialBasicCards:
-	call CreateHandCardList
-	ld hl, wDuelTempList
-.check_for_next_card
-	ld a, [hli]
-	ldh [hTempCardIndex_ff98], a
-	cp $ff
-	ret z ; return when done
+; ; routine for AI to play all Basic cards from its hand
+; ; in the beginning of the Duel.
+; AIPlayInitialBasicCards:
+; 	call CreateHandCardList
+; 	ld hl, wDuelTempList
+; .check_for_next_card
+; 	ld a, [hli]
+; 	ldh [hTempCardIndex_ff98], a
+; 	cp $ff
+; 	ret z ; return when done
 
-	call LoadCardDataToBuffer1_FromDeckIndex
-	ld a, [wLoadedCard1Type]
-	cp TYPE_ENERGY
-	jr nc, .check_for_next_card ; skip if not Pokemon card
-	ld a, [wLoadedCard1Stage]
-	or a
-	jr nz, .check_for_next_card ; skip if not Basic Stage
+; 	call LoadCardDataToBuffer1_FromDeckIndex
+; 	ld a, [wLoadedCard1Type]
+; 	cp TYPE_ENERGY
+; 	jr nc, .check_for_next_card ; skip if not Pokemon card
+; 	ld a, [wLoadedCard1Stage]
+; 	or a
+; 	jr nz, .check_for_next_card ; skip if not Basic Stage
 
-; play Basic card from hand
-	push hl
-	ldh a, [hTempCardIndex_ff98]
-	call PutHandPokemonCardInPlayArea
-	pop hl
-	jr .check_for_next_card
+; ; play Basic card from hand
+; 	push hl
+; 	ldh a, [hTempCardIndex_ff98]
+; 	call PutHandPokemonCardInPlayArea
+; 	pop hl
+; 	jr .check_for_next_card
 
 ; returns carry if Pokémon at hTempPlayAreaLocation_ff9d
 ; can't use an attack or if that selected attack doesn't have enough energy
@@ -1219,82 +1219,82 @@ RemoveCardIDInList:
 	or a
 	ret
 
-; play Pokemon cards from the hand to set the starting
-; Play Area of Boss decks.
-; each Boss deck has two ID lists in order of preference.
-; one list is for the Arena card is the other is for the Bench cards.
-; if Arena card could not be set (due to hand not having any card in its list)
-; or if list is null, return carry and do not play any cards.
-TrySetUpBossStartingPlayArea:
-	ld de, wAICardListArenaPriority
-	ld a, d
-	or a
-	jr z, .set_carry ; return if null
+; ; play Pokemon cards from the hand to set the starting
+; ; Play Area of Boss decks.
+; ; each Boss deck has two ID lists in order of preference.
+; ; one list is for the Arena card is the other is for the Bench cards.
+; ; if Arena card could not be set (due to hand not having any card in its list)
+; ; or if list is null, return carry and do not play any cards.
+; TrySetUpBossStartingPlayArea:
+; 	ld de, wAICardListArenaPriority
+; 	ld a, d
+; 	or a
+; 	jr z, .set_carry ; return if null
 
-; pick Arena card
-	call CreateHandCardList
-	ld hl, wDuelTempList
-	ld de, wAICardListArenaPriority
-	call .PlayPokemonCardInOrder
-	ret c
+; ; pick Arena card
+; 	call CreateHandCardList
+; 	ld hl, wDuelTempList
+; 	ld de, wAICardListArenaPriority
+; 	call .PlayPokemonCardInOrder
+; 	ret c
 
-; play Pokemon cards to Bench until there are
-; a maximum of 3 cards in Play Area.
-.loop
-	ld de, wAICardListBenchPriority
-	call .PlayPokemonCardInOrder
-	jr c, .done
-	cp 3
-	jr c, .loop
+; ; play Pokemon cards to Bench until there are
+; ; a maximum of 3 cards in Play Area.
+; .loop
+; 	ld de, wAICardListBenchPriority
+; 	call .PlayPokemonCardInOrder
+; 	jr c, .done
+; 	cp 3
+; 	jr c, .loop
 
-.done
-	or a
-	ret
-.set_carry
-	scf
-	ret
+; .done
+; 	or a
+; 	ret
+; .set_carry
+; 	scf
+; 	ret
 
-; runs through input card ID list in de.
-; plays to Play Area first card that is found in hand.
-; returns carry if none of the cards in the list are found.
-; returns number of Pokemon in Play Area in a.
-.PlayPokemonCardInOrder
-	ld a, [de]
-	ld c, a
-	inc de
-	ld a, [de]
-	ld d, a
-	ld e, c
+; ; runs through input card ID list in de.
+; ; plays to Play Area first card that is found in hand.
+; ; returns carry if none of the cards in the list are found.
+; ; returns number of Pokemon in Play Area in a.
+; .PlayPokemonCardInOrder
+; 	ld a, [de]
+; 	ld c, a
+; 	inc de
+; 	ld a, [de]
+; 	ld d, a
+; 	ld e, c
 
-; go in order of the list in de and
-; add first card that matches ID.
-; returns carry if hand doesn't have any card in list.
-.loop_id_list
-	ld a, [de]
-	inc de
-	ld c, a
-	ld a, [de]
-	or c
-	jr z, .not_found
-	push de
-	ld a, [de]
-	ld e, c
-	ld d, a
-	call RemoveCardIDInList
-	pop de
-	inc de
-	jr nc, .loop_id_list
+; ; go in order of the list in de and
+; ; add first card that matches ID.
+; ; returns carry if hand doesn't have any card in list.
+; .loop_id_list
+; 	ld a, [de]
+; 	inc de
+; 	ld c, a
+; 	ld a, [de]
+; 	or c
+; 	jr z, .not_found
+; 	push de
+; 	ld a, [de]
+; 	ld e, c
+; 	ld d, a
+; 	call RemoveCardIDInList
+; 	pop de
+; 	inc de
+; 	jr nc, .loop_id_list
 
-	; play this card to Play Area and return
-	push hl
-	call PutHandPokemonCardInPlayArea
-	pop hl
-	or a
-	ret
+; 	; play this card to Play Area and return
+; 	push hl
+; 	call PutHandPokemonCardInPlayArea
+; 	pop hl
+; 	or a
+; 	ret
 
-.not_found
-	scf
-	ret
+; .not_found
+; 	scf
+; 	ret
 
 INCLUDE "engine/duel/ai/retreat.asm"
 

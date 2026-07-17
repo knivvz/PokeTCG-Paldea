@@ -61,6 +61,7 @@ ENDM
 ; wAICardListRetreatBonus  : scores given to certain cards for retreat;
 ; wAICardListEnergyBonus   : max number of energy cards and card scores.
 
+INCLUDE "engine/duel/ai/decks/duel_setup.asm"
 INCLUDE "engine/duel/ai/decks/general.asm"
 INCLUDE "engine/duel/ai/decks/sams_practice.asm"
 INCLUDE "engine/duel/ai/decks/general_no_retreat.asm"
