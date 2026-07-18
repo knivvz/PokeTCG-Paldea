@@ -1,3 +1,36 @@
+AIProcessRetreat:
+	call AIDecideWhetherToRetreat
+	ret nc ; return if not retreating
+
+	call AIDecideBenchPokemonToSwitchTo
+	ret c ; return if no Bench Pokemon
+
+; store Play Area to retreat to and
+; set flag to prevent retreating again this turn
+	ld [wAIPlayAreaCardToSwitch], a
+	ld hl, wOncePerTurnFlags
+	set UNABLE_TO_RETREAT_THIS_TURN_F, [hl]
+
+; if AI can use Switch from hand, use it instead...
+	ld a, AI_TRAINER_CARD_PHASE_09
+	call AIProcessHandTrainerCards
+	ld a, [wPreviousAIFlags]
+	and AI_FLAG_USED_SWITCH
+	jr nz, .used_switch
+; ... else try retreating normally.
+	ld a, [wAIPlayAreaCardToSwitch]
+	jp AITryToRetreat
+
+.used_switch
+; if AI used switch, unset its AI flag
+	ld a, [wPreviousAIFlags]
+	and ~AI_FLAG_USED_SWITCH ; clear Switch flag
+	ld [wPreviousAIFlags], a
+
+	;ld a, AI_ENERGY_TRANS_RETREAT
+	;farcall HandleAIEnergyTrans
+	ret
+
 ; determine AI score for retreating
 ; return carry if AI decides to retreat
 AIDecideWhetherToRetreat:
