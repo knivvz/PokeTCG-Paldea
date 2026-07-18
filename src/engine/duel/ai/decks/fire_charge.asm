@@ -66,16 +66,16 @@ AIActionTable_FireCharge:
 	ret
 
 AIDoTurn_FireCharge:
-	call InitAITurnVars
+	farcall InitAITurnVars
 
 .start
 	farcall UnsetAIModifiedHandFlag
 
 	; play and evolve pokemon
-	call AIDecidePlayPokemonCard
+	farcall AIDecidePlayPokemonCard
 
 	ld a, AI_TRAINER_CARD_PHASE_02 ; NEST_BALL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	; use lunatone if possible
 	farcall HandleAIPkmnPowers
@@ -83,40 +83,42 @@ AIDoTurn_FireCharge:
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 	
 	ld a, AI_TRAINER_CARD_PHASE_04 ; NEMONA
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_05 ; NIGHT_STRETCHER
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_08 ; SUPER_ROD
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	ld a, AI_TRAINER_CARD_PHASE_03 ; ULTRA_BALL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	ld a, AI_TRAINER_CARD_PHASE_07 ; ENERGY_REMOVAL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
-	call AIProcessRetreat ; where to put this?
+	farcall AIProcessRetreat ; where to put this?
 
 	; play Energy card if possible
 	ld a, [wAlreadyPlayedEnergy]
 	or a
-	call z, AIProcessAndTryToPlayEnergy
+	jr nz, .next
+	farcall AIProcessAndTryToPlayEnergy
 
+.next
 	ld a, AI_TRAINER_CARD_PHASE_15 ; PROFESSORS_RESEARCH
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 .try_attack
 ; attack if possible, if not,
 ; finish turn without attacking.
-	call AIProcessAndTryToUseAttack
+	farcall AIProcessAndTryToUseAttack
 	ret c ; return if turn ended
 	ld a, OPPACTION_FINISH_NO_ATTACK
 	bank1call AIMakeDecision
