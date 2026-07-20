@@ -18,13 +18,16 @@ AIActionTable_Kaleidoscope:
 	jp AIPlayInitialBasicCards
 
 .forced_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .ko_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .take_prize
-	jp AIPickPrizeCards
+	farcall AIPickPrizeCards
+	ret
 
 .list_arena
 	dw VENONAT
@@ -117,46 +120,31 @@ AIDecide_NestBall_Kaleidoscope:
 	scf
 	ret
 
-	call CreateDeckCardList
-	ld hl, wDuelTempList
-.loop_deck
-	ld a, [hli]
-	ldh [hTemp_ffa0], a
-	cp $ff
-	ret z ; none found
-	call LoadCardDataToBuffer2_FromDeckIndex
-
-	ld a, [wLoadedCard2Stage]
-	or a ; BASIC
-	jr nz, .loop_deck
-	scf 
-	ret
-
 ; carry set if energy played
 AIAttachEnergy_Kaleidoscope:
 	ld de, DARKNESS_ENERGY
-	call LookForCardIDInHandList_Bank5
+	farcall LookForCardIDInHandList_Bank5
 	jr nc, .check_grass ; not found
 	
 	ldh [hTemp_ffa0], a ; energy
 
 	ld de, MUNKIDORI
 	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	farcall LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
 	jr nc, .check_grass ; not found, dont use
 	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .play_energy_card
 
 .check_grass
 	ld de, GRASS_ENERGY
-	call LookForCardIDInHandList_Bank5
+	farcall LookForCardIDInHandList_Bank5
 	ret nc ; no energy found
 	
 	ldh [hTemp_ffa0], a ; energy
 
 	ld de, VENOMOTH
 	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	farcall LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
 	jr nc, .check_venonat ; not found, dont use
 	ldh [hTempPlayAreaLocation_ff9d], a
 	jr .play_energy_card
@@ -164,7 +152,7 @@ AIAttachEnergy_Kaleidoscope:
 .check_venonat
 	ld de, VENONAT
 	ld b, PLAY_AREA_ARENA
-	call LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
+	farcall LookForCardIDInPlayAreaWithNoEnergyAttached_Bank5
 	ret nc ; not found, dont use
 	ldh [hTempPlayAreaLocation_ff9d], a
 
@@ -180,16 +168,16 @@ AIAttachEnergy_Kaleidoscope:
 	ret
 
 AIDoTurn_Kaleidoscope:
-	call InitAITurnVars
+	farcall InitAITurnVars
 
 .start
 	farcall UnsetAIModifiedHandFlag
 
 	; play and evolve pokemon
-	call AIDecidePlayPokemonCard
+	farcall AIDecidePlayPokemonCard
 
 	ld a, AI_TRAINER_CARD_PHASE_02 ; NEST_BALL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	; use lunatone if possible
 	farcall HandleAIPkmnPowers
@@ -197,23 +185,23 @@ AIDoTurn_Kaleidoscope:
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 	
 	ld a, AI_TRAINER_CARD_PHASE_04 ; NEMONA
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_05 ; NIGHT_STRETCHER
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_08 ; SUPER_ROD
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	ld a, AI_TRAINER_CARD_PHASE_03 ; ULTRA_BALL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	ld a, AI_TRAINER_CARD_PHASE_07 ; ENERGY_REMOVAL
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	; play Energy card if possible
 	ld a, [wAlreadyPlayedEnergy]
@@ -222,22 +210,22 @@ AIDoTurn_Kaleidoscope:
 
 	;call AIProcessRetreat ; where to put this?
 	ld a, AI_TRAINER_CARD_PHASE_09 ; SWITCH
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 
 	ld a, AI_TRAINER_CARD_PHASE_13 ; LILLIES_DETERMINATION
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_11 ; IONO
-	call AIProcessHandTrainerCards
+	farcall AIProcessHandTrainerCards
 	farcall CheckAIModifiedHandFlag
 	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 .try_attack
 ; attack if possible, if not,
 ; finish turn without attacking.
-	call AIProcessAndTryToUseAttack
+	farcall AIProcessAndTryToUseAttack
 	ret c ; return if turn ended
 	ld a, OPPACTION_FINISH_NO_ATTACK
 	bank1call AIMakeDecision

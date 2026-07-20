@@ -18,13 +18,16 @@ AIActionTable_LegendaryZapdos:
 	jp AIPlayInitialBasicCards
 
 .forced_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .ko_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .take_prize
-	jp AIPickPrizeCards
+	farcall AIPickPrizeCards
+	ret
 
 .list_arena
 	dw IRON_HANDS_EX

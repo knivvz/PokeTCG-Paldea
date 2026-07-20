@@ -15,13 +15,16 @@ AIActionTable_GeneralNoRetreat:
 	jp AIPlayInitialBasicCards
 
 .forced_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .ko_switch
-	jp AIDecideBenchPokemonToSwitchTo
+	farcall AIDecideBenchPokemonToSwitchTo
+	ret
 
 .take_prize
-	jp AIPickPrizeCards
+	farcall AIPickPrizeCards
+	ret
 
 AIDoTurn_GeneralNoRetreat:
 ; initialize variables
