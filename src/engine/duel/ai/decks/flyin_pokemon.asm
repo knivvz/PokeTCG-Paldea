@@ -50,11 +50,10 @@ AIActionTable_FlyinPokemon:
 	dw NULL
 
 .list_energy
-	ai_energy VENONAT,         0, +5
-	ai_energy VENOMOTH,        1, +5
-	ai_energy MUNKIDORI,       1, +6
-	ai_energy SNORUNT,         0, +0
-    ai_energy FROSLASS,        0, +0
+	ai_energy MURKROW,         1, +5
+	ai_energy DUNSPARCE,       0, +0
+	ai_energy FLAMIGO,         2, +3
+	ai_energy WATTREL,         2, +2
 	dw NULL
 
 .list_prize
