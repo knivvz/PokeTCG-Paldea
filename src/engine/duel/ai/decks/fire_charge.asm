@@ -100,6 +100,8 @@ AIDoTurn_FireCharge:
 
 	ld a, AI_TRAINER_CARD_PHASE_03 ; ULTRA_BALL
 	farcall AIProcessHandTrainerCards
+	farcall CheckAIModifiedHandFlag
+	jr nz, .start ; if hand was modified, start over to re-evaluate hand
 
 	ld a, AI_TRAINER_CARD_PHASE_07 ; ENERGY_REMOVAL
 	farcall AIProcessHandTrainerCards
